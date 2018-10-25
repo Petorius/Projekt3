@@ -34,6 +34,7 @@ namespace DesktopClient
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 Console.WriteLine();
+                Console.WriteLine("kjlasdlmkasdmklasldmkadslmk");
             }
         }
     }
