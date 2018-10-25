@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain
-{
-    public class Class1
-    {
+namespace Domain {
+    public class Product {
     }
 }
