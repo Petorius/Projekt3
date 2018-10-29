@@ -8,9 +8,9 @@ using System.Text;
 namespace ShoppingService
 {
     [ServiceContract]
-    public interface IService1
+    public interface IProductService
     {
         [OperationContract]
-        string GetData(int value);
+        void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description, int rating);
     }
 }

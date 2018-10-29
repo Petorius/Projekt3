@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b7d77769-9657-4a9e-ac28-da686e2ae626" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="cd0ca1f2-cdc9-4047-89e2-23550b22d5f8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,9 +22,9 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/ShoppingService/Service1/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="4aaf00f4-35f7-4223-b05a-7b8f5011224b" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ShoppingService/Service1/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="e23d6f0c-1b99-4dfb-a501-053498a4b8ee" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ShoppingService/Service1/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="ef69729f-dd9a-4cce-99e9-662539f212d2" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ShoppingService/Service1/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="efeae168-3a9f-456d-85e2-b81c2f39b6ff" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ShoppingService/Service1/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="3aa07e6a-59a9-4afd-b65a-906aeea9dd28" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ShoppingService/Service1/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="98de98b4-d575-4e7c-a592-37cca0c8f0a0" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ShoppingService/Service1/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
