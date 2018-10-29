@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer {
-    interface ICRUD<T> {
+    public interface ICRUD<T> {
         void Create(T Entity);
         T Get(int id);
         IEnumerable<T> GetAll();
