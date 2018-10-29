@@ -37,5 +37,16 @@ namespace DesktopClient
                 Console.WriteLine("kjlasdlmkasdmklasldmkadslmk");
             }
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                Console.WriteLine();
+                Console.WriteLine("kjlasdlmkasdmklasldmkadslmk");
+            }
+        }
     }
 }
