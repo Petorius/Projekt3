@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="420" Margin="0,0,-0.4,0" VerticalAlignment="Top" Width="794">
-            <TabItem Header="Produkt">
+            <TabItem Header="Produkt" Margin="-2,-2,-2,0">
                 <Grid Background="#FFE5E5E5" Margin="0,-25,0,0.2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0*"/>
