@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DesktopClient.DesktopServiceReference {
+namespace DesktopClient.ProductService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DesktopServiceReference.IProductService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ProductService.IProductService")]
     public interface IProductService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
@@ -23,12 +23,12 @@ namespace DesktopClient.DesktopServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IProductServiceChannel : DesktopClient.DesktopServiceReference.IProductService, System.ServiceModel.IClientChannel {
+    public interface IProductServiceChannel : DesktopClient.ProductService.IProductService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ProductServiceClient : System.ServiceModel.ClientBase<DesktopClient.DesktopServiceReference.IProductService>, DesktopClient.DesktopServiceReference.IProductService {
+    public partial class ProductServiceClient : System.ServiceModel.ClientBase<DesktopClient.ProductService.IProductService>, DesktopClient.ProductService.IProductService {
         
         public ProductServiceClient() {
         }

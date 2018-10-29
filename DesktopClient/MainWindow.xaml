@@ -17,11 +17,21 @@
                     <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="389" Margin="10,25,0,0" VerticalAlignment="Top" Width="778">
                         <TabItem Header="Opret">
                             <Grid Background="#FFE5E5E5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="33*"/>
-                                    <ColumnDefinition Width="43*"/>
-                                    <ColumnDefinition Width="696*"/>
-                                </Grid.ColumnDefinitions>
+
+                                <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="23" Margin="155,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214"/>
+                                <Label Content="Navn: " HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="90"/>
+                                <TextBox x:Name="priceTextBox" HorizontalAlignment="Left" Height="23" Margin="155,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214"/>
+                                <Label Content="Pris: " HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="90"/>
+                                <TextBox x:Name="stockTextBox" HorizontalAlignment="Left" Height="23" Margin="155,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214"/>
+                                <Label Content="Antal: " HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" Width="90"/>
+                                <TextBox x:Name="minStockTextBox" HorizontalAlignment="Left" Height="23" Margin="155,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214"/>
+                                <Label Content="Minimum antal på lager:" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Width="140"/>
+                                <TextBox x:Name="maxStockTextBox" HorizontalAlignment="Left" Height="23" Margin="155,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214"/>
+                                <Label Content="Maximum antal på lager:" HorizontalAlignment="Left" Margin="10,199,0,0" VerticalAlignment="Top" Width="140"/>
+                                <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Height="82" Margin="155,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="343"/>
+                                <Label Content="Beskrivelse:" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Width="90"/>
+                                <Button Content="Opret Produkt" HorizontalAlignment="Left" Margin="535,306,0,0" VerticalAlignment="Top" Width="93" Height="20" Click="Button_Click"/>
+                                <Button Content="Fortryd" HorizontalAlignment="Left" Margin="668,307,0,0" VerticalAlignment="Top" Width="75"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Søg">

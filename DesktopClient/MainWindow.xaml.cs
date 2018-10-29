@@ -28,5 +28,19 @@ namespace DesktopClient
             InitializeComponent();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            try {
+                string name = nameTextBox.Text;
+                double price = double.Parse(priceTextBox.Text);
+                int stock = Int32.Parse(stockTextBox.Text);
+                int minStock = Int32.Parse(minStockTextBox.Text);
+                int maxStock = Int32.Parse(maxStockTextBox.Text);
+                string description = descriptionTextBox.Text;
+            }
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
+            }
+
+        }
     }
 }
