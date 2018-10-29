@@ -11,6 +11,6 @@ namespace ShoppingService
     public interface IProductService
     {
         [OperationContract]
-        void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description);
+        void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description, int rating);
     }
 }

@@ -23,13 +23,14 @@ namespace Domain {
         [DataMember]
         public int Rating { get; set; }
 
-        public Product(string name, double price, int stock, int minStock, int maxStock, string description) {
+        public Product(string name, double price, int stock, int minStock, int maxStock, string description, int rating) {
             Name = name;
             Price = price;
             Stock = stock;
             MinStock = minStock;
             MaxStock = maxStock;
             Description = description;
+            Rating = rating;
         }
     }
 }

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
 using System.Data.SqlClient;
+using Domain;
 
 namespace DesktopClient
 {
@@ -27,15 +28,5 @@ namespace DesktopClient
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                Console.WriteLine();
-                Console.WriteLine("kjlasdlmkasdmklasldmkadslmk");
-            }
-        }
     }
 }
