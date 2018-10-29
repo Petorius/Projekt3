@@ -8,67 +8,84 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="420" Margin="0,0,-0.4,0" VerticalAlignment="Top" Width="794">
-            <TabItem Header="TabItem">
+            <TabItem Header="Produkt">
                 <Grid Background="#FFE5E5E5" Margin="0,-25,0,0.2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="389" Margin="10,25,0,0" VerticalAlignment="Top" Width="778">
-                        <TabItem Header="TabItem">
+                        <TabItem Header="Opret">
+                            <Grid Background="#FFE5E5E5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="33*"/>
+                                    <ColumnDefinition Width="43*"/>
+                                    <ColumnDefinition Width="696*"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Søg">
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
-                        <TabItem Header="TabItem">
+                        <TabItem Header="Opdater">
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
-                        <TabItem Header="TabItem">
+                        <TabItem Header="Slet">
+                            <Grid Background="#FFE5E5E5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="93*"/>
+                                    <ColumnDefinition Width="680*"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Ordre" Margin="-2,-2,-2,0">
+                <Grid Background="#FFE5E5E5" Margin="0,-25,0,0.2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="389" Margin="10,25,0,0" VerticalAlignment="Top" Width="778">
+                        <TabItem Header="Opret">
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
-                        <TabItem Header="TabItem">
+                        <TabItem Header="Søg">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Opdater">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Slet">
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
                     </TabControl>
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem" Margin="-2,-2,-2,0">
+            <TabItem Header="Kunde" Margin="-2,-2,-2,0">
                 <Grid Background="#FFE5E5E5" Margin="0,-25,0,0.2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="389" Margin="10,25,0,0" VerticalAlignment="Top" Width="778">
-                        <TabItem Header="TabItem">
+                        <TabItem Header="Opret">
+                            <Grid Background="#FFE5E5E5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="29*"/>
+                                    <ColumnDefinition Width="22*"/>
+                                    <ColumnDefinition Width="722*"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Søg">
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
-                        <TabItem Header="TabItem">
+                        <TabItem Header="Opdater">
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
-                        <TabItem Header="TabItem">
-                            <Grid Background="#FFE5E5E5"/>
-                        </TabItem>
-                        <TabItem Header="TabItem">
-                            <Grid Background="#FFE5E5E5"/>
-                        </TabItem>
-                    </TabControl>
-                </Grid>
-            </TabItem>
-            <TabItem Header="TabItem" Margin="-2,-2,-2,0">
-                <Grid Background="#FFE5E5E5" Margin="0,-25,0,0.2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0*"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="389" Margin="10,25,0,0" VerticalAlignment="Top" Width="778">
-                        <TabItem Header="TabItem">
-                            <Grid Background="#FFE5E5E5"/>
-                        </TabItem>
-                        <TabItem Header="TabItem">
-                            <Grid Background="#FFE5E5E5"/>
-                        </TabItem>
-                        <TabItem Header="TabItem">
-                            <Grid Background="#FFE5E5E5"/>
-                        </TabItem>
-                        <TabItem Header="TabItem">
+                        <TabItem Header="Slet">
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
                     </TabControl>
