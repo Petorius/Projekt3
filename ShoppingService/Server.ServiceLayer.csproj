@@ -52,18 +52,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusniessLayer\BusniessLayer.csproj">
+    <ProjectReference Include="..\BusniessLayer\Server.BusinessLogic.csproj">
       <Project>{e887ff99-d62e-4a9f-92c5-f31973f9571e}</Project>
-      <Name>BusniessLayer</Name>
+      <Name>Server.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+    <ProjectReference Include="..\DataAccessLayer\Server.DataAccessLayer.csproj">
       <Project>{25a117a2-004b-4b26-9aa1-244418a6d605}</Project>
-      <Name>DataAccessLayer</Name>
+      <Name>Server.DataAccessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Domain\Domain.csproj">
+    <ProjectReference Include="..\Domain\Server.Domain.csproj">
       <Project>{b0ca8488-e992-4170-9a7e-5ca714f0aabe}</Project>
-      <Name>Domain</Name>
+      <Name>Server.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
