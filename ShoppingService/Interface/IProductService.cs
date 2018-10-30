@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
-namespace ShoppingService
+namespace Server.ServiceLayer
 {
     [ServiceContract]
     public interface IProductService

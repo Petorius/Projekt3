@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
 using System.Data.SqlClient;
-using Domain;
+using Server.Domain;
 
 namespace DesktopClient
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer {
+namespace Server.DataAccessLayer {
     public interface ICRUD<T> {
         void Create(T Entity);
         T Get(int id);

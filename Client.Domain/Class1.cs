@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Domain
+namespace Client.Server.Domain
 {
     public class Class1
     {
