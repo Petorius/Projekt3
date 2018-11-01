@@ -46,5 +46,32 @@ namespace DesktopClient
             
 
         }
+
+        private void inputIDtextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void OKbutton_Click(object sender, RoutedEventArgs e)
+        {
+           
+
+            Product p = productController.Find(Int32.Parse(inputIDtextBox.Text));
+
+            try
+            {
+                foundNamelabel.Text = p._Name;
+                double price = double.Parse(priceTextBox.Text);
+                int stock = Int32.Parse(stockTextBox.Text);
+                int minStock = Int32.Parse(minStockTextBox.Text);
+                int maxStock = Int32.Parse(maxStockTextBox.Text);
+                string description = descriptionTextBox.Text;
+                productController.CreateProduct(name, price, stock, minStock, maxStock, description);
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Ugyldig tekst indsat");
+            }
+        }
     }
 }

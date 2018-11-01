@@ -18,11 +18,10 @@ namespace Client.ControlLayer {
         }
 
         public Product Find(int ID) {
-            try {
-                return productService.Find(ID);
-            }
-            catch (NullReferenceException) {
-            }
+            
+            return productService.Find(ID);
+           
+            
         }
     }
 }

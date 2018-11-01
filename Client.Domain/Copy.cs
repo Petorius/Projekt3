@@ -8,6 +8,7 @@ namespace Client.Domain
 {
     public class Copy
     {
-        
+        public int Stock { get; set; }
+
     }
 }
