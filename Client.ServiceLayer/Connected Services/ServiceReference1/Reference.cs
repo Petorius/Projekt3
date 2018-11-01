@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+
 namespace Client.ServiceLayer.ServiceReference1 {
     
     
@@ -55,6 +57,14 @@ namespace Client.ServiceLayer.ServiceReference1 {
         
         public System.Threading.Tasks.Task CreateProductAsync(string name, double price, int stock, int minStock, int maxStock, string description) {
             return base.Channel.CreateProductAsync(name, price, stock, minStock, maxStock, description);
+        }
+
+        internal void Find(int iD) {
+            throw new NotImplementedException();
+        }
+
+        internal void FindProduct(int iD) {
+            throw new NotImplementedException();
         }
     }
 }

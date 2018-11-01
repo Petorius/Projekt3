@@ -12,5 +12,11 @@ namespace Client.ServiceLayer
             ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
             myProxy.CreateProduct(name, price, stock, minStock, maxStock, description);
         }
+
+        public Product Find(int ID) {
+            ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
+            return myProxy.FindProduct(ID);
+
+        }
     }
 }

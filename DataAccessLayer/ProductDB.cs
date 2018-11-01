@@ -37,8 +37,22 @@ namespace Server.DataAccessLayer {
         }
 
         public Product Get(int id) {
-            throw new NotImplementedException();
-        }
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                connection.Open();
+                using (SqlCommand cmd = connection.CreateCommand()) {
+                    cmd.CommandText = "SELECT from Product";
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read()) {
+                        Product p = new Product();
+                        p.ID = reader.GetInt32(reader.GetOrdinal("id"));
+                        if (id == p.ID) {
+                            return p;
+                        }
+                    }
+                    return null;
+                }
+            }
+        } 
 
         public IEnumerable<Product> GetAll() {
             throw new NotImplementedException();

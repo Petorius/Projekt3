@@ -9,6 +9,8 @@ namespace Server.Domain {
     [DataContract]
     public class Product {
         [DataMember]
+        public int ID { get; set; }
+        [DataMember]
         public string Name { get; set; }
         [DataMember]
         public double Price { get; set; }
@@ -31,5 +33,7 @@ namespace Server.Domain {
             MaxStock = maxStock;
             Description = description;
         }
+
+        public Product() { }
     }
 }

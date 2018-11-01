@@ -20,5 +20,10 @@ namespace Server.ServiceLayer
             Product p = new Product(name, price, stock, minStock, maxStock, description);
             productDb.Create(p);
         }
+
+        public Product FindProduct(int ID) {
+            Product product = productDb.Get(ID);
+            return product;
+        }
     }
 }

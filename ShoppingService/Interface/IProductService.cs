@@ -13,5 +13,10 @@ namespace Server.ServiceLayer
     {
         [OperationContract]
         void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description);
+
+        [OperationContract]
+        Product FindProduct(int ID);
     }
+
+    
 }
