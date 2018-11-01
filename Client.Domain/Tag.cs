@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Client.Domain;
 
-namespace Client.ServiceLayer
+namespace Client.Domain
 {
-    public interface IProductService
+    public class Tag
     {
-       
-        
+        public string Description { get; set; }
     }
 }
