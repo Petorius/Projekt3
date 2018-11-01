@@ -32,5 +32,9 @@ namespace Client.Domain
             _Category = category;
             _Keywords = keywords;
         }
+
+        public Product() {
+                
+        }
     }
 }

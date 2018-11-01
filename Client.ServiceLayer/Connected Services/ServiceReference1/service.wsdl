@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Server.Domain" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IProductService_CreateProduct_InputMessage">
@@ -12,16 +13,35 @@
   <wsdl:message name="IProductService_CreateProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateProductResponse" />
   </wsdl:message>
+  <wsdl:message name="IProductService_FindProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindProduct" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_FindProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindProductResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProductService">
     <wsdl:operation name="CreateProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/CreateProduct" message="tns:IProductService_CreateProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/CreateProductResponse" message="tns:IProductService_CreateProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/FindProduct" message="tns:IProductService_FindProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/FindProductResponse" message="tns:IProductService_FindProduct_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProductService" type="tns:IProductService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="CreateProduct">
       <soap:operation soapAction="http://tempuri.org/IProductService/CreateProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindProduct">
+      <soap:operation soapAction="http://tempuri.org/IProductService/FindProduct" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

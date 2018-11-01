@@ -40,11 +40,17 @@ namespace Server.DataAccessLayer {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
-                    cmd.CommandText = "SELECT from Product";
+                    cmd.CommandText = "SELECT id, name, price, stock, description, rating from Product";
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read()) {
                         Product p = new Product();
                         p.ID = reader.GetInt32(reader.GetOrdinal("id"));
+                        p.Name = reader.GetString(reader.GetOrdinal("name"));
+                        p.Price = reader.GetDouble(reader.GetOrdinal("price"));
+                        p.Stock = reader.GetInt32(reader.GetOrdinal("stock"));
+                        p.Description = reader.GetString(reader.GetOrdinal("description"));
+                        p.Rating = reader.GetInt32(reader.GetOrdinal("rating"));
+
                         if (id == p.ID) {
                             return p;
                         }

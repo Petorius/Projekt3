@@ -45,6 +45,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Client.Domain\Client.Domain.csproj">
+      <Project>{4582B80E-A3BE-4348-8181-9FCDDC5E04C9}</Project>
+      <Name>Client.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Client.ServiceLayer\Client.ServiceLayer.csproj">
       <Project>{6af48941-0fd0-4cbf-a081-95510761382f}</Project>
       <Name>Client.ServiceLayer</Name>
