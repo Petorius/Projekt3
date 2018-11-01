@@ -20,15 +20,14 @@ namespace Server.DataAccessLayer {
                 using(SqlConnection connection = new SqlConnection(connectionString)) {
                     connection.Open();
                     using(SqlCommand cmd = connection.CreateCommand()) {
-                        cmd.CommandText = "Insert into Product(Name, Price, Stock, MinStock, MaxStock, Description, Rating) values" +
-                            " (@Name, @Price, @Stock, @MinStock, @MaxStock, @Description, @Rating)";
+                        cmd.CommandText = "Insert into Product(Name, Price, Stock, MinStock, MaxStock, Description) values" +
+                            " (@Name, @Price, @Stock, @MinStock, @MaxStock, @Description)";
                         cmd.Parameters.AddWithValue("Name", Entity.Name);
                         cmd.Parameters.AddWithValue("Price", Entity.Price);
                         cmd.Parameters.AddWithValue("Stock", Entity.Stock);
                         cmd.Parameters.AddWithValue("MinStock", Entity.MinStock);
                         cmd.Parameters.AddWithValue("MaxStock", Entity.MaxStock);
                         cmd.Parameters.AddWithValue("Description", Entity.Description);
-                        cmd.Parameters.AddWithValue("Rating", Entity.Rating);
                     }
                 }
         }

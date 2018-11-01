@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using Server.Domain;
 
 namespace Server.ServiceLayer
 {
@@ -11,6 +12,6 @@ namespace Server.ServiceLayer
     public interface IProductService
     {
         [OperationContract]
-        void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description, int rating);
+        void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description);
     }
 }

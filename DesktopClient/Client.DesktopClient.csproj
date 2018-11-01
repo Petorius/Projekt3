@@ -98,9 +98,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Server.Domain.csproj">
-      <Project>{b0ca8488-e992-4170-9a7e-5ca714f0aabe}</Project>
-      <Name>Server.Domain</Name>
+    <ProjectReference Include="..\Client.ControlLayer\Client.ControlLayer.csproj">
+      <Project>{61a619c3-39df-4499-82bb-1bfb63cef8b3}</Project>
+      <Name>Client.ControlLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Client.Domain\Client.Domain.csproj">
+      <Project>{4582b80e-a3be-4348-8181-9fcddc5e04c9}</Project>
+      <Name>Client.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

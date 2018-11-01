@@ -9,7 +9,6 @@
         <xs:element minOccurs="0" name="minStock" type="xs:int" />
         <xs:element minOccurs="0" name="maxStock" type="xs:int" />
         <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="rating" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

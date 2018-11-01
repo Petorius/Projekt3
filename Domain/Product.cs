@@ -23,14 +23,13 @@ namespace Server.Domain {
         [DataMember]
         public int Rating { get; set; }
 
-        public Product(string name, double price, int stock, int minStock, int maxStock, string description, int rating) {
+        public Product(string name, double price, int stock, int minStock, int maxStock, string description) {
             Name = name;
             Price = price;
             Stock = stock;
             MinStock = minStock;
             MaxStock = maxStock;
             Description = description;
-            Rating = rating;
         }
     }
 }

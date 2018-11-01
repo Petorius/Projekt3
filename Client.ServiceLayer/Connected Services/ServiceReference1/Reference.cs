@@ -16,10 +16,10 @@ namespace Client.ServiceLayer.ServiceReference1 {
     public interface IProductService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
-        void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description, int rating);
+        void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
-        System.Threading.Tasks.Task CreateProductAsync(string name, double price, int stock, int minStock, int maxStock, string description, int rating);
+        System.Threading.Tasks.Task CreateProductAsync(string name, double price, int stock, int minStock, int maxStock, string description);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,12 +49,12 @@ namespace Client.ServiceLayer.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description, int rating) {
-            base.Channel.CreateProduct(name, price, stock, minStock, maxStock, description, rating);
+        public void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description) {
+            base.Channel.CreateProduct(name, price, stock, minStock, maxStock, description);
         }
         
-        public System.Threading.Tasks.Task CreateProductAsync(string name, double price, int stock, int minStock, int maxStock, string description, int rating) {
-            return base.Channel.CreateProductAsync(name, price, stock, minStock, maxStock, description, rating);
+        public System.Threading.Tasks.Task CreateProductAsync(string name, double price, int stock, int minStock, int maxStock, string description) {
+            return base.Channel.CreateProductAsync(name, price, stock, minStock, maxStock, description);
         }
     }
 }

@@ -16,8 +16,8 @@ namespace Server.ServiceLayer
         public ProductService() {
             productDb = new ProductDB();
         }
-        public void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description, int rating) {
-            Product p = new Product(name, price, stock, minStock, maxStock, description, rating);
+        public void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description) {
+            Product p = new Product(name, price, stock, minStock, maxStock, description);
             productDb.Create(p);
         }
     }

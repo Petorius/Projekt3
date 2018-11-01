@@ -14,18 +14,20 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
 using System.Data.SqlClient;
-using Server.Domain;
+using Client.Domain;
+using Client.ControlLayer;
 
 namespace DesktopClient
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
+    public partial class MainWindow : Window {
+        private ProductController productController;
+        public MainWindow() {
             InitializeComponent();
+            productController = new ProductController();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
@@ -36,6 +38,7 @@ namespace DesktopClient
                 int minStock = Int32.Parse(minStockTextBox.Text);
                 int maxStock = Int32.Parse(maxStockTextBox.Text);
                 string description = descriptionTextBox.Text;
+                productController.CreateProduct(name, price, stock, minStock, maxStock, description);
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
