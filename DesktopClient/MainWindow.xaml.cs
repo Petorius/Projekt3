@@ -40,6 +40,7 @@ namespace DesktopClient
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
             }
+            
 
         }
     }
