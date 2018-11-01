@@ -60,17 +60,16 @@ namespace DesktopClient
 
             try
             {
-                foundNamelabel.Text = p._Name;
-                double price = double.Parse(priceTextBox.Text);
-                int stock = Int32.Parse(stockTextBox.Text);
-                int minStock = Int32.Parse(minStockTextBox.Text);
-                int maxStock = Int32.Parse(maxStockTextBox.Text);
-                string description = descriptionTextBox.Text;
-                productController.CreateProduct(name, price, stock, minStock, maxStock, description);
+                foundNamelabel.Content = p._Name;
+                foundPricelabel.Content = p._Price;
+                foundStocklabel.Content = p._Stock;
+                foundDescriptionlabel.Content = p._Description;
+                foundRatinglabel.Content = p._Rating;
+                
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("Ugyldig tekst indsat");
+                MessageBox.Show("Product does not exist");
             }
         }
     }
