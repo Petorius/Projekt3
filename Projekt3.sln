@@ -24,6 +24,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.ControlLayer", "Client.ControlLayer\Client.ControlLayer.csproj", "{61A619C3-39DF-4499-82BB-1BFB63CEF8B3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.ServiceLayer", "Client.ServiceLayer\Client.ServiceLayer.csproj", "{6AF48941-0FD0-4CBF-A081-95510761382F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5C5B648A-F250-424D-9FCD-331E548FDC90} = {5C5B648A-F250-424D-9FCD-331E548FDC90}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server.Host", "Server.Host\Server.Host.csproj", "{95CC681E-4FFE-41F0-9A73-6B2A33CB2178}"
 EndProject
