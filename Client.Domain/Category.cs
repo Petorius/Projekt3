@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client.Domain {
     public class Category : Tag {
+        //
 
     }
 }
