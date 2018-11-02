@@ -13,7 +13,7 @@ namespace Server.Domain {
         [DataMember]
         public string Name { get; set; }
         [DataMember]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         [DataMember]
         public int Stock { get; set; }
         [DataMember]
@@ -25,7 +25,7 @@ namespace Server.Domain {
         [DataMember]
         public int Rating { get; set; }
 
-        public Product(string name, double price, int stock, int minStock, int maxStock, string description) {
+        public Product(string name, decimal price, int stock, int minStock, int maxStock, string description) {
             Name = name;
             Price = price;
             Stock = stock;

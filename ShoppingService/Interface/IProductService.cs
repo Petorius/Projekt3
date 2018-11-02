@@ -10,7 +10,7 @@ namespace Server.ServiceLayer {
     [ServiceContract]
     public interface IProductService {
         [OperationContract]
-        void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description);
+        void CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description);
 
         [OperationContract]
         Product FindProduct(int ID);

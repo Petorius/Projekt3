@@ -51,6 +51,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Domain\Server.Domain.csproj">
+      <Project>{B0CA8488-E992-4170-9A7E-5CA714F0AABE}</Project>
+      <Name>Server.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ShoppingService\Server.ServiceLayer.csproj">
       <Project>{5c5b648a-f250-424d-9fcd-331e548fdc90}</Project>
       <Name>Server.ServiceLayer</Name>

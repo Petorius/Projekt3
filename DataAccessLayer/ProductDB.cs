@@ -28,6 +28,7 @@ namespace Server.DataAccessLayer {
                         cmd.Parameters.AddWithValue("MinStock", Entity.MinStock);
                         cmd.Parameters.AddWithValue("MaxStock", Entity.MaxStock);
                         cmd.Parameters.AddWithValue("Description", Entity.Description);
+                        cmd.ExecuteNonQuery();
                     }
                 }
         }
@@ -63,13 +64,13 @@ namespace Server.DataAccessLayer {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
-                    cmd.CommandText = "SELECT id, name, price, stock, description, rating from Product";
+                    cmd.CommandText = "SELECT productid, name, price, stock, description, rating from Product";
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read()) {
                         Product p = new Product();
-                        p.ID = reader.GetInt32(reader.GetOrdinal("id"));
+                        p.ID = reader.GetInt32(reader.GetOrdinal("productid"));
                         p.Name = reader.GetString(reader.GetOrdinal("name"));
-                        p.Price = reader.GetDouble(reader.GetOrdinal("price"));
+                        p.Price = reader.GetDecimal(reader.GetOrdinal("price"));
                         p.Stock = reader.GetInt32(reader.GetOrdinal("stock"));
                         p.Description = reader.GetString(reader.GetOrdinal("description"));
                         p.Rating = reader.GetInt32(reader.GetOrdinal("rating"));
