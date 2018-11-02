@@ -8,7 +8,7 @@ using Client.Domain;
 namespace Client.ServiceLayer
 {
     public class ProductService : IProductService {
-        public void Create(string name, double price, int stock, int minStock, int maxStock, string description) {
+        public void Create(string name, decimal price, int stock, int minStock, int maxStock, string description) {
             ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
             myProxy.CreateProduct(name, price, stock, minStock, maxStock, description);
         }

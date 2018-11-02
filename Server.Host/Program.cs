@@ -9,6 +9,7 @@ using serviceToHost = Server.ServiceLayer;
 namespace Server.Host {
     class Program {
         static void Main(string[] args) {
+
             Console.WriteLine("Console based host");
 
             using (ServiceHost serviceHost = new ServiceHost(typeof(serviceToHost.ProductService)))
@@ -22,7 +23,7 @@ namespace Server.Host {
                 Console.WriteLine("Press key to terminate");
 
                 Console.ReadLine();
-            }    
+            }
         }
         static void DisplayHostInfo(ServiceHost host)
         {
