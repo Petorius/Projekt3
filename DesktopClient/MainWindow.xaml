@@ -7,7 +7,140 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" Margin="506,203,212.6,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <TabControl HorizontalAlignment="Left" Height="420" Margin="0,0,-0.4,0" VerticalAlignment="Top" Width="794">
+            <TabItem Header="Produkt" Margin="-2,-2,-2,0">
+                <Grid Background="#FFE5E5E5" Margin="0,-25,0,0.2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="389" Margin="10,25,0,0" VerticalAlignment="Top" Width="778">
+                        <TabItem Header="Opret">
+                            <Grid Background="#FFE5E5E5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="53*"/>
+                                    <ColumnDefinition Width="719*"/>
+                                </Grid.ColumnDefinitions>
 
+                                <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="23" Margin="101.791,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Grid.Column="1"/>
+                                <Label Content="Navn: " HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="90" Grid.ColumnSpan="2"/>
+                                <TextBox x:Name="priceTextBox" HorizontalAlignment="Left" Height="23" Margin="101.791,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Grid.Column="1"/>
+                                <Label Content="Pris: " HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="90" Grid.ColumnSpan="2"/>
+                                <TextBox x:Name="stockTextBox" HorizontalAlignment="Left" Height="23" Margin="101.791,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Grid.Column="1"/>
+                                <Label Content="Antal: " HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" Width="90" Grid.ColumnSpan="2"/>
+                                <TextBox x:Name="minStockTextBox" HorizontalAlignment="Left" Height="23" Margin="101.791,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Grid.Column="1"/>
+                                <Label Content="Minimum antal på lager:" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Width="140" Grid.ColumnSpan="2"/>
+                                <TextBox x:Name="maxStockTextBox" HorizontalAlignment="Left" Height="23" Margin="101.791,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" Grid.Column="1"/>
+                                <Label Content="Maximum antal på lager:" HorizontalAlignment="Left" Margin="10,199,0,0" VerticalAlignment="Top" Width="140" Grid.ColumnSpan="2"/>
+                                <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Height="82" Margin="101.791,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="343" Grid.Column="1"/>
+                                <Label Content="Beskrivelse:" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Width="90" Grid.ColumnSpan="2"/>
+                                <Button Content="Opret Produkt" HorizontalAlignment="Left" Margin="481.791,306,0,0" VerticalAlignment="Top" Width="93" Height="20" Click="Button_Click" Grid.Column="1"/>
+                                <Button Content="Fortryd" HorizontalAlignment="Left" Margin="614.791,307,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Søg">
+                            <Grid Background="#FFE5E5E5">
+                                <TextBox x:Name="inputIDtextBox" HorizontalAlignment="Left" Height="23" Margin="371,40,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.388,0.557" TextChanged="inputIDtextBox_TextChanged"/>
+                                <Label x:Name="searchByIDlabel" Content="Search by ID" HorizontalAlignment="Left" Margin="212,37,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="namelabel" Content="Name:" HorizontalAlignment="Left" Margin="212,106,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="foundNamelabel" Content="" HorizontalAlignment="Left" Margin="371,124,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="pricelabel" Content="Price:" HorizontalAlignment="Left" Margin="212,152,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="foundPricelabel" Content="" HorizontalAlignment="Left" Margin="371,170,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="stocklabel" Content="Stock:" HorizontalAlignment="Left" Margin="212,197,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="descriptionlabel" Content="Description:" HorizontalAlignment="Left" Margin="212,246,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="foundDescriptionlabel" Content="" HorizontalAlignment="Left" Margin="371,264,0,0" VerticalAlignment="Top" Width="285"/>
+                                <Label x:Name="foundStocklabel" Content="" HorizontalAlignment="Left" Margin="371,215,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="ratinglabel" Content="Rating:" HorizontalAlignment="Left" Margin="212,288,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="foundRatinglabel" Content="" HorizontalAlignment="Left" Margin="371,306,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="OKbutton" Content="OK" HorizontalAlignment="Left" Margin="581,331,0,0" VerticalAlignment="Top" Width="75" Click="OKbutton_Click"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Opdater">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Slet">
+                            <Grid Background="#FFE5E5E5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="93*"/>
+                                    <ColumnDefinition Width="680*"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Ordre" Margin="-2,-2,-2,0">
+                <Grid Background="#FFE5E5E5" Margin="0,-25,0,0.2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="389" Margin="10,25,0,0" VerticalAlignment="Top" Width="778">
+                        <TabItem Header="Opret">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Søg">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Opdater">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Slet">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Kunde" Margin="-2,-2,-2,0">
+                <Grid Background="#FFE5E5E5" Margin="0,-25,0,0.2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="389" Margin="10,25,0,0" VerticalAlignment="Top" Width="778">
+                        <TabItem Header="Opret">
+                            <Grid Background="#FFE5E5E5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="29*"/>
+                                    <ColumnDefinition Width="22*"/>
+                                    <ColumnDefinition Width="722*"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Søg">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Opdater">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Slet">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TabItem" Margin="-2,-2,-2,0">
+                <Grid Background="#FFE5E5E5" Margin="0,-25,0,0.2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="389" Margin="10,25,0,0" VerticalAlignment="Top" Width="778">
+                        <TabItem Header="TabItem">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="TabItem">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="TabItem">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="TabItem">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
