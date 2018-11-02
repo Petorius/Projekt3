@@ -13,17 +13,28 @@ namespace Client.ServiceLayer
             myProxy.CreateProduct(name, price, stock, minStock, maxStock, description);
         }
 
+        public void Delete(int id) {
+            ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
+            myProxy.DeleteProduct(id);
+        }
+
         public Product Find(int ID) {
             ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
             var p = myProxy.FindProduct(ID);
 
             Product product = new Product();
-            product._Name = p.Name;
-            product._Price = p.Price;
-            product._Stock = p.Stock;
-            product._Description = p.Description;
-            product._Rating = p.Rating;
+            product.Name = p.Name;
+            product.Price = p.Price;
+            product.Stock = p.Stock;
+            product.Description = p.Description;
+            product.Rating = p.Rating;
             return product;
+        }
+
+        public void Update(int ID) {
+            ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
+            myProxy.Update(ID);
+
         }
     }
 }

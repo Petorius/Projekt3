@@ -18,10 +18,15 @@ namespace Client.ControlLayer {
         }
 
         public Product Find(int ID) {
-            
             return productService.Find(ID);
-           
-            
+        }
+
+        public void DeleteProduct(int ID) {
+            productService.Delete(ID);
+        }
+
+        public void Update(int ID) {
+            productService.Update(ID);
         }
     }
 }

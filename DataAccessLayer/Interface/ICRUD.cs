@@ -9,7 +9,7 @@ namespace Server.DataAccessLayer {
         void Create(T Entity);
         T Get(int id);
         IEnumerable<T> GetAll();
-        void Update(T Enitity);
-        void Delete(T Entity);
+        void Update(int id);
+        void Delete(int id);
     }
 }

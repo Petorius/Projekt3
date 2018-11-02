@@ -21,9 +21,17 @@ namespace Server.ServiceLayer
             productDb.Create(p);
         }
 
+        public void DeleteProduct(int id) {
+            productDb.Delete(id);
+        }
+
         public Product FindProduct(int ID) {
             Product product = productDb.Get(ID);
             return product;
+        }
+
+        public void Update(int id) {
+            productDb.Update(id);
         }
     }
 }

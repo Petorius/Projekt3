@@ -60,11 +60,11 @@ namespace DesktopClient
 
             try
             {
-                foundNamelabel.Content = p._Name;
-                foundPricelabel.Content = p._Price;
-                foundStocklabel.Content = p._Stock;
-                foundDescriptionlabel.Content = p._Description;
-                foundRatinglabel.Content = p._Rating;
+                foundNamelabel.Content = p.Name;
+                foundPricelabel.Content = p.Price;
+                foundStocklabel.Content = p.Stock;
+                foundDescriptionlabel.Content = p.Description;
+                foundRatinglabel.Content = p.Rating;
                 
             }
             catch (NullReferenceException)

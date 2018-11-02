@@ -32,8 +32,31 @@ namespace Server.DataAccessLayer {
                 }
         }
 
-        public void Delete(Product Entity) {
-            throw new NotImplementedException();
+        public void Delete(int id) {
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                connection.Open();
+                int rowId = 0;
+                int rowCount;
+
+                using (SqlCommand cmd = connection.CreateCommand()) {
+                    cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                    cmd.Parameters.AddWithValue("productID", id);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while(reader.Read()) {
+                        rowId = reader.GetInt32(reader.GetOrdinal("rowID"));
+                    }
+
+                    cmd.CommandText = "DELETE FROM Product WHERE ProductID = @productID AND rowID = @rowId";
+                    cmd.Parameters.AddWithValue("productID", id);
+                    cmd.Parameters.AddWithValue("rowID", rowId);
+                    rowCount = cmd.ExecuteNonQuery();
+
+                    if(rowCount == 0) {
+                        cmd.Transaction.Rollback();
+                    }
+                }
+            }
         }
 
         public Product Get(int id) {
@@ -58,14 +81,31 @@ namespace Server.DataAccessLayer {
                     return null;
                 }
             }
-        } 
+        }
+
+        public void Update(int ID) {
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                connection.Open();
+                using (SqlCommand cmd = connection.CreateCommand()) {
+                    int rowID = 0;
+                    cmd.CommandText = "SELECT RowID FROM Product WHERE ProductID = @ID";
+                    cmd.Parameters.AddWithValue("ID", ID);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read()) {
+                        rowID = reader.GetInt32(reader.GetOrdinal("RowID"));
+                    }
+                    cmd.CommandText = "UPDATE Product WHERE ProductID = @ID AND RowID = @RowID";
+                    cmd.Parameters.AddWithValue("ID", ID);
+                    cmd.Parameters.AddWithValue("RowID", rowID);
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
 
         public IEnumerable<Product> GetAll() {
             throw new NotImplementedException();
         }
 
-        public void Update(Product Enitity) {
-            throw new NotImplementedException();
-        }
     }
 }

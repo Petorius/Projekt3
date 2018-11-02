@@ -185,6 +185,18 @@ namespace Client.ServiceLayer.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductAsync(int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteProduct", ReplyAction="http://tempuri.org/IProductService/DeleteProductResponse")]
+        void DeleteProduct(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteProduct", ReplyAction="http://tempuri.org/IProductService/DeleteProductResponse")]
+        System.Threading.Tasks.Task DeleteProductAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/Update", ReplyAction="http://tempuri.org/IProductService/UpdateResponse")]
+        void Update(int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/Update", ReplyAction="http://tempuri.org/IProductService/UpdateResponse")]
+        System.Threading.Tasks.Task UpdateAsync(int ID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -228,6 +240,22 @@ namespace Client.ServiceLayer.ServiceReference1 {
         
         public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductAsync(int ID) {
             return base.Channel.FindProductAsync(ID);
+        }
+        
+        public void DeleteProduct(int id) {
+            base.Channel.DeleteProduct(id);
+        }
+        
+        public System.Threading.Tasks.Task DeleteProductAsync(int id) {
+            return base.Channel.DeleteProductAsync(id);
+        }
+        
+        public void Update(int ID) {
+            base.Channel.Update(ID);
+        }
+        
+        public System.Threading.Tasks.Task UpdateAsync(int ID) {
+            return base.Channel.UpdateAsync(ID);
         }
     }
 }

@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Domain
-{
-    public class Keyword : Tag
-    {
+namespace Client.Domain {
+    public class Keyword : Tag {
     }
 }

@@ -11,6 +11,10 @@ namespace Client.ServiceLayer
         void Create(string name, double price, int stock, int minStock, int maxStock, string description);
 
         Product Find(int ID);
+
+        void Delete(int id);
+
+        void Update(int ID);
     }
 
 

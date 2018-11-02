@@ -6,17 +6,19 @@ using System.ServiceModel;
 using System.Text;
 using Server.Domain;
 
-namespace Server.ServiceLayer
-{
+namespace Server.ServiceLayer {
     [ServiceContract]
-    public interface IProductService
-    {
+    public interface IProductService {
         [OperationContract]
         void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description);
 
         [OperationContract]
         Product FindProduct(int ID);
-    }
 
-    
+        [OperationContract]
+        void DeleteProduct(int id);
+
+        [OperationContract]
+        void Update(int ID);
+    }
 }

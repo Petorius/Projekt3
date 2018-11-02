@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Domain
-{
-    public class Copy
-    {
+namespace Client.Domain {
+    public class Copy {
         public int Stock { get; set; }
 
     }
