@@ -13,7 +13,7 @@ namespace Client.ControlLayer {
             productService = new ProductService();
         }
 
-        public void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description) {
+        public void CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description) {
             productService.Create(name, price, stock, minStock, maxStock, description);
         }
 

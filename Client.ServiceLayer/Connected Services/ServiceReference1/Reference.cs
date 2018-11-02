@@ -38,7 +38,7 @@ namespace Client.ServiceLayer.ServiceReference1 {
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double PriceField;
+        private decimal PriceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int RatingField;
@@ -122,7 +122,7 @@ namespace Client.ServiceLayer.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double Price {
+        public decimal Price {
             get {
                 return this.PriceField;
             }
@@ -175,10 +175,10 @@ namespace Client.ServiceLayer.ServiceReference1 {
     public interface IProductService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
-        void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description);
+        void CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
-        System.Threading.Tasks.Task CreateProductAsync(string name, double price, int stock, int minStock, int maxStock, string description);
+        System.Threading.Tasks.Task CreateProductAsync(string name, decimal price, int stock, int minStock, int maxStock, string description);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
         Client.ServiceLayer.ServiceReference1.Product FindProduct(int ID);
@@ -226,11 +226,11 @@ namespace Client.ServiceLayer.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public void CreateProduct(string name, double price, int stock, int minStock, int maxStock, string description) {
+        public void CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description) {
             base.Channel.CreateProduct(name, price, stock, minStock, maxStock, description);
         }
         
-        public System.Threading.Tasks.Task CreateProductAsync(string name, double price, int stock, int minStock, int maxStock, string description) {
+        public System.Threading.Tasks.Task CreateProductAsync(string name, decimal price, int stock, int minStock, int maxStock, string description) {
             return base.Channel.CreateProductAsync(name, price, stock, minStock, maxStock, description);
         }
         

@@ -5,7 +5,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="price" type="xs:double" />
+        <xs:element minOccurs="0" name="price" type="xs:decimal" />
         <xs:element minOccurs="0" name="stock" type="xs:int" />
         <xs:element minOccurs="0" name="minStock" type="xs:int" />
         <xs:element minOccurs="0" name="maxStock" type="xs:int" />
