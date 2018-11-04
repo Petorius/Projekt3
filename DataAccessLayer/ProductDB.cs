@@ -37,8 +37,8 @@ namespace Server.DataAccessLayer {
             bool deleted = false;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
-                string rowId = "";
-                int rowCount;
+                byte[] rowId = null;
+                int rowCount = 0;
 
                 using (SqlCommand cmd = connection.CreateCommand()) {
                     cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
@@ -46,21 +46,25 @@ namespace Server.DataAccessLayer {
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while(reader.Read()) {
-                        rowId = Convert.ToBase64String(reader["rowId"] as byte[]);
-                        Console.WriteLine(rowId);
+                        rowId = (byte[])reader["rowId"];
+                    }
+                    reader.Close();
+
+                    try {
+                        cmd.CommandText = "DELETE FROM Product WHERE ProductID = @productID AND rowID = @rowId";
+                        cmd.Parameters.AddWithValue("rowID", rowId);
+                        rowCount = cmd.ExecuteNonQuery();
+                        if (rowCount == 0) {
+                            cmd.Transaction.Rollback();
+                        }
+                        else {
+                            deleted = true;
+                        }
+                    } catch (SqlException) {
+                        deleted = false;
                     }
 
-                    cmd.CommandText = "DELETE FROM Product WHERE ProductID = @productID AND rowID = @rowId";
-                    cmd.Parameters.AddWithValue("productID", id);
-                    cmd.Parameters.AddWithValue("rowID", rowId);
-                    rowCount = cmd.ExecuteNonQuery();
 
-                    if(rowCount == 0) {
-                        cmd.Transaction.Rollback();
-                    }
-                    else {
-                        deleted = true;
-                    }
 
                 }
             }
