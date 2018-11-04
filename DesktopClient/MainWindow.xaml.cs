@@ -83,5 +83,61 @@ namespace DesktopClient {
             }
             
         }
+
+        private void Søgbutton_Click(object sender, RoutedEventArgs e) {
+            Product p = productController.Find(Int32.Parse(_inputIDtextBox.Text));
+            try {
+                updateNameTextBox.Text = p.Name;
+                updatePriceTextBox.Text = p.Price.ToString();
+                updateStockTextBox.Text = p.Stock.ToString();
+                updateDescriptionTextBox.Text = p.Description;
+                updateMinStockTextBox.Text = p.MinStock.ToString();
+                updateMaxStockTextBox.Text = p.MaxStock.ToString();
+                _inputIDtextBox.IsEnabled = false;
+            }
+            catch (NullReferenceException) {
+                MessageBox.Show("Produktet findes ikke");
+            }
+        }
+
+        private void OKUpdateButton_Click(object sender, RoutedEventArgs e) {
+            try {
+                int id = Int32.Parse(_inputIDtextBox.Text);
+                string name = updateNameTextBox.Text;
+                decimal price = decimal.Parse(updatePriceTextBox.Text);
+                int stock = Int32.Parse(updateStockTextBox.Text);
+                int minStock = Int32.Parse(updateMinStockTextBox.Text);
+                int maxStock = Int32.Parse(updateMaxStockTextBox.Text);
+                string description = updateDescriptionTextBox.Text;
+                bool isUpdated = productController.Update(id, name, price, stock, minStock, maxStock, description);
+                if(isUpdated) {
+                    updateProductText.Content = "Produktet blev opdateret";
+                    ProductClearUpdateFields();
+                    _inputIDtextBox.IsEnabled = true;
+                } 
+                else {
+                    updateProductText.Content = "Der opstod en fejl. Prøv igen";
+                }
+                
+            }
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
+            }
+        }
+
+        private void ProductClearUpdateFields() {
+            _inputIDtextBox.Text = "";
+            updateNameTextBox.Text = "";
+            updatePriceTextBox.Text = "";
+            updateStockTextBox.Text = "";
+            updateMaxStockTextBox.Text = "";
+            updateMinStockTextBox.Text = "";
+            updateDescriptionTextBox.Text = "";
+        }
+
+        private void CancelUpdateButton_Click(object sender, RoutedEventArgs e) {
+            _inputIDtextBox.IsEnabled = true;
+            ProductClearUpdateFields();
+        }
     }
 }

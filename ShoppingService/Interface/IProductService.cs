@@ -19,6 +19,6 @@ namespace Server.ServiceLayer {
         bool DeleteProduct(int id);
 
         [OperationContract]
-        void Update(int ID);
+        bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description);
     }
 }

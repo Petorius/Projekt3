@@ -50,12 +50,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="ID" type="xs:int" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="price" type="xs:decimal" />
+        <xs:element minOccurs="0" name="stock" type="xs:int" />
+        <xs:element minOccurs="0" name="minStock" type="xs:int" />
+        <xs:element minOccurs="0" name="maxStock" type="xs:int" />
+        <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateResult" type="xs:boolean" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>
