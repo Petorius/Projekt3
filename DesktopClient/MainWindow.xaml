@@ -34,25 +34,26 @@
                                 <Label Content="Maximum antal på lager:" HorizontalAlignment="Left" Margin="10,199,0,0" VerticalAlignment="Top" Width="140" Grid.ColumnSpan="2"/>
                                 <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Height="82" Margin="101.791,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="343" Grid.Column="1"/>
                                 <Label Content="Beskrivelse:" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Width="90" Grid.ColumnSpan="2"/>
-                                <Button Content="Opret Produkt" HorizontalAlignment="Left" Margin="481.791,306,0,0" VerticalAlignment="Top" Width="93" Height="20" Click="Button_Click" Grid.Column="1"/>
-                                <Button Content="Fortryd" HorizontalAlignment="Left" Margin="614.791,307,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+                                <Button Content="Opret Produkt" HorizontalAlignment="Left" Margin="481.791,306,0,0" VerticalAlignment="Top" Width="93" Height="20" Click="Produkt_Opret_OpretProdukt_Clicked" Grid.Column="1"/>
+                                <Button Content="Fortryd" HorizontalAlignment="Left" Margin="614.791,307,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="Produkt_Opret_Fortryd_Clicked"/>
+                                <Label x:Name="addProductText" Content="" Grid.Column="1" HorizontalAlignment="Center" Margin="400.2,157,0,0" VerticalAlignment="Top" Height="67" Width="290" FontSize="24"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Søg">
                             <Grid Background="#FFE5E5E5">
-                                <TextBox x:Name="inputIDtextBox" HorizontalAlignment="Left" Height="23" Margin="371,40,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.388,0.557" TextChanged="inputIDtextBox_TextChanged"/>
-                                <Label x:Name="searchByIDlabel" Content="Search by ID" HorizontalAlignment="Left" Margin="212,37,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="namelabel" Content="Name:" HorizontalAlignment="Left" Margin="212,106,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="foundNamelabel" Content="" HorizontalAlignment="Left" Margin="371,124,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="pricelabel" Content="Price:" HorizontalAlignment="Left" Margin="212,152,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="foundPricelabel" Content="" HorizontalAlignment="Left" Margin="371,170,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="stocklabel" Content="Stock:" HorizontalAlignment="Left" Margin="212,197,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="descriptionlabel" Content="Description:" HorizontalAlignment="Left" Margin="212,246,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="foundDescriptionlabel" Content="" HorizontalAlignment="Left" Margin="371,264,0,0" VerticalAlignment="Top" Width="285"/>
-                                <Label x:Name="foundStocklabel" Content="" HorizontalAlignment="Left" Margin="371,215,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="ratinglabel" Content="Rating:" HorizontalAlignment="Left" Margin="212,288,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="foundRatinglabel" Content="" HorizontalAlignment="Left" Margin="371,306,0,0" VerticalAlignment="Top"/>
-                                <Button x:Name="OKbutton" Content="OK" HorizontalAlignment="Left" Margin="581,331,0,0" VerticalAlignment="Top" Width="75" Click="OKbutton_Click"/>
+                                <TextBox x:Name="inputIDtextBox" HorizontalAlignment="Left" Height="23" Margin="371,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.388,0.557"/>
+                                <Label x:Name="searchByIDlabel" Content="Søg på ID" HorizontalAlignment="Left" Margin="212,37,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="namelabel" Content="Navn:" HorizontalAlignment="Left" Margin="212,106,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="foundNamelabel" Content="" HorizontalAlignment="Left" Margin="371,106,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="pricelabel" Content="Pris:" HorizontalAlignment="Left" Margin="212,152,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="foundPricelabel" Content="" HorizontalAlignment="Left" Margin="371,152,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="stocklabel" Content="Antal på lager:" HorizontalAlignment="Left" Margin="212,197,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="descriptionlabel" Content="Beskrivelse:" HorizontalAlignment="Left" Margin="212,246,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="foundDescriptionlabel" Content="" HorizontalAlignment="Left" Margin="371,246,0,0" VerticalAlignment="Top" Width="285"/>
+                                <Label x:Name="foundStocklabel" Content="" HorizontalAlignment="Left" Margin="371,197,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="ratinglabel" Content="Kunde rating:" HorizontalAlignment="Left" Margin="212,288,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="foundRatinglabel" Content="" HorizontalAlignment="Left" Margin="371,289,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="OKbutton" Content="OK" HorizontalAlignment="Left" Margin="581,331,0,0" VerticalAlignment="Top" Width="75" Click="Produkt_Søg_Ok_Clicked"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Opdater">
@@ -64,6 +65,10 @@
                                     <ColumnDefinition Width="93*"/>
                                     <ColumnDefinition Width="680*"/>
                                 </Grid.ColumnDefinitions>
+                                <Button x:Name="Produkt_Slet_SletProdukt_Clicked" Content="Slet Produkt" Grid.Column="1" HorizontalAlignment="Left" Margin="413.2,293,0,0" VerticalAlignment="Top" Width="75" Click="Produkt_Slet_SletProdukt_Clicked_Click"/>
+                                <Label x:Name="findProductLabel" Content="Søg på ID" Grid.Column="1" HorizontalAlignment="Left" Margin="131.2,114,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="deleteTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="278.2,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="deleteStatusLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="173.2,174,0,0" VerticalAlignment="Top" Height="77" Width="341" FontSize="24"/>
                             </Grid>
                         </TabItem>
                     </TabControl>

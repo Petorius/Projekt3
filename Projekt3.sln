@@ -10,11 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.DesktopClient", "Des
 		{5C5B648A-F250-424D-9FCD-331E548FDC90} = {5C5B648A-F250-424D-9FCD-331E548FDC90}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.WebClient", "WebClient\Client.WebClient.csproj", "{A72880BE-01CF-4E6D-9D8E-33735FF502BF}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5C5B648A-F250-424D-9FCD-331E548FDC90} = {5C5B648A-F250-424D-9FCD-331E548FDC90}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server.Domain", "Domain\Server.Domain.csproj", "{B0CA8488-E992-4170-9A7E-5CA714F0AABE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server.DataAccessLayer", "DataAccessLayer\Server.DataAccessLayer.csproj", "{25A117A2-004B-4B26-9AA1-244418A6D605}"
@@ -46,10 +41,6 @@ Global
 		{1E5743E8-C2AD-4739-95AC-D4D2A09F1542}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E5743E8-C2AD-4739-95AC-D4D2A09F1542}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E5743E8-C2AD-4739-95AC-D4D2A09F1542}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A72880BE-01CF-4E6D-9D8E-33735FF502BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A72880BE-01CF-4E6D-9D8E-33735FF502BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A72880BE-01CF-4E6D-9D8E-33735FF502BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A72880BE-01CF-4E6D-9D8E-33735FF502BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B0CA8488-E992-4170-9A7E-5CA714F0AABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B0CA8488-E992-4170-9A7E-5CA714F0AABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0CA8488-E992-4170-9A7E-5CA714F0AABE}.Release|Any CPU.ActiveCfg = Release|Any CPU

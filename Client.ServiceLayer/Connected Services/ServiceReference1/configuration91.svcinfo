@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="/QHO6wTKe0Np85E0X0Aoz6lNIcU=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="MwemV6jj8VuRqOsPlhUwNoY4Bc8=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IProductService">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IProductService" contract="ServiceReference1.IProductService" bindingType="basicHttpBinding" address="http://localhost:8734/Design_Time_Addresses/Server.ServiceLayer/ProductService/" bindingConfiguration="BasicHttpBinding_IProductService">
+    <endpoint name="BasicHttpBinding_IProductService" contract="ServiceReference1.IProductService" bindingType="basicHttpBinding" address="http://localhost:8733/Design_Time_Addresses/Server.ServiceLayer/ProductService/" bindingConfiguration="BasicHttpBinding_IProductService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8734/Design_Time_Addresses/Server.ServiceLayer/ProductService/</serializedValue>
+          <serializedValue>http://localhost:8733/Design_Time_Addresses/Server.ServiceLayer/ProductService/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

@@ -12,8 +12,7 @@ namespace Server.Host {
 
             Console.WriteLine("Console based host");
 
-            using (ServiceHost serviceHost = new ServiceHost(typeof(serviceToHost.ProductService)))
-            {
+            using (ServiceHost serviceHost = new ServiceHost(typeof(serviceToHost.ProductService))) {
                 // Open the host and start listening for oncoming calls
                 serviceHost.Open();
                 DisplayHostInfo(serviceHost);
@@ -25,13 +24,11 @@ namespace Server.Host {
                 Console.ReadLine();
             }
         }
-        static void DisplayHostInfo(ServiceHost host)
-        {
+        static void DisplayHostInfo(ServiceHost host) {
             Console.WriteLine();
             Console.WriteLine("*-- Host Info --*");
 
-            foreach (System.ServiceModel.Description.ServiceEndpoint se in host.Description.Endpoints)
-            {
+            foreach (System.ServiceModel.Description.ServiceEndpoint se in host.Description.Endpoints) {
                 Console.WriteLine($"Address: {se.Address}");
                 Console.WriteLine($"Binding: {se.Binding.Name}");
                 Console.WriteLine($"Contract: {se.Contract.Name}");

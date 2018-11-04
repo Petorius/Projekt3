@@ -21,8 +21,8 @@ namespace Client.ControlLayer {
             return productService.Find(ID);
         }
 
-        public void DeleteProduct(int ID) {
-            productService.Delete(ID);
+        public bool DeleteProduct(int ID) {
+            return productService.Delete(ID);
         }
 
         public void Update(int ID) {

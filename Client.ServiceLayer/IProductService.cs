@@ -12,7 +12,7 @@ namespace Client.ServiceLayer
 
         Product Find(int ID);
 
-        void Delete(int id);
+        bool Delete(int id);
 
         void Update(int ID);
     }

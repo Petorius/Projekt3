@@ -187,10 +187,10 @@ namespace Client.ServiceLayer.ServiceReference1 {
         System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductAsync(int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteProduct", ReplyAction="http://tempuri.org/IProductService/DeleteProductResponse")]
-        void DeleteProduct(int id);
+        bool DeleteProduct(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteProduct", ReplyAction="http://tempuri.org/IProductService/DeleteProductResponse")]
-        System.Threading.Tasks.Task DeleteProductAsync(int id);
+        System.Threading.Tasks.Task<bool> DeleteProductAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/Update", ReplyAction="http://tempuri.org/IProductService/UpdateResponse")]
         void Update(int ID);
@@ -242,11 +242,11 @@ namespace Client.ServiceLayer.ServiceReference1 {
             return base.Channel.FindProductAsync(ID);
         }
         
-        public void DeleteProduct(int id) {
-            base.Channel.DeleteProduct(id);
+        public bool DeleteProduct(int id) {
+            return base.Channel.DeleteProduct(id);
         }
         
-        public System.Threading.Tasks.Task DeleteProductAsync(int id) {
+        public System.Threading.Tasks.Task<bool> DeleteProductAsync(int id) {
             return base.Channel.DeleteProductAsync(id);
         }
         

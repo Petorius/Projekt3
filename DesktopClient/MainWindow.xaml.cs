@@ -17,8 +17,7 @@ using System.Data.SqlClient;
 using Client.Domain;
 using Client.ControlLayer;
 
-namespace DesktopClient
-{
+namespace DesktopClient {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -29,8 +28,7 @@ namespace DesktopClient
             productController = new ProductController();
 
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e) {
+        private void Produkt_Opret_OpretProdukt_Clicked(object sender, RoutedEventArgs e) {
             try {
                 string name = nameTextBox.Text;
                 decimal price = decimal.Parse(priceTextBox.Text);
@@ -39,38 +37,51 @@ namespace DesktopClient
                 int maxStock = Int32.Parse(maxStockTextBox.Text);
                 string description = descriptionTextBox.Text;
                 productController.CreateProduct(name, price, stock, minStock, maxStock, description);
+                addProductText.Content = "Produktet blev tilføjet";
+                clearFields();
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
             }
-            
-
         }
 
-        private void inputIDtextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+        private void Produkt_Opret_Fortryd_Clicked(object sender, RoutedEventArgs e) {
+            clearFields();
         }
 
-        private void OKbutton_Click(object sender, RoutedEventArgs e)
-        {
-           
+        private void clearFields() {
+            nameTextBox.Text = "";
+            priceTextBox.Text = "";
+            minStockTextBox.Text = "";
+            maxStockTextBox.Text = "";
+            descriptionTextBox.Text = "";
+        }
 
+        private void Produkt_Søg_Ok_Clicked(object sender, RoutedEventArgs e) {
             Product p = productController.Find(Int32.Parse(inputIDtextBox.Text));
-
-            try
-            {
+            try {
                 foundNamelabel.Content = p.Name;
                 foundPricelabel.Content = p.Price;
                 foundStocklabel.Content = p.Stock;
                 foundDescriptionlabel.Content = p.Description;
                 foundRatinglabel.Content = p.Rating;
-                
             }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("Product does not exist");
+            catch (NullReferenceException) {
+                MessageBox.Show("Produktet findes ikke");
             }
+        }
+
+        private void Produkt_Slet_SletProdukt_Clicked_Click(object sender, RoutedEventArgs e) {
+            int value = Int32.Parse(deleteTextBox.Text);
+            bool res = productController.DeleteProduct(value);
+            if(res == true) {
+                deleteStatusLabel.Content = "Produktet blev slettet";
+                deleteTextBox.Text = "";
+            }
+            else {
+                deleteStatusLabel.Content = "Der opstod en fejl. Prøv igen";
+            }
+            
         }
     }
 }

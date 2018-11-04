@@ -33,10 +33,11 @@ namespace Server.DataAccessLayer {
                 }
         }
 
-        public void Delete(int id) {
+        public bool Delete(int id) {
+            bool deleted = false;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
-                int rowId = 0;
+                string rowId = "";
                 int rowCount;
 
                 using (SqlCommand cmd = connection.CreateCommand()) {
@@ -45,7 +46,8 @@ namespace Server.DataAccessLayer {
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while(reader.Read()) {
-                        rowId = reader.GetInt32(reader.GetOrdinal("rowID"));
+                        rowId = Convert.ToBase64String(reader["rowId"] as byte[]);
+                        Console.WriteLine(rowId);
                     }
 
                     cmd.CommandText = "DELETE FROM Product WHERE ProductID = @productID AND rowID = @rowId";
@@ -56,15 +58,21 @@ namespace Server.DataAccessLayer {
                     if(rowCount == 0) {
                         cmd.Transaction.Rollback();
                     }
+                    else {
+                        deleted = true;
+                    }
+
                 }
             }
+            return deleted;
         }
 
         public Product Get(int id) {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
-                    cmd.CommandText = "SELECT productid, name, price, stock, description, rating from Product";
+                    cmd.CommandText = "SELECT productid, name, price, stock, description, rating from Product where productID = @ProductID";
+                    cmd.Parameters.AddWithValue("ProductID", id);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read()) {
                         Product p = new Product();
@@ -73,7 +81,7 @@ namespace Server.DataAccessLayer {
                         p.Price = reader.GetDecimal(reader.GetOrdinal("price"));
                         p.Stock = reader.GetInt32(reader.GetOrdinal("stock"));
                         p.Description = reader.GetString(reader.GetOrdinal("description"));
-                        p.Rating = reader.GetInt32(reader.GetOrdinal("rating"));
+                        //p.Rating = reader.GetInt32(reader.GetOrdinal("rating"));
 
                         if (id == p.ID) {
                             return p;
