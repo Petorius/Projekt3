@@ -75,7 +75,7 @@ namespace Server.DataAccessLayer {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
-                    cmd.CommandText = "SELECT productid, name, price, stock, description, rating from Product where productID = @ProductID";
+                    cmd.CommandText = "SELECT productid, name, price, stock, description, rating, minstock, maxstock from Product where productID = @ProductID";
                     cmd.Parameters.AddWithValue("ProductID", id);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read()) {
@@ -84,6 +84,8 @@ namespace Server.DataAccessLayer {
                         p.Name = reader.GetString(reader.GetOrdinal("name"));
                         p.Price = reader.GetDecimal(reader.GetOrdinal("price"));
                         p.Stock = reader.GetInt32(reader.GetOrdinal("stock"));
+                        p.MinStock = reader.GetInt32(reader.GetOrdinal("minstock"));
+                        p.MaxStock = reader.GetInt32(reader.GetOrdinal("maxstock"));
                         p.Description = reader.GetString(reader.GetOrdinal("description"));
                         //p.Rating = reader.GetInt32(reader.GetOrdinal("rating"));
 
@@ -96,24 +98,49 @@ namespace Server.DataAccessLayer {
             }
         }
 
-        public void Update(int ID) {
+        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description) {
+            bool isUpdated = false;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
-                    int rowID = 0;
-                    cmd.CommandText = "SELECT RowID FROM Product WHERE ProductID = @ID";
-                    cmd.Parameters.AddWithValue("ID", ID);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read()) {
-                        rowID = reader.GetInt32(reader.GetOrdinal("RowID"));
-                    }
-                    cmd.CommandText = "UPDATE Product WHERE ProductID = @ID AND RowID = @RowID";
-                    cmd.Parameters.AddWithValue("ID", ID);
-                    cmd.Parameters.AddWithValue("RowID", rowID);
-                    cmd.ExecuteNonQuery();
+                byte[] rowId = null;
+                int rowCount = 0;
 
+                using (SqlCommand cmd = connection.CreateCommand()) {
+                    cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                    cmd.Parameters.AddWithValue("productID", ID);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read()) {
+                        rowId = (byte[])reader["rowId"];
+                    }
+                    reader.Close();
+
+                    //try {
+                        cmd.CommandText = "UPDATE Product " +
+                            "SET name = @name, price = @price, stock = @stock, minStock = @minStock, maxStock = @maxStock, description = @description " +
+                            "WHERE productID = @productID AND rowID = @rowId";
+                        cmd.Parameters.AddWithValue("name", name);
+                        cmd.Parameters.AddWithValue("price", price);
+                        cmd.Parameters.AddWithValue("stock", stock);
+                        cmd.Parameters.AddWithValue("minStock", minStock);
+                        cmd.Parameters.AddWithValue("maxStock", maxStock);
+                        cmd.Parameters.AddWithValue("description", description);
+                        cmd.Parameters.AddWithValue("rowID", rowId);
+
+                        rowCount = cmd.ExecuteNonQuery();
+                        if (rowCount == 0) {
+                            cmd.Transaction.Rollback();
+                        }
+                        else {
+                            isUpdated = true;
+                        }
+                    //}
+                    //catch (SqlException) {
+                    //    isUpdated = false;
+                    //}
                 }
             }
+            return isUpdated;
         }
 
         public IEnumerable<Product> GetAll() {

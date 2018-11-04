@@ -27,16 +27,17 @@ namespace Client.ServiceLayer {
                 product.Stock = p.Stock;
                 product.Description = p.Description;
                 product.Rating = p.Rating;
+                product.MinStock = p.MinStock;
+                product.MaxStock = p.MaxStock;
                 return product;
             }
             return null;
             
         }
 
-        public void Update(int ID) {
+        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description) {
             ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
-            myProxy.Update(ID);
-
+            return myProxy.Update(ID, name, price, stock, minStock, maxStock, description);
         }
     }
 }

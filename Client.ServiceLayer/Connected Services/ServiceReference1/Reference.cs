@@ -193,10 +193,10 @@ namespace Client.ServiceLayer.ServiceReference1 {
         System.Threading.Tasks.Task<bool> DeleteProductAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/Update", ReplyAction="http://tempuri.org/IProductService/UpdateResponse")]
-        void Update(int ID);
+        bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/Update", ReplyAction="http://tempuri.org/IProductService/UpdateResponse")]
-        System.Threading.Tasks.Task UpdateAsync(int ID);
+        System.Threading.Tasks.Task<bool> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -250,12 +250,12 @@ namespace Client.ServiceLayer.ServiceReference1 {
             return base.Channel.DeleteProductAsync(id);
         }
         
-        public void Update(int ID) {
-            base.Channel.Update(ID);
+        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description) {
+            return base.Channel.Update(ID, name, price, stock, minStock, maxStock, description);
         }
         
-        public System.Threading.Tasks.Task UpdateAsync(int ID) {
-            return base.Channel.UpdateAsync(ID);
+        public System.Threading.Tasks.Task<bool> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description) {
+            return base.Channel.UpdateAsync(ID, name, price, stock, minStock, maxStock, description);
         }
     }
 }

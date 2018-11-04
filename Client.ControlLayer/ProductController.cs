@@ -25,8 +25,8 @@ namespace Client.ControlLayer {
             return productService.Delete(ID);
         }
 
-        public void Update(int ID) {
-            productService.Update(ID);
+        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description) {
+            return productService.Update(ID, name, price, stock, minStock, maxStock, description);
         }
     }
 }
