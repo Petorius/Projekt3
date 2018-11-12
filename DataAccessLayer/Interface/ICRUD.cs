@@ -9,7 +9,7 @@ namespace Server.DataAccessLayer {
         void Create(T Entity);
         T Get(int id);
         IEnumerable<T> GetAll();
-        bool Update(int id, string name, decimal price, int stock, int minStock, int maxStock, string description);
-        bool Delete(int id);
+        bool Update(int id, string name, decimal price, int stock, int minStock, int maxStock, string description, bool test = false, bool testResult = false);
+        bool Delete(int id, bool test = false, bool testResult = false);
     }
 }

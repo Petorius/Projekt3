@@ -2,71 +2,82 @@
 using System.Collections.Generic;
 using System.Configuration;
 using Server.Domain;
-using System.Transactions;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Server.DataAccessLayer {
     public class ProductDB : ICRUD<Product> {
-        private string connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+        private string connectionString;
+
+        // Database test constructor. Only used for unit testing.
+        public ProductDB(string connectionString) {
+            this.connectionString = connectionString;
+        }
 
         public ProductDB() {
-
+            connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
         }
 
         public void Create(Product Entity) {
-                using(SqlConnection connection = new SqlConnection(connectionString)) {
-                    connection.Open();
-                    using(SqlCommand cmd = connection.CreateCommand()) {
-                        cmd.CommandText = "Insert into Product(Name, Price, Stock, MinStock, MaxStock, Description) values" +
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                connection.Open();
+                using (SqlCommand cmd = connection.CreateCommand()) {
+                    cmd.CommandText = "Insert into Product(Name, Price, Stock, MinStock, MaxStock, Description) values" +
                             " (@Name, @Price, @Stock, @MinStock, @MaxStock, @Description)";
-                        cmd.Parameters.AddWithValue("Name", Entity.Name);
-                        cmd.Parameters.AddWithValue("Price", Entity.Price);
-                        cmd.Parameters.AddWithValue("Stock", Entity.Stock);
-                        cmd.Parameters.AddWithValue("MinStock", Entity.MinStock);
-                        cmd.Parameters.AddWithValue("MaxStock", Entity.MaxStock);
-                        cmd.Parameters.AddWithValue("Description", Entity.Description);
-                        cmd.ExecuteNonQuery();
-                    }
+                    cmd.Parameters.AddWithValue("Name", Entity.Name);
+                    cmd.Parameters.AddWithValue("Price", Entity.Price);
+                    cmd.Parameters.AddWithValue("Stock", Entity.Stock);
+                    cmd.Parameters.AddWithValue("MinStock", Entity.MinStock);
+                    cmd.Parameters.AddWithValue("MaxStock", Entity.MaxStock);
+                    cmd.Parameters.AddWithValue("Description", Entity.Description);
+                    cmd.ExecuteNonQuery();
                 }
+            }
         }
 
-        public bool Delete(int id) {
+        public bool Delete(int id, bool test = false, bool testResult = false) {
             bool deleted = false;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
-                byte[] rowId = null;
-                int rowCount = 0;
+                using (SqlTransaction trans = connection.BeginTransaction()) {
+                    byte[] rowId = null;
+                    int rowCount = 0;
 
-                using (SqlCommand cmd = connection.CreateCommand()) {
-                    cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
-                    cmd.Parameters.AddWithValue("productID", id);
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
+                        cmd.Transaction = trans;
+                        cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                        cmd.Parameters.AddWithValue("productID", id);
+                        SqlDataReader reader = cmd.ExecuteReader();
 
-                    while(reader.Read()) {
-                        rowId = (byte[])reader["rowId"];
-                    }
-                    reader.Close();
+                        while (reader.Read()) {
+                            rowId = (byte[])reader["rowId"];
+                        }
+                        reader.Close();
 
-                    try {
+                        //try {
                         cmd.CommandText = "DELETE FROM Product WHERE ProductID = @productID AND rowID = @rowId";
                         cmd.Parameters.AddWithValue("rowID", rowId);
                         rowCount = cmd.ExecuteNonQuery();
+
+                        if (test) {
+                            rowCount = testResult ? 1 : 0;
+                        }
+
                         if (rowCount == 0) {
                             cmd.Transaction.Rollback();
                         }
                         else {
                             deleted = true;
+                            cmd.Transaction.Commit();
                         }
-                    } catch (SqlException) {
-                        deleted = false;
                     }
-
-
+                    //catch (SqlException) {
+                    //    deleted = false;
+                    //}
 
                 }
+
+
             }
             return deleted;
         }
@@ -98,24 +109,26 @@ namespace Server.DataAccessLayer {
             }
         }
 
-        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description) {
+        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool test = false, bool testResult = false) {
             bool isUpdated = false;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
-                byte[] rowId = null;
-                int rowCount = 0;
+                using (SqlTransaction trans = connection.BeginTransaction()) {
+                    byte[] rowId = null;
+                    int rowCount = 0;
 
-                using (SqlCommand cmd = connection.CreateCommand()) {
-                    cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
-                    cmd.Parameters.AddWithValue("productID", ID);
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
+                        cmd.Transaction = trans;
+                        cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                        cmd.Parameters.AddWithValue("productID", ID);
+                        SqlDataReader reader = cmd.ExecuteReader();
 
-                    while (reader.Read()) {
-                        rowId = (byte[])reader["rowId"];
-                    }
-                    reader.Close();
+                        while (reader.Read()) {
+                            rowId = (byte[])reader["rowId"];
+                        }
+                        reader.Close();
 
-                    //try {
+                        //try {
                         cmd.CommandText = "UPDATE Product " +
                             "SET name = @name, price = @price, stock = @stock, minStock = @minStock, maxStock = @maxStock, description = @description " +
                             "WHERE productID = @productID AND rowID = @rowId";
@@ -126,26 +139,34 @@ namespace Server.DataAccessLayer {
                         cmd.Parameters.AddWithValue("maxStock", maxStock);
                         cmd.Parameters.AddWithValue("description", description);
                         cmd.Parameters.AddWithValue("rowID", rowId);
-
                         rowCount = cmd.ExecuteNonQuery();
+
+                        if (test) {
+                            rowCount = testResult ? 1 : 0;
+                        }
+
                         if (rowCount == 0) {
                             cmd.Transaction.Rollback();
                         }
                         else {
                             isUpdated = true;
+                            cmd.Transaction.Commit();
                         }
-                    //}
-                    //catch (SqlException) {
-                    //    isUpdated = false;
-                    //}
+                        //}
+                        //catch (SqlException) {
+                        //    isUpdated = false;
+                        //}
+
+                    }
+                    return isUpdated;
                 }
             }
-            return isUpdated;
         }
 
         public IEnumerable<Product> GetAll() {
             throw new NotImplementedException();
         }
-
     }
+
+
 }
