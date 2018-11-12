@@ -1,8 +1,26 @@
 ﻿
 @{
-    ViewBag.Title = "ShoppingCart";
+    ViewBag.Title = "View";
 }
+@using Client.Webshop.Controllers;
+@using Client.Webshop.Models;
 
-<h2>ShoppingCart</h2>
-<p>@ViewBag.Message</p>
-
+<h2>View</h2>
+<table cellpadding="2" cellspacing="2" border="1">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sub total</th>
+    </tr>
+    @foreach(Orderline orderline in (List<Orderline>)Session["ShoppingCart"]) {
+    <tr>
+        <td>@orderline.Product.ID</td>
+        <td>@orderline.Product.Name</td>
+        <td>@orderline.Product.Price</td>
+        <td>@orderline.Quantity</td>
+        <td>@(orderline.Product.Price * orderline.Quantity)</td>
+    </tr>
+    }
+</table>

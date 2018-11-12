@@ -214,6 +214,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Client.ControlLayer\Client.ControlLayer.csproj">
+      <Project>{61a619c3-39df-4499-82bb-1bfb63cef8b3}</Project>
+      <Name>Client.ControlLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Client.Domain\Client.Domain.csproj">
       <Project>{4582b80e-a3be-4348-8181-9fcddc5e04c9}</Project>
       <Name>Client.Domain</Name>
