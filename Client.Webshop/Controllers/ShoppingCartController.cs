@@ -16,14 +16,16 @@ namespace Client.Webshop.Controllers
         public ActionResult ShoppingCart()
         {
             ViewBag.Message = "Shopping Cart page";
-
+            
             return View();
         }
 
         public ActionResult AddProduct(int id) {
+
             if(Session["ShoppingCart"] == null) {
-                List<Orderline> cart = new List<Orderline>();
-                cart.Add(new Orderline(pc.Find(id), 1));
+                List<Orderline> cart = new List<Orderline> {
+                    new Orderline(pc.Find(id), 1)
+                };
                 Session["ShoppingCart"] = cart;
             }
             else {
@@ -31,7 +33,6 @@ namespace Client.Webshop.Controllers
                 cart.Add(new Orderline(pc.Find(id), 1));
                 Session["ShoppingCart"] = cart;
             }
-
 
             return View("ShoppingCart");
         }

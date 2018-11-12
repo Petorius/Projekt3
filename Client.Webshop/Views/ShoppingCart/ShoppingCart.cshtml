@@ -1,26 +1,58 @@
-﻿
+﻿@*@{
+        ViewBag.Title = "View";
+    }
+    @using Client.Webshop.Controllers;
+    @using Client.Webshop.Models;
+
+    <h2>View</h2>
+    <table cellpadding="2" cellspacing="2" border="1">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Sub total</th>
+        </tr>
+        @foreach(Orderline orderline in (List<Orderline>)Session["ShoppingCart"]) {
+        <tr>
+            <td>@orderline.Product.ID</td>
+            <td>@orderline.Product.Name</td>
+            <td>@orderline.Product.Price</td>
+            <td>@orderline.Quantity</td>
+            <td>@(orderline.Product.Price * orderline.Quantity)</td>
+        </tr>
+        }
+    </table>*@
+@model IEnumerable<Client.Webshop.Models.Orderline>
+
 @{
     ViewBag.Title = "View";
 }
-@using Client.Webshop.Controllers;
-@using Client.Webshop.Models;
 
 <h2>View</h2>
-<table cellpadding="2" cellspacing="2" border="1">
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
     <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Sub total</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th></th>
     </tr>
-    @foreach(Orderline orderline in (List<Orderline>)Session["ShoppingCart"]) {
-    <tr>
-        <td>@orderline.Product.ID</td>
-        <td>@orderline.Product.Name</td>
-        <td>@orderline.Product.Price</td>
-        <td>@orderline.Quantity</td>
-        <td>@(orderline.Product.Price * orderline.Quantity)</td>
-    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
     }
+
 </table>
