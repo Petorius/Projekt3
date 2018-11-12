@@ -11,23 +11,23 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                
-                
+
+
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse; navbar-header; navbar-search">
-
-                @using (Html.BeginForm())
-                {
-                <div class="searchbar-margin">
-                    <p>
+                <ul class="nav navbar-nav">
+                    <li>
                         @Html.TextBox("SearchString")
                         <input type="submit" value="Search" style="color: black" />
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ShoppingCart", "ShoppingCart")">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                        </a>    
+                    </li>
+                </ul>
 
-                    </p>
-
-                </div>
-               }
             </div>
         </div>
     </div>
