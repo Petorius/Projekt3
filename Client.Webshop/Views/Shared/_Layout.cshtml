@@ -18,8 +18,13 @@
             <div class="navbar-collapse collapse; navbar-header; navbar-search">
                 <ul class="nav navbar-nav">
                     <li>
-                        @Html.TextBox("SearchString")
-                        <input type="submit" value="Search" style="color: black" />
+                        @using (Html.BeginForm("Search", "Search", FormMethod.Post, new { novalidate = "novalidate" }))
+                        {
+                            <div>
+                                @Html.TextBox("searchString")
+                                <input type='submit' value='Search' />
+                            </div>
+                        }
                     </li>
                     <li>
                         <a href="@Url.Action("ShoppingCart", "ShoppingCart")">

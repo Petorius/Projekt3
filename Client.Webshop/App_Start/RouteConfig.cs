@@ -14,10 +14,24 @@ namespace Client.Webshop
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Search",
+                url: "Search",
+                defaults: new { controller = "Search", action = "Search", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "ShoppingCart",
+                url: "Cart",
+                defaults: new { controller = "ShoppingCart", action = "ShoppingCart", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                
             );
+
         }
     }
 }
