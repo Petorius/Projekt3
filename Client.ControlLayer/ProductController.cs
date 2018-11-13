@@ -7,7 +7,7 @@ using Client.Domain;
 using Client.ServiceLayer;
 
 namespace Client.ControlLayer {
-    public class ProductController { 
+    public class ProductController {
         private IProductService productService;
         public ProductController() {
             productService = new ProductService();

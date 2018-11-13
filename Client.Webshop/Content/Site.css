@@ -22,3 +22,26 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#ProductViewDetails {
+    background-color: red;
+    margin: auto;
+    margin-top:80px;
+    margin-bottom:120px;
+    height:550px;
+    width: 1100px;
+    align-content:center;
+}
+
+#ProductViewDetailsInfo{
+    float:right;
+    background-color:green;
+    height: 450px;
+    width: 600px;
+    padding-left:30px;
+    padding-right:50px;
+}
+
+.boldText{
+    font-weight:bold;
+}

@@ -42,8 +42,8 @@ namespace UnitTest {
         [TestMethod]
         public void UpdateProductTestExceptedToFail() {
             Product p = productDB.Get(1);
-
-            productDB.Update(p.ID, "Rune", p.Price, p.Stock, p.MinStock, p.MaxStock, p.Description, true);
+            p.Name = "Rune";
+            productDB.Update(p, true);
 
             p = productDB.Get(1);
 
@@ -53,8 +53,9 @@ namespace UnitTest {
         [TestMethod]
         public void UpdateProductTest() {
             Product p = productDB.Get(1);
+            p.Name = "Rune";
 
-            productDB.Update(p.ID, "Rune", p.Price, p.Stock, p.MinStock, p.MaxStock, p.Description, true, true);
+            productDB.Update(p, true, true);
 
             p = productDB.Get(1);
 

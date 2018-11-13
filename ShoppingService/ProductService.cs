@@ -31,7 +31,9 @@ namespace Server.ServiceLayer
         }
 
         public bool Update(int id, string name, decimal price, int stock, int minStock, int maxStock, string description) {
-            return productDb.Update(id, name, price, stock, minStock, maxStock, description);
+            Product p = new Product(name, price, stock, minStock, maxStock, description);
+            p.ID = id;
+            return productDb.Update(p);
         }
     }
 }

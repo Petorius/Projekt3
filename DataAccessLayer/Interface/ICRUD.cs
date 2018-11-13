@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Server.DataAccessLayer {
     public interface ICRUD<T> {
-        void Create(T Entity);
+        void Create(T Entity, bool test = false, bool testResult = false);
         T Get(int id);
         IEnumerable<T> GetAll();
-        bool Update(int id, string name, decimal price, int stock, int minStock, int maxStock, string description, bool test = false, bool testResult = false);
+        bool Update(T Entity, bool test = false, bool testResult = false);
         bool Delete(int id, bool test = false, bool testResult = false);
     }
 }
