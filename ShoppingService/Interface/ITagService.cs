@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using Server.Domain;
+
+namespace Server.ServiceLayer
+{
+    [ServiceContract]
+    public interface ITagService
+    {
+        [OperationContract]
+        Tag FindTagByName(string name);
+    }
+}

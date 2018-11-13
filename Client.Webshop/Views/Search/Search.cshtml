@@ -1,8 +1,13 @@
-﻿@model Client.Domain.Product
+﻿@model IEnumerable<Client.Domain.Product>
 
 @{
     ViewBag.Title = "Search";
 }
 
-<h2>@Model.Name</h2>
-
+@foreach (var item in Model)
+{
+    <div>
+        @item.ID
+        <hr />
+    </div>
+}

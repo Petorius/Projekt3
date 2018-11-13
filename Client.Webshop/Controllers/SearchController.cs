@@ -10,19 +10,23 @@ namespace Client.Webshop.Controllers
 {
     public class SearchController : Controller
     {
-        
 
-        ProductController pc = new ProductController();
+
+        //ProductController pc = new ProductController();
+        TagController tc = new TagController();
 
         [HttpPost]
         public ActionResult Search(string searchString)
         {
 
-            Int32.TryParse(searchString, out int ID);
+            //Int32.TryParse(searchString, out int ID);
 
-            Product p = pc.Find(ID);
-            
-            return View(p);
+            //Product p = pc.Find(ID);
+
+            Tag t = tc.FindTagByName(searchString);
+
+
+            return View(t.Products);
         }      
     }
 }

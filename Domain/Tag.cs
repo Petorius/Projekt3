@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
-namespace Client.Domain {
-    public class Tag {
-        
+
+namespace Server.Domain
+{
+    [DataContract]
+    public class Tag
+    {
+        [DataMember]
+        public int TagID { get; set; }
+        [DataMember]
         public string Name { get; set; }
-       
+        [DataMember]
         public List<Product> Products { get; set; }
 
-        public Tag()
-        {
+        public Tag() {
             Products = new List<Product>();
         }
     }
