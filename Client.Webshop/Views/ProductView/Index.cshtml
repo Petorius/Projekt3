@@ -15,8 +15,12 @@
             <h1 class="boldText">@Model.Name</h1>
             <h2 class="boldText">Pris @Model.Price DKK</h2>
             <h2 class="boldText"> Antal </h2>
-            <input name="quantity" type="text" pattern="[0-9]{4}" maxlength="4" value="1" style="width:40px; text-align:center;" />
-           
+
+            <form action="/ShoppingCart/AddProduct/@Model.ID" method="post">
+                <input name="quantity" type="text" pattern="[0-9]" maxlength="4" style="width:40px; text-align:center;" />
+                <button class="add-button" type="submit">Tilføj til kurv</button>
+            </form>
+
             <h2 class="boldText"> Beskrivelse </h2>
             <h3> @Model.Description</h3>
         </div>
