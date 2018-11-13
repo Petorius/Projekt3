@@ -18,7 +18,7 @@ namespace Server.DataAccessLayer {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
         }
 
-        public void Create(Product Entity) {
+        public void Create(Product Entity, bool test = false, bool testResult = false) {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
@@ -109,7 +109,7 @@ namespace Server.DataAccessLayer {
             }
         }
 
-        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool test = false, bool testResult = false) {
+        public bool Update(Product p, bool test = false, bool testResult = false) {
             bool isUpdated = false;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
@@ -120,7 +120,7 @@ namespace Server.DataAccessLayer {
                     using (SqlCommand cmd = connection.CreateCommand()) {
                         cmd.Transaction = trans;
                         cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
-                        cmd.Parameters.AddWithValue("productID", ID);
+                        cmd.Parameters.AddWithValue("productID", p.ID);
                         SqlDataReader reader = cmd.ExecuteReader();
 
                         while (reader.Read()) {
@@ -132,12 +132,12 @@ namespace Server.DataAccessLayer {
                         cmd.CommandText = "UPDATE Product " +
                             "SET name = @name, price = @price, stock = @stock, minStock = @minStock, maxStock = @maxStock, description = @description " +
                             "WHERE productID = @productID AND rowID = @rowId";
-                        cmd.Parameters.AddWithValue("name", name);
-                        cmd.Parameters.AddWithValue("price", price);
-                        cmd.Parameters.AddWithValue("stock", stock);
-                        cmd.Parameters.AddWithValue("minStock", minStock);
-                        cmd.Parameters.AddWithValue("maxStock", maxStock);
-                        cmd.Parameters.AddWithValue("description", description);
+                        cmd.Parameters.AddWithValue("name", p.Name);
+                        cmd.Parameters.AddWithValue("price", p.Price);
+                        cmd.Parameters.AddWithValue("stock", p.Stock);
+                        cmd.Parameters.AddWithValue("minStock", p.MinStock);
+                        cmd.Parameters.AddWithValue("maxStock", p.MaxStock);
+                        cmd.Parameters.AddWithValue("description", p.Description);
                         cmd.Parameters.AddWithValue("rowID", rowId);
                         rowCount = cmd.ExecuteNonQuery();
 

@@ -48,8 +48,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Interface\IOrderService.cs" />
+    <Compile Include="OrderService.cs" />
     <Compile Include="ProductService.cs" />
-    <Compile Include="IProductService.cs" />
+    <Compile Include="Interface\IProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

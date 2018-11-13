@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interface\ICRUD.cs" />
+    <Compile Include="OrderLineDB.cs" />
     <Compile Include="ProductDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

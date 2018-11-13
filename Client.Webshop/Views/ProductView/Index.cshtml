@@ -1,0 +1,29 @@
+﻿@model Client.Domain.Product
+@{
+    ViewBag.Title = "ProductView";
+}
+
+<head>
+    <title>Produkt</title>
+    <link rel="stylesheet" href="/Content/Site.css" />
+</head>
+
+<body>
+    <div id="ProductViewDetails">
+        <img src="https://urskiven.dk/images/Billeder%20Ure/Club/MNS18_boerneure.jpg" width="500" height="450">
+        <div id="ProductViewDetailsInfo">
+            <h1 class="boldText">@Model.Name</h1>
+            <h2 class="boldText">Pris @Model.Price DKK</h2>
+            <h2 class="boldText"> Antal </h2>
+            <input name="quantity" type="text" pattern="[0-9]{4}" maxlength="4" value="1" style="width:40px; text-align:center;" />
+            <input type="button" value="Tilføj til kurv" onclick="location.href='@UrlAction("AddProduct")'" />
+            <h2 class="boldText"> Beskrivelse </h2>
+            <h3> @Model.Description</h3>
+        </div>
+
+
+    </div>
+
+
+</body>
+
