@@ -32,20 +32,17 @@ namespace Client.ServiceLayer {
                 return product;
             }
             return null;
-            
+
         }
 
-        public IEnumerable<Product> GetAllProducts()
-        {
+        public IEnumerable<Product> GetAllProducts() {
             ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
             var products = myProxy.GetAllProducts();
 
             List<Product> productList = new List<Product>();
 
-            if (products != null)
-            {
-                foreach (var p in products)
-                {
+            if (products != null) {
+                foreach (var p in products) {
                     Product product = new Product();
                     product.ID = p.ID;
                     product.Name = p.Name;

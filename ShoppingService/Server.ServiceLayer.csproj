@@ -59,7 +59,7 @@
   <ItemGroup>
     <Compile Include="Interface\IProductService.cs" />
     <Compile Include="Interface\ITagService.cs" />
-    <Compile Include="IOrderService.cs" />
+    <Compile Include="Interface\IOrderService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProductService.cs" />

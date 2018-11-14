@@ -13,8 +13,8 @@ namespace Server.Host {
             Console.WriteLine("Console based host");
 
             using (ServiceHost productHost = new ServiceHost(typeof(serviceToHost.ProductService)))
-            using (ServiceHost tagHost = new ServiceHost(typeof(serviceToHost.TagService)))
-            {
+
+            using (ServiceHost tagHost = new ServiceHost(typeof(serviceToHost.TagService))) {
                 // Open the host and start listening for oncoming calls
                 productHost.Open();
                 DisplayHostInfo(productHost);
