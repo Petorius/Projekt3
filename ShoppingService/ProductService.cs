@@ -30,6 +30,11 @@ namespace Server.ServiceLayer
             return product;
         }
 
+        public IEnumerable<Product> GetAllProducts()
+        {
+            return productDb.GetAll();
+        }
+
         public bool Update(int id, string name, decimal price, int stock, int minStock, int maxStock, string description) {
             Product p = new Product(name, price, stock, minStock, maxStock, description);
             p.ID = id;

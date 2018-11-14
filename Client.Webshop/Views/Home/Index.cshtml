@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Client.Domain.Product>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -8,6 +10,15 @@
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 <input type="button" value="Fake billede knap" onclick="location.href='@Url.Action("Index", "ProductView" )'" />
+
+@foreach (var item in Model)
+{
+    <div>
+        @item.ID
+        <hr />
+    </div>
+}
+
 <div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>

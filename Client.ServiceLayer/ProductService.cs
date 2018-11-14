@@ -35,6 +35,32 @@ namespace Client.ServiceLayer {
             
         }
 
+        public IEnumerable<Product> GetAllProducts()
+        {
+            ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
+            var products = myProxy.GetAllProducts();
+
+            List<Product> productList = new List<Product>();
+
+            if (products != null)
+            {
+                foreach (var p in products)
+                {
+                    Product product = new Product();
+                    product.ID = p.ID;
+                    product.Name = p.Name;
+                    product.Price = p.Price;
+                    product.Stock = p.Stock;
+                    product.Description = p.Description;
+                    product.Rating = p.Rating;
+                    product.MinStock = p.MinStock;
+                    product.MaxStock = p.MaxStock;
+                    productList.Add(product);
+                }
+            }
+            return productList;
+        }
+
         public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description) {
             ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
             return myProxy.Update(ID, name, price, stock, minStock, maxStock, description);

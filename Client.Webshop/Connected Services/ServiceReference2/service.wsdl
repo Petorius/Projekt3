@@ -33,7 +33,7 @@
   </wsdl:binding>
   <wsdl:service name="TagService">
     <wsdl:port name="BasicHttpBinding_ITagService" binding="tns:BasicHttpBinding_ITagService">
-      <soap:address location="http://localhost:8010/Design_Time_Addresses/Server.ServiceLayer/TagService/" />
+      <soap:address location="http://localhost:8012/Design_Time_Addresses/Server.ServiceLayer/TagService/" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

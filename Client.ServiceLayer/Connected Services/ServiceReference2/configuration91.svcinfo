@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="dgQ/9IMhvRvnRQebPFGKlMDFT+o=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="/ZC8hZARdP27COx9tQh2I+T4MMU=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_ITagService">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_ITagService" contract="ServiceReference2.ITagService" bindingType="basicHttpBinding" address="http://localhost:8010/Design_Time_Addresses/Server.ServiceLayer/TagService/" bindingConfiguration="BasicHttpBinding_ITagService">
+    <endpoint name="BasicHttpBinding_ITagService" contract="ServiceReference2.ITagService" bindingType="basicHttpBinding" address="http://localhost:8012/Design_Time_Addresses/Server.ServiceLayer/TagService/" bindingConfiguration="BasicHttpBinding_ITagService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8010/Design_Time_Addresses/Server.ServiceLayer/TagService/</serializedValue>
+          <serializedValue>http://localhost:8012/Design_Time_Addresses/Server.ServiceLayer/TagService/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
