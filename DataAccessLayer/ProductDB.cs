@@ -37,46 +37,49 @@ namespace Server.DataAccessLayer {
 
         public bool Delete(int id, bool test = false, bool testResult = false) {
             bool deleted = false;
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlTransaction trans = connection.BeginTransaction()) {
-                    byte[] rowId = null;
-                    int rowCount = 0;
+            for (int i = 0; i < 5; i++) {
+                using (SqlConnection connection = new SqlConnection(connectionString)) {
+                    connection.Open();
+                    using (SqlTransaction trans = connection.BeginTransaction()) {
+                        byte[] rowId = null;
+                        int rowCount = 0;
+                        using (SqlCommand cmd = connection.CreateCommand()) {
+                            cmd.Transaction = trans;
+                            cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                            cmd.Parameters.AddWithValue("productID", id);
+                            SqlDataReader reader = cmd.ExecuteReader();
 
-                    using (SqlCommand cmd = connection.CreateCommand()) {
-                        cmd.Transaction = trans;
-                        cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
-                        cmd.Parameters.AddWithValue("productID", id);
-                        SqlDataReader reader = cmd.ExecuteReader();
+                            while (reader.Read()) {
+                                rowId = (byte[])reader["rowId"];
+                            }
+                            reader.Close();
 
-                        while (reader.Read()) {
-                            rowId = (byte[])reader["rowId"];
+                            //try {
+                            cmd.CommandText = "DELETE FROM Product WHERE ProductID = @productID AND rowID = @rowId";
+                            cmd.Parameters.AddWithValue("rowID", rowId);
+                            rowCount = cmd.ExecuteNonQuery();
+
+                            if (test) {
+                                rowCount = testResult ? 1 : 0;
+                            }
+
+                            if (rowCount == 0) {
+                                cmd.Transaction.Rollback();
+                            }
+                            else {
+                                deleted = true;
+                                cmd.Transaction.Commit();
+                                break;
+                            }
                         }
-                        reader.Close();
+                        //catch (SqlException) {
+                        //    deleted = false;
+                        //}
 
-                        //try {
-                        cmd.CommandText = "DELETE FROM Product WHERE ProductID = @productID AND rowID = @rowId";
-                        cmd.Parameters.AddWithValue("rowID", rowId);
-                        rowCount = cmd.ExecuteNonQuery();
-
-                        if (test) {
-                            rowCount = testResult ? 1 : 0;
-                        }
-
-                        if (rowCount == 0) {
-                            cmd.Transaction.Rollback();
-                        }
-                        else {
-                            deleted = true;
-                            cmd.Transaction.Commit();
-                        }
                     }
-                    //catch (SqlException) {
-                    //    deleted = false;
-                    //}
+
 
                 }
-
 
             }
             return deleted;
@@ -111,56 +114,58 @@ namespace Server.DataAccessLayer {
 
         public bool Update(Product p, bool test = false, bool testResult = false) {
             bool isUpdated = false;
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlTransaction trans = connection.BeginTransaction()) {
-                    byte[] rowId = null;
-                    int rowCount = 0;
+            for (int i = 0; i < 5; i++) {
+                using (SqlConnection connection = new SqlConnection(connectionString)) {
+                    connection.Open();
+                    using (SqlTransaction trans = connection.BeginTransaction()) {
+                        byte[] rowId = null;
+                        int rowCount = 0;
+                        using (SqlCommand cmd = connection.CreateCommand()) {
+                            cmd.Transaction = trans;
+                            cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                            cmd.Parameters.AddWithValue("productID", p.ID);
+                            SqlDataReader reader = cmd.ExecuteReader();
 
-                    using (SqlCommand cmd = connection.CreateCommand()) {
-                        cmd.Transaction = trans;
-                        cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
-                        cmd.Parameters.AddWithValue("productID", p.ID);
-                        SqlDataReader reader = cmd.ExecuteReader();
+                            while (reader.Read()) {
+                                rowId = (byte[])reader["rowId"];
+                            }
+                            reader.Close();
 
-                        while (reader.Read()) {
-                            rowId = (byte[])reader["rowId"];
+                            //try {
+                            cmd.CommandText = "UPDATE Product " +
+                                "SET name = @name, price = @price, stock = @stock, minStock = @minStock, maxStock = @maxStock, description = @description " +
+                                "WHERE productID = @productID AND rowID = @rowId";
+                            cmd.Parameters.AddWithValue("name", p.Name);
+                            cmd.Parameters.AddWithValue("price", p.Price);
+                            cmd.Parameters.AddWithValue("stock", p.Stock);
+                            cmd.Parameters.AddWithValue("minStock", p.MinStock);
+                            cmd.Parameters.AddWithValue("maxStock", p.MaxStock);
+                            cmd.Parameters.AddWithValue("description", p.Description);
+                            cmd.Parameters.AddWithValue("rowID", rowId);
+                            rowCount = cmd.ExecuteNonQuery();
+
+                            if (test) {
+                                rowCount = testResult ? 1 : 0;
+                            }
+
+                            if (rowCount == 0) {
+                                cmd.Transaction.Rollback();
+                            }
+                            else {
+                                isUpdated = true;
+                                cmd.Transaction.Commit();
+                                break;
+                            }
+                            //}
+                            //catch (SqlException) {
+                            //    isUpdated = false;
+                            //}
+
                         }
-                        reader.Close();
-
-                        //try {
-                        cmd.CommandText = "UPDATE Product " +
-                            "SET name = @name, price = @price, stock = @stock, minStock = @minStock, maxStock = @maxStock, description = @description " +
-                            "WHERE productID = @productID AND rowID = @rowId";
-                        cmd.Parameters.AddWithValue("name", p.Name);
-                        cmd.Parameters.AddWithValue("price", p.Price);
-                        cmd.Parameters.AddWithValue("stock", p.Stock);
-                        cmd.Parameters.AddWithValue("minStock", p.MinStock);
-                        cmd.Parameters.AddWithValue("maxStock", p.MaxStock);
-                        cmd.Parameters.AddWithValue("description", p.Description);
-                        cmd.Parameters.AddWithValue("rowID", rowId);
-                        rowCount = cmd.ExecuteNonQuery();
-
-                        if (test) {
-                            rowCount = testResult ? 1 : 0;
-                        }
-
-                        if (rowCount == 0) {
-                            cmd.Transaction.Rollback();
-                        }
-                        else {
-                            isUpdated = true;
-                            cmd.Transaction.Commit();
-                        }
-                        //}
-                        //catch (SqlException) {
-                        //    isUpdated = false;
-                        //}
-
-                    }
-                    return isUpdated;
+                    }  
                 }
             }
+            return isUpdated;
         }
 
         public IEnumerable<Product> GetAll() {

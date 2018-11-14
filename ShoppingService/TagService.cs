@@ -6,20 +6,16 @@ using System.Threading.Tasks;
 using Server.Domain;
 using Server.DataAccessLayer;
 
-namespace Server.ServiceLayer
-{
-    public class TagService : ITagService
-    {
+namespace Server.ServiceLayer {
+    public class TagService : ITagService {
         TagDB tagDB;
 
-        public TagService()
-        {
+        public TagService() {
             tagDB = new TagDB();
         }
 
-        public Tag FindTagByName(string name)
-        {
+        public Tag FindTagByName(string name) {
             return tagDB.Get(name);
-        } 
+        }
     }
 }

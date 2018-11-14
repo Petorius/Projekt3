@@ -23,6 +23,12 @@ textarea {
     max-width: 280px;
 }
 
+#navBar-Right {
+    margin-left: 500px;
+    
+
+}
+
 #ProductViewDetails {
     background-color: red;
     margin: auto;
