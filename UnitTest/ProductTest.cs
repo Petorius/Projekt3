@@ -13,15 +13,14 @@ using System.Threading.Tasks;
 namespace UnitTest {
     [TestClass]
     public class ProductTest {
-        private string connectionString = "Server=kraka.ucn.dk; Database=dmab0917_1067354; User Id=dmab0917_1067354; Password=Password1! ";
+        private static string connectionString = "Server=kraka.ucn.dk; Database=dmab0917_1067354; User Id=dmab0917_1067354; Password=Password1! ";
         private ProductDB productDB;
+        
 
         [TestInitialize]
         public void SetUp() {
             productDB = new ProductDB(connectionString);
         }
-
-
 
         [TestMethod]
         public void InsertProductTest() {
@@ -34,6 +33,7 @@ namespace UnitTest {
 
         [TestMethod]
         public void FindProductTest() {
+
             Product p = productDB.Get(1);
 
             Assert.IsNotNull(p);
@@ -84,22 +84,16 @@ namespace UnitTest {
             Assert.IsNull(p);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        [ClassCleanup]
+        public static void CleanUp() {
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                connection.Open();
+                using (SqlCommand cmd = connection.CreateCommand()) {
+                    cmd.CommandText = "Truncate table Product";
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
         private Product FindHelperTest(int id) {
             Product p = new Product();

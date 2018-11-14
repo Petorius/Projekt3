@@ -25,6 +25,7 @@ namespace Server.DataAccessLayer {
                 using (SqlTransaction trans = connection.BeginTransaction()) {
                     byte[] rowId = null;
                     int rowCount = 0;
+                    
 
                     using (SqlCommand cmd = connection.CreateCommand()) {
                         cmd.Transaction = trans;
@@ -49,7 +50,14 @@ namespace Server.DataAccessLayer {
                         }
 
                         if (rowCount == 0) {
-                            cmd.Transaction.Rollback();
+                            //if(attemptCount <= 5) {
+                            //    attemptCount++;
+                            //    Create(Entity);
+                                
+                            //}
+                            //else {
+                                cmd.Transaction.Rollback();
+                            //}      
                         }
                         else {
                             cmd.Transaction.Commit();
