@@ -5,21 +5,22 @@
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>De fedeste ure</h1>
 </div>
-<input type="button" value="Fake billede knap" onclick="location.href='@Url.Action("Index", "ProductView" )'" />
 
-@foreach (var item in Model)
-{
+
+@foreach (var item in Model) {
+<tr>
+    <td> @Html.Action("Index", "ProductView", new { id = item.ID }) </td>
+
+</tr>
     <div>
-        @item.ID
+        <input type="button" value="Knap" onclick="location.href='@Url.Action("Index", "ProductView", new { id = item.ID })'" />
         <hr />
     </div>
 }
 
-<div class="row">
+@*<div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>
         <p>
@@ -39,4 +40,4 @@
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
-</div>
+</div>*@

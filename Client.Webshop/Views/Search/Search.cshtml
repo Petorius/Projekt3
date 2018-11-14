@@ -4,10 +4,17 @@
     ViewBag.Title = "Search";
 }
 
-@foreach (var item in Model)
-{
-    <div>
-        @item.ID
-        <hr />
-    </div>
+<div class="jumbotron">
+    <h1>De fedeste ure</h1>
+</div>
+
+@foreach (var item in Model) {
+    <tr>
+        <td> @Html.Action("Index", "ProductView", new { id = item.ID }) </td>
+
+    </tr>
+<div>
+    <input type="button" value="Knap" onclick="location.href='@Url.Action("Index", "ProductView", new { id = item.ID })'" />
+    <hr />
+</div>
 }
