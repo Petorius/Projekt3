@@ -197,6 +197,12 @@ namespace Client.Webshop.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/Update", ReplyAction="http://tempuri.org/IProductService/UpdateResponse")]
         System.Threading.Tasks.Task<bool> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetAllProducts", ReplyAction="http://tempuri.org/IProductService/GetAllProductsResponse")]
+        Client.Webshop.ServiceReference1.Product[] GetAllProducts();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetAllProducts", ReplyAction="http://tempuri.org/IProductService/GetAllProductsResponse")]
+        System.Threading.Tasks.Task<Client.Webshop.ServiceReference1.Product[]> GetAllProductsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -256,6 +262,14 @@ namespace Client.Webshop.ServiceReference1 {
         
         public System.Threading.Tasks.Task<bool> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description) {
             return base.Channel.UpdateAsync(ID, name, price, stock, minStock, maxStock, description);
+        }
+        
+        public Client.Webshop.ServiceReference1.Product[] GetAllProducts() {
+            return base.Channel.GetAllProducts();
+        }
+        
+        public System.Threading.Tasks.Task<Client.Webshop.ServiceReference1.Product[]> GetAllProductsAsync() {
+            return base.Channel.GetAllProductsAsync();
         }
     }
 }

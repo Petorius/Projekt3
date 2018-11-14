@@ -28,5 +28,10 @@ namespace Client.ControlLayer {
         public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description) {
             return productService.Update(ID, name, price, stock, minStock, maxStock, description);
         }
+
+        public IEnumerable<Product> GetAllProducts()
+        {
+            return productService.GetAllProducts();
+        }
     }
 }

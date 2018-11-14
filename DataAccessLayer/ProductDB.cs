@@ -169,7 +169,32 @@ namespace Server.DataAccessLayer {
         }
 
         public IEnumerable<Product> GetAll() {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand cmd = connection.CreateCommand())
+                {
+                    List<Product> products = new List<Product>();
+
+                    cmd.CommandText = "SELECT * from Product";
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Product p = new Product();
+                        p.ID = reader.GetInt32(reader.GetOrdinal("productid"));
+                        p.Name = reader.GetString(reader.GetOrdinal("name"));
+                        p.Price = reader.GetDecimal(reader.GetOrdinal("price"));
+                        p.Stock = reader.GetInt32(reader.GetOrdinal("stock"));
+                        p.MinStock = reader.GetInt32(reader.GetOrdinal("minstock"));
+                        p.MaxStock = reader.GetInt32(reader.GetOrdinal("maxstock"));
+                        p.Description = reader.GetString(reader.GetOrdinal("description"));
+                        //p.Rating = reader.GetInt32(reader.GetOrdinal("rating"));
+
+                        products.Add(p);
+                    }
+                    return products;
+                }
+            }
         }
     }
 

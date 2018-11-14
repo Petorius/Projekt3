@@ -20,5 +20,8 @@ namespace Server.ServiceLayer {
 
         [OperationContract]
         bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description);
+
+        [OperationContract]
+        IEnumerable<Product> GetAllProducts();
     }
 }

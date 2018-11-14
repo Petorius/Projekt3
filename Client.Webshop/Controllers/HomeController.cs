@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Client.ControlLayer;
+using Client.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,13 @@ namespace Client.Webshop.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            ProductController pc = new ProductController();
+
+            IEnumerable<Product> products = new List<Product>();
+
+            products = pc.GetAllProducts();
+
+            return View(products);
         }
 
         public ActionResult About()
