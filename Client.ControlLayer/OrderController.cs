@@ -7,7 +7,7 @@ using Client.ServiceLayer;
 using Client.ServiceLayer.Interface;
 
 namespace Client.ControlLayer {
-    class OrderController {
+    public class OrderController {
         private IOrderService orderService;
 
         public OrderController() {

@@ -12,6 +12,7 @@ namespace Client.Webshop.Controllers
     public class ShoppingCartController : Controller
     {
         private ProductController pc = new ProductController();
+        private OrderController oc = new OrderController();
         // GET: ShoppingCart
         public ActionResult ShoppingCart()
         {
@@ -20,24 +21,13 @@ namespace Client.Webshop.Controllers
             return View();
         }
 
-        public ActionResult AddProduct(int id)
+        [HttpPost]
+        public ActionResult AddProduct(int id, int price, int quantity)
         {
+            decimal subTotal = price * quantity;
+            oc.CreateOrderLine(quantity, subTotal, id);
 
-            if (Session["ShoppingCart"] == null)
-            {
-                List<Orderline> cart = new List<Orderline> {
-                    new Orderline(pc.Find(id), 1)
-                };
-                Session["ShoppingCart"] = cart;
-            }
-            else
-            {
-                List<Orderline> cart = (List<Orderline>)Session["ShoppingCart"];
-                cart.Add(new Orderline(pc.Find(id), 1));
-                Session["ShoppingCart"] = cart;
-            }
-
-            return View("ShoppingCart");
+            return RedirectToAction("Index");
         }
     }
 }
