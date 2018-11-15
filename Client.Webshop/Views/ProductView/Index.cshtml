@@ -1,6 +1,7 @@
 ﻿@model Client.Domain.Product
 @{
     ViewBag.Title = "ProductView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <head>
@@ -17,9 +18,9 @@
             <h2 class="boldText"> Antal </h2>
 
             <form action="/ShoppingCart/AddProduct/@Model.ID" method="post">
-                <input name="id" value="@Model.ID" hidden />
-                <input name="price" value="@Model.Price" hidden />
-                <input name="quantity" type="number" style="width:40px; text-align:center;" />
+                <input id="id" name="id" value="@Model.ID" hidden />
+                <input id="price" name="price" value="@Model.Price" hidden />
+                <input id="quantity" name="quantity" type="number" value="1" style="width:40px; text-align:center;" />
                 <button class="add-button" type="submit">Tilføj til kurv</button>
             </form>
 
@@ -29,7 +30,6 @@
 
 
     </div>
-
 
 </body>
 
