@@ -19,13 +19,14 @@ namespace Server.DataAccessLayer {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
         }
 
-        public void Create(OrderLine Entity, bool test = false, bool testResult = false) {
+        public bool Create(OrderLine Entity, bool test = false, bool testResult = false) {
+            bool isCompleted = true;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 using (SqlTransaction trans = connection.BeginTransaction()) {
                     byte[] rowId = null;
                     int rowCount = 0;
-                    
+
 
                     using (SqlCommand cmd = connection.CreateCommand()) {
                         cmd.Transaction = trans;
@@ -37,34 +38,31 @@ namespace Server.DataAccessLayer {
                             rowId = (byte[])reader["rowId"];
                         }
                         reader.Close();
+                        try {
+                            cmd.CommandText = "UPDATE Product " +
+                                "SET stock = @stock WHERE productID = @productID AND rowID = @rowId";
+                            cmd.Parameters.AddWithValue("stock", Entity.Product.Stock - Entity.Quantity);
+                            cmd.Parameters.AddWithValue("rowID", rowId);
+                            rowCount = cmd.ExecuteNonQuery();
 
-                        //try {
-                        cmd.CommandText = "UPDATE Product " +
-                            "SET stock = @stock WHERE productID = @productID AND rowID = @rowId";
-                        cmd.Parameters.AddWithValue("stock", Entity.Product.Stock - Entity.Quantity);
-                        cmd.Parameters.AddWithValue("rowID", rowId);
-                        rowCount = cmd.ExecuteNonQuery();
-
-                        if (test) {
-                            rowCount = testResult ? 1 : 0;
-                        }
-
-                        if (rowCount == 0) {
-                            //if(attemptCount <= 5) {
-                            //    attemptCount++;
-                            //    Create(Entity);
-                                
-                            //}
-                            //else {
+                            if (test) {
+                                rowCount = testResult ? 1 : 0;
+                            }
+                            if (rowCount == 0) {
                                 cmd.Transaction.Rollback();
-                            //}      
+                            }
+                            else {
+                                cmd.Transaction.Commit();
+                            }
                         }
-                        else {
-                            cmd.Transaction.Commit();
+                        catch (SqlException) {
+                            isCompleted = false;
                         }
+
                     }
                 }
             }
+            return isCompleted;
         }
 
         public bool Delete(int id, bool test = false, bool testResult = false) {

@@ -14,8 +14,8 @@ namespace Client.ControlLayer {
             orderService = new OrderService();
         }
 
-        public void CreateOrderLine(int quantity, decimal subTotal, int ID) {
-            orderService.CreateOrderLine(quantity,subTotal, ID);
+        public bool CreateOrderLine(int quantity, decimal subTotal, int ID) {
+            return orderService.CreateOrderLine(quantity,subTotal, ID);
         }
     }
 }

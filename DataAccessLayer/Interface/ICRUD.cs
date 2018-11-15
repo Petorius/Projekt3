@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server.DataAccessLayer {
     public interface ICRUD<T> {
-        void Create(T Entity, bool test = false, bool testResult = false);
+        bool Create(T Entity, bool test = false, bool testResult = false);
         T Get(int id);
         IEnumerable<T> GetAll();
         bool Update(T Entity, bool test = false, bool testResult = false);

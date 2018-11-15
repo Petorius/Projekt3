@@ -15,9 +15,9 @@ namespace Server.ServiceLayer {
         public ProductService() {
             productDb = new ProductDB();
         }
-        public void CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description) {
+        public bool CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description) {
             Product p = new Product(name, price, stock, minStock, maxStock, description);
-            productDb.Create(p);
+            return productDb.Create(p);
         }
 
         public bool DeleteProduct(int id) {

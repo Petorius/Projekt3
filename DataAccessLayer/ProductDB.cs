@@ -18,23 +18,27 @@ namespace Server.DataAccessLayer {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
         }
 
-        public void Create(Product Entity, bool test = false, bool testResult = false) {
+        public bool Create(Product Entity, bool test = false, bool testResult = false) {
+            bool isCompleted = true;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
-                    cmd.CommandText = "Insert into Product(Name, Price, Stock, MinStock, MaxStock, Description) values" +
-                            " (@Name, @Price, @Stock, @MinStock, @MaxStock, @Description)";
-                    cmd.Parameters.AddWithValue("Name", Entity.Name);
-                    cmd.Parameters.AddWithValue("Price", Entity.Price);
-                    cmd.Parameters.AddWithValue("Stock", Entity.Stock);
-                    cmd.Parameters.AddWithValue("MinStock", Entity.MinStock);
-                    cmd.Parameters.AddWithValue("MaxStock", Entity.MaxStock);
-                    cmd.Parameters.AddWithValue("Description", Entity.Description);
-                    cmd.ExecuteNonQuery();
-
-
+                    try {
+                        cmd.CommandText = "Insert into Product(Name, Price, Stock, MinStock, MaxStock, Description) values" +
+                                " (@Name, @Price, @Stock, @MinStock, @MaxStock, @Description)";
+                        cmd.Parameters.AddWithValue("Name", Entity.Name);
+                        cmd.Parameters.AddWithValue("Price", Entity.Price);
+                        cmd.Parameters.AddWithValue("Stock", Entity.Stock);
+                        cmd.Parameters.AddWithValue("MinStock", Entity.MinStock);
+                        cmd.Parameters.AddWithValue("MaxStock", Entity.MaxStock);
+                        cmd.Parameters.AddWithValue("Description", Entity.Description);
+                        cmd.ExecuteNonQuery();
+                    } catch (SqlException) {
+                        isCompleted = false;
+                    }
                 }
             }
+            return isCompleted;
         }
 
         public bool Delete(int id, bool test = false, bool testResult = false) {

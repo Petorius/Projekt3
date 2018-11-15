@@ -17,10 +17,10 @@ namespace Server.ServiceLayer {
             productDB = new ProductDB();
         }
 
-        public void CreateOrderLine(int quantity, decimal subTotal, int id) {
+        public bool CreateOrderLine(int quantity, decimal subTotal, int id) {
             Product p = productDB.Get(id);
             OrderLine ol = new OrderLine(quantity, subTotal, p);
-            orderLineDB.Create(ol);
+            return orderLineDB.Create(ol);
         }
     }
 }

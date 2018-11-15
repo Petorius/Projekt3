@@ -20,7 +20,7 @@ namespace UnitTest {
 
         [TestMethod]
         public void OptimisticConcurrenyWithStock() {
-            
+
 
         }
 
@@ -42,3 +42,5 @@ namespace UnitTest {
         //        }
         //    }
         //}
+    }
+}

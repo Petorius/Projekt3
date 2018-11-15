@@ -9,6 +9,6 @@ namespace Server.ServiceLayer {
     [ServiceContract]
     interface IOrderService {
         [OperationContract]
-        void CreateOrderLine(int quantity, decimal subTotal, int ID);
+        bool CreateOrderLine(int quantity, decimal subTotal, int ID);
     }
 }

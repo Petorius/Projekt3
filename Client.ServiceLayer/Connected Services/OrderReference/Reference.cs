@@ -16,10 +16,10 @@ namespace Client.ServiceLayer.OrderReference {
     public interface IOrderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrderLine", ReplyAction="http://tempuri.org/IOrderService/CreateOrderLineResponse")]
-        void CreateOrderLine(int quantity, decimal subTotal, int ID);
+        bool CreateOrderLine(int quantity, decimal subTotal, int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrderLine", ReplyAction="http://tempuri.org/IOrderService/CreateOrderLineResponse")]
-        System.Threading.Tasks.Task CreateOrderLineAsync(int quantity, decimal subTotal, int ID);
+        System.Threading.Tasks.Task<bool> CreateOrderLineAsync(int quantity, decimal subTotal, int ID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,11 +49,11 @@ namespace Client.ServiceLayer.OrderReference {
                 base(binding, remoteAddress) {
         }
         
-        public void CreateOrderLine(int quantity, decimal subTotal, int ID) {
-            base.Channel.CreateOrderLine(quantity, subTotal, ID);
+        public bool CreateOrderLine(int quantity, decimal subTotal, int ID) {
+            return base.Channel.CreateOrderLine(quantity, subTotal, ID);
         }
         
-        public System.Threading.Tasks.Task CreateOrderLineAsync(int quantity, decimal subTotal, int ID) {
+        public System.Threading.Tasks.Task<bool> CreateOrderLineAsync(int quantity, decimal subTotal, int ID) {
             return base.Channel.CreateOrderLineAsync(quantity, subTotal, ID);
         }
     }

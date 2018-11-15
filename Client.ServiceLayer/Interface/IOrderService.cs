@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Client.ServiceLayer.Interface {
     public interface IOrderService {
-        void CreateOrderLine(int quantity, decimal subTotal, int ID);
+        bool CreateOrderLine(int quantity, decimal subTotal, int ID);
     }
 }

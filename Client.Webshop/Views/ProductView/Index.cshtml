@@ -1,8 +1,8 @@
 ﻿@model Client.Domain.Product
 
-    @{ 
-ViewBag.Title = "ProductView";
-Layout = "~/Views/Shared/_Layout.cshtml";
+@{
+    ViewBag.Title = "ProductView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <head>
@@ -15,13 +15,13 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         @Html.ValidationSummary(true)
         @Html.Hidden("url", this.Request.RawUrl)
         <div id="ProductViewDetails">
-            <img src="https://urskiven.dk/images/Billeder%20Ure/Club/MNS18_boerneure.jpg" width="500" height="450">
+            <img img src="@Model.Images[0].ImageSource" width="500" height="450">
             <div id="ProductViewDetailsInfo">
                 <h1 class="boldText">@Model.Name</h1>
                 <h2 class="boldText">Pris @Model.Price DKK</h2>
                 <h2 class="boldText"> Antal </h2>
                 <form action="/ProductView/AddProduct/" method="post">
-                    <input id="id" name="id" value="@Model.ID" hidden/>
+                    <input id="id" name="id" value="@Model.ID" hidden />
                     <input id="quantity" name="quantity" type="number" value="1" style="width:40px; text-align:center;" />
                     <button class="add-button" type="submit">Tilføj til kurv</button>
                 </form>
@@ -35,4 +35,3 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     }
 
 </body>
-

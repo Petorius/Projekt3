@@ -23,12 +23,9 @@ namespace Client.Webshop.Controllers {
 
         [HttpPost]
         public ActionResult AddProduct(int id, int quantity, string url) {
-            Console.WriteLine(quantity);
-            Console.WriteLine(id);
             Product product = pc.Find(id);
             decimal subTotal = product.Price * quantity;
             Orderline ol = new Orderline(quantity, subTotal, product);
-            Console.WriteLine(ol.Quantity);
             oc.CreateOrderLine(quantity, subTotal, product.ID);
 
             return Redirect(url);

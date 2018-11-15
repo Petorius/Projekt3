@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace Client.ServiceLayer {
     public class OrderService : IOrderService {
 
-        public void CreateOrderLine(int quantity, decimal subTotal, int ID) {
+        public bool CreateOrderLine(int quantity, decimal subTotal, int ID) {
             OrderReference.OrderServiceClient myProxy = new OrderReference.OrderServiceClient();
-            myProxy.CreateOrderLine(quantity, subTotal, ID);
+            return myProxy.CreateOrderLine(quantity, subTotal, ID);
         }
     }
 }
