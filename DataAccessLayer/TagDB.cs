@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 namespace Server.DataAccessLayer {
     public class TagDB {
         private string connectionString;
+        private ProductDB productDB;
 
         // Database test constructor. Only used for unit testing.
         public TagDB(string connectionString) {
@@ -15,6 +16,7 @@ namespace Server.DataAccessLayer {
 
         public TagDB() {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            productDB = new ProductDB();
         }
 
         public Tag Get(string name) {
@@ -38,30 +40,14 @@ namespace Server.DataAccessLayer {
                     cmd.Parameters.AddWithValue("tagID", t.TagID);
                     SqlDataReader productReader = cmd.ExecuteReader();
                     while (productReader.Read()) {
-                        Product p = new Product();
-                        p.ID = productReader.GetInt32(productReader.GetOrdinal("productID"));
+                        int foundProductID;
+                        foundProductID = productReader.GetInt32(productReader.GetOrdinal("productID"));
+
+                        Product p = productDB.Get(foundProductID);
+
                         t.Products.Add(p);
                     }
                     productReader.Close();
-                }
-
-
-                using (SqlCommand cmd2 = connection.CreateCommand()) {
-
-                    foreach (Product p in t.Products) {
-                        cmd2.CommandText = "Select ImageSource, Name from Image where Image.ProductID = @productID";
-                        cmd2.Parameters.AddWithValue("productID", p.ID);
-                        SqlDataReader imageReader = cmd2.ExecuteReader();
-                        while (imageReader.Read()) {
-                            Image i = new Image();
-                            i.ImageSource = imageReader.GetString(imageReader.GetOrdinal("ImageSource"));
-                            i.Name = imageReader.GetString(imageReader.GetOrdinal("Name"));
-
-                            p.Images.Add(i);
-                        }
-                        imageReader.Close();
-                        cmd2.Parameters.Clear();
-                    }
                 }
                 return t;
             }
