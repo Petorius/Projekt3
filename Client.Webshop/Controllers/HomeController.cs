@@ -10,12 +10,13 @@ namespace Client.Webshop.Controllers
 {
     public class HomeController : Controller
     {
+        ProductController pc = new ProductController();
+
+        IEnumerable<Product> products = new List<Product>();
+
         public ActionResult Index()
         {
-            ProductController pc = new ProductController();
-
-            IEnumerable<Product> products = new List<Product>();
-
+            
             products = pc.GetAllProducts();
 
             return View(products);
