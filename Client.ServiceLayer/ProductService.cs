@@ -29,6 +29,14 @@ namespace Client.ServiceLayer {
                 product.Rating = p.Rating;
                 product.MinStock = p.MinStock;
                 product.MaxStock = p.MaxStock;
+
+                foreach(var i in p.Images) {
+                    Image image = new Image();
+                    image.ImageSource = i.ImageSource;
+                    image.Name = i.Name;
+                    product.Images.Add(image);
+                }
+
                 return product;
             }
             return null;

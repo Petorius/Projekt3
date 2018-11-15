@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.Webshop.ServiceReference1 {
+namespace Client.ServiceLayer.ServiceReference1 {
     using System.Runtime.Serialization;
     using System;
     
@@ -29,7 +29,7 @@ namespace Client.Webshop.ServiceReference1 {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.Webshop.ServiceReference1.Image[] ImagesField;
+        private Client.ServiceLayer.ServiceReference1.Image[] ImagesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int MaxStockField;
@@ -86,7 +86,7 @@ namespace Client.Webshop.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.Webshop.ServiceReference1.Image[] Images {
+        public Client.ServiceLayer.ServiceReference1.Image[] Images {
             get {
                 return this.ImagesField;
             }
@@ -258,10 +258,10 @@ namespace Client.Webshop.ServiceReference1 {
         System.Threading.Tasks.Task CreateProductAsync(string name, decimal price, int stock, int minStock, int maxStock, string description);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
-        Client.Webshop.ServiceReference1.Product FindProduct(int ID);
+        Client.ServiceLayer.ServiceReference1.Product FindProduct(int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
-        System.Threading.Tasks.Task<Client.Webshop.ServiceReference1.Product> FindProductAsync(int ID);
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductAsync(int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteProduct", ReplyAction="http://tempuri.org/IProductService/DeleteProductResponse")]
         bool DeleteProduct(int id);
@@ -276,19 +276,19 @@ namespace Client.Webshop.ServiceReference1 {
         System.Threading.Tasks.Task<bool> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetAllProducts", ReplyAction="http://tempuri.org/IProductService/GetAllProductsResponse")]
-        Client.Webshop.ServiceReference1.Product[] GetAllProducts();
+        Client.ServiceLayer.ServiceReference1.Product[] GetAllProducts();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetAllProducts", ReplyAction="http://tempuri.org/IProductService/GetAllProductsResponse")]
-        System.Threading.Tasks.Task<Client.Webshop.ServiceReference1.Product[]> GetAllProductsAsync();
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product[]> GetAllProductsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IProductServiceChannel : Client.Webshop.ServiceReference1.IProductService, System.ServiceModel.IClientChannel {
+    public interface IProductServiceChannel : Client.ServiceLayer.ServiceReference1.IProductService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ProductServiceClient : System.ServiceModel.ClientBase<Client.Webshop.ServiceReference1.IProductService>, Client.Webshop.ServiceReference1.IProductService {
+    public partial class ProductServiceClient : System.ServiceModel.ClientBase<Client.ServiceLayer.ServiceReference1.IProductService>, Client.ServiceLayer.ServiceReference1.IProductService {
         
         public ProductServiceClient() {
         }
@@ -317,11 +317,11 @@ namespace Client.Webshop.ServiceReference1 {
             return base.Channel.CreateProductAsync(name, price, stock, minStock, maxStock, description);
         }
         
-        public Client.Webshop.ServiceReference1.Product FindProduct(int ID) {
+        public Client.ServiceLayer.ServiceReference1.Product FindProduct(int ID) {
             return base.Channel.FindProduct(ID);
         }
         
-        public System.Threading.Tasks.Task<Client.Webshop.ServiceReference1.Product> FindProductAsync(int ID) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductAsync(int ID) {
             return base.Channel.FindProductAsync(ID);
         }
         
@@ -341,11 +341,11 @@ namespace Client.Webshop.ServiceReference1 {
             return base.Channel.UpdateAsync(ID, name, price, stock, minStock, maxStock, description);
         }
         
-        public Client.Webshop.ServiceReference1.Product[] GetAllProducts() {
+        public Client.ServiceLayer.ServiceReference1.Product[] GetAllProducts() {
             return base.Channel.GetAllProducts();
         }
         
-        public System.Threading.Tasks.Task<Client.Webshop.ServiceReference1.Product[]> GetAllProductsAsync() {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product[]> GetAllProductsAsync() {
             return base.Channel.GetAllProductsAsync();
         }
     }

@@ -31,6 +31,8 @@ namespace Server.DataAccessLayer {
                     cmd.Parameters.AddWithValue("MaxStock", Entity.MaxStock);
                     cmd.Parameters.AddWithValue("Description", Entity.Description);
                     cmd.ExecuteNonQuery();
+
+
                 }
             }
         }
@@ -89,11 +91,12 @@ namespace Server.DataAccessLayer {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
+                    Product p = new Product();
+
                     cmd.CommandText = "SELECT productid, name, price, stock, description, rating, minstock, maxstock from Product where productID = @ProductID";
                     cmd.Parameters.AddWithValue("ProductID", id);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read()) {
-                        Product p = new Product();
                         p.ID = reader.GetInt32(reader.GetOrdinal("productid"));
                         p.Name = reader.GetString(reader.GetOrdinal("name"));
                         p.Price = reader.GetDecimal(reader.GetOrdinal("price"));
@@ -102,13 +105,27 @@ namespace Server.DataAccessLayer {
                         p.MaxStock = reader.GetInt32(reader.GetOrdinal("maxstock"));
                         p.Description = reader.GetString(reader.GetOrdinal("description"));
                         //p.Rating = reader.GetInt32(reader.GetOrdinal("rating"));
-
-                        if (id == p.ID) {
-                            return p;
-                        }
                     }
-                    return null;
+                    reader.Close();
+                    cmd.Parameters.Clear();
+
+                    cmd.CommandText = "Select ImageSource, Name from Image where Image.ProductID = @productID";
+                    cmd.Parameters.AddWithValue("productID", p.ID);
+                    SqlDataReader imageReader = cmd.ExecuteReader();
+                    while (imageReader.Read()) {
+                        Image i = new Image();
+                        i.ImageSource = imageReader.GetString(imageReader.GetOrdinal("ImageSource"));
+                        i.Name = imageReader.GetString(imageReader.GetOrdinal("Name"));
+
+                        p.Images.Add(i);
+                    }
+                    imageReader.Close();
+
+                    if (id == p.ID) {
+                        return p;
+                    }
                 }
+                return null;
             }
         }
 

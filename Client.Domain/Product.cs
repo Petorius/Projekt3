@@ -14,6 +14,7 @@ namespace Client.Domain {
         public int MaxStock { get; set; }
         public string Description { get; set; }
         public int Rating { get; set; }
+        public List<Image> Images { get; set; }
         public List<Copy> Copies { get; set; }
         public Category Category { get; set; }
         public List<Keyword> Keywords { get; set; }
@@ -29,9 +30,11 @@ namespace Client.Domain {
             Copies = copies;
             Category = category;
             Keywords = keywords;
+            
         }
 
         public Product() {
+            Images = new List<Image>();
 
         }
     }
