@@ -21,6 +21,12 @@ namespace Client.ServiceLayer
                     Product product = new Product();
                     product.ID = p.ID;
                     product.Name = p.Name;
+                    product.Price = p.Price;
+                    product.Stock = p.Stock;
+                    product.Description = p.Description;
+                    product.Rating = p.Rating;
+                    product.MinStock = p.MinStock;
+                    product.MaxStock = p.MaxStock;
 
                     foreach (var i in p.Images) {
                         Image image = new Image();

@@ -26,7 +26,7 @@ namespace Client.Webshop.Controllers {
             Product product = pc.Find(id);
             decimal subTotal = product.Price * quantity;
             Orderline ol = new Orderline(quantity, subTotal, product);
-            oc.CreateOrderLine(quantity, subTotal, product.ID);
+            bool result = oc.CreateOrderLine(quantity, subTotal, product.ID);
 
             return Redirect(url);
         }
