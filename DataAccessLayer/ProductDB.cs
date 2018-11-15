@@ -109,6 +109,8 @@ namespace Server.DataAccessLayer {
                     reader.Close();
                     cmd.Parameters.Clear();
 
+                    
+
                     cmd.CommandText = "Select ImageSource, Name from Image where Image.ProductID = @productID";
                     cmd.Parameters.AddWithValue("productID", p.ID);
                     SqlDataReader imageReader = cmd.ExecuteReader();
@@ -179,24 +181,22 @@ namespace Server.DataAccessLayer {
                             //}
 
                         }
-                    }  
+                    }
                 }
             }
             return isUpdated;
         }
 
         public IEnumerable<Product> GetAll() {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand())
-                {
-                    List<Product> products = new List<Product>();
+                List<Product> products = new List<Product>();
+                using (SqlCommand cmd = connection.CreateCommand()) {
+                    
 
                     cmd.CommandText = "SELECT * from Product";
                     SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
+                    while (reader.Read()) {
                         Product p = new Product();
                         p.ID = reader.GetInt32(reader.GetOrdinal("productid"));
                         p.Name = reader.GetString(reader.GetOrdinal("name"));
@@ -209,11 +209,30 @@ namespace Server.DataAccessLayer {
 
                         products.Add(p);
                     }
-                    return products;
+                    reader.Close();
+                    cmd.Parameters.Clear();
                 }
+
+                using (SqlCommand cmd2 = connection.CreateCommand()) {
+
+                    foreach (Product p in products) {
+                        cmd2.CommandText = "Select ImageSource, Name from Image where Image.ProductID = @productID";
+                        cmd2.Parameters.AddWithValue("productID", p.ID);
+                        SqlDataReader imageReader = cmd2.ExecuteReader();
+                        while (imageReader.Read()) {
+                            Image i = new Image();
+                            i.ImageSource = imageReader.GetString(imageReader.GetOrdinal("ImageSource"));
+                            i.Name = imageReader.GetString(imageReader.GetOrdinal("Name"));
+
+                            p.Images.Add(i);
+                        }
+                        imageReader.Close();
+                        cmd2.Parameters.Clear();
+
+                    }
+                }
+                return products;
             }
         }
     }
-
-
 }
