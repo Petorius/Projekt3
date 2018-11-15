@@ -22,6 +22,7 @@ namespace Client.ServiceLayer {
             var p = myProxy.FindProduct(ID);
             Product product = new Product();
             if (p != null) {
+                product.ID = p.ID;
                 product.Name = p.Name;
                 product.Price = p.Price;
                 product.Stock = p.Stock;
