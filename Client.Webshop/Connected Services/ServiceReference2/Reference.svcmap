@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="2f40fa55-b902-477c-9402-133cf0ac068f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a5beff63-c972-42b8-8ae1-9fc9c7b493b2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,10 +22,10 @@
     <MetadataSource Address="http://localhost:8012/Design_Time_Addresses/Server.ServiceLayer/TagService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="dde468e5-6def-48e8-bc58-0794c1836a13" SourceId="1" SourceUrl="http://localhost:8012/Design_Time_Addresses/Server.ServiceLayer/TagService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="e4de7b4f-dc86-40f6-9f47-23ea32fd5559" SourceId="1" SourceUrl="http://localhost:8012/Design_Time_Addresses/Server.ServiceLayer/TagService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="f0d2a3d6-4577-436d-93f8-0471a6695abf" SourceId="1" SourceUrl="http://localhost:8012/Design_Time_Addresses/Server.ServiceLayer/TagService/mex" />
-    <MetadataFile FileName="Server.Domain.xsd" MetadataType="Schema" ID="03bf5bfc-7973-4411-a951-d040f00ab6fb" SourceId="1" SourceUrl="http://localhost:8012/Design_Time_Addresses/Server.ServiceLayer/TagService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="3815bbb0-5aff-43b9-af49-02e66d8127b2" SourceId="1" SourceUrl="http://localhost:8012/Design_Time_Addresses/Server.ServiceLayer/TagService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="a402b045-6123-4b03-9629-a0f41d86e61c" SourceId="1" SourceUrl="http://localhost:8012/Design_Time_Addresses/Server.ServiceLayer/TagService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="b523f86b-4a7e-4cc4-ad74-e83079a88a8b" SourceId="1" SourceUrl="http://localhost:8012/Design_Time_Addresses/Server.ServiceLayer/TagService/mex" />
+    <MetadataFile FileName="Server.Domain.xsd" MetadataType="Schema" ID="4b57a3c6-c616-46cf-bac2-272cc76b7b8c" SourceId="1" SourceUrl="http://localhost:8012/Design_Time_Addresses/Server.ServiceLayer/TagService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

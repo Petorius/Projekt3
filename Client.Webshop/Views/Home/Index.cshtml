@@ -11,13 +11,12 @@
 
 @foreach (var item in Model) {
 <tr>
-    <td> <img src="" alt="Alternate Text" /></td>
-
+    <p>
+        @item.Name <a href="@Url.Action("Index", "ProductView", new { id = item.ID })">
+            <img border="0" alt="W3Schools" src="@item.Images[0].ImageSource" width="100" height="100">
+        </a>
+    </p>
 </tr>
-    <div>
-        <input type="button" value="Knap" onclick="location.href='@Url.Action("Index", "ProductView", new { id = item.ID })'" />
-        <hr />
-    </div>
 }
 
 @*<div class="row">

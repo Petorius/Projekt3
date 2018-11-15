@@ -20,6 +20,14 @@ namespace Client.ServiceLayer
                 {
                     Product product = new Product();
                     product.ID = p.ID;
+                    product.Name = p.Name;
+
+                    foreach (var i in p.Images) {
+                        Image image = new Image();
+                        image.ImageSource = i.ImageSource;
+                        image.Name = i.Name;
+                        product.Images.Add(image);
+                    }
 
                     tag.Products.Add(product);
                 }
