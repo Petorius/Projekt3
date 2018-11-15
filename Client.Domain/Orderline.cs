@@ -11,9 +11,10 @@ namespace Client.Domain {
         public decimal SubTotal { get; set; }
         public int Quantity { get; set; }
 
-        public Orderline(int quantity, decimal subTotal) {
-            this.SubTotal = subTotal;
+        public Orderline(int quantity, decimal subTotal, Product p) {
             this.Quantity = quantity;
+            this.SubTotal = subTotal;
+            this.Product = p;
         }
     }
 }

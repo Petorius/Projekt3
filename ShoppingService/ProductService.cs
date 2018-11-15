@@ -7,8 +7,7 @@ using System.Text;
 using Server.Domain;
 using Server.DataAccessLayer;
 
-namespace Server.ServiceLayer
-{
+namespace Server.ServiceLayer {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class ProductService : IProductService {
         private ICRUD<Product> productDb;
@@ -30,8 +29,7 @@ namespace Server.ServiceLayer
             return product;
         }
 
-        public IEnumerable<Product> GetAllProducts()
-        {
+        public IEnumerable<Product> GetAllProducts() {
             return productDb.GetAll();
         }
 

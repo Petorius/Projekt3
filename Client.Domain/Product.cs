@@ -34,5 +34,9 @@ namespace Client.Domain {
         public Product() {
 
         }
+
+        public Product(int id) {
+            ID = id;
+        }
     }
 }

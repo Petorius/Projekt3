@@ -10,11 +10,11 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td> @Html.Action("Index", "ProductView", new { id = item.ID }) </td>
+        <td> @Html.Action("Index", "ProductView", item.ID) </td>
 
     </tr>
 <div>
-    <input type="button" value="Knap" onclick="location.href='@Url.Action("Index", "ProductView", new { id = item.ID })'" />
+    <input type="button" value="Knap" onclick="location.href='@Url.Action("Index", "ProductView", item.ID)'" />
     <hr />
 </div>
 }

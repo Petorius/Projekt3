@@ -13,11 +13,18 @@ namespace Server.Host {
             Console.WriteLine("Console based host");
 
             using (ServiceHost productHost = new ServiceHost(typeof(serviceToHost.ProductService)))
-
+            using (ServiceHost orderHost = new ServiceHost(typeof(serviceToHost.OrderService)))
             using (ServiceHost tagHost = new ServiceHost(typeof(serviceToHost.TagService))) {
                 // Open the host and start listening for oncoming calls
                 productHost.Open();
                 DisplayHostInfo(productHost);
+
+                //Keep the service running until key pressed
+                Console.WriteLine("The service is ready");
+
+                // Open the host and start listening for oncoming calls
+                orderHost.Open();
+                DisplayHostInfo(orderHost);
 
                 //Keep the service running until key pressed
                 Console.WriteLine("The service is ready");

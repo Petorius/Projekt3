@@ -15,7 +15,7 @@ namespace UnitTest {
     public class ProductTest {
         private static string connectionString = "Server=kraka.ucn.dk; Database=dmab0917_1067354; User Id=dmab0917_1067354; Password=Password1! ";
         private ProductDB productDB;
-        
+
 
         [TestInitialize]
         public void SetUp() {
@@ -40,7 +40,7 @@ namespace UnitTest {
         }
 
         [TestMethod]
-        public void UpdateProductTestExceptedToFail() {
+        public void UpdateProductTestExpectedToFail() {
             Product p = productDB.Get(1);
             p.Name = "Rune";
             productDB.Update(p, true);
@@ -63,7 +63,7 @@ namespace UnitTest {
         }
 
         [TestMethod]
-        public void DeleteProductTestExceptedToFail() {
+        public void DeleteProductTestExpectedToFail() {
             Product p = new Product();
 
             productDB.Delete(1, true);
