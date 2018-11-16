@@ -54,7 +54,16 @@ namespace Client.Webshop.Controllers {
                 }
                 Session["cart"] = cart;
             }
+
+            if(result) {
+                ViewBag.Message = "Success";
+            }
+            else {
+                ViewBag.Message = "Fail";
+            }
+
             return Redirect(url);
+
         }
     }
 }

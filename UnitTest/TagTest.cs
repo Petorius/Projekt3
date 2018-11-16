@@ -36,7 +36,6 @@ namespace UnitTest
         [TestMethod]
         public void FindProductTest()
         {
-
             Tag t = TagDB.Get("Sort");
 
             Assert.IsNotNull(t);

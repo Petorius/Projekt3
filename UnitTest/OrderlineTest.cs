@@ -16,12 +16,13 @@ namespace UnitTest {
         [TestInitialize]
         public void SetUp() {
             orderlineDB = new OrderLineDB(connectionString);
+
+
         }
 
         [TestMethod]
         public void OptimisticConcurrenyWithStock() {
-
-
+            
         }
 
         [TestMethod]
