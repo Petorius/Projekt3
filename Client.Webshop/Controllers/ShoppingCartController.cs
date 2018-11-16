@@ -22,7 +22,7 @@ namespace Client.Webshop.Controllers {
 
         public ActionResult UpdateOrderlineQuanity() {
 
-            return Redirect(url);
+            return Redirect();
         }
 
         

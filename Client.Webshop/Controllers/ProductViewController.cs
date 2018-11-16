@@ -11,8 +11,6 @@ namespace Client.Webshop.Controllers {
         ProductController pc = new ProductController();
         OrderController oc = new OrderController();
         
-
-
         public ActionResult Index(int id) {
 
             Product product = pc.Find(id);
@@ -54,7 +52,8 @@ namespace Client.Webshop.Controllers {
                 }
                 Session["cart"] = cart;
             }
-            return Redirect(url);
+            //return Redirect(url);
+            return View();
         }
     }
 }

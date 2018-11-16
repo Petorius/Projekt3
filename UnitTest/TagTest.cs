@@ -10,52 +10,31 @@ using System.Threading;
 using System.Threading.Tasks;
 
 
-namespace UnitTest
-{
+namespace UnitTest {
     [TestClass]
-    public class TagTest
-    {
+    public class TagTest {
         private static string connectionString = "Server=kraka.ucn.dk; Database=dmab0917_1067354; User Id=dmab0917_1067354; Password=Password1! ";
         private TagDB TagDB;
 
 
         [TestInitialize]
-        public void SetUp()
-        {
+        public void SetUp() {
             TagDB = new TagDB(connectionString);
         }
 
         [TestMethod]
-        public void GetTagTest()
-        {
+        public void GetTagTest() {
             Tag t = TagDB.Get("Sort");
 
             Assert.AreEqual(t.Name, "Sort");
         }
 
         [TestMethod]
-        public void FindProductTest()
-        {
+        public void GetTagFailIsNull() {
 
-            Tag t = TagDB.Get("Sort");
+            Tag t = TagDB.Get("Hvid");
 
-            Assert.IsNotNull(t);
+            Assert.IsNull(t);
         }
-
-        //[ClassCleanup]
-        //public static void CleanUp()
-        //{
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        connection.Open();
-        //        using (SqlCommand cmd = connection.CreateCommand())
-        //        {
-        //            cmd.CommandText = "Truncate table Product";
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //    }
-        //}
-
-        
     }
 }

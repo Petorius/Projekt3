@@ -160,6 +160,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\BuyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductViewController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -250,6 +251,7 @@
     <Content Include="Views\ShoppingCart\ShoppingCart.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\ProductView\Index.cshtml" />
+    <Content Include="Views\Buy\Information.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

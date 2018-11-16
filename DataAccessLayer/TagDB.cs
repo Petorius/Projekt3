@@ -30,9 +30,7 @@ namespace Server.DataAccessLayer {
                     cmd.Parameters.AddWithValue("Name", name);
                     SqlDataReader tagIDReader = cmd.ExecuteReader();
                     while (tagIDReader.Read()) {
-
                         t.TagID = tagIDReader.GetInt32(tagIDReader.GetOrdinal("tagID"));
-
                     }
                     tagIDReader.Close();
 
