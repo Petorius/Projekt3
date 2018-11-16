@@ -13,8 +13,19 @@ namespace Client.Webshop.Controllers {
         public ActionResult ShoppingCart() {
             ViewBag.Message = "Shopping Cart page";
 
-            return View();
+            
+
+            IEnumerable<Orderline> orderlines = Session["cart"] as IEnumerable<Orderline>;
+
+            return View(orderlines);
         }
+
+        public ActionResult UpdateOrderlineQuanity() {
+
+            return Redirect(url);
+        }
+
+        
 
     }
 }
