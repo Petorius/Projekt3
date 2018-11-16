@@ -20,10 +20,14 @@ namespace Client.Webshop.Controllers {
             return View(orderlines);
         }
 
-        public ActionResult UpdateOrderlineQuanity() {
+        //public ActionResult UpdateOrderlineQuanity(int id, string url) {
 
-            return Redirect();
-        }
+        //    IEnumerable<Orderline> orderlines = Session["cart"] as IEnumerable<Orderline>;
+
+        //    foreach()
+
+        //    return Redirect(url);
+        //}
 
         
 

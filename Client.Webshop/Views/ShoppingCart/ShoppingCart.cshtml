@@ -18,16 +18,19 @@
         <b>@item.Product.Name</b>
     </p>
     <p>
-        <i>@item.SubTotal DKK</i>
+        <i>@item.SubTotal DKK </i>
     </p>
     <p>
-        <b>Quantity: @item.Quantity</b>
+        <b>Quantity: <span id="qty" name="quantity">@item.Quantity</span> </b>
+
+
     </p>
 
     <div class="container">
         
         <p>
-            <a href="@Url.Action("Index", "ProductView", new { id = item.Product.ID })">
+
+            <a href="@Url.Action("UpdateOrderlineQuantity", "ShoppingCart", new { id = item.Product.ID, url = this.Request.RawUrl })">
                 <span class="glyphicon glyphicon-minus"></span>
             </a>
         </p>
