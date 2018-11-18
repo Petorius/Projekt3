@@ -20,6 +20,12 @@ namespace Client.ServiceLayer.OrderReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrderLine", ReplyAction="http://tempuri.org/IOrderService/CreateOrderLineResponse")]
         System.Threading.Tasks.Task<bool> CreateOrderLineAsync(int quantity, decimal subTotal, int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/UpdateOrderLine", ReplyAction="http://tempuri.org/IOrderService/UpdateOrderLineResponse")]
+        bool UpdateOrderLine(int ID, decimal subTotal, int quantity);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/UpdateOrderLine", ReplyAction="http://tempuri.org/IOrderService/UpdateOrderLineResponse")]
+        System.Threading.Tasks.Task<bool> UpdateOrderLineAsync(int ID, decimal subTotal, int quantity);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +61,14 @@ namespace Client.ServiceLayer.OrderReference {
         
         public System.Threading.Tasks.Task<bool> CreateOrderLineAsync(int quantity, decimal subTotal, int ID) {
             return base.Channel.CreateOrderLineAsync(quantity, subTotal, ID);
+        }
+        
+        public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {
+            return base.Channel.UpdateOrderLine(ID, subTotal, quantity);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateOrderLineAsync(int ID, decimal subTotal, int quantity) {
+            return base.Channel.UpdateOrderLineAsync(ID, subTotal, quantity);
         }
     }
 }

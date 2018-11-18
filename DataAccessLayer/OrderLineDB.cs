@@ -78,7 +78,53 @@ namespace Server.DataAccessLayer {
         }
 
         public bool Update(OrderLine Entity, bool test = false, bool testResult = false) {
-            throw new NotImplementedException();
+            bool isUpdated = false;
+            for (int i = 0; i < 5; i++) {
+                using (SqlConnection connection = new SqlConnection(connectionString)) {
+                    connection.Open();
+                    using (SqlTransaction trans = connection.BeginTransaction()) {
+                        byte[] rowId = null;
+                        int rowCount = 0;
+                        using (SqlCommand cmd = connection.CreateCommand()) {
+                            cmd.Transaction = trans;
+                            cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                            cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
+                            SqlDataReader reader = cmd.ExecuteReader();
+
+                            while (reader.Read()) {
+                                rowId = (byte[])reader["rowId"];
+                            }
+                            reader.Close();
+
+                            try {
+                                cmd.CommandText = "UPDATE Product " +
+                                    "SET stock = @stock WHERE productID = @productID AND rowID = @rowId";
+                                cmd.Parameters.AddWithValue("stock", Entity.Product.Stock + 1);
+                                cmd.Parameters.AddWithValue("rowID", rowId);
+                                rowCount = cmd.ExecuteNonQuery();
+
+                                if (test) {
+                                    rowCount = testResult ? 1 : 0;
+                                }
+
+                                if (rowCount == 0) {
+                                    cmd.Transaction.Rollback();
+                                }
+                                else {
+                                    isUpdated = true;
+                                    cmd.Transaction.Commit();
+                                    break;
+                                }
+                            }
+                            catch (SqlException) {
+                                isUpdated = false;
+                            }
+
+                        }
+                    }
+                }
+            }
+            return isUpdated;
         }
     }
 }

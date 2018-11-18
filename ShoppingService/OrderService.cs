@@ -22,5 +22,12 @@ namespace Server.ServiceLayer {
             OrderLine ol = new OrderLine(quantity, subTotal, p);
             return orderLineDB.Create(ol);
         }
+
+        public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {
+
+            Product p = productDB.Get(ID);
+            OrderLine ol = new OrderLine(quantity, subTotal, p);
+            return orderLineDB.Update(ol);
+        }
     }
 }

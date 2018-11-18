@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -10,5 +11,8 @@ namespace Server.ServiceLayer {
     interface IOrderService {
         [OperationContract]
         bool CreateOrderLine(int quantity, decimal subTotal, int ID);
+
+        [OperationContract]
+        bool UpdateOrderLine(int ID, decimal subTotal, int quantity);
     }
 }
