@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -14,5 +15,8 @@ namespace Server.ServiceLayer {
         [OperationContract]
         Order CreateOrder(string firstName, string lastName, string street,
             int zip, string city, string email, int number, IEnumerable<OrderLine> ol);
+
+        [OperationContract]
+        bool UpdateOrderLine(int ID, decimal subTotal, int quantity);
     }
 }

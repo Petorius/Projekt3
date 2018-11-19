@@ -19,5 +19,10 @@ namespace Client.ServiceLayer {
             OrderReference.OrderServiceClient myProxy = new OrderReference.OrderServiceClient();
             return myProxy.CreateOrderLine(quantity, subTotal, ID);
         }
+
+        public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {
+            OrderReference.OrderServiceClient myProxy = new OrderReference.OrderServiceClient();
+            return myProxy.UpdateOrderLine(ID, subTotal, quantity);
+        }
     }
 }

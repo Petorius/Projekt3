@@ -8,36 +8,56 @@
 
 @if (Model != null) {
     foreach (var item in Model) {
-        <div>
-            <p>
-                <a href="@Url.Action("Index", "ProductView", new { id = item.Product.ID })">
-                    <img border="0" alt="W3Schools" src="@item.Product.Images[0].ImageSource" width="100" height="100">
-                </a>
-            </p>
-            <p>
-                <b>@item.Product.Name</b>
-            </p>
-            <p>
-                <i>@item.SubTotal DKK </i>
-            </p>
-            <p>
-                <b>Quantity: <span id="qty" name="quantity">@item.Quantity</span> </b>
+<div>
+    <p>
+        <a href="@Url.Action("Index", "ProductView", new { id = item.Product.ID })">
+            <img border="0" alt="W3Schools" src="@item.Product.Images[0].ImageSource" width="100" height="100">
+        </a>
+    </p>
+    <p>
+        <b>@item.Product.Name</b>
+    </p>
+    <p>
+        <i>@item.SubTotal DKK </i>
+    </p>
+    <p>
+        <b>Quantity: <span id="qty" name="quantity">@item.Quantity</span> </b>
 
 
-            </p>
+    </p>
 
-            <div class="container">
+    <div class="container">
+        
+        <p>
+            <a href="@Url.Action("UpdateOrderlineQuantity", "ShoppingCart", new { id = item.Product.ID })">
+                <span class="glyphicon glyphicon-minus"></span>
+            </a>
 
-                <p>
+            @*<a href="@Url.Action("AddProduct", "ProductView", new { id = item.Product.ID, quantity = 1, url = this.Request.RawUrl })">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>*@
 
-                    <a href="@Url.Action(" UpdateOrderlineQuantity", "ShoppingCart" , new { id=item.Product.ID, url=this.Request.RawUrl })">
-                        <span class="glyphicon glyphicon-minus"></span>
-                    </a>
-                </p>
+            @using (Html.BeginForm("AddProduct", "ProductView", FormMethod.Post, null)) {
+                @Html.ValidationSummary(true)
+                @Html.Hidden("url", this.Request.RawUrl)
+            <form action="/ProductView/AddProduct/" method="post">
+                <input id="id" name="id" value="@item.Product.ID" hidden />
+                <input id="quantity" name="quantity" type="number" value="1" hidden />
+                <button class="glyphicon glyphicon-plus" type="submit"></button>
 
-            </div>
-        </div>
+            </form>
+                    
+                    
+                     
+                        
+
+            
+
+
+            }
+        </p>
+        
+    </div>
+</div>
     }
 }
-
-<button type="button" onclick="location.href= '@Url.Action("Information", "Buy")'">Checkout</button>

@@ -9,27 +9,43 @@ using Client.Domain;
 namespace Client.Webshop.Controllers {
     public class ShoppingCartController : Controller {
 
+        OrderController oc = new OrderController();
+
         // GET: ShoppingCart
         public ActionResult ShoppingCart() {
             ViewBag.Message = "Shopping Cart page";
 
             
-
             IEnumerable<Orderline> orderlines = Session["cart"] as IEnumerable<Orderline>;
 
             return View(orderlines);
         }
 
-        //public ActionResult UpdateOrderlineQuanity(int id, string url) {
+        public ActionResult UpdateOrderlineQuantity(int id) {
 
-        //    IEnumerable<Orderline> orderlines = Session["cart"] as IEnumerable<Orderline>;
+         
+            List<Orderline> orderlines = Session["cart"] as List<Orderline>;
 
-        //    foreach()
+            if (orderlines != null ) {
+                foreach (Orderline orderline in orderlines.ToList<Orderline>()) {
+                    if (orderline.Product.ID == id) {
+                        orderline.SubTotal -= orderline.Product.Price;
+                        orderline.Quantity -= 1;
 
-        //    return Redirect(url);
-        //}
+                        oc.UpdateOrderline(orderline.Product.ID, orderline.SubTotal, orderline.Quantity);
+                       
+                    }
 
-        
-
+                    if(orderline.SubTotal == 0) {
+                        orderlines.Remove(orderline);
+                    }
+                }
+                
+                Session["cart"] = orderlines;
+            }
+            
+         
+            return RedirectToAction("ShoppingCart");
+        }
     }
 }
