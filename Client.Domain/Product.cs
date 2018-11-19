@@ -15,19 +15,17 @@ namespace Client.Domain {
         public string Description { get; set; }
         public int Rating { get; set; }
         public List<Image> Images { get; set; }
-        public List<Copy> Copies { get; set; }
         public Category Category { get; set; }
         public List<Keyword> Keywords { get; set; }
         public Review Review { get; set; }
 
-        public Product(string name, decimal price, int stock, int minStock, int maxStock, string description, List<Copy> copies, Category category, List<Keyword> keywords) {
+        public Product(string name, decimal price, int stock, int minStock, int maxStock, string description, Category category, List<Keyword> keywords) {
             Name = name;
             Price = price;
             Stock = stock;
             MinStock = minStock;
             MaxStock = maxStock;
             Description = description;
-            Copies = copies;
             Category = category;
             Keywords = keywords;
             

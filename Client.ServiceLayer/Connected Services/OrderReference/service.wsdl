@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Server.Domain" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IOrderService_CreateOrderLine_InputMessage">
@@ -12,16 +13,35 @@
   <wsdl:message name="IOrderService_CreateOrderLine_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateOrderLineResponse" />
   </wsdl:message>
+  <wsdl:message name="IOrderService_CreateOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrder" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_CreateOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrderResponse" />
+  </wsdl:message>
   <wsdl:portType name="IOrderService">
     <wsdl:operation name="CreateOrderLine">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/CreateOrderLine" message="tns:IOrderService_CreateOrderLine_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/CreateOrderLineResponse" message="tns:IOrderService_CreateOrderLine_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/CreateOrder" message="tns:IOrderService_CreateOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/CreateOrderResponse" message="tns:IOrderService_CreateOrder_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IOrderService" type="tns:IOrderService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="CreateOrderLine">
       <soap:operation soapAction="http://tempuri.org/IOrderService/CreateOrderLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder">
+      <soap:operation soapAction="http://tempuri.org/IOrderService/CreateOrder" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

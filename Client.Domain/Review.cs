@@ -8,6 +8,5 @@ namespace Client.Domain {
     public class Review {
         public string Title { get; set; }
         public string Description { get; set; }
-        public Copy Copy { get; set; }
     }
 }

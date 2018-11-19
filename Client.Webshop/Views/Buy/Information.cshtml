@@ -1,7 +1,57 @@
 ﻿
 @{
     ViewBag.Title = "Information";
+    
 }
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <main>
+        <fieldset>
+            <legend>Leveringsadresse</legend>
+            <div class="formArea formRow">
+                <form name="deliveryAddress" method="post" action="@Url.Action("Confirmation", "Buy")">
 
-<h2>Information</h2>
+                    <div class="formRow textNormal">
+                        Fornavn*
+                        <input name="firstName" type="text" maxlength="64" class="textboxWide2 textNormal margin" />
+                    </div>
+                    <div class="formRow textNormal">
+                        Efternavn*
+                        <input name="lastName" type="text" maxlength="64" class="textboxWide2 textNormal margin" />
+                    </div>
+                    <div class="formRow textNormal">
+                        Adresse*
+                        <input name="street" type="text" maxlength="64" class="textboxWide2 textNormal margin" />
+                    </div>
+                    <div class="formRow textNormal">
+                        Postnummer.*
+                        <input name="zip" type="tel" pattern="[0-9]{4}" required class="textboxSmall3 textNormal marginRightWide2" />
+                    </div>
+                    <div class="formRow textNormal">
+                        By.*
+                        <input name="city" type="text" maxlength="64" class="textboxMedium2 textNormal marginRightMedium2" />
+                    </div>
+                    <div class="formRow textNormal">
+                        Email.*
+                        <input name="email" type="email" maxlength="64" class="textboxWide2 textNormal margin" />
+                    </div>
+                    <div class="formRow textNormal">
+                        Telefonnummer.*
+                        <input name="number" type="tel" pattern="[0-9]{8}" required class="textboxMedium2 textNormal marginRightMedium2" />
+                    </div>
 
+
+                    <div class="formRow">
+                        <input type="submit" value="Forsæt" onclick="if ( ! validateInput()) return false;" language="javascript" class="submitButton" />
+                        <input type="reset" value="Annuller" class="resetButton" />
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+    </main>
+
+</body>
+</html>

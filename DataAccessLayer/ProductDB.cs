@@ -33,7 +33,8 @@ namespace Server.DataAccessLayer {
                         cmd.Parameters.AddWithValue("MaxStock", Entity.MaxStock);
                         cmd.Parameters.AddWithValue("Description", Entity.Description);
                         cmd.ExecuteNonQuery();
-                    } catch (SqlException) {
+                    }
+                    catch (SqlException) {
                         isCompleted = false;
                     }
                 }

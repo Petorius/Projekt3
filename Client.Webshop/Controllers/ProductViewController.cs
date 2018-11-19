@@ -10,7 +10,7 @@ namespace Client.Webshop.Controllers {
     public class ProductViewController : Controller {
         ProductController pc = new ProductController();
         OrderController oc = new OrderController();
-        
+
 
 
         public ActionResult Index(int id) {

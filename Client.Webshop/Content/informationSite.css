@@ -1,57 +1,11 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
-#navBar-Right {
-    margin-left: 500px;
-    
-
-}
-
-#ProductViewDetails {
-    background-color: red;
-    margin: auto;
-    margin-top:80px;
-    margin-bottom:120px;
-    height:550px;
-    width: 1100px;
-    align-content:center;
-}
-
-#ProductViewDetailsInfo{
-    float:right;
-    background-color:green;
-    height: 450px;
-    width: 600px;
-    padding-left:30px;
-    padding-right:50px;
+﻿.boldText {
+    font-weight: bold;
 }
 
 fieldset {
     background-color: #f5f5f5;
     width: 708px;
-    padding-right: 4px
+    padding-right: 4px;
 }
 
 legend {
@@ -63,7 +17,7 @@ legend {
     font-weight: bold;
 }
 
-h3.formHeader {
+.formHeader {
     font-family: Verdana, Arial;
     padding-bottom: 0;
     margin-bottom: 0;
@@ -71,29 +25,28 @@ h3.formHeader {
     text-align: right;
 }
 
-div.formArea {
+.formArea {
     /*background-color: #EEE;*/
     /*border: solid 1px #555;*/
     padding: 18px 56px 0 30px;
 }
 
-div.formRow {
+.formRow {
     width: 640px;
     text-align: right;
     margin-bottom: 4px;
 }
 
-.margin {
-    margin-right: 80px;
-}
-
 .marginRightWide2 {
     margin-right: 300px;
-
 }
 
 .marginRightMedium2 {
     margin-right: 180px;
+}
+
+.marginRightSmall2 {
+    margin-right: 60px;
 }
 
 .textboxWide2 {
@@ -125,7 +78,7 @@ div.formRow {
     font-weight: bold;
     color: white;
     margin-right: 40px;
-    background-color: black;
+    background-color: yellow;
     cursor: grab
 }
 
@@ -137,4 +90,3 @@ div.formRow {
     border: outset 2px #FFF;
     background-color: red;
 }
-

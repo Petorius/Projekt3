@@ -76,6 +76,12 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\OrderReference\Client.ServiceLayer.OrderReference.Order.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\OrderReference\Server.Domain.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\OrderReference\service.wsdl" />
     <None Include="Connected Services\OrderReference\service.xsd">
       <SubType>Designer</SubType>
