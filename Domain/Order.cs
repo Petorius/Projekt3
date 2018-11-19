@@ -13,6 +13,8 @@ namespace Server.Domain {
         [DataMember]
         public decimal Total { get; set; }
         [DataMember]
+        public bool Validation { get; set; }
+        [DataMember]
         public Customer Customer { get; set; }
         [DataMember]
         public Invoice Invoice { get; set; }
@@ -20,6 +22,7 @@ namespace Server.Domain {
         public IEnumerable<OrderLine> Orderlines { get; set; }
 
         public Order(Customer customer, Invoice invoice) {
+            Validation = false;
             Customer = customer;
             Invoice = invoice;
         }

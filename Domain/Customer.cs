@@ -34,5 +34,9 @@ namespace Server.Domain {
             ZipCode = zipCode;
             City = city;
         }
+
+        public Customer() {
+
+        }
     }
 }

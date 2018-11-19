@@ -24,5 +24,9 @@ namespace Client.ControlLayer {
             return orderService.CrateOrder(firstName, lastName, street, zip, city, email,
             number, ol);
         }
+
+        public bool UpdateOrderline(int ID, decimal subTotal, int quantity) {
+            return orderService.UpdateOrderLine(ID, subTotal, quantity);
+        }
     }
 }
