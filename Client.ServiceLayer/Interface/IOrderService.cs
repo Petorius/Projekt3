@@ -9,5 +9,6 @@ namespace Client.ServiceLayer.Interface {
     public interface IOrderService {
         bool CreateOrderLine(int quantity, decimal subTotal, int ID);
         bool UpdateOrderLine(int ID, decimal subTotal, int quantity);
+        bool DeleteOrderLine(int ID, decimal subTotal, int quantity);
     }
 }

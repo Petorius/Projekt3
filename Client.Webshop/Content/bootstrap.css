@@ -6070,6 +6070,16 @@ button.close {
   border-width: 5px 5px 0;
   border-top-color: #000;
 }
+
+.transparentBtn {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
 .tooltip.top-left .tooltip-arrow {
   right: 5px;
   bottom: 0;

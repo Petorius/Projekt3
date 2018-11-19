@@ -32,7 +32,7 @@ namespace Client.Webshop.Controllers {
                         orderline.SubTotal -= orderline.Product.Price;
                         orderline.Quantity -= 1;
 
-                        oc.UpdateOrderline(orderline.Product.ID, orderline.SubTotal, orderline.Quantity);
+                        oc.UpdateOrderLine(orderline.Product.ID, orderline.SubTotal, orderline.Quantity);
                        
                     }
 
@@ -44,7 +44,28 @@ namespace Client.Webshop.Controllers {
                 Session["cart"] = orderlines;
             }
             
-         
+            return RedirectToAction("ShoppingCart");
+        }
+
+        public ActionResult DeleteOrderline(int id) {
+
+            List<Orderline> orderlines = Session["cart"] as List<Orderline>;
+
+            if (orderlines != null) {
+                foreach (Orderline orderline in orderlines.ToList<Orderline>()) {
+                    if (orderline.Product.ID == id) {
+
+                        orderlines.Remove(orderline);
+
+                        oc.DeleteOrderLine(orderline.Product.ID, orderline.SubTotal, orderline.Quantity);
+
+                    }
+                }
+
+                Session["cart"] = orderlines;
+            }
+
+
             return RedirectToAction("ShoppingCart");
         }
     }

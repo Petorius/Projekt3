@@ -28,35 +28,30 @@
 
     <div class="container">
         
-        <p>
-            <a href="@Url.Action("UpdateOrderlineQuantity", "ShoppingCart", new { id = item.Product.ID })">
-                <span class="glyphicon glyphicon-minus"></span>
-            </a>
-
-            @*<a href="@Url.Action("AddProduct", "ProductView", new { id = item.Product.ID, quantity = 1, url = this.Request.RawUrl })">
-                <span class="glyphicon glyphicon-plus"></span>
-            </a>*@
+     
+            
 
             @using (Html.BeginForm("AddProduct", "ProductView", FormMethod.Post, null)) {
                 @Html.ValidationSummary(true)
                 @Html.Hidden("url", this.Request.RawUrl)
             <form action="/ProductView/AddProduct/" method="post">
+
+                <a href="@Url.Action("UpdateOrderlineQuantity", "ShoppingCart", new { id = item.Product.ID }) ">
+                    <span class="glyphicon glyphicon-minus"></span>
+                </a>
+
                 <input id="id" name="id" value="@item.Product.ID" hidden />
                 <input id="quantity" name="quantity" type="number" value="1" hidden />
-                <button class="glyphicon glyphicon-plus" type="submit"></button>
+                <button class="glyphicon glyphicon-plus" style="background-color: Transparent; background-repeat: no-repeat; border: none; cursor: pointer;
+                        overflow: hidden; outline: none; color: steelblue" type="submit"></button>
+
+                <a href="@Url.Action("DeleteOrderline", "ShoppingCart", new { id = item.Product.ID }) ">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
 
             </form>
-                    
-                    
-                     
-                        
-
-            
-
-
             }
-        </p>
-        
+     
     </div>
 </div>
     }

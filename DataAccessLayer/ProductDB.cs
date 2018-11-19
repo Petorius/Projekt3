@@ -41,7 +41,7 @@ namespace Server.DataAccessLayer {
             return isCompleted;
         }
 
-        public bool Delete(int id, bool test = false, bool testResult = false) {
+        public bool Delete(Product Entity, bool test = false, bool testResult = false) {
             bool deleted = false;
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
@@ -52,7 +52,7 @@ namespace Server.DataAccessLayer {
                         using (SqlCommand cmd = connection.CreateCommand()) {
                             cmd.Transaction = trans;
                             cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
-                            cmd.Parameters.AddWithValue("productID", id);
+                            cmd.Parameters.AddWithValue("productID", Entity.ID);
                             SqlDataReader reader = cmd.ExecuteReader();
 
                             while (reader.Read()) {

@@ -10,6 +10,6 @@ namespace Server.DataAccessLayer {
         T Get(int id);
         IEnumerable<T> GetAll();
         bool Update(T Entity, bool test = false, bool testResult = false);
-        bool Delete(int id, bool test = false, bool testResult = false);
+        bool Delete(T Entity, bool test = false, bool testResult = false);
     }
 }
