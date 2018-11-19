@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Client.ControlLayer;
+using Client.Domain;
 
 namespace Client.Webshop
 {
@@ -17,5 +19,24 @@ namespace Client.Webshop
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Session_OnEnd(Object sender, EventArgs e)
+        {
+            OrderController oc = new OrderController();
+
+            List<Orderline> orderlines = Session["cart"] as List<Orderline>;
+
+            if (orderlines != null)
+            {
+                foreach (Orderline orderline in orderlines.ToList<Orderline>())
+                {
+
+                    oc.DeleteOrderLine(orderline.Product.ID, orderline.SubTotal, orderline.Quantity);
+                }
+            }
+
+
+        }
+
     }
 }
