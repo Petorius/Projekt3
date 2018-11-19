@@ -65,8 +65,8 @@ namespace UnitTest {
         [TestMethod]
         public void DeleteProductTestExpectedToFail() {
             Product p = new Product();
-
-            productDB.Delete(1, true);
+            p.ID = 1;
+            productDB.Delete(p, true);
 
             p = productDB.Get(1);
 
@@ -76,8 +76,8 @@ namespace UnitTest {
         [TestMethod]
         public void DeleteProductTest() {
             Product p = new Product();
-
-            productDB.Delete(1, true, true);
+            p.ID = 1;
+            productDB.Delete(p, true, true);
 
             p = productDB.Get(1);
 

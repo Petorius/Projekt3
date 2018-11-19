@@ -22,7 +22,7 @@
     <MetadataSource Address="http://localhost:8013/Design_Time_Addresses/Server.ServiceLayer/OrderService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="73e7aa1f-2e74-4df6-bcab-adef3e8b0003" SourceId="1" SourceUrl="http://localhost:8013/Design_Time_Addresses/Server.ServiceLayer/OrderService/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="5224986c-8ab6-4742-bb4e-1c7df5105786" SourceId="1" SourceUrl="http://localhost:8013/Design_Time_Addresses/Server.ServiceLayer/OrderService/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="9cb22fa0-4b31-4296-9b7f-082b6c66c8ef" SourceId="1" SourceUrl="http://localhost:8013/Design_Time_Addresses/Server.ServiceLayer/OrderService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="d16314a0-e8bc-4c1d-a2b4-2906942ac0f8" SourceId="1" SourceUrl="http://localhost:8013/Design_Time_Addresses/Server.ServiceLayer/OrderService/mex" />
     <MetadataFile FileName="Server.Domain.xsd" MetadataType="Schema" ID="8448ff62-ca60-4dfa-aa5c-861323b18237" SourceId="1" SourceUrl="http://localhost:8013/Design_Time_Addresses/Server.ServiceLayer/OrderService/mex" />

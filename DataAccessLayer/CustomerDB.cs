@@ -46,11 +46,6 @@ namespace Server.DataAccessLayer {
             return isCompleted;
         }
 
-
-        public bool Delete(int id, bool test = false, bool testResult = false) {
-            throw new NotImplementedException();
-        }
-
         public Customer Get(int id) {
             throw new NotImplementedException();
         }
@@ -141,6 +136,10 @@ namespace Server.DataAccessLayer {
                 }
 
             }
+        }
+
+        public bool Delete(Customer Entity, bool test = false, bool testResult = false) {
+            throw new NotImplementedException();
         }
     }
 }

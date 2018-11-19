@@ -12,7 +12,7 @@ namespace Server.DataAccessLayer {
             throw new NotImplementedException();
         }
 
-        public bool Delete(int id, bool test = false, bool testResult = false) {
+        public bool Delete(Order Entity, bool test = false, bool testResult = false) {
             throw new NotImplementedException();
         }
 

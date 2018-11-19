@@ -364,6 +364,9 @@ namespace Client.ServiceLayer.OrderReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal TotalField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ValidationField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -435,6 +438,19 @@ namespace Client.ServiceLayer.OrderReference {
                 if ((this.TotalField.Equals(value) != true)) {
                     this.TotalField = value;
                     this.RaisePropertyChanged("Total");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Validation {
+            get {
+                return this.ValidationField;
+            }
+            set {
+                if ((this.ValidationField.Equals(value) != true)) {
+                    this.ValidationField = value;
+                    this.RaisePropertyChanged("Validation");
                 }
             }
         }
@@ -656,6 +672,12 @@ namespace Client.ServiceLayer.OrderReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/UpdateOrderLine", ReplyAction="http://tempuri.org/IOrderService/UpdateOrderLineResponse")]
         System.Threading.Tasks.Task<bool> UpdateOrderLineAsync(int ID, decimal subTotal, int quantity);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrderLine", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderLineResponse")]
+        bool DeleteOrderLine(int ID, decimal subTotal, int quantity);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrderLine", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderLineResponse")]
+        System.Threading.Tasks.Task<bool> DeleteOrderLineAsync(int ID, decimal subTotal, int quantity);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -707,6 +729,14 @@ namespace Client.ServiceLayer.OrderReference {
         
         public System.Threading.Tasks.Task<bool> UpdateOrderLineAsync(int ID, decimal subTotal, int quantity) {
             return base.Channel.UpdateOrderLineAsync(ID, subTotal, quantity);
+        }
+        
+        public bool DeleteOrderLine(int ID, decimal subTotal, int quantity) {
+            return base.Channel.DeleteOrderLine(ID, subTotal, quantity);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteOrderLineAsync(int ID, decimal subTotal, int quantity) {
+            return base.Channel.DeleteOrderLineAsync(ID, subTotal, quantity);
         }
     }
 }

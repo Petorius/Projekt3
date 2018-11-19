@@ -22,7 +22,6 @@ namespace Client.Webshop.Controllers {
         }
 
         public ActionResult UpdateOrderlineQuantity(int id) {
-
          
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
 
