@@ -21,7 +21,8 @@ namespace Server.ServiceLayer {
         }
 
         public bool DeleteProduct(int id) {
-            return productDb.Delete(id);
+            Product p = productDb.Get(id);
+            return productDb.Delete(p);
         }
 
         public Product FindProduct(int ID) {

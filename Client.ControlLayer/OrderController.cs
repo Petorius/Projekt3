@@ -28,5 +28,9 @@ namespace Client.ControlLayer {
         public bool UpdateOrderline(int ID, decimal subTotal, int quantity) {
             return orderService.UpdateOrderLine(ID, subTotal, quantity);
         }
+
+        public bool DeleteOrderLine(int ID, decimal subTotal, int quantity) {
+            return orderService.DeleteOrderLine(ID, subTotal, quantity);
+        }
     }
 }

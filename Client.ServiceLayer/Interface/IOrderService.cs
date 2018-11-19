@@ -11,5 +11,6 @@ namespace Client.ServiceLayer.Interface {
         Order CrateOrder(string firstName, string lastName, string street,
             int zip, string city, string email, int number, IEnumerable<Orderline> ol);
         bool UpdateOrderLine(int ID, decimal subTotal, int quantity);
+        bool DeleteOrderLine(int ID, decimal subTotal, int quantity);
     }
 }

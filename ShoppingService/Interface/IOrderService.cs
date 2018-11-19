@@ -18,5 +18,8 @@ namespace Server.ServiceLayer {
 
         [OperationContract]
         bool UpdateOrderLine(int ID, decimal subTotal, int quantity);
+
+        [OperationContract]
+        bool DeleteOrderLine(int ID, decimal subTotal, int quantity);
     }
 }
