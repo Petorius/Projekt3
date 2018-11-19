@@ -6,7 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/Scripts/updatebuttons.js");
+    @Scripts.Render("~/Scripts/validateScripts.js")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -19,8 +19,7 @@
             <div class="navbar-collapse collapse; navbar-header; navbar-search">
                 <ul class="nav navbar-nav">
                     <li>
-                        @using (Html.BeginForm("Search", "Search", FormMethod.Post, new { novalidate = "novalidate" }))
-                        {
+                        @using (Html.BeginForm("Search", "Search", FormMethod.Post, new { novalidate = "novalidate" })) {
                             <div>
                                 @Html.TextBox("searchString")
                                 <input type='submit' value='Search' />

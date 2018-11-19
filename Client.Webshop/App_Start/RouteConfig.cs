@@ -5,13 +5,22 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Client.Webshop
-{
-    public class RouteConfig
-    {
-        public static void RegisterRoutes(RouteCollection routes)
-        {
+namespace Client.Webshop {
+    public class RouteConfig {
+        public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                name: "Buy",
+                url: "Checkout/Buy",
+                defaults: new { controller = "Buy", action = "Information", id = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
+                name: "Confirmation",
+                url: "Confirmation/",
+                defaults: new { controller = "Buy", action = "Confirmation", id = UrlParameter.Optional }
+                );
 
             routes.MapRoute(
                 name: "ProductView",

@@ -43,7 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerDB.cs" />
     <Compile Include="Interface\ICRUD.cs" />
+    <Compile Include="Interface\IOrder.cs" />
+    <Compile Include="OrderDB.cs" />
     <Compile Include="OrderLineDB.cs" />
     <Compile Include="ProductDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

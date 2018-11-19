@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Client.Domain;
 using Client.ServiceLayer;
 using Client.ServiceLayer.Interface;
+using Client.Domain;
 
 namespace Client.ControlLayer {
     public class OrderController {
@@ -21,6 +21,10 @@ namespace Client.ControlLayer {
 
         public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {
             return orderService.UpdateOrderLine(ID, subTotal, quantity);
+        public Order CreateOrder(string firstName, string lastName, string street,
+            int zip, string city, string email, int number, IEnumerable<Orderline> ol) {
+            return orderService.CrateOrder(firstName, lastName, street, zip, city, email,
+            number, ol);
         }
 
         public bool DeleteOrderLine(int ID, decimal subTotal, int quantity) {

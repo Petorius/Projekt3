@@ -41,7 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessLayer\Server.DataAccessLayer.csproj">
+      <Project>{25a117a2-004b-4b26-9aa1-244418a6d605}</Project>
+      <Name>Server.DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Server.Domain.csproj">
+      <Project>{b0ca8488-e992-4170-9a7e-5ca714f0aabe}</Project>
+      <Name>Server.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
