@@ -12,6 +12,7 @@ namespace Server.DataAccessLayer {
         // Database test constructor. Only used for unit testing.
         public TagDB(string connectionString) {
             this.connectionString = connectionString;
+            productDB = new ProductDB(connectionString);
         }
 
         public TagDB() {

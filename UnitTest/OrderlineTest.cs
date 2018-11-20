@@ -19,11 +19,10 @@ namespace UnitTest {
         public void SetUp() {
             orderlineDB = new OrderLineDB(connectionString);
             productDB = new ProductDB(connectionString);
-            CreateFakeProduct();
         }
 
         [TestMethod]
-        public void OptimisticConcurrenyWithStock() {
+        public void OptimisticConcurrencyWithStock() {
             Product p = productDB.Get(1);
             OrderLine ol = new OrderLine(1, 2000, p);
 
@@ -31,43 +30,79 @@ namespace UnitTest {
 
             ol.Product = productDB.Get(1);
 
-            Assert.AreEqual(ol.Product.Stock, 4);
+            Assert.AreEqual(p.Stock - 1, ol.Product.Stock);
         }
 
         [TestMethod]
-        public void OptimisticConcurrenyWithStockExpectedToFail() {
+        public void OptimisticConcurrencyWithStockExpectedToFail() {
+            Product p = productDB.Get(1);
+            OrderLine ol = new OrderLine(1, 2000, p);
 
+            orderlineDB.Create(ol, true);
 
+            ol.Product = productDB.Get(1);
+
+            Assert.AreEqual(p.Stock , ol.Product.Stock);
         }
 
+        [TestMethod]
+        public void OptimisticConCurrencyUpdateStock() {
+            Product p = productDB.Get(1);
+            OrderLine ol = new OrderLine(2, 2000, p);
+
+            orderlineDB.Update(ol, true, true);
+
+            ol.Product = productDB.Get(1);
+
+            Assert.AreEqual(p.Stock + 1, ol.Product.Stock);
+        }
+
+        [TestMethod]
+        public void OptimisticConCurrencyUpdateStockFail() {
+            Product p = productDB.Get(1);
+            OrderLine ol = new OrderLine(2, 2000, p);
+
+            orderlineDB.Update(ol, true, false);
+
+            ol.Product = productDB.Get(1);
+
+            Assert.AreEqual(p.Stock, ol.Product.Stock);
+        }
+
+        [TestMethod]
+        public void OptimisticConCurrencyDelete() {
+            Product p = productDB.Get(1);
+            OrderLine ol = new OrderLine(2, 2000, p);
+
+            orderlineDB.Delete(ol, true, true);
+
+            ol.Product = productDB.Get(1);
+
+            Assert.AreEqual(p.Stock + 2, ol.Product.Stock);
+        }
+
+        [TestMethod]
+        public void OptimisticConCurrencyDeleteFail() {
+            Product p = productDB.Get(1);
+            OrderLine ol = new OrderLine(2, 2000, p);
+
+            orderlineDB.Delete(ol, true, false);
+
+            ol.Product = productDB.Get(1);
+
+            Assert.AreEqual(p.Stock, ol.Product.Stock);
+        }
 
 
         [ClassCleanup]
         public static void CleanUp() {
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
-                    cmd.CommandText = "Truncate table Product";
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        private void CreateFakeProduct() {
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
-                    cmd.CommandText = "Insert into Product(Name, Price, Stock, MinStock, MaxStock, Description) values" +
-                     " (@Name, @Price, @Stock, @MinStock, @MaxStock, @Description)";
-                    cmd.Parameters.AddWithValue("Name", "Rolex");
-                    cmd.Parameters.AddWithValue("Price", 2000);
-                    cmd.Parameters.AddWithValue("Stock", 5);
-                    cmd.Parameters.AddWithValue("MinStock", 2);
-                    cmd.Parameters.AddWithValue("MaxStock", 10);
-                    cmd.Parameters.AddWithValue("Description", "Mega fed ur");
-                    cmd.ExecuteNonQuery();
-                }
-            }
+            //using (SqlConnection connection = new SqlConnection(connectionString)) {
+            //    connection.Open();
+            //    using (SqlCommand cmd = connection.CreateCommand()) {
+            //        cmd.CommandText = "Truncate table Product";
+            //        cmd.ExecuteNonQuery();
+            //    }
+            //}
         }
     }
 }

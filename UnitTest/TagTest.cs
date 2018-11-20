@@ -14,46 +14,34 @@ namespace UnitTest {
     [TestClass]
     public class TagTest {
         private static string connectionString = "Server=kraka.ucn.dk; Database=dmab0917_1067354; User Id=dmab0917_1067354; Password=Password1! ";
-        private TagDB TagDB;
+        private TagDB tagDB;
 
         [TestInitialize]
         public void SetUp() {
-            TagDB = new TagDB(connectionString);
-            Tag tag = new Tag();
-            tag.Name = "Rødt";
-            TagDB.CreateTag(tag);
+            tagDB = new TagDB(connectionString);
         }
-
+        
         [TestMethod]
         public void GetTagTest() {
             Tag t = new Tag();
-            t.Name = TagDB.Get("Rødt").Name;
+            t.Name = tagDB.Get("Sort").Name;
 
-            Assert.AreEqual("Rødt", t.Name);
+            Assert.AreEqual("Sort", t.Name);
         }
 
         [TestMethod]
         public void GetTagFailIsNull() {
 
-            Tag t = TagDB.Get("Hvid");
+            Tag t = tagDB.Get("Hvid");
 
             Assert.IsNull(t.Name);
-            //Der assertes på navnet da et objekt vil blive bygget og få et automatisk ID uanset hvad
         }
 
-        [ClassCleanup]
-        public static void CleanUp()
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = "Truncate table Tag";
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
+        [TestMethod] 
+        public void GetProductsInTag() {
+            Tag t = tagDB.Get("Sort");
 
+            Assert.AreEqual(t.Products.Count, 2);
+        }
     }
 }
