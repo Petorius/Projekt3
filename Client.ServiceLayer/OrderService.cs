@@ -8,33 +8,36 @@ using System.Threading.Tasks;
 
 namespace Client.ServiceLayer {
     public class OrderService : IOrderService {
-        public Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email, int number, IEnumerable<Orderline> ol) {
+        public Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email, int number, IEnumerable<Orderline> ol)
+        {
             throw new NotImplementedException();
-
         }
 
-        public Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email, 
-            int number, IEnumerable<Orderline> ol) {
-            OrderReference.OrderServiceClient myProxy = new OrderReference.OrderServiceClient();
 
-            //OrderReference.OrderLine[] serverOrderLines = GetServerOrderLine(ol);
+        //public Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email, 
+        //    int number, IEnumerable<Orderline> ol) {
+        //    OrderReference.OrderServiceClient myProxy = new OrderReference.OrderServiceClient();
 
-            //var order = myProxy.CreateOrder(firstName, lastName, street, zip, city, email,
-            //number, serverOrderLines);
+        //    OrderReference.OrderLine[] serverOrderLines = GetServerOrderLine(ol);
 
-            //Customer customer = new Customer(order.Customer.FirstName, order.Customer.LastName, order.Customer.Phone, 
-            //    order.Customer.Email, order.Customer.Address, order.Customer.ZipCode, order.Customer.City);
-            //Order order2 = new Order(customer, new Invoice());
-            //order2.Total = order.Total;
-            //order2.ID = order.ID;
-            //order2.Orderlines = ol;
-            //return order2;
-        }
+        //    var order = myProxy.CreateOrder(firstName, lastName, street, zip, city, email,
+        //    number, serverOrderLines);
 
-        //private OrderReference.OrderLine[] GetServerOrderLine(IEnumerable<Orderline> ol) {
+        //    Customer customer = new Customer(order.Customer.FirstName, order.Customer.LastName, order.Customer.Phone,
+        //        order.Customer.Email, order.Customer.Address, order.Customer.ZipCode, order.Customer.City);
+        //    Order order2 = new Order(customer, new Invoice());
+        //    order2.Total = order.Total;
+        //    order2.ID = order.ID;
+        //    order2.Orderlines = ol;
+        //    return order2;
+        //}
+
+        //private OrderReference.OrderLine[] GetServerOrderLine(IEnumerable<Orderline> ol)
+        //{
         //    List<OrderReference.OrderLine[]> orderLines = new List<OrderReference.OrderLine[]>();
 
-        //    foreach (Orderline orderline in ol) {
+        //    foreach (Orderline orderline in ol)
+        //    {
         //        OrderReference.Product product = new OrderReference.Product();
         //        product.ID = orderline.Product.ID;
         //        orderLines.Add(new OrderReference.OrderLine(orderline.Quantity, orderline.SubTotal, product));
@@ -42,8 +45,8 @@ namespace Client.ServiceLayer {
 
         //    return orderLines;
         //}
-            
-        
+
+
 
         public bool CreateOrderLine(int quantity, decimal subTotal, int ID) {
             OrderReference.OrderServiceClient myProxy = new OrderReference.OrderServiceClient();

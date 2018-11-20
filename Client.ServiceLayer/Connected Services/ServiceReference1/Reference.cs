@@ -49,6 +49,12 @@ namespace Client.ServiceLayer.ServiceReference1 {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StockField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TempImageNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TempImageURLField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -176,6 +182,32 @@ namespace Client.ServiceLayer.ServiceReference1 {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TempImageName {
+            get {
+                return this.TempImageNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TempImageNameField, value) != true)) {
+                    this.TempImageNameField = value;
+                    this.RaisePropertyChanged("TempImageName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TempImageURL {
+            get {
+                return this.TempImageURLField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TempImageURLField, value) != true)) {
+                    this.TempImageURLField = value;
+                    this.RaisePropertyChanged("TempImageURL");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -252,10 +284,10 @@ namespace Client.ServiceLayer.ServiceReference1 {
     public interface IProductService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
-        bool CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description);
+        bool CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
-        System.Threading.Tasks.Task<bool> CreateProductAsync(string name, decimal price, int stock, int minStock, int maxStock, string description);
+        System.Threading.Tasks.Task<bool> CreateProductAsync(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
         Client.ServiceLayer.ServiceReference1.Product FindProduct(int ID);
@@ -309,12 +341,12 @@ namespace Client.ServiceLayer.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public bool CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description) {
-            return base.Channel.CreateProduct(name, price, stock, minStock, maxStock, description);
+        public bool CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
+            return base.Channel.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
         }
         
-        public System.Threading.Tasks.Task<bool> CreateProductAsync(string name, decimal price, int stock, int minStock, int maxStock, string description) {
-            return base.Channel.CreateProductAsync(name, price, stock, minStock, maxStock, description);
+        public System.Threading.Tasks.Task<bool> CreateProductAsync(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
+            return base.Channel.CreateProductAsync(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
         }
         
         public Client.ServiceLayer.ServiceReference1.Product FindProduct(int ID) {

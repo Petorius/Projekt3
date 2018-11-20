@@ -22,6 +22,8 @@ namespace DesktopClient {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+        public string ImageURL { get; set; }
+        public string ImageName { get; set; }
         private ProductController productController;
         public MainWindow() {
             InitializeComponent();
@@ -36,7 +38,7 @@ namespace DesktopClient {
                 int minStock = Int32.Parse(minStockTextBox.Text);
                 int maxStock = Int32.Parse(maxStockTextBox.Text);
                 string description = descriptionTextBox.Text;
-                productController.CreateProduct(name, price, stock, minStock, maxStock, description);
+                productController.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
                 addProductText.Content = "Produktet blev tilføjet";
                 clearFields();
             }
@@ -139,5 +141,13 @@ namespace DesktopClient {
             _inputIDtextBox.IsEnabled = true;
             ProductClearUpdateFields();
         }
+
+        private void AddImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddImagesWindow addImagesWindow = new AddImagesWindow();
+            addImagesWindow.Show();
+        }
+
+
     }
 }

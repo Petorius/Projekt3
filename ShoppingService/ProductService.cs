@@ -15,8 +15,10 @@ namespace Server.ServiceLayer {
         public ProductService() {
             productDb = new ProductDB();
         }
-        public bool CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description) {
+        public bool CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
             Product p = new Product(name, price, stock, minStock, maxStock, description);
+            p.TempImageURL = ImageURL;
+            p.TempImageName = ImageName;
             return productDb.Create(p);
         }
 

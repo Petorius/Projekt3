@@ -19,6 +19,7 @@ namespace Server.DataAccessLayer {
         }
 
         public bool Create(Product Entity, bool test = false, bool testResult = false) {
+            int insertedID = -1;
             bool isCompleted = true;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
@@ -32,7 +33,15 @@ namespace Server.DataAccessLayer {
                         cmd.Parameters.AddWithValue("MinStock", Entity.MinStock);
                         cmd.Parameters.AddWithValue("MaxStock", Entity.MaxStock);
                         cmd.Parameters.AddWithValue("Description", Entity.Description);
+                        insertedID = (int) cmd.ExecuteScalar();
+
+                        cmd.CommandText = "Insert into Image(ImageSource, Name, ProductID) values" +
+                            " (@ImageSource, @Name, @ProductID)";
+                        cmd.Parameters.AddWithValue("ImageSource", Entity.TempImageURL);
+                        cmd.Parameters.AddWithValue("Name", Entity.TempImageName);
+                        cmd.Parameters.AddWithValue("ProductID", insertedID);
                         cmd.ExecuteNonQuery();
+
                     }
                     catch (SqlException) {
                         isCompleted = false;

@@ -142,6 +142,12 @@ namespace Client.ServiceLayer.OrderReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StockField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TempImageNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TempImageURLField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -265,6 +271,32 @@ namespace Client.ServiceLayer.OrderReference {
                 if ((this.StockField.Equals(value) != true)) {
                     this.StockField = value;
                     this.RaisePropertyChanged("Stock");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TempImageName {
+            get {
+                return this.TempImageNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TempImageNameField, value) != true)) {
+                    this.TempImageNameField = value;
+                    this.RaisePropertyChanged("TempImageName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TempImageURL {
+            get {
+                return this.TempImageURLField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TempImageURLField, value) != true)) {
+                    this.TempImageURLField = value;
+                    this.RaisePropertyChanged("TempImageURL");
                 }
             }
         }
