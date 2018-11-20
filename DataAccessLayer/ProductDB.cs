@@ -115,7 +115,7 @@ namespace Server.DataAccessLayer {
                     cmd.Parameters.Clear();
 
                     
-
+                    
                     cmd.CommandText = "Select ImageSource, Name from Image where Image.ProductID = @productID";
                     cmd.Parameters.AddWithValue("productID", p.ID);
                     SqlDataReader imageReader = cmd.ExecuteReader();

@@ -9,7 +9,7 @@ using DataAccessLayer.Interface;
 
 namespace Server.BusinessLogic {
     public class OrderLogic {
-        private ICRUD<Order> orderDB;
+        private OrderDB orderDB;
         private CustomerDB customerDB;
         private ICRUD<Product> productDB;
 
@@ -30,7 +30,7 @@ namespace Server.BusinessLogic {
                 o.Validation = true;
                 o.Orderlines = ol;
                 o.Total = TotalOrderPrice(ol);
-                orderDB.Create(o);
+                o.ID = orderDB.CreateReturnID(o);
             } else {
                 o.Validation = false;
             }
