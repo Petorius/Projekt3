@@ -22,14 +22,14 @@ namespace UnitTest {
             productDB = new ProductDB(connectionString);
         }
 
-        [TestMethod]
-        public void InsertProductTest() {
-            Product p = new Product("Tissot Classic", 4000, 10, 4, 20, "Tissot Classic er designet som det fedeste ur");
+        //[TestMethod]
+        //public void InsertProductTest() {
+        //    Product p = new Product("Tissot Classic", 4000, 10, 4, 20, "Tissot Classic er designet som det fedeste ur");
 
-            productDB.Create(p);
+        //    productDB.Create(p);
 
-            Assert.AreEqual(p.Name, FindHelperTest(1).Name);
-        }
+        //    Assert.AreEqual(p.Name, FindHelperTest(1).Name);
+        //}
 
         [TestMethod]
         public void FindProductTest() {
@@ -42,7 +42,7 @@ namespace UnitTest {
         [TestMethod]
         public void UpdateProductTestExpectedToFail() {
             Product p = productDB.Get(1);
-            p.Name = "Rune";
+            p.Name = "Tissot Prime";
             productDB.Update(p, true);
 
             p = productDB.Get(1);
@@ -53,13 +53,17 @@ namespace UnitTest {
         [TestMethod]
         public void UpdateProductTest() {
             Product p = productDB.Get(1);
-            p.Name = "Rune";
+            p.Name = "Tissot Prime";
 
             productDB.Update(p, true, true);
 
             p = productDB.Get(1);
 
-            Assert.AreEqual(p.Name, "Rune");
+            Assert.AreEqual(p.Name, "Tissot Prime");
+
+            Product p1 = productDB.Get(1);
+            p1.Name = "Tissot Classic";
+            productDB.Update(p1, true, true);
         }
 
         [TestMethod]
@@ -73,26 +77,26 @@ namespace UnitTest {
             Assert.IsNotNull(p);
         }
 
-        [TestMethod]
-        public void DeleteProductTest() {
-            Product p = new Product();
-            p.ID = 1;
-            productDB.Delete(p, true, true);
+        //[TestMethod]
+        //public void DeleteProductTest() {
+        //    Product p = new Product();
+        //    p.ID = 1;
+        //    productDB.Delete(p, true, true);
 
-            p = productDB.Get(1);
+        //    p = productDB.Get(1);
 
-            Assert.IsNull(p);
-        }
+        //    Assert.IsNull(p);
+        //}
 
         [ClassCleanup]
         public static void CleanUp() {
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
-                    cmd.CommandText = "Truncate table Product";
-                    cmd.ExecuteNonQuery();
-                }
-            }
+            //using (SqlConnection connection = new SqlConnection(connectionString)) {
+            //    connection.Open();
+            //    using (SqlCommand cmd = connection.CreateCommand()) {
+            //        cmd.CommandText = "Truncate table Product";
+            //        cmd.ExecuteNonQuery();
+            //    }
+
         }
 
         private Product FindHelperTest(int id) {
