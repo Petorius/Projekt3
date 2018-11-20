@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Client.ServiceLayer {
     public class OrderService : IOrderService {
-        public Order CrateOrder(string firstName, string lastName, string street, int zip, string city, string email, int number, IEnumerable<Orderline> ol) {
+        public Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email, int number, IEnumerable<Orderline> ol) {
             throw new NotImplementedException();
 
         }
