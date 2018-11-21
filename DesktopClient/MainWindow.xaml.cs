@@ -38,9 +38,15 @@ namespace DesktopClient {
                 int minStock = Int32.Parse(minStockTextBox.Text);
                 int maxStock = Int32.Parse(maxStockTextBox.Text);
                 string description = descriptionTextBox.Text;
-                productController.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
-                addProductText.Content = "Produktet blev tilføjet";
-                clearFields();
+                bool res = productController.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
+                if(res) {
+                    addProductText.Content = "Produktet blev tilføjet";
+                    clearFields();
+                } else {
+                    addProductText.Content = "Der skete en fejl";
+                }
+                
+                
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
@@ -54,6 +60,7 @@ namespace DesktopClient {
         private void clearFields() {
             nameTextBox.Text = "";
             priceTextBox.Text = "";
+            stockTextBox.Text = "";
             minStockTextBox.Text = "";
             maxStockTextBox.Text = "";
             descriptionTextBox.Text = "";

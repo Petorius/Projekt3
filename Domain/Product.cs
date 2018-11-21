@@ -23,10 +23,6 @@ namespace Server.Domain {
         [DataMember]
         public string Description { get; set; }
         [DataMember]
-        public string TempImageName { get; set; }
-        [DataMember]
-        public string TempImageURL { get; set; }
-        [DataMember]
         public int Rating { get; set; }
         [DataMember]
         public List<Image> Images { get; set; }
@@ -38,7 +34,7 @@ namespace Server.Domain {
             MinStock = minStock;
             MaxStock = maxStock;
             Description = description;
-            
+            Images = new List<Image>();
         }
 
         public Product() {

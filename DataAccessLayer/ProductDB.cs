@@ -20,32 +20,34 @@ namespace Server.DataAccessLayer {
 
         public bool Create(Product Entity, bool test = false, bool testResult = false) {
             int insertedID = -1;
-            bool isCompleted = true;
+            bool isCompleted = false;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
-                    try {
-                        cmd.CommandText = "Insert into Product(Name, Price, Stock, MinStock, MaxStock, Description) values" +
-                                " (@Name, @Price, @Stock, @MinStock, @MaxStock, @Description)";
-                        cmd.Parameters.AddWithValue("Name", Entity.Name);
-                        cmd.Parameters.AddWithValue("Price", Entity.Price);
-                        cmd.Parameters.AddWithValue("Stock", Entity.Stock);
-                        cmd.Parameters.AddWithValue("MinStock", Entity.MinStock);
-                        cmd.Parameters.AddWithValue("MaxStock", Entity.MaxStock);
-                        cmd.Parameters.AddWithValue("Description", Entity.Description);
-                        insertedID = (int) cmd.ExecuteScalar();
 
+                    cmd.CommandText = "Insert into Product(Name, Price, Stock, MinStock, MaxStock, Description) OUTPUT INSERTED.ProductID values" +
+                            " (@Name, @Price, @Stock, @MinStock, @MaxStock, @Description)";
+                    cmd.Parameters.AddWithValue("Name", Entity.Name);
+                    cmd.Parameters.AddWithValue("Price", Entity.Price);
+                    cmd.Parameters.AddWithValue("Stock", Entity.Stock);
+                    cmd.Parameters.AddWithValue("MinStock", Entity.MinStock);
+                    cmd.Parameters.AddWithValue("MaxStock", Entity.MaxStock);
+                    cmd.Parameters.AddWithValue("Description", Entity.Description);
+                    insertedID = (int)cmd.ExecuteScalar();
+
+                    foreach (Image i in Entity.Images) {
                         cmd.CommandText = "Insert into Image(ImageSource, Name, ProductID) values" +
-                            " (@ImageSource, @Name, @ProductID)";
-                        cmd.Parameters.AddWithValue("ImageSource", Entity.TempImageURL);
-                        cmd.Parameters.AddWithValue("Name", Entity.TempImageName);
+                            " (@ImageSource, @ImageName, @ProductID)";
+                        cmd.Parameters.AddWithValue("ImageSource", i.ImageSource);
+                        cmd.Parameters.AddWithValue("ImageName", i.Name);
                         cmd.Parameters.AddWithValue("ProductID", insertedID);
                         cmd.ExecuteNonQuery();
+                    }
 
-                    }
-                    catch (SqlException) {
-                        isCompleted = false;
-                    }
+
+                }
+                if (insertedID > 0) {
+                    isCompleted = true;
                 }
             }
             return isCompleted;
@@ -123,8 +125,8 @@ namespace Server.DataAccessLayer {
                     reader.Close();
                     cmd.Parameters.Clear();
 
-                    
-                    
+
+
                     cmd.CommandText = "Select ImageSource, Name from Image where Image.ProductID = @productID";
                     cmd.Parameters.AddWithValue("productID", p.ID);
                     SqlDataReader imageReader = cmd.ExecuteReader();
@@ -206,7 +208,7 @@ namespace Server.DataAccessLayer {
                 connection.Open();
                 List<Product> products = new List<Product>();
                 using (SqlCommand cmd = connection.CreateCommand()) {
-                    
+
 
                     cmd.CommandText = "SELECT * from Product";
                     SqlDataReader reader = cmd.ExecuteReader();
