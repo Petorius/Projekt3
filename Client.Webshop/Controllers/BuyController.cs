@@ -23,7 +23,7 @@ namespace Client.Webshop.Controllers {
             bool flag = webApi.Get();
 
             if (flag) {
-                ViewBag.Message7 = "Payment was successful!";
+                ViewBag.Message7 = "Betalingen blev gennemført!";
                 Order o = new Order();
                 List<Orderline> cart = (List<Orderline>)Session["cart"];
                 if (cart != null) {
@@ -34,7 +34,7 @@ namespace Client.Webshop.Controllers {
             }
             else {
                 
-                ViewBag.Message7 = "Payment was unsuccessful!";
+                ViewBag.Message7 = "Der skete en fejl med betalingen. Prøv igen";
 
                 return View();
             }

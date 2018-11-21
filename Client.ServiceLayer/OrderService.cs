@@ -62,6 +62,8 @@ namespace Client.ServiceLayer {
             Invoice i = new Invoice();
             Order o = new Order(c, i);
             o.Orderlines = ol;
+            o.ID = order.ID;
+            o.Total = order.Total;
             return o;
         }
            
