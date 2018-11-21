@@ -58,6 +58,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -152,6 +153,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BuyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductViewController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
@@ -165,6 +167,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\login.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -206,6 +209,7 @@
     <Content Include="Views\ProductView\Index.cshtml" />
     <Content Include="Views\Buy\Information.cshtml" />
     <Content Include="Views\Buy\Confirmation.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -232,6 +236,10 @@
     <ProjectReference Include="..\Client.Domain\Client.Domain.csproj">
       <Project>{4582b80e-a3be-4348-8181-9fcddc5e04c9}</Project>
       <Name>Client.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaymentWebAPI\PaymentWebAPI.csproj">
+      <Project>{B858E6BE-CB7F-4805-BF14-6F7060689820}</Project>
+      <Name>PaymentWebAPI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
