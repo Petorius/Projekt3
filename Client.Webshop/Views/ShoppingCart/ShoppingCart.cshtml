@@ -6,59 +6,61 @@
 
 <h2>Kurv</h2>
 
-@if(Model != null) {
-        foreach (var item in Model) {
-<div>
-    <p>
-        <a href="@Url.Action(" Index", "ProductView" , new { id=item.Product.ID })">
-            <img border="0" alt="W3Schools" src="@item.Product.Images[0].ImageSource" width="100" height="100">
-        </a>
-    </p>
-    <p>
-        <b>@item.Product.Name</b>
-    </p>
-    <p>
-        <i>@item.SubTotal DKK </i>
-    </p>
-    <p>
-        <b>Quantity: <span id="qty" name="quantity">@item.Quantity</span> </b>
-
-
-    </p>
-
-    <div class="container">
-
-
-
-
-        @using (Html.BeginForm("AddProduct", "ProductView", FormMethod.Post, null)) {
-            @Html.ValidationSummary(true)
-            @Html.Hidden("url", this.Request.RawUrl)
-            <form action="/ProductView/AddProduct/" method="post">
-
-                <a href="@Url.Action("UpdateOrderlineQuantity", "ShoppingCart", new { id = item.Product.ID }) ">
-                    <span class="glyphicon glyphicon-minus"></span>
+@if (Model != null) {
+    foreach (var item in Model) {
+        <div>
+            <p>
+                <a href="@Url.Action(" Index", "ProductView" , new { id=item.Product.ID })">
+                    <img border="0" alt="W3Schools" src="@item.Product.Images[0].ImageSource" width="100" height="100">
                 </a>
+            </p>
+            <p>
+                <b>@item.Product.Name</b>
+            </p>
+            <p>
+                <i>@item.SubTotal DKK </i>
+            </p>
+            <p>
+                <b>Quantity: <span id="qty" name="quantity">@item.Quantity</span> </b>
 
-                <input id="id" name="id" value="@item.Product.ID" hidden />
-                <input id="quantity" name="quantity" type="number" value="1" hidden />
-                <button class="glyphicon glyphicon-plus" style="background-color: Transparent; background-repeat: no-repeat; border: none; cursor: pointer;
+
+            </p>
+
+            <div class="container">
+
+
+
+
+                @using (Html.BeginForm("AddProduct", "ProductView", FormMethod.Post, null)) {
+                    @Html.ValidationSummary(true)
+                    @Html.Hidden("url", this.Request.RawUrl)
+                    <form action="/ProductView/AddProduct/" method="post">
+
+                        <a href="@Url.Action("UpdateOrderlineQuantity", "ShoppingCart", new { id = item.Product.ID }) ">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </a>
+
+                        <input id="id" name="id" value="@item.Product.ID" hidden />
+                        <input id="quantity" name="quantity" type="number" value="1" hidden />
+                        <button class="glyphicon glyphicon-plus" style="background-color: Transparent; background-repeat: no-repeat; border: none; cursor: pointer;
                         overflow: hidden; outline: none; color: steelblue" type="submit"></button>
 
-                <a href="@Url.Action("DeleteOrderline", "ShoppingCart", new { id = item.Product.ID }) ">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </a>
+                        <a href="@Url.Action("DeleteOrderline", "ShoppingCart", new { id = item.Product.ID }) ">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
 
-            </form>
-        }
+                    </form>
+                }
 
+            </div>
+        </div>
+    }
+
+    <div>
+        <form method="post" action="/Buy/Information">
+            <button type="submit">KØB</button>
+        </form>
     </div>
-</div>
-}
 
 }
-<div>
-    <form method="post" action="/Buy/Information">
-        <button type="submit">KØB</button>
-    </form>
-</div>
+
