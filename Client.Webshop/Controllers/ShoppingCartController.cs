@@ -15,7 +15,6 @@ namespace Client.Webshop.Controllers {
         public ActionResult ShoppingCart() {
             ViewBag.Message = "Shopping Cart page";
 
-            
             IEnumerable<Orderline> orderlines = Session["cart"] as IEnumerable<Orderline>;
 
             return View(orderlines);
@@ -60,11 +59,8 @@ namespace Client.Webshop.Controllers {
 
                     }
                 }
-
                 Session["cart"] = orderlines;
             }
-
-
             return RedirectToAction("ShoppingCart");
         }
     }

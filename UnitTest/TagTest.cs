@@ -20,7 +20,7 @@ namespace UnitTest {
         public void SetUp() {
             tagDB = new TagDB(connectionString);
         }
-        
+
         [TestMethod]
         public void GetTagTest() {
             Tag t = new Tag();
@@ -37,7 +37,7 @@ namespace UnitTest {
             Assert.IsNull(t.Name);
         }
 
-        [TestMethod] 
+        [TestMethod]
         public void GetProductsInTag() {
             Tag t = tagDB.Get("Sort");
 

@@ -19,12 +19,13 @@ namespace Server.Domain {
         [DataMember]
         public Invoice Invoice { get; set; }
         [DataMember]
-        public IEnumerable<OrderLine> Orderlines { get; set; }
+        public List<OrderLine> Orderlines { get; set; }
 
         public Order(Customer customer, Invoice invoice) {
             Validation = false;
             Customer = customer;
             Invoice = invoice;
+            Orderlines = new List<OrderLine>();
         }
     }
 

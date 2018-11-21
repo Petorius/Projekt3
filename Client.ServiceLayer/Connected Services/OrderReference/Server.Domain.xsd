@@ -26,8 +26,6 @@
       <xs:element minOccurs="0" name="Price" type="xs:decimal" />
       <xs:element minOccurs="0" name="Rating" type="xs:int" />
       <xs:element minOccurs="0" name="Stock" type="xs:int" />
-      <xs:element minOccurs="0" name="TempImageName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TempImageURL" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Product" nillable="true" type="tns:Product" />

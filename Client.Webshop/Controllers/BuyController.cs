@@ -26,9 +26,13 @@ namespace Client.Webshop.Controllers {
             ViewBag.Message6 = "Nummer: " + number;
         
             List<Orderline> cart = (List<Orderline>)Session["cart"];
-            Session.Abandon();
-            Session.Clear();
-            oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
+            if (cart != null) {
+                oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
+                Session.Abandon();
+            } 
+
+
+            
             return View();
         }
     }
