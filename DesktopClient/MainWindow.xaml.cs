@@ -38,7 +38,10 @@ namespace DesktopClient {
                 int minStock = Int32.Parse(minStockTextBox.Text);
                 int maxStock = Int32.Parse(maxStockTextBox.Text);
                 string description = descriptionTextBox.Text;
-                bool res = productController.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
+                bool res = false;
+                if(ImageName != "" && ImageURL != "") {
+                    res = productController.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
+                }
                 if(res) {
                     addProductText.Content = "Produktet blev tilføjet";
                     clearFields();
