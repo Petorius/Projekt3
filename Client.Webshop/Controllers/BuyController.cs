@@ -23,21 +23,14 @@ namespace Client.Webshop.Controllers {
             bool flag = webApi.Get();
 
             if (flag) {
-                ViewBag.Message = "Fornavn: " + firstName;
-                ViewBag.Message1 = "Efternavn: " + lastName;
-                ViewBag.Message2 = "Adresse: " + street;
-                ViewBag.Message3 = "Postnummer: " + zip;
-                ViewBag.Message4 = "By: " + city;
-                ViewBag.Message5 = "Email: " + email;
-                ViewBag.Message6 = "Nummer: " + number;
-
                 ViewBag.Message7 = "Payment was successful!";
-
+                Order o = new Order();
                 List<Orderline> cart = (List<Orderline>)Session["cart"];
-                Session.Abandon();
-                Session.Clear();
-                oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
-                return View();
+                if (cart != null) {
+                    o = oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
+                    Session.Abandon();
+                }
+                return View(o);
             }
             else {
                 
@@ -46,26 +39,6 @@ namespace Client.Webshop.Controllers {
                 return View();
             }
             
-        }
-        public ActionResult Confirmation(string firstName, string lastName, string street,
-            int zip, string city, string email, int number) {
-            ViewBag.Message = "Fornavn: " + firstName;
-            ViewBag.Message1 = "Efternavn: " + lastName;
-            ViewBag.Message2 = "Adresse: " + street;
-            ViewBag.Message3 = "Postnummer: " + zip;
-            ViewBag.Message4 = "By: " + city;
-            ViewBag.Message5 = "Email: " + email;
-            ViewBag.Message6 = "Nummer: " + number;
-        
-            List<Orderline> cart = (List<Orderline>)Session["cart"];
-            if (cart != null) {
-                oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
-                Session.Abandon();
-            } 
-
-
-            
-            return View();
         }
     }
 }

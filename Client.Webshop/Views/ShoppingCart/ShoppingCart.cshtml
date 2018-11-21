@@ -6,11 +6,11 @@
 
 <h2>Kurv</h2>
 
-@if (Model != null) {
-    foreach (var item in Model) {
+@if(Model != null) {
+        foreach (var item in Model) {
 <div>
     <p>
-        <a href="@Url.Action("Index", "ProductView", new { id = item.Product.ID })">
+        <a href="@Url.Action(" Index", "ProductView" , new { id=item.Product.ID })">
             <img border="0" alt="W3Schools" src="@item.Product.Images[0].ImageSource" width="100" height="100">
         </a>
     </p>
@@ -27,13 +27,13 @@
     </p>
 
     <div class="container">
-        
-     
-            
 
-            @using (Html.BeginForm("AddProduct", "ProductView", FormMethod.Post, null)) {
-                @Html.ValidationSummary(true)
-                @Html.Hidden("url", this.Request.RawUrl)
+
+
+
+        @using (Html.BeginForm("AddProduct", "ProductView", FormMethod.Post, null)) {
+            @Html.ValidationSummary(true)
+            @Html.Hidden("url", this.Request.RawUrl)
             <form action="/ProductView/AddProduct/" method="post">
 
                 <a href="@Url.Action("UpdateOrderlineQuantity", "ShoppingCart", new { id = item.Product.ID }) ">
@@ -50,12 +50,12 @@
                 </a>
 
             </form>
-            }
-     
+        }
+
     </div>
 </div>
-    }
-    
+}
+
 }
 <div>
     <form method="post" action="/Buy/Information">
