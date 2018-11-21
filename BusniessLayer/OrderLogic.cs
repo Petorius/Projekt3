@@ -19,19 +19,19 @@ namespace Server.BusinessLogic {
             productDB = new ProductDB();
         }
         public Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email,
-            int number, IEnumerable<OrderLine> ol) {
+            int number, List<OrderLine> ol) {
             
             Customer c = HandleCustomer(firstName, lastName, street, zip, city, email, number);
             Invoice i = new Invoice();
 
             Order o = new Order(c, i);
 
-            if(ValidateOrderLinePrices(ol)) {
+            if (ValidateOrderLinePrices(ol)) {
                 o.Validation = true;
                 o.Orderlines = ol;
                 o.Total = TotalOrderPrice(ol);
                 o.ID = orderDB.CreateReturnID(o);
-            } else {
+        } else {
                 o.Validation = false;
             }
             return o;
@@ -48,7 +48,7 @@ namespace Server.BusinessLogic {
             c.Email = email;
             c.Phone = number;
             if (c.ID < 1) {
-                customerDB.Create(c);
+                c.ID = customerDB.CreateReturnedID(c);
             } else {
                 customerDB.Update(c);
             }

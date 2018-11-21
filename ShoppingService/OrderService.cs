@@ -21,7 +21,7 @@ namespace Server.ServiceLayer {
         }
 
         public Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email,
-            int number, IEnumerable<OrderLine> ol) {
+            int number, List<OrderLine> ol) {
             return orderLogic.CreateOrder(firstName, lastName, street, zip, city, email,
             number, ol);
         }

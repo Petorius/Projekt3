@@ -25,7 +25,7 @@ namespace Server.Domain {
         [DataMember]
         public string City { get; set; }
 
-        public Customer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city, string country) {
+        public Customer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
             FirstName = firstName;
             LastName = lastName;
             Phone = phone;

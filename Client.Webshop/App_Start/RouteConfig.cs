@@ -25,7 +25,7 @@ namespace Client.Webshop {
 
             routes.MapRoute(
                 name: "Confirmation",
-                url: "Confirmation/",
+                url: "Confirmation",
                 defaults: new { controller = "Buy", action = "Confirmation", id = UrlParameter.Optional }
                 );
 

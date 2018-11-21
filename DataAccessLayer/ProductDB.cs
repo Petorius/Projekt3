@@ -42,6 +42,7 @@ namespace Server.DataAccessLayer {
                         cmd.Parameters.AddWithValue("ImageName", i.Name);
                         cmd.Parameters.AddWithValue("ProductID", insertedID);
                         cmd.ExecuteNonQuery();
+                        cmd.Parameters.Clear();
                     }
 
 

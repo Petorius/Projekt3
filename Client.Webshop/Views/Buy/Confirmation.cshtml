@@ -1,14 +1,37 @@
-﻿@{
+﻿@model Client.Domain.Order
+@{
     ViewBag.Title = "Confirmation";
 }
 
-<h2>@ViewBag.Message</h2>
-<h2>@ViewBag.Message1</h2>
-<h2>@ViewBag.Message2</h2>
-<h2>@ViewBag.Message3</h2>
-<h2>@ViewBag.Message4</h2>
-<h2>@ViewBag.Message5</h2>
-<h2>@ViewBag.Message6</h2>
+
 <h2>@ViewBag.Message7</h2>
+<h2> Tak for dit køb </h2>
+<div id="confirmationOuterDiv">
+    <div >
+
+    </div>
+    <div>
+
+    </div>
+    <div>
+            @foreach (var item in Model.Orderlines) {
+                <p>
+                    <a href="@Url.Action("Index", "ProductView", new { id = item.Product.ID })">
+                        <img border="0" alt="W3Schools" src="@item.Product.Images[0].ImageSource" width="100" height="100">
+                    </a>
+                </p>
+                <p>
+                    <b>@item.Product.Name</b>
+                </p>
+                <p>
+                    <i>@item.SubTotal DKK </i>
+                </p>
+                <p>
+                    <b>Quantity: <span id="qty" name="quantity">@item.Quantity</span> </b>
+                </p>
+            }
+        
+        </div>
+</div>
 
 
