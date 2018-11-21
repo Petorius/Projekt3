@@ -139,9 +139,41 @@ div.formRow {
 }
 
 #confirmationOuterDiv {
-    background-color: red;
-    margin: 50px, 90px, 20px, 90px;
-    height: 700px;
-    width: 700px;
+    border: 1px solid black;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    height: auto;
+    width: 1100px;
+    align-content: center;
 }
 
+.centerText {
+    text-align: center;
+}
+
+#orderCustomerInfo {
+    float: left;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 0.5px solid black;
+    width: 549px;
+    height: 180px;
+}
+
+#orderInfo {
+    float: right;
+    border-left: 0.5px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    width: 549px;
+    height: 180px;
+}
+
+#orderOrderlines {
+    border: 1px solid black;
+    align-content: center;
+    text-align: center;
+}
