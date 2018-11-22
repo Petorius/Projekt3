@@ -11,8 +11,6 @@ namespace Client.Webshop.Controllers {
         ProductController pc = new ProductController();
         OrderController oc = new OrderController();
 
-
-
         public ActionResult Index(int id) {
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;

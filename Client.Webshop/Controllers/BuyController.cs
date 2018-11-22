@@ -24,16 +24,11 @@ namespace Client.Webshop.Controllers {
                         orderlines.Remove(orderLine);
 
                         oc.DeleteOrderLine(orderLine.Product.ID, orderLine.SubTotal, orderLine.Quantity);
-
                     }
-
-
-
                 }
                 Session["cart"] = orderlines;
             }
             return View();
-
         }
 
         [HttpPost]

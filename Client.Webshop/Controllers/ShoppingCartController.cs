@@ -13,7 +13,8 @@ namespace Client.Webshop.Controllers {
 
         // GET: ShoppingCart
         public ActionResult ShoppingCart() {
-                        long timeNow = DateTime.Now.Ticks;
+
+            long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
             if (orderlines != null)
             {
@@ -24,16 +25,13 @@ namespace Client.Webshop.Controllers {
                         orderlines.Remove(orderLine);
 
                         oc.DeleteOrderLine(orderLine.Product.ID, orderLine.SubTotal, orderLine.Quantity);
-
                     }
                 }
                 Session["cart"] = orderlines;
-
             }
 
             ViewBag.Message = "Shopping Cart page";
 
-            
             IEnumerable<Orderline> ViewOrderlines = Session["cart"] as IEnumerable<Orderline>;
 
             return View(ViewOrderlines);

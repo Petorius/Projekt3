@@ -11,11 +11,9 @@ namespace Client.Webshop.Controllers
     public class SearchController : Controller
     {
 
-
         //ProductController pc = new ProductController();
         TagController tc = new TagController();
         OrderController orderController = new OrderController();
-
 
         [HttpPost]
         public ActionResult Search(string searchString)

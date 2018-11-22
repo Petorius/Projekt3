@@ -30,12 +30,12 @@ namespace Client.Webshop.Controllers
 
                         orderController.DeleteOrderLine(orderLine.Product.ID, orderLine.SubTotal, orderLine.Quantity);
 
-                    }
-                    products = pc.GetAllProducts();
+                    }   
                 }
                 Session["cart"] = orderlines;
-
             }
+
+            products = pc.GetAllProducts();
 
             return View(products);
         }
