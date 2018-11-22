@@ -66,16 +66,16 @@ namespace UnitTest {
             productDB.Update(p1, true, true);
         }
 
-        [TestMethod]
-        public void DeleteProductTestExpectedToFail() {
-            Product p = new Product();
-            p.ID = 1;
-            productDB.Delete(p, true);
+        //[TestMethod]
+        //public void DeleteProductTestExpectedToFail() {
+        //    Product p = new Product();
+        //    p.ID = 1;
+        //    productDB.Delete(p, true);
 
-            p = productDB.Get(1);
+        //    p = productDB.Get(1);
 
-            Assert.IsNotNull(p);
-        }
+        //    Assert.IsNotNull(p);
+        //}
 
         //[TestMethod]
         //public void DeleteProductTest() {

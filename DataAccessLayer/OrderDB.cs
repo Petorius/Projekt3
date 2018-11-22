@@ -26,26 +26,26 @@ namespace Server.DataAccessLayer {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
-                    
-                    
-                        cmd.CommandText = "Insert into [dbo].[Order](total, customerID) OUTPUT INSERTED.OrderID values (@Total, @CustomerID)";
-                        cmd.Parameters.AddWithValue("Total", Entity.Total);
-                        cmd.Parameters.AddWithValue("CustomerID", Entity.Customer.ID);
-                        insertedID = (int)cmd.ExecuteScalar();
 
-                        foreach (OrderLine ol in Entity.Orderlines) {
-                            cmd.CommandText = "INSERT INTO Orderline (Quantity, SubTotal, OrderID, ProductID) Values " +
-                                                        "(@Quantity, @SubTotal, @OrderID, @ProductID)";
-                            cmd.Parameters.AddWithValue("Quantity", ol.Quantity);
-                            cmd.Parameters.AddWithValue("SubTotal", ol.SubTotal);
-                            cmd.Parameters.AddWithValue("OrderID", insertedID);
-                            cmd.Parameters.AddWithValue("ProductID", ol.Product.ID);
-                            cmd.ExecuteNonQuery();
-                            cmd.Parameters.Clear();
-                        }
-                    
+
+                    cmd.CommandText = "Insert into [dbo].[Order](total, customerID) OUTPUT INSERTED.OrderID values (@Total, @CustomerID)";
+                    cmd.Parameters.AddWithValue("Total", Entity.Total);
+                    cmd.Parameters.AddWithValue("CustomerID", Entity.Customer.ID);
+                    insertedID = (int)cmd.ExecuteScalar();
+
+                    foreach (OrderLine ol in Entity.Orderlines) {
+                        cmd.CommandText = "INSERT INTO Orderline (Quantity, SubTotal, OrderID, ProductID) Values " +
+                                                    "(@Quantity, @SubTotal, @OrderID, @ProductID)";
+                        cmd.Parameters.AddWithValue("Quantity", ol.Quantity);
+                        cmd.Parameters.AddWithValue("SubTotal", ol.SubTotal);
+                        cmd.Parameters.AddWithValue("OrderID", insertedID);
+                        cmd.Parameters.AddWithValue("ProductID", ol.Product.ID);
+                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.Clear();
+                    }
+
                     //catch (SqlException) {
-                        
+
                     //}
                 }
             }

@@ -17,7 +17,8 @@ namespace Client.Webshop.Controllers {
 
         [HttpPost]
         public ActionResult Confirmation(string firstName, string lastName, string street, int zip, string city, string email, int number) {
-
+            // Skal kalde på mail og se om den mail tilhører en person som har et userID.
+            // Hvis den tilhører en user, får han en fejl om han den mail ikke kan bruges.
             var webApi = new ValuesController();
 
             bool flag = webApi.Get();
@@ -26,11 +27,16 @@ namespace Client.Webshop.Controllers {
                 ViewBag.Message7 = "Betalingen blev gennemført!";
                 Order o = new Order();
                 List<Orderline> cart = (List<Orderline>)Session["cart"];
-                if (cart != null) {
                     o = oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
-                    Session.Abandon();
+                    if(o.Validation) {
+                        Session.Abandon();
+                        return View(o); 
                 }
-                return View(o);
+                    else {
+                        Session.Abandon();
+                        return Redirect("https://media.giphy.com/media/5ftsmLIqktHQA/giphy.gif");       
+                }
+                
             }
             else {
                 

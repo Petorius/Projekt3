@@ -11,6 +11,7 @@ namespace Server.DataAccessLayer {
     public class OrderLineDB : ICRUD<OrderLine> {
         private string connectionString;
 
+        // Database test constructor. Only used for unit testing.
         public OrderLineDB(string connectionString) {
             this.connectionString = connectionString;
         }

@@ -5,23 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 using Server.Domain;
 using Server.DataAccessLayer;
-using DataAccessLayer.Interface;
 
 namespace Server.BusinessLogic {
     public class OrderLogic {
         private OrderDB orderDB;
-        private CustomerDB customerDB;
+        private CustomerLogic cl;
         private ICRUD<Product> productDB;
 
         public OrderLogic() {
             orderDB = new OrderDB();
-            customerDB = new CustomerDB();
+            cl = new CustomerLogic();
             productDB = new ProductDB();
+        }
+
+        // Database test constructor. Only used for unit testing.
+        public OrderLogic(string connectionString) {
+            orderDB = new OrderDB(connectionString);
+            cl = new CustomerLogic(connectionString);
+            productDB = new ProductDB(connectionString);
+
         }
         public Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email,
             int number, List<OrderLine> ol) {
             
-            Customer c = HandleCustomer(firstName, lastName, street, zip, city, email, number);
+            Customer c = cl.HandleCustomer(firstName, lastName, street, zip, city, email, number);
             Invoice i = new Invoice();
 
             Order o = new Order(c, i);
@@ -35,24 +42,6 @@ namespace Server.BusinessLogic {
                 o.Validation = false;
             }
             return o;
-        }
-
-        private Customer HandleCustomer(string firstName, string lastName, string street, int zip, string city, string email,
-            int number) {
-            Customer c = customerDB.GetByMail(email);
-            c.FirstName = firstName;
-            c.LastName = lastName;
-            c.Address = street;
-            c.ZipCode = zip;
-            c.City = city;
-            c.Email = email;
-            c.Phone = number;
-            if (c.ID < 1) {
-                c.ID = customerDB.CreateReturnedID(c);
-            } else {
-                customerDB.Update(c);
-            }
-            return c;
         }
 
         private bool ValidateOrderLinePrices(IEnumerable<OrderLine> ol) {

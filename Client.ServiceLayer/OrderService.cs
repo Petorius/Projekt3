@@ -64,6 +64,7 @@ namespace Client.ServiceLayer {
             o.Orderlines = ol;
             o.ID = order.ID;
             o.Total = order.Total;
+            o.Validation = order.Validation;
             return o;
         }
            
