@@ -11,13 +11,31 @@ namespace Client.Webshop.Controllers
     public class HomeController : Controller
     {
         ProductController pc = new ProductController();
+        OrderController orderController = new OrderController();
+
 
         IEnumerable<Product> products = new List<Product>();
 
         public ActionResult Index()
         {
-            
-            products = pc.GetAllProducts();
+            long timeNow = DateTime.Now.Ticks;
+            List<Orderline> orderlines = Session["cart"] as List<Orderline>;
+            if (orderlines != null)
+            {
+                foreach (Orderline orderLine in orderlines.ToList<Orderline>())
+                {
+                    if (orderLine.TimeStamp < timeNow)
+                    {
+                        orderlines.Remove(orderLine);
+
+                        orderController.DeleteOrderLine(orderLine.Product.ID, orderLine.SubTotal, orderLine.Quantity);
+
+                    }
+                    products = pc.GetAllProducts();
+                }
+                Session["cart"] = orderlines;
+
+            }
 
             return View(products);
         }
