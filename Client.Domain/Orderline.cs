@@ -16,7 +16,7 @@ namespace Client.Domain {
             this.Quantity = quantity;
             this.SubTotal = subTotal;
             this.Product = p;
-            TimeStamp = DateTime.Now.AddMinutes(1).Ticks;
+            TimeStamp = DateTime.Now.AddMinutes(60).Ticks;
         }
     }
 }
