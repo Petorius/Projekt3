@@ -1,16 +1,59 @@
-﻿@{
+﻿@model Client.Domain.Order
+@{
     ViewBag.Title = "Confirmation";
 }
 
-<h2>@ViewBag.Message</h2>
-<h2>@ViewBag.Message1</h2>
-<h2>@ViewBag.Message2</h2>
-<h2>@ViewBag.Message3</h2>
-<h2>@ViewBag.Message4</h2>
-<h2>@ViewBag.Message5</h2>
-<h2>@ViewBag.Message6</h2>
 
-<form action="" method="">
-    <button type="submit"></button>
-</form>
+<h2 class="centerText">@ViewBag.Message7</h2>
+@if (Model != null) {
+<h2 class="centerText">Tak for dit køb @Model.Customer.FirstName, din pakke er på vej!</h2>
+<h2 class="centerText">Ordrenummer #@Model.ID</h2>
+<div id="confirmationOuterDiv">
+    <div id="orderCustomerInfo">
+        <h3 class="centerText">Leveringsaddresse</h3>
+        <p class="centerText">
+            @Model.Customer.FirstName @Model.Customer.LastName
+            <br />
+            @Model.Customer.Address
+            <br />
+            @Model.Customer.ZipCode @Model.Customer.City, Danmark
+            <br />
+            @Model.Customer.Phone
+            <br />
+            @Model.Customer.Email
+        </p>
+    </div>
+    <div id="orderInfo">
+        <h3 class="centerText">Ordre info</h3>
+        <p class="centerText">
+            Total: @Model.Total DKK
+            <br />
+            Forventet levering 1 - 3 dage
+        </p>
+    </div>
+    
+    <div id="orderOrderlines">
+        <h2 class="centerText">Vi håber du bliver glad for dine varer</h2>
+        @foreach (var item in Model.Orderlines) {
+            <p>
+                <a href="@Url.Action("Index", "ProductView", new { id = item.Product.ID })">
+                    <img border="0" alt="W3Schools" src="@item.Product.Images[0].ImageSource" width="200" height="200">
+                </a>
+            </p>
+            <h3>
+                <b>@item.Product.Name</b>
+            </h3>
+            <h3>
+                <i>@item.SubTotal DKK </i>
+            </h3>
+            <h3>
+                <b>Quantity: <span id="qty" name="quantity">@item.Quantity</span> </b>
+            </h3>
+            <hr />
+        }
+
+    </div>
+</div>
+}
+
 

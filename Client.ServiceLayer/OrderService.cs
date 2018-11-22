@@ -6,13 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Client.ServiceLayer {
     public class OrderService : IOrderService {
 
         public Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email,
             int number, IEnumerable<Orderline> ol) {
             OrderReference.OrderServiceClient myProxy = new OrderReference.OrderServiceClient();
-            return null;
+            List<OrderReference.OrderLine> serviceOrderLines = GetServiceOrderLines(ol);
+
+            var order = myProxy.CreateOrder(firstName, lastName, street, zip, city, email, number, serviceOrderLines.ToArray());
+
+            return BuildOrderFromServices(order, ol.ToList());
         }
 
         public bool CreateOrderLine(int quantity, decimal subTotal, int ID) {
@@ -29,31 +34,38 @@ namespace Client.ServiceLayer {
             OrderReference.OrderServiceClient myProxy = new OrderReference.OrderServiceClient();
             return myProxy.UpdateOrderLine(ID, subTotal, quantity);
         }
-        //OrderReference.OrderLine[] serverOrderLines = GetServerOrderLine(ol);
+        
+        private List<OrderReference.OrderLine> GetServiceOrderLines(IEnumerable<Orderline> pols) {
+            OrderReference.OrderLine tempOl;
+            OrderReference.Product tempProduct;
+            List<OrderReference.OrderLine> serviceOrderLines = new List<OrderReference.OrderLine>();
 
-        //var order = myProxy.CreateOrder(firstName, lastName, street, zip, city, email,
-        //number, serverOrderLines);
+            foreach (Orderline pol in pols) {
+                tempProduct = new OrderReference.Product() {
+                    ID = pol.Product.ID,
+                    Stock = pol.Product.Stock,
+                    Price = pol.Product.Price
+                };
+                tempOl = new OrderReference.OrderLine() {
+                    Product = tempProduct,
+                    Quantity = pol.Quantity,
+                    SubTotal = pol.SubTotal 
+                };
+                serviceOrderLines.Add(tempOl);
+            }
+            return serviceOrderLines;
+        }
 
-        //Customer customer = new Customer(order.Customer.FirstName, order.Customer.LastName, order.Customer.Phone, 
-        //    order.Customer.Email, order.Customer.Address, order.Customer.ZipCode, order.Customer.City);
-        //Order order2 = new Order(customer, new Invoice());
-        //order2.Total = order.Total;
-        //order2.ID = order.ID;
-        //order2.Orderlines = ol;
-        //return order2;
-    
-
-        //private OrderReference.OrderLine[] GetServerOrderLine(IEnumerable<Orderline> ol) {
-        //    List<OrderReference.OrderLine[]> orderLines = new List<OrderReference.OrderLine[]>();
-
-        //    foreach (Orderline orderline in ol) {
-        //        OrderReference.Product product = new OrderReference.Product();
-        //        product.ID = orderline.Product.ID;
-        //        orderLines.Add(new OrderReference.OrderLine(orderline.Quantity, orderline.SubTotal, product));
-        //    }
-
-        //    return orderLines;
-        //}
+        private Order BuildOrderFromServices(OrderReference.Order order, List<Orderline> ol) {
+            Customer c = new Customer(order.Customer.FirstName, order.Customer.LastName, order.Customer.Phone,
+                order.Customer.Email, order.Customer.Address, order.Customer.ZipCode, order.Customer.City);
+            Invoice i = new Invoice();
+            Order o = new Order(c, i);
+            o.Orderlines = ol;
+            o.ID = order.ID;
+            o.Total = order.Total;
+            return o;
+        }
            
     }
 }

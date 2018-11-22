@@ -8,5 +8,6 @@ using Server.Domain;
 namespace DataAccessLayer.Interface {
     public interface ICustomer {
         Customer GetByMail(string email);
+        int CreateReturnedID(Customer Entity);
     }
 }

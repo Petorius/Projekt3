@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Client.Domain\Client.Domain.csproj">
-      <Project>{4582B80E-A3BE-4348-8181-9FCDDC5E04C9}</Project>
+      <Project>{4582b80e-a3be-4348-8181-9fcddc5e04c9}</Project>
       <Name>Client.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Client.ServiceLayer\Client.ServiceLayer.csproj">

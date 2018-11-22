@@ -27,25 +27,26 @@ namespace Server.DataAccessLayer {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
                     
-                    try {
-                        cmd.CommandText = "Insert into Order(total, customerID) values (@Total, @CustomerID)";
+                    
+                        cmd.CommandText = "Insert into [dbo].[Order](total, customerID) OUTPUT INSERTED.OrderID values (@Total, @CustomerID)";
                         cmd.Parameters.AddWithValue("Total", Entity.Total);
                         cmd.Parameters.AddWithValue("CustomerID", Entity.Customer.ID);
                         insertedID = (int)cmd.ExecuteScalar();
 
                         foreach (OrderLine ol in Entity.Orderlines) {
                             cmd.CommandText = "INSERT INTO Orderline (Quantity, SubTotal, OrderID, ProductID) Values " +
-                                                        "(@Quantity, @SubTotal, @OrderID, @ProductID";
+                                                        "(@Quantity, @SubTotal, @OrderID, @ProductID)";
                             cmd.Parameters.AddWithValue("Quantity", ol.Quantity);
                             cmd.Parameters.AddWithValue("SubTotal", ol.SubTotal);
-                            cmd.Parameters.AddWithValue("orderID", insertedID);
-                            cmd.Parameters.AddWithValue("productID", ol.Product.ID);
+                            cmd.Parameters.AddWithValue("OrderID", insertedID);
+                            cmd.Parameters.AddWithValue("ProductID", ol.Product.ID);
                             cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
                         }
-                    }
-                    catch (SqlException) {
+                    
+                    //catch (SqlException) {
                         
-                    }
+                    //}
                 }
             }
             return insertedID;

@@ -32,11 +32,11 @@ textarea {
 #ProductViewDetails {
     background-color: red;
     margin: auto;
-    margin-top:80px;
-    margin-bottom:120px;
-    height:550px;
+    margin-top: 80px;
+    margin-bottom: 120px;
+    height: 550px;
     width: 1100px;
-    align-content:center;
+    align-content: center;
 }
 
 #ProductViewDetailsInfo{
@@ -138,3 +138,42 @@ div.formRow {
     background-color: red;
 }
 
+#confirmationOuterDiv {
+    border: 1px solid black;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    height: auto;
+    width: 1100px;
+    align-content: center;
+}
+
+.centerText {
+    text-align: center;
+}
+
+#orderCustomerInfo {
+    float: left;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 0.5px solid black;
+    width: 549px;
+    height: 180px;
+}
+
+#orderInfo {
+    float: right;
+    border-left: 0.5px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    width: 549px;
+    height: 180px;
+}
+
+#orderOrderlines {
+    border: 1px solid black;
+    align-content: center;
+    text-align: center;
+}

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/Scripts/validateScripts.js")
 </head>
@@ -28,9 +29,15 @@
                     </li>
                     <li>
                         <div>
+
+                            <a href="@Url.Action("Index", "LogIn")">
+                                <span class="glyphicon glyphicon-user" style="font-size:35px; margin-left:100px; color: lightgray"></span>
+                            </a>
+
                             <a href="@Url.Action("ShoppingCart", "ShoppingCart")">
                                 <span class="glyphicon glyphicon-shopping-cart" style="font-size:35px; margin-left:100px; color: lightgray"></span>
                             </a>
+
                         </div>
                     </li>
                 </ul>

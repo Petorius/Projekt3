@@ -16,6 +16,10 @@ namespace Client.Domain {
             Customer = customer;
             Invoice = invoice;
         }
+
+        public Order() {
+
+        }
     }
 
 }

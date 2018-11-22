@@ -21,13 +21,13 @@ namespace Server.DataAccessLayer {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
         }
 
-        public bool Create(Customer Entity, bool test = false, bool testResult = false) {
-            bool isCompleted = true;
+        public int CreateReturnedID(Customer Entity) {
+            int res = -1;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
-                    try {
-                        cmd.CommandText = "Insert into Customer(FirstName, LastName, Phone, Email, Address, ZipCode, City) values" +
+                    //try {
+                        cmd.CommandText = "Insert into Customer(FirstName, LastName, Phone, Email, Address, ZipCode, City) OUTPUT INSERTED.CustomerID values" +
                                 " (@FirstName, @LastName, @Phone, @Email, @Address, @ZipCode, @City)";
                         cmd.Parameters.AddWithValue("FirstName", Entity.FirstName);
                         cmd.Parameters.AddWithValue("LastName", Entity.LastName);
@@ -36,14 +36,14 @@ namespace Server.DataAccessLayer {
                         cmd.Parameters.AddWithValue("Address", Entity.Address);
                         cmd.Parameters.AddWithValue("ZipCode", Entity.ZipCode);
                         cmd.Parameters.AddWithValue("City", Entity.City);
-                        cmd.ExecuteNonQuery();
+                        res = (int)cmd.ExecuteScalar();
                     }
-                    catch (SqlException) {
-                        isCompleted = false;
-                    }
-                }
+                    //catch (SqlException) {
+                    //    isCompleted = false;
+                    //}
+                
             }
-            return isCompleted;
+            return res;
         }
 
         public Customer Get(int id) {
@@ -65,7 +65,7 @@ namespace Server.DataAccessLayer {
                         using (SqlCommand cmd = connection.CreateCommand()) {
                             cmd.Transaction = trans;
                             cmd.CommandText = "SELECT rowID FROM customer WHERE customerID = @customerID";
-                            cmd.Parameters.AddWithValue("productID", Entity.ID);
+                            cmd.Parameters.AddWithValue("customerID", Entity.ID);
                             SqlDataReader reader = cmd.ExecuteReader();
 
                             while (reader.Read()) {
@@ -75,7 +75,7 @@ namespace Server.DataAccessLayer {
 
                             try {
                                 cmd.CommandText = "UPDATE Customer SET firstName = @firstName, lastname = @lastName, phone = @phone, " +
-                                    "email = @email, address = @address, zipCode = @zipCode, city = @city WHERE cusomterID = @customerID AND rowID = @rowId";
+                                    "email = @email, address = @address, zipCode = @zipCode, city = @city WHERE customerID = @customerID AND rowID = @rowId";
                                 cmd.Parameters.AddWithValue("firstName", Entity.FirstName);
                                 cmd.Parameters.AddWithValue("lastName", Entity.LastName);
                                 cmd.Parameters.AddWithValue("phone", Entity.Phone);
@@ -139,6 +139,10 @@ namespace Server.DataAccessLayer {
         }
 
         public bool Delete(Customer Entity, bool test = false, bool testResult = false) {
+            throw new NotImplementedException();
+        }
+
+        public bool Create(Customer Entity, bool test = false, bool testResult = false) {
             throw new NotImplementedException();
         }
     }
