@@ -13,11 +13,28 @@ namespace Client.Webshop.Controllers {
 
         // GET: ShoppingCart
         public ActionResult ShoppingCart() {
+
+            long timeNow = DateTime.Now.Ticks;
+            List<Orderline> orderlines = Session["cart"] as List<Orderline>;
+            if (orderlines != null)
+            {
+                foreach (Orderline orderLine in orderlines.ToList<Orderline>())
+                {
+                    if (orderLine.TimeStamp < timeNow)
+                    {
+                        orderlines.Remove(orderLine);
+
+                        oc.DeleteOrderLine(orderLine.Product.ID, orderLine.SubTotal, orderLine.Quantity);
+                    }
+                }
+                Session["cart"] = orderlines;
+            }
+
             ViewBag.Message = "Shopping Cart page";
 
-            IEnumerable<Orderline> orderlines = Session["cart"] as IEnumerable<Orderline>;
+            IEnumerable<Orderline> ViewOrderlines = Session["cart"] as IEnumerable<Orderline>;
 
-            return View(orderlines);
+            return View(ViewOrderlines);
         }
 
         public ActionResult UpdateOrderlineQuantity(int id) {
@@ -59,8 +76,11 @@ namespace Client.Webshop.Controllers {
 
                     }
                 }
+
                 Session["cart"] = orderlines;
             }
+
+
             return RedirectToAction("ShoppingCart");
         }
     }

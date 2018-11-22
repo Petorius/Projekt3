@@ -13,35 +13,40 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-
-
                 @Html.ActionLink("Lol-Shop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse; navbar-header; navbar-search">
                 <ul class="nav navbar-nav">
-                    <li>
+                    <li style="padding-left:260px">
                         @using (Html.BeginForm("Search", "Search", FormMethod.Post, new { novalidate = "novalidate" })) {
                             <div>
                                 @Html.TextBox("searchString")
-                                <input type='submit' value='Search' />
+                                @*<input type='submit' value='Search' />*@
+                                <button class="glyphicon glyphicon-search" style="font-size:21px; position:absolute; top: 0px;"></button>
                             </div>
                         }
                     </li>
-                    <li>
-                        <div>
-
-                            <a href="@Url.Action("Index", "LogIn")">
-                                <span class="glyphicon glyphicon-user" style="font-size:35px; margin-left:100px; color: lightgray"></span>
-                            </a>
-
-                            <a href="@Url.Action("ShoppingCart", "ShoppingCart")">
-                                <span class="glyphicon glyphicon-shopping-cart" style="font-size:35px; margin-left:100px; color: lightgray"></span>
-                            </a>
-
-                        </div>
-                    </li>
                 </ul>
+            </div>
 
+            <div class="navbar-header">
+                <li style="padding-left:252px"></li>
+            </div>
+
+            <div class="navbar-header">
+                <li>
+                    <div>
+
+                        <a href="@Url.Action("Index", "LogIn")">
+                            <span class="glyphicon glyphicon-user" style="font-size:35px; margin-left:15px; color: lightgray"></span>
+                        </a>
+
+                        <a href="@Url.Action("ShoppingCart", "ShoppingCart")">
+                            <span class="glyphicon glyphicon-shopping-cart" style="font-size:35px; margin-left:15px; color: lightgray"></span>
+                        </a>
+
+                    </div>
+                </li>
             </div>
         </div>
     </div>
