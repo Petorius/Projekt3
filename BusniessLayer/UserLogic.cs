@@ -39,8 +39,13 @@ namespace Server.BusinessLogic {
         }
 
         public bool ValidatePassword(string email, string password) {
+            bool res = false;
             User user = userDB.GetUser(email);
-            return account.ValidateUserLogin(user, password);
+            if(user.Salt != null && user.HashPassword != null) {
+                res = account.ValidateUserLogin(user, password);
+            }
+            return res;
+            
         }
     }
 }
