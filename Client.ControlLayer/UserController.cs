@@ -17,5 +17,9 @@ namespace Client.ControlLayer {
                                                 string city, string email, int number, string password) {
             return userService.CreateUserWithPassword(firstName, lastName, street, zip, city, email, number, password);
         }
+
+        public bool ValidatePassword(string email, string password) {
+            return userService.ValidatePassword(email, password);
+        }
     }
 }
