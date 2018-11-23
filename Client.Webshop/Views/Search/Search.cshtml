@@ -7,19 +7,21 @@
 <div class="jumbotron">
     <h1>Søg</h1>
 </div>
+<div class="container">
+    @foreach (var item in Model) {
 
-@foreach (var item in Model) {
-    <div>
-        <p>
-            <a href="@Url.Action("Index", "ProductView", new { id = item.ID })">
-                <img border="0" alt="W3Schools" src="@item.Images[0].ImageSource" width="100" height="100">
-            </a>
-        </p>
-        <p>
-            <b>@item.Name</b>
-        </p>
-        <p>
-            <i>@item.Price DKK</i>
-        </p>
-    </div>
-}
+        <div class="imageFloat">
+            <p>
+                <a href="@Url.Action("Index", "ProductView", new { id = item.ID })">
+                    <img border="0" alt="W3Schools" src="@item.Images[0].ImageSource" width="250" height="250">
+                </a>
+            </p>
+            <p>
+                <b>@item.Name</b>
+            </p>
+            <p>
+                <i>@item.Price DKK</i>
+            </p>
+        </div>
+    }
+</div>

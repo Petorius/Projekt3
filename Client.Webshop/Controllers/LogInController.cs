@@ -12,6 +12,7 @@ namespace Client.Webshop.Controllers
     {
 
         OrderController orderController = new OrderController();
+        UserController uc = new UserController();
 
         // GET: LogIn
         public ActionResult Index()
@@ -32,6 +33,17 @@ namespace Client.Webshop.Controllers
             }
 
             return View();
+        }
+
+        public ActionResult Login(string email, string password) {
+
+            bool result = uc.ValidatePassword(email, password);
+
+            if (result) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

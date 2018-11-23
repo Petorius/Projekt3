@@ -13,7 +13,7 @@
 
     <h1>Tilmeld dig</h1>
 
-    <form name="deliveryAddr" method="post" action="@Url.Action("Signup", "Signup")">
+    <form name="Tilmeld" method="post" action="@Url.Action("Signup", "Signup")">
         <hr>
         <label id="icon" for="name"><i class="icon-user"></i></label>
         <input autocomplete="off" name="firstName" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" placeholder="Fornavn" required oninvalid="this.setCustomValidity('Indtast et fornavn med 2-20 bogstaver')" oninput="setCustomValidity('')" />
