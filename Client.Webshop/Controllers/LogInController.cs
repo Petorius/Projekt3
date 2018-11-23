@@ -32,6 +32,8 @@ namespace Client.Webshop.Controllers
                 Session["cart"] = orderlines;
             }
 
+            ViewBag.Visibility = "hidden";
+
             return View();
         }
 
@@ -42,6 +44,8 @@ namespace Client.Webshop.Controllers
             if (result) {
                 return RedirectToAction("Index", "Home");
             }
+
+            ViewBag.Visibility = "visible";
 
             return RedirectToAction("Index");
         }
