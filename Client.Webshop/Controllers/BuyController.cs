@@ -11,16 +11,12 @@ namespace Client.Webshop.Controllers {
     public class BuyController : Controller {
         OrderController oc = new OrderController();
         // GET: Buy
-        public ActionResult Information()
-        {
+        public ActionResult Information() {
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
-            if (orderlines != null)
-            {
-                foreach (Orderline orderLine in orderlines.ToList<Orderline>())
-                {
-                    if (orderLine.TimeStamp < timeNow)
-                    {
+            if (orderlines != null) {
+                foreach (Orderline orderLine in orderlines.ToList<Orderline>()) {
+                    if (orderLine.TimeStamp < timeNow) {
                         orderlines.Remove(orderLine);
 
                         oc.DeleteOrderLine(orderLine.Product.ID, orderLine.SubTotal, orderLine.Quantity);
@@ -43,24 +39,24 @@ namespace Client.Webshop.Controllers {
                 ViewBag.Message7 = "Betalingen blev gennemført!";
                 Order o = new Order();
                 List<Orderline> cart = (List<Orderline>)Session["cart"];
-                    o = oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
-                    if(o.Validation) {
-                        Session.Abandon();
-                        return View(o); 
+                o = oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
+                if (o.Validation) {
+                    Session.Abandon();
+                    return View(o);
                 }
-                    else {
-                        Session.Abandon();
-                        return Redirect("https://media.giphy.com/media/5ftsmLIqktHQA/giphy.gif");       
+                else {
+                    Session.Abandon();
+                    return Redirect("https://media.giphy.com/media/5ftsmLIqktHQA/giphy.gif");
                 }
-                
+
             }
             else {
-                
+
                 ViewBag.Message7 = "Der skete en fejl med betalingen. Prøv igen";
 
                 return View();
             }
-            
+
         }
     }
 }

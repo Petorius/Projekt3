@@ -6,17 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Client.Webshop.Controllers
-{
-    public class LoginController : Controller
-    {
+namespace Client.Webshop.Controllers {
+    public class LoginController : Controller {
 
         OrderController orderController = new OrderController();
         UserController uc = new UserController();
 
         // GET: LogIn
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
 
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;

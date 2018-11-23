@@ -14,12 +14,9 @@ namespace Client.Webshop.Controllers {
         public ActionResult Index(int id) {
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
-            if (orderlines != null)
-            {
-                foreach (Orderline orderLine in orderlines.ToList<Orderline>())
-                {
-                    if (orderLine.TimeStamp < timeNow)
-                    {
+            if (orderlines != null) {
+                foreach (Orderline orderLine in orderlines.ToList<Orderline>()) {
+                    if (orderLine.TimeStamp < timeNow) {
                         orderlines.Remove(orderLine);
 
                         oc.DeleteOrderLine(orderLine.Product.ID, orderLine.SubTotal, orderLine.Quantity);
@@ -46,7 +43,7 @@ namespace Client.Webshop.Controllers {
             List<Orderline> cart;
             bool flag = true;
 
-            if(ol != null && result) {
+            if (ol != null && result) {
                 if (Session["cart"] == null) {
                     cart = new List<Orderline>();
                     cart.Add(ol);
@@ -69,7 +66,7 @@ namespace Client.Webshop.Controllers {
                 Session["cart"] = cart;
             }
 
-            if(result) {
+            if (result) {
                 ViewBag.Message = "Success";
             }
             else {
