@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Server.Domain" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUserService_CreateUserWithPassword_InputMessage">
@@ -18,6 +19,12 @@
   <wsdl:message name="IUserService_ValidatePassword_OutputMessage">
     <wsdl:part name="parameters" element="tns:ValidatePasswordResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUserService">
     <wsdl:operation name="CreateUserWithPassword">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/CreateUserWithPassword" message="tns:IUserService_CreateUserWithPassword_InputMessage" />
@@ -26,6 +33,10 @@
     <wsdl:operation name="ValidatePassword">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/ValidatePassword" message="tns:IUserService_ValidatePassword_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/ValidatePasswordResponse" message="tns:IUserService_ValidatePassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUser" message="tns:IUserService_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUserResponse" message="tns:IUserService_GetUser_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserService" type="tns:IUserService">
@@ -41,6 +52,15 @@
     </wsdl:operation>
     <wsdl:operation name="ValidatePassword">
       <soap:operation soapAction="http://tempuri.org/IUserService/ValidatePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

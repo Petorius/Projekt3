@@ -29,9 +29,8 @@ namespace Server.BusinessLogic {
             int number, List<OrderLine> ol) {
             
             Customer c = cl.HandleCustomer(firstName, lastName, street, zip, city, email, number);
-            Invoice i = new Invoice();
 
-            Order o = new Order(c, i);
+            Order o = new Order(c);
 
             if (ValidateOrderLinePrices(ol)) {
                 o.Validation = true;

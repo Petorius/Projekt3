@@ -31,6 +31,7 @@ namespace Client.Webshop.Controllers {
         public ActionResult Confirmation(string firstName, string lastName, string street, int zip, string city, string email, int number) {
             // Skal kalde på mail og se om den mail tilhører en person som har et userID.
             // Hvis den tilhører en user, får han en fejl om han den mail ikke kan bruges.
+
             var webApi = new ValuesController();
 
             bool flag = webApi.Get();

@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Customer.cs" />
     <Compile Include="Image.cs" />
-    <Compile Include="Invoice.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderLine.cs" />
     <Compile Include="Product.cs" />

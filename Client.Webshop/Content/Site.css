@@ -28,7 +28,6 @@ textarea {
 }
 
 #ProductViewDetails {
-    background-color: red;
     margin: auto;
     margin-top: 80px;
     margin-bottom: 120px;
@@ -38,8 +37,8 @@ textarea {
 }
 
 #ProductViewDetailsInfo {
+    background-color: lightgray;
     float: right;
-    background-color: green;
     height: 450px;
     width: 600px;
     padding-left: 30px;

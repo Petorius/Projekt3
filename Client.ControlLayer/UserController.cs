@@ -21,5 +21,7 @@ namespace Client.ControlLayer {
         public bool ValidatePassword(string email, string password) {
             return userService.ValidatePassword(email, password);
         }
+
+
     }
 }

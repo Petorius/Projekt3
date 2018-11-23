@@ -17,14 +17,11 @@ namespace Server.Domain {
         [DataMember]
         public Customer Customer { get; set; }
         [DataMember]
-        public Invoice Invoice { get; set; }
-        [DataMember]
         public List<OrderLine> Orderlines { get; set; }
 
-        public Order(Customer customer, Invoice invoice) {
+        public Order(Customer customer) {
             Validation = false;
             Customer = customer;
-            Invoice = invoice;
             Orderlines = new List<OrderLine>();
         }
     }

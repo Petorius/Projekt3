@@ -62,8 +62,7 @@ namespace UnitTest {
         [TestMethod]
         public void CreateOrderWithReturnedPrimaryKey() {
             Customer c = customerDB.GetByMail("Morten@hotmail.com");
-            Invoice i = new Invoice();
-            Order o = new Order(c, i);
+            Order o = new Order(c);
             o.Orderlines.Add(new OrderLine(2, 200, productDB.Get(1)));
 
             int res = orderDB.CreateReturnID(o);
