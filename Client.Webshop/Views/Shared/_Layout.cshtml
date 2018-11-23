@@ -17,12 +17,12 @@
             </div>
             <div class="navbar-collapse collapse; navbar-header; navbar-search">
                 <ul class="nav navbar-nav">
-                    <li style="padding-left:260px">
+                    <li style="padding-left:250px">
                         @using (Html.BeginForm("Search", "Search", FormMethod.Post, new { novalidate = "novalidate" })) {
                             <div>
                                 @Html.TextBox("searchString")
                                 @*<input type='submit' value='Search' />*@
-                                <button class="glyphicon glyphicon-search" style="font-size:21px; position:absolute; top: 0px;"></button>
+                                <button class="glyphicon glyphicon-search" style="font-size:21px; top: 4.5px;"></button>
                             </div>
                         }
                     </li>
