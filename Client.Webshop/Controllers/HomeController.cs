@@ -6,31 +6,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Client.Webshop.Controllers
-{
-    public class HomeController : Controller
-    {
+namespace Client.Webshop.Controllers {
+    public class HomeController : Controller {
         ProductController pc = new ProductController();
         OrderController orderController = new OrderController();
 
 
         IEnumerable<Product> products = new List<Product>();
 
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
-            if (orderlines != null)
-            {
-                foreach (Orderline orderLine in orderlines.ToList<Orderline>())
-                {
-                    if (orderLine.TimeStamp < timeNow)
-                    {
+            if (orderlines != null) {
+                foreach (Orderline orderLine in orderlines.ToList<Orderline>()) {
+                    if (orderLine.TimeStamp < timeNow) {
                         orderlines.Remove(orderLine);
 
                         orderController.DeleteOrderLine(orderLine.Product.ID, orderLine.SubTotal, orderLine.Quantity);
 
-                    }   
+                    }
                 }
                 Session["cart"] = orderlines;
             }
@@ -40,15 +34,13 @@ namespace Client.Webshop.Controllers
             return View(products);
         }
 
-        public ActionResult About()
-        {
+        public ActionResult About() {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
-        {
+        public ActionResult Contact() {
             ViewBag.Message = "Your contact page.";
 
             return View();

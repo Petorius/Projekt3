@@ -16,12 +16,9 @@ namespace Client.Webshop.Controllers {
 
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
-            if (orderlines != null)
-            {
-                foreach (Orderline orderLine in orderlines.ToList<Orderline>())
-                {
-                    if (orderLine.TimeStamp < timeNow)
-                    {
+            if (orderlines != null) {
+                foreach (Orderline orderLine in orderlines.ToList<Orderline>()) {
+                    if (orderLine.TimeStamp < timeNow) {
                         orderlines.Remove(orderLine);
 
                         oc.DeleteOrderLine(orderLine.Product.ID, orderLine.SubTotal, orderLine.Quantity);
@@ -38,26 +35,26 @@ namespace Client.Webshop.Controllers {
         }
 
         public ActionResult UpdateOrderlineQuantity(int id) {
-         
+
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
 
-            if (orderlines != null ) {
+            if (orderlines != null) {
                 foreach (Orderline orderline in orderlines.ToList<Orderline>()) {
                     if (orderline.Product.ID == id) {
                         orderline.SubTotal -= orderline.Product.Price;
                         orderline.Quantity -= 1;
 
-                        oc.UpdateOrderLine(orderline.Product.ID, orderline.SubTotal, orderline.Quantity); 
+                        oc.UpdateOrderLine(orderline.Product.ID, orderline.SubTotal, orderline.Quantity);
                     }
 
-                    if(orderline.SubTotal == 0) {
+                    if (orderline.SubTotal == 0) {
                         orderlines.Remove(orderline);
                     }
                 }
-                
+
                 Session["cart"] = orderlines;
             }
-            
+
             return RedirectToAction("ShoppingCart");
         }
 

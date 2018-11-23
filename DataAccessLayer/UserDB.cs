@@ -52,15 +52,17 @@ namespace Server.DataAccessLayer {
                         user.ID = reader.GetInt32(reader.GetOrdinal("customerID"));
                     }
                     reader.Close();
-
-                    cmd.CommandText = "SELECT HashPassword, Salt from [dbo].[User] where userID = @ID";
-                    cmd.Parameters.AddWithValue("ID", user.ID);
-                    SqlDataReader userReader = cmd.ExecuteReader();
-                    while (userReader.Read()) {
-                        user.HashPassword = userReader.GetString(userReader.GetOrdinal("HashPassword"));
-                        user.Salt = userReader.GetString(userReader.GetOrdinal("Salt"));
+                    if(user.ID > 0) {
+                        cmd.CommandText = "SELECT HashPassword, Salt from [dbo].[User] where userID = @ID";
+                        cmd.Parameters.AddWithValue("ID", user.ID);
+                        SqlDataReader userReader = cmd.ExecuteReader();
+                        while (userReader.Read()) {
+                            user.HashPassword = userReader.GetString(userReader.GetOrdinal("HashPassword"));
+                            user.Salt = userReader.GetString(userReader.GetOrdinal("Salt"));
+                        }
+                        userReader.Close();
                     }
-                    userReader.Close();
+                    
                     return user;
                 }
             }
