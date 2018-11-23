@@ -13,15 +13,16 @@
 
     <h1>Log på</h1>
 
-    <form action="/">
+    <form name="Login" method="post" action="@Url.Action("Login", "Login")">
         <hr>
         <hr>
-        <label id="icon" for="name"><i class="icon-user"></i></label>
-        <input type="text" name="name" id="name" placeholder="E-mail" required />
+        <label id="icon" for="name"><i class="icon-envelope "></i></label>
+        <input autocomplete="off" name="email" type="email" id="name" placeholder="E-mail" required />
         <label id="icon" for="name"><i class="icon-shield"></i></label>
-        <input type="password" name="name" id="name" placeholder="Kodeord" required />
+        <input autocomplete="off" name="password" type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-ZÆØÅ])(?=.*[a-zæøå]).*$" id="name" placeholder="Kodeord" required oninvalid="this.setCustomValidity('Indtast store bogstaver, tal, og små bogstaver')" oninput="setCustomValidity('')" />
 
-        <a href="#" class="loginbutton">Log ind</a>
+
+        <input type="submit" value="Log ind" class="loginbutton" />
 
         <p>Er du ikke medlem?</p>
         <a href="@Url.Action("Index", "Signup")">Tilmeld her</a>

@@ -100,11 +100,11 @@ input[type=password] {
     border: solid 0px #cbc9c9;
 }
 
-a.button {
+.button {
     font-size: 14px;
     font-weight: 600;
     color: white;
-    padding: 6px 25px 0px 20px;
+    padding: 6px 25px 25px 20px;
     margin: 25px 8px 20px 0px;
     display: inline-block;
     float: right;
@@ -123,7 +123,7 @@ a.button {
     position: relative;
 }
 
-a.button:hover {
+.button:hover {
     top: 3px;
     background-color: #a9a9a9;
     -webkit-box-shadow: none;
@@ -131,11 +131,11 @@ a.button:hover {
     box-shadow: none;
 }
 
-a.loginbutton {
+.loginbutton {
     font-size: 14px;
     font-weight: 600;
     color: white;
-    padding: 6px 25px 0px 20px;
+    padding: 6px 25px 25px 20px;
     margin: 10px 24px 20px 0px;
     display: inline-block;
     float: right;
@@ -154,41 +154,10 @@ a.loginbutton {
     position: relative;
 }
 
-    a.loginbutton:hover {
+    .loginbutton:hover {
         top: 3px;
         background-color: #a9a9a9;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
     }
-
-a.signupbutton {
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-    padding: 6px 25px 0px 20px;
-    margin: 10px 8px 20px 0px;
-    display: inline-block;
-    float: right;
-    text-decoration: none;
-    width: 127px;
-    height: 35px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    background-color: #000000;
-    -webkit-box-shadow: 0 3px #a9a9a9;
-    -moz-box-shadow: 0 3px #a9a9a9;
-    box-shadow: 0 3px #a9a9a9;
-    transition: all 0.1s linear 0s;
-    top: 0px;
-    position: relative;
-}
-
-a.signupbutton:hover {
-    top: 3px;
-    background-color: #a9a9a9;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-}
