@@ -13,7 +13,7 @@ namespace Client.Webshop.Controllers {
         UserController uc = new UserController();
 
         // GET: LogIn
-        public ActionResult Index() {
+        public ActionResult Index(bool? wasRedirected) {
 
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
@@ -29,8 +29,19 @@ namespace Client.Webshop.Controllers {
                 Session["cart"] = orderlines;
             }
 
-            ViewBag.Visibility = "hidden";
+            bool error = false;
 
+            if (wasRedirected != null) {
+                error = true;
+            }
+
+            if (error) {
+                ViewBag.Visibility = "visible";
+            }
+            else {
+                ViewBag.Visibility = "hidden";
+            }
+            
             return View();
         }
 
@@ -42,9 +53,8 @@ namespace Client.Webshop.Controllers {
                 return RedirectToAction("Index", "Home");
             }
 
-            ViewBag.Visibility = "visible";
-
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index", new { wasRedirected = true });
+            
         }
     }
 }
