@@ -47,8 +47,7 @@ namespace Client.Webshop.Controllers {
                         orderline.SubTotal -= orderline.Product.Price;
                         orderline.Quantity -= 1;
 
-                        oc.UpdateOrderLine(orderline.Product.ID, orderline.SubTotal, orderline.Quantity);
-                       
+                        oc.UpdateOrderLine(orderline.Product.ID, orderline.SubTotal, orderline.Quantity); 
                     }
 
                     if(orderline.SubTotal == 0) {
