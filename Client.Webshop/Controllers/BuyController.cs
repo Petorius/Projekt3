@@ -10,6 +10,7 @@ using System.Web.Mvc;
 namespace Client.Webshop.Controllers {
     public class BuyController : Controller {
         OrderController oc = new OrderController();
+        UserController uc = new UserController();
         // GET: Buy
         public ActionResult Information() {
             long timeNow = DateTime.Now.Ticks;
@@ -31,32 +32,38 @@ namespace Client.Webshop.Controllers {
         public ActionResult Confirmation(string firstName, string lastName, string street, int zip, string city, string email, int number) {
             // Skal kalde på mail og se om den mail tilhører en person som har et userID.
             // Hvis den tilhører en user, får han en fejl om han den mail ikke kan bruges.
+            //if (!uc.isEmailAlreadyRegistered(email)) {
+                var webApi = new ValuesController();
 
-            var webApi = new ValuesController();
+                bool flag = webApi.Get();
 
-            bool flag = webApi.Get();
+                if (flag) {
+                    ViewBag.Message7 = "Betalingen blev gennemført!";
+                    Order o = new Order();
+                    List<Orderline> cart = (List<Orderline>)Session["cart"];
+                    o = oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
+                    if (o.Validation) {
+                        Session.Abandon();
+                        return View(o);
+                    }
+                    else {
+                        Session.Abandon();
+                        return Redirect("https://media.giphy.com/media/5ftsmLIqktHQA/giphy.gif");
+                    }
 
-            if (flag) {
-                ViewBag.Message7 = "Betalingen blev gennemført!";
-                Order o = new Order();
-                List<Orderline> cart = (List<Orderline>)Session["cart"];
-                o = oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
-                if (o.Validation) {
-                    Session.Abandon();
-                    return View(o);
                 }
                 else {
-                    Session.Abandon();
-                    return Redirect("https://media.giphy.com/media/5ftsmLIqktHQA/giphy.gif");
+
+                    ViewBag.Message7 = "Der skete en fejl med betalingen. Prøv igen";
+
+                    return View();
                 }
+            
+            //else {
+                
+            //}
 
-            }
-            else {
 
-                ViewBag.Message7 = "Der skete en fejl med betalingen. Prøv igen";
-
-                return View();
-            }
 
         }
     }

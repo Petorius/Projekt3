@@ -67,11 +67,12 @@ namespace Client.Webshop.Controllers {
             }
 
             if (result) {
-                ViewBag.Message = "Success";
+                TempData["Message"] = "Produktet blev tilføjet til kurv";
             }
             else {
-                ViewBag.Message = "Fail";
+                TempData["Message"] = "Produktet blev ikke tilføjet";
             }
+            
 
             return Redirect(url);
 

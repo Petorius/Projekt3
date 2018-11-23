@@ -1,4 +1,5 @@
-﻿using Client.ServiceLayer;
+﻿using Client.Domain;
+using Client.ServiceLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,14 @@ namespace Client.ControlLayer {
             return userService.ValidatePassword(email, password);
         }
 
-
+        public bool isEmailAlreadyRegistered(string email) {
+            bool res = false;
+            User user = userService.GetUser(email);
+            if(user.ID > 0) {
+                res = true;
+            }
+            return res;
+        }
+        
     }
 }
