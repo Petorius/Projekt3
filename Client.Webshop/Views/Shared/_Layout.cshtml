@@ -35,18 +35,37 @@
 
             <div class="navbar-header">
                 
-                    <div>
+                @if(HttpContext.Current.Session["User"] != null) {
+                <div>
 
-                        <a href="@Url.Action("Index", "LogIn")">
-                            <span class="glyphicon glyphicon-user" style="font-size:35px; margin-left:15px; color: lightgray"></span>
-                        </a>
+                    <a href="@Url.Action("Index", "Login")">
+                        <span class="glyphicon glyphicon-user" style="font-size:35px; margin-left:15px; color: lightgray"></span>
+                    </a>
 
-                        <a href="@Url.Action("ShoppingCart", "ShoppingCart")">
-                            <span class="glyphicon glyphicon-shopping-cart" style="font-size:35px; margin-left:15px; color: lightgray"></span>
-                        </a>
+                    <a href="@Url.Action("ShoppingCart", "ShoppingCart")">
+                        <span class="glyphicon glyphicon-shopping-cart" style="font-size:35px; margin-left:15px; color: lightgray"></span>
+                    </a>
 
-                    </div>
-                
+                    <a href="@Url.Action("Logout", "UserController")">
+                        <span class="glyphicon glyphicon-log-out" style="font-size:35px; margin-left:15px; color: lightgray"></span>
+                    </a>
+                </div>
+                }
+
+                else {
+                    
+                <div>
+
+                    <a href="@Url.Action("Index", "Login")">
+                        <span class="glyphicon glyphicon-user" style="font-size:35px; margin-left:15px; color: lightgray"></span>
+                    </a>
+
+                    <a href="@Url.Action("ShoppingCart", "ShoppingCart")">
+                        <span class="glyphicon glyphicon-shopping-cart" style="font-size:35px; margin-left:15px; color: lightgray"></span>
+                    </a>
+
+                </div>
+                }
             </div>
         </div>
     </div>
