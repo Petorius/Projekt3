@@ -59,8 +59,7 @@ namespace Client.ServiceLayer {
         private Order BuildOrderFromServices(OrderReference.Order order, List<Orderline> ol) {
             Customer c = new Customer(order.Customer.FirstName, order.Customer.LastName, order.Customer.Phone,
                 order.Customer.Email, order.Customer.Address, order.Customer.ZipCode, order.Customer.City);
-            Invoice i = new Invoice();
-            Order o = new Order(c, i);
+            Order o = new Order(c);
             o.Orderlines = ol;
             o.ID = order.ID;
             o.Total = order.Total;

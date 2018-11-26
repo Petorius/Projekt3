@@ -10,12 +10,10 @@ namespace Client.Domain {
         public decimal Total { get; set; }
         public bool Validation { get; set; }
         public Customer Customer { get; set; }
-        public Invoice Invoice { get; set; }
         public IEnumerable<Orderline> Orderlines { get; set; }
 
-        public Order(Customer customer, Invoice invoice) {
+        public Order(Customer customer) {
             Customer = customer;
-            Invoice = invoice;
         }
 
         public Order() {

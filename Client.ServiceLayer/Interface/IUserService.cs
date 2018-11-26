@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,7 @@ namespace Client.ServiceLayer {
         int zip, string city, string email, int number, string password);
 
         bool ValidatePassword(string email, string password);
+
+        User GetUser(string email);
     }
 }

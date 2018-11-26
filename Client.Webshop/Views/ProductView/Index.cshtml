@@ -17,7 +17,6 @@
         <div id="ProductViewDetails">
             <img img src="@Model.Images[0].ImageSource" width="500" height="450">
             <div id="ProductViewDetailsInfo">
-                <h2>@ViewBag.Message</h2>
                 <h1 class="boldText">@Model.Name</h1>
                 <h2 class="boldText">Pris @Model.Price DKK</h2>
                 <h2 class="boldText"> Antal </h2>
@@ -35,6 +34,14 @@
 
 
         </div>
+    }
+
+    @if(TempData["Message"] != null) {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert(TempData["Message"]);
+            }
+        </script>
     }
 
 </body>

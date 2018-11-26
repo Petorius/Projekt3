@@ -25,12 +25,9 @@ textarea {
 
 #navBar-Right {
     margin-left: 500px;
-    
-
 }
 
 #ProductViewDetails {
-    background-color: red;
     margin: auto;
     margin-top: 80px;
     margin-bottom: 120px;
@@ -39,13 +36,13 @@ textarea {
     align-content: center;
 }
 
-#ProductViewDetailsInfo{
-    float:right;
-    background-color:green;
+#ProductViewDetailsInfo {
+    background-color: lightgray;
+    float: right;
     height: 450px;
     width: 600px;
-    padding-left:30px;
-    padding-right:50px;
+    padding-left: 30px;
+    padding-right: 50px;
 }
 
 fieldset {
@@ -89,7 +86,6 @@ div.formRow {
 
 .marginRightWide2 {
     margin-right: 300px;
-
 }
 
 .marginRightMedium2 {
@@ -176,4 +172,58 @@ div.formRow {
     border: 1px solid black;
     align-content: center;
     text-align: center;
+}
+
+.imageFloat {
+    float: left;
+    padding: 65px;
+}
+
+img {
+    background-size: contain;
+}
+
+.myButton {
+    background-color: #44c767;
+    -moz-border-radius: 28px;
+    -webkit-border-radius: 28px;
+    border-radius: 28px;
+    border: 1px solid #18ab29;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 16px;
+    padding: 21px 60px;
+    text-decoration: none;
+}
+
+    .myButton:hover {
+        background-color: #5cbf2a;
+    }
+
+    .myButton:active {
+        position: relative;
+        top: 1px;
+    }
+
+.alert-box {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
 }

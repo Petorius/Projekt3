@@ -6,16 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Client.Webshop.Controllers
-{
-    public class LoginController : Controller
-    {
+namespace Client.Webshop.Controllers {
+    public class LoginController : Controller {
 
         OrderController orderController = new OrderController();
+        UserController uc = new UserController();
 
         // GET: LogIn
-        public ActionResult Index()
-        {
+        public ActionResult Index(bool? wasRedirected) {
 
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
@@ -31,7 +29,32 @@ namespace Client.Webshop.Controllers
                 Session["cart"] = orderlines;
             }
 
+            bool error = false;
+
+            if (wasRedirected != null) {
+                error = true;
+            }
+
+            if (error) {
+                ViewBag.Visibility = "visible";
+            }
+            else {
+                ViewBag.Visibility = "hidden";
+            }
+            
             return View();
+        }
+
+        public ActionResult Login(string email, string password) {
+
+            bool result = uc.ValidatePassword(email, password);
+
+            if (result) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return this.RedirectToAction("Index", new { wasRedirected = true });
+            
         }
     }
 }
