@@ -15,6 +15,7 @@
 
     <form name="Tilmeld" method="post" action="@Url.Action("Signup", "Signup")">
         <hr>
+        <div> <p style="visibility: @ViewBag.Visibility; color: red; font-size: 17px; width: 250px; height: 20px;">E-mail er allerede i brug</p> </div>
         <label id="icon" for="name"><i class="icon-user"></i></label>
         <input autocomplete="off" name="firstName" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" placeholder="Fornavn" required oninvalid="this.setCustomValidity('Indtast et fornavn med 2-20 bogstaver')" oninput="setCustomValidity('')" />
         <label id="icon" for="name"><i class="icon-user"></i></label>

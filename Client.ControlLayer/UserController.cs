@@ -23,7 +23,7 @@ namespace Client.ControlLayer {
             return userService.ValidatePassword(email, password);
         }
 
-        public bool isEmailAlreadyRegistered(string email) {
+        public bool IsEmailAlreadyRegistered(string email) {
             bool res = false;
             User user = userService.GetUser(email);
             if(user.ID > 0) {
