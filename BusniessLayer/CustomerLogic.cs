@@ -37,5 +37,9 @@ namespace Server.BusinessLogic {
             }
             return c;
         }
+
+        public Customer GetCustomerByMail(string email) {
+            return customerDB.GetByMail(email);
+        }
     }
 }
