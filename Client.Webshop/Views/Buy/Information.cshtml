@@ -42,7 +42,7 @@
                     </div>
                     <div class="formRow textNormal">
                         Postnummer.*
-                        <input class="textboxSmall3 textNormal marginRightWide2" value="@(int.Parse(TempData["Zip"].ToString()))" name="zip" pattern="[0-9]{4}" type="tel" id="name" required oninvalid="this.setCustomValidity('Indtast et dansk postnummer')" oninput="setCustomValidity('')" />
+                        <input class="textboxSmall3 textNormal marginRightWide2" value="@(TempData["ZipCode"])" name="zip" pattern="[0-9]{4}" type="tel" id="name" required oninvalid="this.setCustomValidity('Indtast et dansk postnummer')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         By.*
@@ -54,7 +54,7 @@
                     </div>
                     <div class="formRow textNormal">
                         Telefonnummer.*
-                        <input class="textboxMedium2 textNormal marginRightMedium2" value="@(TempData["Number"])" name="number" pattern="[0-9]{8}" type="tel" id="name" required oninvalid="this.setCustomValidity('Indtast et gyldigt telefonnummer')" oninput="setCustomValidity('')" />
+                        <input class="textboxMedium2 textNormal marginRightMedium2" value="@(TempData["Phone"])" name="number" pattern="[0-9]{8}" type="tel" id="name" required oninvalid="this.setCustomValidity('Indtast et gyldigt telefonnummer')" oninput="setCustomValidity('')" />
                     </div>
 
 
