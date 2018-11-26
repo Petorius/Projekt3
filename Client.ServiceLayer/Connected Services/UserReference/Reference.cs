@@ -231,6 +231,12 @@ namespace Client.ServiceLayer.UserReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUser", ReplyAction="http://tempuri.org/IUserService/GetUserResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.User> GetUserAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetCustomerByMail", ReplyAction="http://tempuri.org/IUserService/GetCustomerByMailResponse")]
+        Client.ServiceLayer.UserReference.Customer GetCustomerByMail(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetCustomerByMail", ReplyAction="http://tempuri.org/IUserService/GetCustomerByMailResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.Customer> GetCustomerByMailAsync(string email);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -282,6 +288,14 @@ namespace Client.ServiceLayer.UserReference {
         
         public System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.User> GetUserAsync(string email) {
             return base.Channel.GetUserAsync(email);
+        }
+        
+        public Client.ServiceLayer.UserReference.Customer GetCustomerByMail(string email) {
+            return base.Channel.GetCustomerByMail(email);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.Customer> GetCustomerByMailAsync(string email) {
+            return base.Channel.GetCustomerByMailAsync(email);
         }
     }
 }
