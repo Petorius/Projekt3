@@ -82,16 +82,16 @@ namespace Client.Webshop.Controllers {
         }
 
         [HttpPost]
-        public ActionResult GetCustomerInfo(string email) {
-            Customer c = new Customer(uc.GetCustomerByMail(email));
+        public ActionResult GetCustomerInfo(string prevEmail) {
+            Customer c = uc.GetCustomerByMail(prevEmail);
 
-            ViewBag.FirstName = c.FirstName;
-            ViewBag.LastName = c.LastName;
-            ViewBag.Address = c.Address;
-            ViewBag.Zip = c.ZipCode;
-            ViewBag.City = c.City;
-            ViewBag.Email = c.Email;
-            ViewBag.Number = c.Phone;
+            TempData["FirstName"] = c.FirstName;
+            TempData["LastName"] = c.LastName;
+            TempData["Address"] = c.Address;
+            TempData["ZipCode"] = c.ZipCode;
+            TempData["City"] = c.City;
+            TempData["Email"] = c.Email;
+            TempData["Phone"] = c.Phone;
             return RedirectToAction("Information");
         }
     }

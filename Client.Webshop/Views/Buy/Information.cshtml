@@ -30,31 +30,31 @@
 
                     <div class="formRow textNormal">
                         Fornavn*
-                        <input class="textboxWide2 textNormal margin" value="@(ViewBag.FirstName)" name="firstName" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" required oninvalid="this.setCustomValidity('Indtast et fornavn med 2-20 bogstaver')" oninput="setCustomValidity('')" />
+                        <input class="textboxWide2 textNormal margin" value="@(TempData["FirstName"])" name="firstName" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" required oninvalid="this.setCustomValidity('Indtast et fornavn med 2-20 bogstaver')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         Efternavn*
-                        <input class="textboxWide2 textNormal margin" value="@(ViewBag.LastName)" name="lastName" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ ]+)*$" type="text" id="name" required oninvalid="this.setCustomValidity('Indtast et efternavn')" oninput="setCustomValidity('')" />
+                        <input class="textboxWide2 textNormal margin" value="@(TempData["LastName"])" name="lastName" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ ]+)*$" type="text" id="name" required oninvalid="this.setCustomValidity('Indtast et efternavn')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         Adresse*
-                        <input class="textboxWide2 textNormal margin" value="@(ViewBag.Address)" name="street" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ0-9-., ]+)*$" type="text" id="name" required oninvalid="this.setCustomValidity('Indtast en gyldig adresse')" oninput="setCustomValidity('')" />
+                        <input class="textboxWide2 textNormal margin" value="@(TempData["Address"])" name="street" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ0-9-., ]+)*$" type="text" id="name" required oninvalid="this.setCustomValidity('Indtast en gyldig adresse')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         Postnummer.*
-                        <input class="textboxSmall3 textNormal marginRightWide2" value="@(ViewBag.Zip)" name="zip" pattern="[0-9]{4}" type="tel" id="name" required oninvalid="this.setCustomValidity('Indtast et dansk postnummer')" oninput="setCustomValidity('')" />
+                        <input class="textboxSmall3 textNormal marginRightWide2" value="@(int.Parse(TempData["Zip"].ToString()))" name="zip" pattern="[0-9]{4}" type="tel" id="name" required oninvalid="this.setCustomValidity('Indtast et dansk postnummer')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         By.*
-                        <input class="textboxMedium2 textNormal marginRightMedium2" value="@(ViewBag.City)" name="city" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name"  required oninvalid="this.setCustomValidity('Indtast en dansk by')" oninput="setCustomValidity('')" />
+                        <input class="textboxMedium2 textNormal marginRightMedium2" value="@(TempData["City"])" name="city" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name"  required oninvalid="this.setCustomValidity('Indtast en dansk by')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         Email.*
-                        <input autocomplete="off" class="textboxWide2 textNormal margin" value="@(ViewBag.Email)" name="email" type="email" id="name"  required />
+                        <input autocomplete="off" class="textboxWide2 textNormal margin" value="@(TempData["Email"])" name="email" type="email" id="name"  required />
                     </div>
                     <div class="formRow textNormal">
                         Telefonnummer.*
-                        <input class="textboxMedium2 textNormal marginRightMedium2" value="@(ViewBag.Number)" name="number" pattern="[0-9]{8}" type="tel" id="name" required oninvalid="this.setCustomValidity('Indtast et gyldigt telefonnummer')" oninput="setCustomValidity('')" />
+                        <input class="textboxMedium2 textNormal marginRightMedium2" value="@(TempData["Number"])" name="number" pattern="[0-9]{8}" type="tel" id="name" required oninvalid="this.setCustomValidity('Indtast et gyldigt telefonnummer')" oninput="setCustomValidity('')" />
                     </div>
 
 

@@ -14,5 +14,7 @@ namespace Client.ServiceLayer {
         bool ValidatePassword(string email, string password);
 
         User GetUser(string email);
+
+        Customer GetCustomerByEmail(string email);
     }
 }
