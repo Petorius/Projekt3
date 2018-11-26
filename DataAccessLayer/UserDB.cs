@@ -45,24 +45,25 @@ namespace Server.DataAccessLayer {
                 using (SqlCommand cmd = connection.CreateCommand()) {
                     User user = new User();
 
-                    cmd.CommandText = "SELECT customerID from Customer where Email = @Email";
+                    cmd.CommandText = "select userid from [dbo].[user], customer where Customer.Email = @Email " +
+                        "AND customer.CustomerID = [dbo].[User].UserID;";
                     cmd.Parameters.AddWithValue("Email", email);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read()) {
-                        user.ID = reader.GetInt32(reader.GetOrdinal("customerID"));
+                        user.ID = reader.GetInt32(reader.GetOrdinal("userid"));
                     }
                     reader.Close();
-                    if(user.ID > 0) {
-                        cmd.CommandText = "SELECT HashPassword, Salt from [dbo].[User] where userID = @ID";
-                        cmd.Parameters.AddWithValue("ID", user.ID);
-                        SqlDataReader userReader = cmd.ExecuteReader();
-                        while (userReader.Read()) {
-                            user.HashPassword = userReader.GetString(userReader.GetOrdinal("HashPassword"));
-                            user.Salt = userReader.GetString(userReader.GetOrdinal("Salt"));
-                        }
-                        userReader.Close();
+
+                    cmd.CommandText = "SELECT HashPassword, Salt from [dbo].[User] where userID = @ID";
+                    cmd.Parameters.AddWithValue("ID", user.ID);
+                    SqlDataReader userReader = cmd.ExecuteReader();
+                    while (userReader.Read()) {
+                        user.HashPassword = userReader.GetString(userReader.GetOrdinal("HashPassword"));
+                        user.Salt = userReader.GetString(userReader.GetOrdinal("Salt"));
                     }
-                    
+                    userReader.Close();
+
+
                     return user;
                 }
             }
