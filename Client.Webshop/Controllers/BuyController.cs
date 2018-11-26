@@ -80,5 +80,19 @@ namespace Client.Webshop.Controllers {
                 return RedirectToAction("Information", new { wasRedirected = true });
             }
         }
+
+        [HttpPost]
+        public ActionResult GetCustomerInfo(string email) {
+            Customer c = new Customer(uc.GetCustomerByMail(email));
+
+            ViewBag.FirstName = c.FirstName;
+            ViewBag.LastName = c.LastName;
+            ViewBag.Address = c.Address;
+            ViewBag.Zip = c.ZipCode;
+            ViewBag.City = c.City;
+            ViewBag.Email = c.Email;
+            ViewBag.Number = c.Phone;
+            return RedirectToAction("Information");
+        }
     }
 }

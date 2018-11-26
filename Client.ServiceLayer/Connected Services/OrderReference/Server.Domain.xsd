@@ -45,8 +45,8 @@
   <xs:complexType name="Order">
     <xs:sequence>
       <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer" />
+      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="Invoice" nillable="true" type="tns:Invoice" />
       <xs:element minOccurs="0" name="Orderlines" nillable="true" type="tns:ArrayOfOrderLine" />
       <xs:element minOccurs="0" name="Total" type="xs:decimal" />
       <xs:element minOccurs="0" name="Validation" type="xs:boolean" />
@@ -66,8 +66,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Customer" nillable="true" type="tns:Customer" />
-  <xs:complexType name="Invoice">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:element name="Invoice" nillable="true" type="tns:Invoice" />
 </xs:schema>

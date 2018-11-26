@@ -17,12 +17,15 @@ namespace Server.Domain {
         [DataMember]
         public Customer Customer { get; set; }
         [DataMember]
+        public DateTime DateCreated { get; set; }
+        [DataMember]
         public List<OrderLine> Orderlines { get; set; }
 
         public Order(Customer customer) {
             Validation = false;
             Customer = customer;
             Orderlines = new List<OrderLine>();
+            DateCreated = DateTime.Today;
         }
     }
 

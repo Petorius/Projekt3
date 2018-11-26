@@ -28,8 +28,9 @@ namespace Server.DataAccessLayer {
                 using (SqlCommand cmd = connection.CreateCommand()) {
 
 
-                    cmd.CommandText = "Insert into [dbo].[Order](total, customerID) OUTPUT INSERTED.OrderID values (@Total, @CustomerID)";
+                    cmd.CommandText = "Insert into [dbo].[Order](total, purchaseTime, customerID) OUTPUT INSERTED.OrderID values (@Total, @PurchaseTime, @CustomerID)";
                     cmd.Parameters.AddWithValue("Total", Entity.Total);
+                    cmd.Parameters.AddWithValue("PurchaseTime", Entity.DateCreated);
                     cmd.Parameters.AddWithValue("CustomerID", Entity.Customer.ID);
                     insertedID = (int)cmd.ExecuteScalar();
 

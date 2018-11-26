@@ -62,6 +62,7 @@ namespace Client.ServiceLayer {
             Order o = new Order(c);
             o.Orderlines = ol;
             o.ID = order.ID;
+            o.DateCreated = order.DateCreated;
             o.Total = order.Total;
             o.Validation = order.Validation;
             return o;

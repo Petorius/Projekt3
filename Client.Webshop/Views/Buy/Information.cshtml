@@ -11,6 +11,18 @@
     <main>
         <fieldset>
             <legend>Leveringsadresse</legend>
+            <div>
+                <div style="text-align: center;">
+                    <p>Har du handlet ved os før? <br /> Find dine oplysninger ved at indtaste din mail</p>
+                    <form name="getCustomer" method="post" , action="@Url.Action("GetCustomerInfo", "Buy")">
+                        <input type="submit" value="Find" />
+                        <input class="textboxWide2 textNormal" type="email" name="prevEmail" />
+
+                    </form>
+                </div>
+
+            </div>
+
             <div class="formArea formRow">
                 <form name="deliveryAddress" method="post" action="@Url.Action("Confirmation", "Buy")">
 
@@ -18,31 +30,31 @@
 
                     <div class="formRow textNormal">
                         Fornavn*
-                        <input class="textboxWide2 textNormal margin" name="firstName" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" placeholder="Fornavn" required oninvalid="this.setCustomValidity('Indtast et fornavn med 2-20 bogstaver')" oninput="setCustomValidity('')" />
+                        <input class="textboxWide2 textNormal margin" value="@(ViewBag.FirstName)" name="firstName" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" required oninvalid="this.setCustomValidity('Indtast et fornavn med 2-20 bogstaver')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         Efternavn*
-                        <input class="textboxWide2 textNormal margin" name="lastName" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ ]+)*$" type="text" id="name" placeholder="Efternavn" required oninvalid="this.setCustomValidity('Indtast et efternavn')" oninput="setCustomValidity('')" />
+                        <input class="textboxWide2 textNormal margin" value="@(ViewBag.LastName)" name="lastName" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ ]+)*$" type="text" id="name" required oninvalid="this.setCustomValidity('Indtast et efternavn')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         Adresse*
-                        <input class="textboxWide2 textNormal margin" name="street" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ0-9-., ]+)*$" type="text" id="name" placeholder="Adresse" required oninvalid="this.setCustomValidity('Indtast en gyldig adresse')" oninput="setCustomValidity('')" />
+                        <input class="textboxWide2 textNormal margin" value="@(ViewBag.Address)" name="street" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ0-9-., ]+)*$" type="text" id="name" required oninvalid="this.setCustomValidity('Indtast en gyldig adresse')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         Postnummer.*
-                        <input class="textboxSmall3 textNormal marginRightWide2" name="zip" pattern="[0-9]{4}" type="tel" id="name" placeholder="Postnr." required oninvalid="this.setCustomValidity('Indtast et dansk postnummer')" oninput="setCustomValidity('')" />
+                        <input class="textboxSmall3 textNormal marginRightWide2" value="@(ViewBag.Zip)" name="zip" pattern="[0-9]{4}" type="tel" id="name" required oninvalid="this.setCustomValidity('Indtast et dansk postnummer')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         By.*
-                        <input class="textboxMedium2 textNormal marginRightMedium2" name="city" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" placeholder="By" required oninvalid="this.setCustomValidity('Indtast en dansk by')" oninput="setCustomValidity('')" />
+                        <input class="textboxMedium2 textNormal marginRightMedium2" value="@(ViewBag.City)" name="city" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name"  required oninvalid="this.setCustomValidity('Indtast en dansk by')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         Email.*
-                        <input autocomplete="off" class="textboxWide2 textNormal margin" name="email" type="email" id="name" placeholder="E-mail" required />
+                        <input autocomplete="off" class="textboxWide2 textNormal margin" value="@(ViewBag.Email)" name="email" type="email" id="name"  required />
                     </div>
                     <div class="formRow textNormal">
                         Telefonnummer.*
-                        <input class="textboxMedium2 textNormal marginRightMedium2" name="number" pattern="[0-9]{8}" type="tel" id="name" placeholder="Telefon nr." required oninvalid="this.setCustomValidity('Indtast et gyldigt telefonnummer')" oninput="setCustomValidity('')" />
+                        <input class="textboxMedium2 textNormal marginRightMedium2" value="@(ViewBag.Number)" name="number" pattern="[0-9]{8}" type="tel" id="name" required oninvalid="this.setCustomValidity('Indtast et gyldigt telefonnummer')" oninput="setCustomValidity('')" />
                     </div>
 
 
