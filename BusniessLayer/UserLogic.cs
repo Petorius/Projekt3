@@ -28,6 +28,9 @@ namespace Server.BusinessLogic {
 
         public bool CreateUserWithPassword(string firstName, string lastName, string street,
             int zip, string city, string email, int number, string password) {
+
+            bool res = false;
+
             string s = account.CreatePasswordHash(password);
             char[] splitter = { ':' };
             var split = s.Split(splitter);
@@ -35,7 +38,14 @@ namespace Server.BusinessLogic {
             string hashValue = split[1];
 
             Customer c = cl.HandleCustomer(firstName, lastName, street, zip, city, email, number);
-            return userDB.CreateUser(c.ID, salt, hashValue);
+
+            // if user exists return false
+            if(c.ID > 0) {
+                res = false;
+            } else {
+                res = userDB.CreateUser(c.ID, salt, hashValue);
+            }
+            return res;
         }
 
         public bool ValidatePassword(string email, string password) {
@@ -45,7 +55,6 @@ namespace Server.BusinessLogic {
                 res = account.ValidateUserLogin(user, password);
             }
             return res;
-            
         }
     }
 }
