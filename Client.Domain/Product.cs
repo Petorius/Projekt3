@@ -16,6 +16,7 @@ namespace Client.Domain {
         public int Rating { get; set; }
         public string TempImageName { get; set; }
         public string TempImageURL { get; set; }
+        public int Sales { get; set; }
         public List<Image> Images { get; set; }
         public Category Category { get; set; }
         public List<Keyword> Keywords { get; set; }

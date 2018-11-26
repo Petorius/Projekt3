@@ -13,16 +13,73 @@
   <wsdl:message name="ITagService_FindTagByName_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindTagByNameResponse" />
   </wsdl:message>
+  <wsdl:message name="ITagService_GetSalesByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSalesByCategory" />
+  </wsdl:message>
+  <wsdl:message name="ITagService_GetSalesByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSalesByCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITagService_GetAllSales_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSales" />
+  </wsdl:message>
+  <wsdl:message name="ITagService_GetAllSales_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSalesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITagService_FindBestSellers_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindBestSellers" />
+  </wsdl:message>
+  <wsdl:message name="ITagService_FindBestSellers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindBestSellersResponse" />
+  </wsdl:message>
   <wsdl:portType name="ITagService">
     <wsdl:operation name="FindTagByName">
       <wsdl:input wsaw:Action="http://tempuri.org/ITagService/FindTagByName" message="tns:ITagService_FindTagByName_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITagService/FindTagByNameResponse" message="tns:ITagService_FindTagByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSalesByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITagService/GetSalesByCategory" message="tns:ITagService_GetSalesByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITagService/GetSalesByCategoryResponse" message="tns:ITagService_GetSalesByCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSales">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITagService/GetAllSales" message="tns:ITagService_GetAllSales_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITagService/GetAllSalesResponse" message="tns:ITagService_GetAllSales_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindBestSellers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITagService/FindBestSellers" message="tns:ITagService_FindBestSellers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITagService/FindBestSellersResponse" message="tns:ITagService_FindBestSellers_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITagService" type="tns:ITagService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="FindTagByName">
       <soap:operation soapAction="http://tempuri.org/ITagService/FindTagByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSalesByCategory">
+      <soap:operation soapAction="http://tempuri.org/ITagService/GetSalesByCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSales">
+      <soap:operation soapAction="http://tempuri.org/ITagService/GetAllSales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindBestSellers">
+      <soap:operation soapAction="http://tempuri.org/ITagService/FindBestSellers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

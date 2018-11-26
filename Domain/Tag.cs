@@ -12,7 +12,7 @@ namespace Server.Domain
     public class Tag
     {
         [DataMember]
-        public int TagID { get; set; }
+        public int ID { get; set; }
         [DataMember]
         public string Name { get; set; }
         [DataMember]

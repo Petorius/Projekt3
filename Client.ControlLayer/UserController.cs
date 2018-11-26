@@ -32,5 +32,8 @@ namespace Client.ControlLayer {
             return res;
         }
         
+        public User GetUser(string email) {
+            return userService.GetUser(email);
+        }
     }
 }

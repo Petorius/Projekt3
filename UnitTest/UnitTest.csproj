@@ -56,6 +56,7 @@
     <Compile Include="ProductTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TagTest.cs" />
+    <Compile Include="CategoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -64,6 +65,14 @@
     <ProjectReference Include="..\BusniessLayer\Server.BusinessLogic.csproj">
       <Project>{e887ff99-d62e-4a9f-92c5-f31973f9571e}</Project>
       <Name>Server.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Client.Domain\Client.Domain.csproj">
+      <Project>{4582B80E-A3BE-4348-8181-9FCDDC5E04C9}</Project>
+      <Name>Client.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Client.ServiceLayer\Client.ServiceLayer.csproj">
+      <Project>{6AF48941-0FD0-4CBF-A081-95510761382F}</Project>
+      <Name>Client.ServiceLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataAccessLayer\Server.DataAccessLayer.csproj">
       <Project>{25a117a2-004b-4b26-9aa1-244418a6d605}</Project>

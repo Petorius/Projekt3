@@ -50,6 +50,7 @@ namespace Client.Webshop.Controllers {
             bool result = uc.ValidatePassword(email, password);
 
             if (result) {
+                Session.Add("User", uc.GetUser(email));
                 return RedirectToAction("Index", "Home");
             }
 
