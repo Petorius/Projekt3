@@ -19,12 +19,12 @@ namespace Server.BusinessLogic {
             return Convert.ToBase64String(salt) + ":" + Convert.ToBase64String(hashValue);
         }
 
-     public bool ValidateUserLogin(User user, string password) {
+        public bool ValidateUserLogin(User user, string password) {
             bool res = false;
             byte[] userSalt = Convert.FromBase64String(user.Salt);
             byte[] userHash = Convert.FromBase64String(user.HashPassword);
             byte[] hashValue = GenerateHashValue(password, userSalt, IterationCount);
-            if(userHash.SequenceEqual(hashValue)) {
+            if (userHash.SequenceEqual(hashValue)) {
                 res = true;
             }
             return res;
