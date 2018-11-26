@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace Client.Webshop.Controllers
 {
-    public class UserController : Controller
+    public class UserProfileController : Controller
     {
-        // GET: User
+        // GET: UserProfile
         public ActionResult Index()
         {
             return View();
