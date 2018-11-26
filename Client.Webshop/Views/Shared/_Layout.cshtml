@@ -38,7 +38,7 @@
                 @if(HttpContext.Current.Session["User"] != null) {
                 <div>
 
-                    <a href="@Url.Action("Index", "Login")">
+                    <a href="@Url.Action("Index", "UserProfile")">
                         <span class="glyphicon glyphicon-user" style="font-size:35px; margin-left:15px; color: lightgray"></span>
                     </a>
 
@@ -46,7 +46,7 @@
                         <span class="glyphicon glyphicon-shopping-cart" style="font-size:35px; margin-left:15px; color: lightgray"></span>
                     </a>
 
-                    <a href="@Url.Action("Logout", "UserController")">
+                    <a href="@Url.Action("Logout", "UserProfile")">
                         <span class="glyphicon glyphicon-log-out" style="font-size:35px; margin-left:15px; color: lightgray"></span>
                     </a>
                 </div>

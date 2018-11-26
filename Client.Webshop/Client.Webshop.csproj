@@ -213,12 +213,11 @@
     <Content Include="Views\Buy\Confirmation.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Signup\Index.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\UserProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\UserProfile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
