@@ -18,38 +18,31 @@
 
                     <div class="formRow textNormal">
                         Fornavn*
-                        placeholder = @((string)(Session["firstName"]));
-                        <input class="textboxWide2 textNormal margin" name="firstName" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" placeholder="Fornavn" required oninvalid="this.setCustomValidity('Indtast et fornavn med 2-20 bogstaver')" oninput="setCustomValidity('')" />
+                        <input autocomplete="off" class="textboxWide2 textNormal margin" name="firstName" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" placeholder="Fornavn" required oninvalid="this.setCustomValidity('Indtast et fornavn med 2-20 bogstaver')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         Efternavn*
-                        placeholder = @((string)(Session["lastName"]));
-                        <input class="textboxWide2 textNormal margin" name="lastName" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ ]+)*$" type="text" id="name" placeholder="Efternavn" required oninvalid="this.setCustomValidity('Indtast et efternavn')" oninput="setCustomValidity('')" />
+                        <input autocomplete="off" class="textboxWide2 textNormal margin" name="lastName" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ ]+)*$" type="text" id="name" placeholder="Efternavn" required oninvalid="this.setCustomValidity('Indtast et efternavn')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         Adresse*
-                        placeholder = @((string)(Session["street"]));
-                        <input class="textboxWide2 textNormal margin" name="street" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ0-9-., ]+)*$" type="text" id="name" placeholder="Adresse" required oninvalid="this.setCustomValidity('Indtast en gyldig adresse')" oninput="setCustomValidity('')" />
+                        <input autocomplete="off" class="textboxWide2 textNormal margin" name="street" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ0-9-., ]+)*$" type="text" id="name" placeholder="Adresse" required oninvalid="this.setCustomValidity('Indtast en gyldig adresse')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         Postnummer.*
-                        placeholder = @((int)(Session["zip"]));
-                        <input class="textboxSmall3 textNormal marginRightWide2" name="zip" pattern="[0-9]{4}" type="tel" id="name" placeholder="Postnr." required oninvalid="this.setCustomValidity('Indtast et dansk postnummer')" oninput="setCustomValidity('')" />
+                        <input autocomplete="off" class="textboxSmall3 textNormal marginRightWide2" name="zip" pattern="[0-9]{4}" type="tel" id="name" placeholder="Postnr." required oninvalid="this.setCustomValidity('Indtast et dansk postnummer')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         By.*
-                        placeholder = @((string)(Session["city"]));
-                        <input class="textboxMedium2 textNormal marginRightMedium2" name="city" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" placeholder="By" required oninvalid="this.setCustomValidity('Indtast en dansk by')" oninput="setCustomValidity('')" />
+                        <input autocomplete="off" class="textboxMedium2 textNormal marginRightMedium2" name="city" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" placeholder="By" required oninvalid="this.setCustomValidity('Indtast en dansk by')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         Email.*
-                        placeholder = @((string)(Session["email"]));
-                        <input autocomplete="off" class="textboxWide2 textNormal margin" name="email" type="email" id="name" placeholder="E-mail" required />
+                        <input autocomplete="off" class="textboxWide2 textNormal margin" name="email" pattern="[a-z0-9._%+-]+@("@")[a-z0-9.-]+\.[a-z]{2,}$" type="email" id="name" placeholder="E-mail" required oninvalid="this.setCustomValidity('Indtast en mailadresse')" oninput="setCustomValidity('')" />
                     </div>
                     <div class="formRow textNormal">
                         Telefonnummer.*
-                        placeholder = @((int)(Session["number"]));
-                        <input class="textboxMedium2 textNormal marginRightMedium2" name="number" pattern="[0-9]{8}" type="tel" id="name" placeholder="Telefon nr." required oninvalid="this.setCustomValidity('Indtast et gyldigt telefonnummer')" oninput="setCustomValidity('')" />
+                        <input autocomplete="off" class="textboxMedium2 textNormal marginRightMedium2" name="number" pattern="[0-9]{8}" type="tel" id="name" placeholder="Telefon nr." required oninvalid="this.setCustomValidity('Indtast et gyldigt telefonnummer')" oninput="setCustomValidity('')" />
                     </div>
 
 
