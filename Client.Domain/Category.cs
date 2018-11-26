@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace Client.Domain {
     public class Category : Tag {
-        //
+        public Category()
+        {
+        }
 
+        public Category(string name)
+        {
+            Name = name;
+            Products = new List<Product>();
+        }
     }
+
+
 }

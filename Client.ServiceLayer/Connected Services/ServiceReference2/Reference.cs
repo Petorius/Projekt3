@@ -17,19 +17,20 @@ namespace Client.ServiceLayer.ServiceReference2 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Tag", Namespace="http://schemas.datacontract.org/2004/07/Server.Domain")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.ServiceLayer.ServiceReference2.Category))]
     public partial class Tag : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Client.ServiceLayer.ServiceReference2.Product[] ProductsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int TagIDField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -38,6 +39,19 @@ namespace Client.ServiceLayer.ServiceReference2 {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
             }
         }
         
@@ -67,19 +81,6 @@ namespace Client.ServiceLayer.ServiceReference2 {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int TagID {
-            get {
-                return this.TagIDField;
-            }
-            set {
-                if ((this.TagIDField.Equals(value) != true)) {
-                    this.TagIDField = value;
-                    this.RaisePropertyChanged("TagID");
-                }
-            }
-        }
-        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -88,6 +89,13 @@ namespace Client.ServiceLayer.ServiceReference2 {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Category", Namespace="http://schemas.datacontract.org/2004/07/Server.Domain")]
+    [System.SerializableAttribute()]
+    public partial class Category : Client.ServiceLayer.ServiceReference2.Tag {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -124,13 +132,10 @@ namespace Client.ServiceLayer.ServiceReference2 {
         private int RatingField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SalesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StockField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TempImageNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TempImageURLField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -247,6 +252,19 @@ namespace Client.ServiceLayer.ServiceReference2 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Sales {
+            get {
+                return this.SalesField;
+            }
+            set {
+                if ((this.SalesField.Equals(value) != true)) {
+                    this.SalesField = value;
+                    this.RaisePropertyChanged("Sales");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Stock {
             get {
                 return this.StockField;
@@ -255,32 +273,6 @@ namespace Client.ServiceLayer.ServiceReference2 {
                 if ((this.StockField.Equals(value) != true)) {
                     this.StockField = value;
                     this.RaisePropertyChanged("Stock");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TempImageName {
-            get {
-                return this.TempImageNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TempImageNameField, value) != true)) {
-                    this.TempImageNameField = value;
-                    this.RaisePropertyChanged("TempImageName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TempImageURL {
-            get {
-                return this.TempImageURLField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TempImageURLField, value) != true)) {
-                    this.TempImageURLField = value;
-                    this.RaisePropertyChanged("TempImageURL");
                 }
             }
         }
@@ -365,6 +357,24 @@ namespace Client.ServiceLayer.ServiceReference2 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/FindTagByName", ReplyAction="http://tempuri.org/ITagService/FindTagByNameResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Tag> FindTagByNameAsync(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetSalesByCategory", ReplyAction="http://tempuri.org/ITagService/GetSalesByCategoryResponse")]
+        Client.ServiceLayer.ServiceReference2.Category GetSalesByCategory(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetSalesByCategory", ReplyAction="http://tempuri.org/ITagService/GetSalesByCategoryResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Category> GetSalesByCategoryAsync(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAllSales", ReplyAction="http://tempuri.org/ITagService/GetAllSalesResponse")]
+        Client.ServiceLayer.ServiceReference2.Product[] GetAllSales();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAllSales", ReplyAction="http://tempuri.org/ITagService/GetAllSalesResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Product[]> GetAllSalesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/FindBestSellers", ReplyAction="http://tempuri.org/ITagService/FindBestSellersResponse")]
+        Client.ServiceLayer.ServiceReference2.Tag FindBestSellers(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/FindBestSellers", ReplyAction="http://tempuri.org/ITagService/FindBestSellersResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Tag> FindBestSellersAsync(string name);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -400,6 +410,30 @@ namespace Client.ServiceLayer.ServiceReference2 {
         
         public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Tag> FindTagByNameAsync(string name) {
             return base.Channel.FindTagByNameAsync(name);
+        }
+        
+        public Client.ServiceLayer.ServiceReference2.Category GetSalesByCategory(string name) {
+            return base.Channel.GetSalesByCategory(name);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Category> GetSalesByCategoryAsync(string name) {
+            return base.Channel.GetSalesByCategoryAsync(name);
+        }
+        
+        public Client.ServiceLayer.ServiceReference2.Product[] GetAllSales() {
+            return base.Channel.GetAllSales();
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Product[]> GetAllSalesAsync() {
+            return base.Channel.GetAllSalesAsync();
+        }
+        
+        public Client.ServiceLayer.ServiceReference2.Tag FindBestSellers(string name) {
+            return base.Channel.FindBestSellers(name);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Tag> FindBestSellersAsync(string name) {
+            return base.Channel.FindBestSellersAsync(name);
         }
     }
 }

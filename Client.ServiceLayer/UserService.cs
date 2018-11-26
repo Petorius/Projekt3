@@ -34,5 +34,22 @@ namespace Client.ServiceLayer {
             UserReference.UserServiceClient myProxy = new UserReference.UserServiceClient();
             return myProxy.ValidatePassword(email, password);
         }
+
+        public Customer GetCustomerByMail(string email) {
+            UserReference.UserServiceClient myProxy = new UserReference.UserServiceClient();
+            var customer = myProxy.GetCustomerByMail(email);
+            Customer c = new Customer();
+            if(customer != null) {
+                c.ID = customer.ID;
+                c.FirstName = customer.FirstName;
+                c.LastName = customer.LastName;
+                c.Phone = customer.Phone;
+                c.Email = customer.Email;
+                c.Address = customer.Address;
+                c.ZipCode = customer.ZipCode;
+                c.City = customer.City;
+            }
+            return c;
+        }
     }
 }

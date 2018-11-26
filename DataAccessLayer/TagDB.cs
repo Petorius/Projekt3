@@ -50,12 +50,12 @@ namespace Server.DataAccessLayer {
                     SqlDataReader tagIDReader = cmd.ExecuteReader();
                     while (tagIDReader.Read()) {
                         t.Name = name;
-                        t.TagID = tagIDReader.GetInt32(tagIDReader.GetOrdinal("tagID"));
+                        t.ID = tagIDReader.GetInt32(tagIDReader.GetOrdinal("tagID"));
                     }
                     tagIDReader.Close();
 
                     cmd.CommandText = "Select productID From ProductTag Where tagID = @tagID";
-                    cmd.Parameters.AddWithValue("tagID", t.TagID);
+                    cmd.Parameters.AddWithValue("tagID", t.ID);
                     SqlDataReader productReader = cmd.ExecuteReader();
                     while (productReader.Read()) {
                         int foundProductID;

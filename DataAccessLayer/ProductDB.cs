@@ -25,14 +25,15 @@ namespace Server.DataAccessLayer {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
 
-                    cmd.CommandText = "Insert into Product(Name, Price, Stock, MinStock, MaxStock, Description) OUTPUT INSERTED.ProductID values" +
-                            " (@Name, @Price, @Stock, @MinStock, @MaxStock, @Description)";
+                    cmd.CommandText = "Insert into Product(Name, Price, Stock, MinStock, MaxStock, Description, Sales) OUTPUT INSERTED.ProductID values" +
+                            " (@Name, @Price, @Stock, @MinStock, @MaxStock, @Description, @Sales)";
                     cmd.Parameters.AddWithValue("Name", Entity.Name);
                     cmd.Parameters.AddWithValue("Price", Entity.Price);
                     cmd.Parameters.AddWithValue("Stock", Entity.Stock);
                     cmd.Parameters.AddWithValue("MinStock", Entity.MinStock);
                     cmd.Parameters.AddWithValue("MaxStock", Entity.MaxStock);
                     cmd.Parameters.AddWithValue("Description", Entity.Description);
+                    cmd.Parameters.AddWithValue("Sales", Entity.Sales);
                     insertedID = (int)cmd.ExecuteScalar();
 
                     foreach (Image i in Entity.Images) {
@@ -110,7 +111,7 @@ namespace Server.DataAccessLayer {
                 using (SqlCommand cmd = connection.CreateCommand()) {
                     Product p = new Product();
 
-                    cmd.CommandText = "SELECT productid, name, price, stock, description, rating, minstock, maxstock from Product where productID = @ProductID";
+                    cmd.CommandText = "SELECT productid, name, price, stock, description, rating, minstock, maxstock, sales from Product where productID = @ProductID";
                     cmd.Parameters.AddWithValue("ProductID", id);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read()) {
@@ -121,6 +122,7 @@ namespace Server.DataAccessLayer {
                         p.MinStock = reader.GetInt32(reader.GetOrdinal("minstock"));
                         p.MaxStock = reader.GetInt32(reader.GetOrdinal("maxstock"));
                         p.Description = reader.GetString(reader.GetOrdinal("description"));
+                        //p.Sales = reader.GetInt32(reader.GetOrdinal("sales"));
                         //p.Rating = reader.GetInt32(reader.GetOrdinal("rating"));
                     }
                     reader.Close();

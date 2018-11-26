@@ -140,6 +140,9 @@ namespace Client.ServiceLayer.OrderReference {
         private int RatingField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SalesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StockField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -252,6 +255,19 @@ namespace Client.ServiceLayer.OrderReference {
                 if ((this.RatingField.Equals(value) != true)) {
                     this.RatingField = value;
                     this.RaisePropertyChanged("Rating");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Sales {
+            get {
+                return this.SalesField;
+            }
+            set {
+                if ((this.SalesField.Equals(value) != true)) {
+                    this.SalesField = value;
+                    this.RaisePropertyChanged("Sales");
                 }
             }
         }
