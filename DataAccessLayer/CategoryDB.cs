@@ -15,6 +15,12 @@ namespace Server.DataAccessLayer
         private string connectionString;
         private ProductDB productDB;
 
+        // Database test constructor. Only used for unit testing.
+        public CategoryDB(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
         public CategoryDB() {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             productDB = new ProductDB();
@@ -58,6 +64,11 @@ namespace Server.DataAccessLayer
                     {
                         int foundProductID;
                         foundProductID = productReader.GetInt32(productReader.GetOrdinal("productID"));
+
+                        if(productDB == null)
+                        {
+                            productDB = new ProductDB(connectionString);
+                        }
 
                         Product p = productDB.Get(foundProductID);
 
