@@ -25,6 +25,8 @@ namespace Server.Domain {
         [DataMember]
         public int Rating { get; set; }
         [DataMember]
+        public int Sales { get; set; }
+        [DataMember]
         public List<Image> Images { get; set; }
 
         public Product(string name, decimal price, int stock, int minStock, int maxStock, string description) {

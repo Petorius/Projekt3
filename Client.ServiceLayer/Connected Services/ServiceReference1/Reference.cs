@@ -47,13 +47,10 @@ namespace Client.ServiceLayer.ServiceReference1 {
         private int RatingField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SalesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StockField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TempImageNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TempImageURLField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -170,6 +167,19 @@ namespace Client.ServiceLayer.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Sales {
+            get {
+                return this.SalesField;
+            }
+            set {
+                if ((this.SalesField.Equals(value) != true)) {
+                    this.SalesField = value;
+                    this.RaisePropertyChanged("Sales");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Stock {
             get {
                 return this.StockField;
@@ -178,32 +188,6 @@ namespace Client.ServiceLayer.ServiceReference1 {
                 if ((this.StockField.Equals(value) != true)) {
                     this.StockField = value;
                     this.RaisePropertyChanged("Stock");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TempImageName {
-            get {
-                return this.TempImageNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TempImageNameField, value) != true)) {
-                    this.TempImageNameField = value;
-                    this.RaisePropertyChanged("TempImageName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TempImageURL {
-            get {
-                return this.TempImageURLField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TempImageURLField, value) != true)) {
-                    this.TempImageURLField = value;
-                    this.RaisePropertyChanged("TempImageURL");
                 }
             }
         }
