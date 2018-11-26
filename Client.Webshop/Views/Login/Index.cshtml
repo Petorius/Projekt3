@@ -16,14 +16,14 @@
     <form name="Login" method="post" action="@Url.Action("Login", "Login")">
         
         <hr>
-        <div> <p style="visibility: @ViewBag.Visibility; color: red; font-size: 17px; width: 250px; height: 20px;" >Invalid email or password</p> </div>
+        <div> <p style="visibility: @ViewBag.Visibility; color: red; font-size: 17px; width: 250px; height: 20px;" >Forkert email eller kodeord</p> </div>
         <label id="icon" for="name"><i class="icon-envelope "></i></label>
         <input autocomplete="off" name="email" type="email" id="name" placeholder="E-mail" required />
         <label id="icon" for="name"><i class="icon-shield"></i></label>
         <input autocomplete="off" name="password" type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-ZÆØÅ])(?=.*[a-zæøå]).*$" id="name" placeholder="Kodeord" required oninvalid="this.setCustomValidity('Indtast minimum 8 tegn med tal, store og små bogstaver.')" oninput="setCustomValidity('')" />
 
 
-        <input type="submit" value="Log ind" class="loginbutton" />
+        <input type="submit" value="Log ind" class="loginbutton"/>
 
         <p>Er du ikke medlem?</p>
         <a href="@Url.Action("Index", "Signup")">Tilmeld her</a>
