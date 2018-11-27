@@ -14,7 +14,7 @@ namespace PaymentWebAPI.Controllers {
             if (true) {
                 return true;
             }
-            return false;
+            //return false;
         }
 
         // POST api/values

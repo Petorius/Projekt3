@@ -17,18 +17,16 @@ namespace Client.Domain {
         public int Sales { get; set; }
         public bool isActive { get; set; }
         public List<Image> Images { get; set; }
-        public Category Category { get; set; }
         public List<Keyword> Keywords { get; set; }
         public Review Review { get; set; }
 
-        public Product(string name, decimal price, int stock, int minStock, int maxStock, string description, Category category, List<Keyword> keywords) {
+        public Product(string name, decimal price, int stock, int minStock, int maxStock, string description, List<Keyword> keywords) {
             Name = name;
             Price = price;
             Stock = stock;
             MinStock = minStock;
             MaxStock = maxStock;
             Description = description;
-            Category = category;
             Keywords = keywords;
             
         }

@@ -56,7 +56,6 @@
     <Compile Include="ProductTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TagTest.cs" />
-    <Compile Include="CategoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
