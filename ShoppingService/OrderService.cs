@@ -1,11 +1,7 @@
 ﻿using Server.Domain;
 using Server.DataAccessLayer;
-using System;
 using Server.BusinessLogic;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server.ServiceLayer {
 

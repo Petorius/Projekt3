@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Server.DataAccessLayer;
+﻿using Server.DataAccessLayer;
 using Server.Domain;
 
 namespace Server.BusinessLogic {
@@ -14,14 +9,16 @@ namespace Server.BusinessLogic {
             customerDB = new CustomerDB();
         }
 
-        // Database test constructor. Only used for unit testing.
+        // Database test constructor. Only used for testing.
         public CustomerLogic(string connectionString) {
             customerDB = new CustomerDB(connectionString);
         }
 
+        // Checks if customer exists in the database. If customer exists we update,
+        // otherwise we create a new customer.
         public Customer HandleCustomer(string firstName, string lastName, string street, int zip, string city, string email,
          int number) {
-            Customer c = customerDB.GetByMail(email);
+            Customer c = GetCustomerByMail(email);
             c.FirstName = firstName;
             c.LastName = lastName;
             c.Address = street;
