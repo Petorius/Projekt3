@@ -10,6 +10,7 @@ namespace Client.Webshop.Controllers {
     public class HomeController : Controller {
         ProductController pc = new ProductController();
         OrderController orderController = new OrderController();
+        TagController tc = new TagController();
 
 
         IEnumerable<Product> products = new List<Product>();
@@ -45,5 +46,13 @@ namespace Client.Webshop.Controllers {
 
             return View();
         }
+
+        // GET: Category
+        public ActionResult GetSalesByCategory(string name) {
+            Category c = tc.GetSalesByCategory(name);
+            return View("Index", c.Products);
+        }
+
+
     }
 }
