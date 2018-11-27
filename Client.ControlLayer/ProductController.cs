@@ -29,9 +29,8 @@ namespace Client.ControlLayer {
             return productService.Update(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
 
-        public IEnumerable<Product> GetAllProducts()
-        {
-            return productService.GetAllProducts();
+        public IEnumerable<Product> GetAllProducts() {
+            return productService.GetAllProducts().OrderByDescending(x => x.Sales);
         }
     }
 }

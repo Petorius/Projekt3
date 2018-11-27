@@ -42,8 +42,9 @@ namespace Server.DataAccessLayer {
                         reader.Close();
                         try {
                             cmd.CommandText = "UPDATE Product " +
-                                "SET stock = @stock WHERE productID = @productID AND rowID = @rowId";
+                                "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
                             cmd.Parameters.AddWithValue("stock", Entity.Product.Stock - Entity.Quantity);
+                            cmd.Parameters.AddWithValue("sales", Entity.Product.Sales + Entity.Quantity);
                             cmd.Parameters.AddWithValue("rowID", rowId);
                             rowCount = cmd.ExecuteNonQuery();
 
@@ -90,8 +91,9 @@ namespace Server.DataAccessLayer {
 
                             try {
                                 cmd.CommandText = "UPDATE Product " +
-                                    "SET stock = @stock WHERE productID = @productID AND rowID = @rowId";
+                                    "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
                                 cmd.Parameters.AddWithValue("stock", Entity.Product.Stock + Entity.Quantity);
+                                cmd.Parameters.AddWithValue("sales", Entity.Product.Sales - Entity.Quantity);
                                 cmd.Parameters.AddWithValue("rowID", rowId);
                                 rowCount = cmd.ExecuteNonQuery();
 
@@ -148,8 +150,9 @@ namespace Server.DataAccessLayer {
 
                             try {
                                 cmd.CommandText = "UPDATE Product " +
-                                    "SET stock = @stock WHERE productID = @productID AND rowID = @rowId";
+                                    "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
                                 cmd.Parameters.AddWithValue("stock", Entity.Product.Stock + 1);
+                                cmd.Parameters.AddWithValue("sales", Entity.Product.Sales - 1);
                                 cmd.Parameters.AddWithValue("rowID", rowId);
                                 rowCount = cmd.ExecuteNonQuery();
 

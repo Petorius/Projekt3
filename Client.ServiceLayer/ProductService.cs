@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Client.Domain;
 
 namespace Client.ServiceLayer {
     public class ProductService : IProductService {
-        public bool Create(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
-            ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
+
+        ServiceReference1.ProductServiceClient myProxy;
+
+        public ProductService() {
+            myProxy = new ServiceReference1.ProductServiceClient();
+        }
+
+        public bool Create(string name, decimal price, int stock, int minStock, int maxStock,
+                        string description, string ImageURL, string ImageName) {
             return myProxy.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
         }
 
         public bool Delete(int id) {
-            ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
             return myProxy.DeleteProduct(id);
         }
 
         public Product Find(int ID) {
-            ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
             var p = myProxy.FindProduct(ID);
             Product product = new Product();
             if (p != null) {
@@ -30,49 +31,50 @@ namespace Client.ServiceLayer {
                 product.Rating = p.Rating;
                 product.MinStock = p.MinStock;
                 product.MaxStock = p.MaxStock;
-                product.isActive = p.IsActive;
 
-                foreach(var i in p.Images) {
-                    Image image = new Image();
-                    image.ImageSource = i.ImageSource;
-                    image.Name = i.Name;
-                    product.Images.Add(image);
+                if (p != null) {
+                    product = BuildServiceProduct(p);
                 }
-
-                return product;
             }
-            return null;
-
+            return product;
         }
 
         public IEnumerable<Product> GetAllProducts() {
-            ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
             var products = myProxy.GetAllProducts();
 
             List<Product> productList = new List<Product>();
 
             if (products != null) {
                 foreach (var p in products) {
-                    Product product = new Product();
-                    product.ID = p.ID;
-                    product.Name = p.Name;
-                    product.Price = p.Price;
-                    product.Stock = p.Stock;
-                    product.Description = p.Description;
-                    product.Rating = p.Rating;
-                    product.MinStock = p.MinStock;
-                    product.MaxStock = p.MaxStock;
-
-                    foreach (var i in p.Images) {
-                        Image image = new Image();
-                        image.ImageSource = i.ImageSource;
-                        image.Name = i.Name;
-                        product.Images.Add(image);
-                    }
+                    Product product = BuildServiceProduct(p);
                     productList.Add(product);
                 }
             }
             return productList;
+        }
+
+        // Helping method used to convert a product from server.domain to client.domain.
+        private Product BuildServiceProduct(ServiceReference1.Product p) {
+            Product product = new Product {
+                ID = p.ID,
+                Name = p.Name,
+                Price = p.Price,
+                Stock = p.Stock,
+                Description = p.Description,
+                Rating = p.Rating,
+                MinStock = p.MinStock,
+                MaxStock = p.MaxStock
+            };
+
+            foreach (var i in p.Images) {
+                Image image = new Image {
+                    ImageSource = i.ImageSource,
+                    Name = i.Name
+                };
+                product.Images.Add(image);
+            }
+
+            return product;
         }
 
         public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
@@ -80,4 +82,5 @@ namespace Client.ServiceLayer {
             return myProxy.Update(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
     }
+
 }

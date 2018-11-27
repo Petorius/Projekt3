@@ -1,10 +1,5 @@
 ﻿using Client.Domain;
 using Client.ServiceLayer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Client.ControlLayer {
     public class UserController {
@@ -23,6 +18,8 @@ namespace Client.ControlLayer {
             return userService.ValidatePassword(email, password);
         }
 
+        // Checks if the email is already registered on an user
+        // and returns true if an email is registered on an user, otherwise false.
         public bool IsEmailAlreadyRegistered(string email) {
             bool res = false;
             User user = userService.GetUser(email);

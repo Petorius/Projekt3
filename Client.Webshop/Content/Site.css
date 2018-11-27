@@ -227,3 +227,28 @@ img {
     border-color: #ebccd1;
     display: none;
 }
+
+.myButton1 {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #eee), color-stop(1, #0eee));
+	background:-moz-linear-gradient(top, #eee 5%, #eee 100%);
+	background:-webkit-linear-gradient(top, #eee 5%, #eee 100%);
+	background:-o-linear-gradient(top, #eee 5%, #eee 100%);
+	background:linear-gradient(to bottom, #eee 5%, #eee 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eee', endColorstr='#eee',GradientType=0);
+	background-color:#eee;
+	-moz-border-radius:22px;
+	-webkit-border-radius:22px;
+	border-radius:22px;
+	display:inline-block;
+	cursor: text;
+	color:#000000;
+	font-family:Arial;
+	font-size:22px;
+	padding:22px 76px;
+	text-decoration:none;
+}
+
+.myButton1:active {
+	position:relative;
+	top:1px;
+}
