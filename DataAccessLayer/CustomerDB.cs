@@ -4,9 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server.DataAccessLayer {
     public class CustomerDB : ICRUD<Customer>, ICustomer {
@@ -41,7 +38,6 @@ namespace Server.DataAccessLayer {
                     //catch (SqlException) {
                     //    isCompleted = false;
                     //}
-                
             }
             return res;
         }
@@ -54,6 +50,7 @@ namespace Server.DataAccessLayer {
             throw new NotImplementedException();
         }
 
+        // Method with optimistic concurreny. If anything is changed, we rollback our transaction after trying for 4 times
         public bool Update(Customer Entity, bool test = false, bool testResult = false) {
             bool isUpdated = false;
             for (int i = 0; i < 5; i++) {
@@ -86,6 +83,7 @@ namespace Server.DataAccessLayer {
                                 cmd.Parameters.AddWithValue("rowID", rowId);
                                 rowCount = cmd.ExecuteNonQuery();
 
+                                // Used to unit test. If test is true, we can set rowCount to 0 and fake a optimistic concurreny problem
                                 if (test) {
                                     rowCount = testResult ? 1 : 0;
                                 }
