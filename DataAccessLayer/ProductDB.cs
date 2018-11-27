@@ -55,6 +55,7 @@ namespace Server.DataAccessLayer {
             return isCompleted;
         }
 
+        // Method with optimistic concurreny. If anything is changed, we rollback our transaction after trying for 4 times
         public bool Delete(Product Entity, bool test = false, bool testResult = false) {
             bool deleted = false;
             for (int i = 0; i < 5; i++) {
@@ -79,6 +80,7 @@ namespace Server.DataAccessLayer {
                             cmd.Parameters.AddWithValue("rowID", rowId);
                             rowCount = cmd.ExecuteNonQuery();
 
+                            // Used to unit test. If test is true, we can set rowCount to 0 and fake a optimistic concurreny problem
                             if (test) {
                                 rowCount = testResult ? 1 : 0;
                             }
@@ -182,6 +184,7 @@ namespace Server.DataAccessLayer {
                             cmd.Parameters.AddWithValue("rowID", rowId);
                             rowCount = cmd.ExecuteNonQuery();
 
+                            // Used to unit test. If test is true, we can set rowCount to 0 and fake a optimistic concurreny problem
                             if (test) {
                                 rowCount = testResult ? 1 : 0;
                             }

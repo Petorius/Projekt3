@@ -20,30 +20,11 @@ namespace Server.DataAccessLayer {
             productDB = new ProductDB();
         }
 
-        public Tag CreateTag(Tag tag)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand())
-                {
-
-                        cmd.CommandText = "Insert into Tag(Name) values" +
-                                " (@Name)";
-                        cmd.Parameters.AddWithValue("Name", tag.Name);
-                        cmd.ExecuteNonQuery();
-
-                }
-            }
-            return tag;
-        }
-
         public Tag Get(string name) {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 Tag t = new Tag();
                 using (SqlCommand cmd = connection.CreateCommand()) {
-                    
 
                     cmd.CommandText = "SELECT tagID From Tag Where Name = @Name";
                     cmd.Parameters.AddWithValue("Name", name);

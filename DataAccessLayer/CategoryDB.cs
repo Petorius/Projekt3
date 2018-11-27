@@ -3,22 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Server.DataAccessLayer
-{
-    public class CategoryDB 
-    {
+
+namespace Server.DataAccessLayer {
+    public class CategoryDB {
 
         private string connectionString;
         private ProductDB productDB;
 
         // Database test constructor. Only used for unit testing.
-        public CategoryDB(string connectionString)
-        {
+        public CategoryDB(string connectionString) {
             this.connectionString = connectionString;
+            productDB = new ProductDB(connectionString);
         }
 
         public CategoryDB() {
@@ -26,32 +22,16 @@ namespace Server.DataAccessLayer
             productDB = new ProductDB();
         }
 
-
-        public bool Create(Category Entity, bool test = false, bool testResult = false)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(Category Entity, bool test = false, bool testResult = false)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Category Get(string name)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
+        public Category Get(string name) {
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 Category c = new Category();
-                using (SqlCommand cmd = connection.CreateCommand())
-                {
-
+                using (SqlCommand cmd = connection.CreateCommand()) {
 
                     cmd.CommandText = "SELECT CategoryID From Category Where Name = @Name";
                     cmd.Parameters.AddWithValue("Name", name);
                     SqlDataReader categoryIDReader = cmd.ExecuteReader();
-                    while (categoryIDReader.Read())
-                    {
+                    while (categoryIDReader.Read()) {
                         c.Name = name;
                         c.ID = categoryIDReader.GetInt32(categoryIDReader.GetOrdinal("CategoryID"));
                     }
@@ -60,15 +40,9 @@ namespace Server.DataAccessLayer
                     cmd.CommandText = "Select productID From ProductCategory Where CategoryID = @CategoryID";
                     cmd.Parameters.AddWithValue("CategoryID", c.ID);
                     SqlDataReader productReader = cmd.ExecuteReader();
-                    while (productReader.Read())
-                    {
+                    while (productReader.Read()) {
                         int foundProductID;
                         foundProductID = productReader.GetInt32(productReader.GetOrdinal("productID"));
-
-                        if(productDB == null)
-                        {
-                            productDB = new ProductDB(connectionString);
-                        }
 
                         Product p = productDB.Get(foundProductID);
 
@@ -78,16 +52,6 @@ namespace Server.DataAccessLayer
                 }
                 return c;
             }
-        }
-
-        public IEnumerable<Category> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(Category Entity, bool test = false, bool testResult = false)
-        {
-            throw new NotImplementedException();
         }
     }
 }
