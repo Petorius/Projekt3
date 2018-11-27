@@ -10,7 +10,7 @@ namespace Client.ServiceLayer {
             myProxy = new ServiceReference1.ProductServiceClient();
         }
 
-        public bool Create(string name, decimal price, int stock, int minStock, int maxStock, 
+        public bool Create(string name, decimal price, int stock, int minStock, int maxStock,
                         string description, string ImageURL, string ImageName) {
             return myProxy.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
         }
@@ -32,10 +32,10 @@ namespace Client.ServiceLayer {
                 product.MinStock = p.MinStock;
                 product.MaxStock = p.MaxStock;
 
-            if (p != null) {
-                product = BuildServiceProduct(p);
+                if (p != null) {
+                    product = BuildServiceProduct(p);
+                }
             }
-
             return product;
         }
 
@@ -82,4 +82,5 @@ namespace Client.ServiceLayer {
             return myProxy.Update(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
     }
+
 }
