@@ -43,8 +43,9 @@ namespace Server.DataAccessLayer {
                         foundProductID = productReader.GetInt32(productReader.GetOrdinal("productID"));
 
                         Product p = productDB.Get(foundProductID);
-
-                        t.Products.Add(p);
+                        if(p.IsActive) {
+                            t.Products.Add(p);
+                        }
                     }
                     productReader.Close();
                 }

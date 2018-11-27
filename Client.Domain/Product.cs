@@ -15,7 +15,7 @@ namespace Client.Domain {
         public string Description { get; set; }
         public int Rating { get; set; }
         public int Sales { get; set; }
-        public bool isActive { get; set; }
+        public bool IsActive { get; set; }
         public List<Image> Images { get; set; }
         public List<Keyword> Keywords { get; set; }
         public Review Review { get; set; }

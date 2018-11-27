@@ -54,7 +54,8 @@ namespace Client.ServiceLayer {
                 Rating = p.Rating,
                 MinStock = p.MinStock,
                 MaxStock = p.MaxStock,
-                Sales = p.Sales
+                Sales = p.Sales,
+                IsActive = p.IsActive
             };
 
             foreach (var i in p.Images) {

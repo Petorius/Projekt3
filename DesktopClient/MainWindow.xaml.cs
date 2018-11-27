@@ -100,7 +100,7 @@ namespace DesktopClient {
         private void Søgbutton_Click(object sender, RoutedEventArgs e) {
             Product p = productController.Find(Int32.Parse(_inputIDtextBox.Text));
             try {
-                IsActiveButton.IsChecked = p.isActive;
+                IsActiveButton.IsChecked = p.IsActive;
                 updateNameTextBox.Text = p.Name;
                 updatePriceTextBox.Text = p.Price.ToString();
                 updateStockTextBox.Text = p.Stock.ToString();
@@ -141,6 +141,7 @@ namespace DesktopClient {
         }
 
         private void ProductClearUpdateFields() {
+            IsActiveButton.IsChecked = false;
             _inputIDtextBox.Text = "";
             updateNameTextBox.Text = "";
             updatePriceTextBox.Text = "";
