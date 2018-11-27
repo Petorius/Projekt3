@@ -15,12 +15,15 @@ namespace Server.ServiceLayer {
         public ProductService() {
             productDb = new ProductDB();
         }
+
         public bool CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
             Product p = new Product(name, price, stock, minStock, maxStock, description);
-            Image i = new Image();
-            i.ImageSource = ImageURL;
-            i.Name = ImageName;
+            Image i = new Image {
+                ImageSource = ImageURL,
+                Name = ImageName
+            };
             p.Images.Add(i);
+
             return productDb.Create(p);
         }
 
@@ -39,8 +42,10 @@ namespace Server.ServiceLayer {
         }
 
         public bool Update(int id, string name, decimal price, int stock, int minStock, int maxStock, string description) {
-            Product p = new Product(name, price, stock, minStock, maxStock, description);
-            p.ID = id;
+            Product p = new Product(name, price, stock, minStock, maxStock, description) {
+                ID = id
+            };
+
             return productDb.Update(p);
         }
     }
