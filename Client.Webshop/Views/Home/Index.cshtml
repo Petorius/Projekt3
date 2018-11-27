@@ -14,14 +14,14 @@
         </categoryMenu>
     </div>
 </div>
-<h1 class="myButton1">BESTSELLERS</h1>
+<h1 class="myButton1">@Session["Category"]</h1>
 <div class="container">
     @foreach (var item in Model) {
 
         <div class="imageFloat">
             <p>
                 <a href="@Url.Action("Index", "ProductView", new { id = item.ID })">
-                    <img border="0" alt="W3Schools" src="@item.Images[0].ImageSource" width="250" height="250" >
+                    <img border="0" alt="W3Schools" src="@item.Images[0].ImageSource" width="250" height="250">
                 </a>
             </p>
             <p>

@@ -16,6 +16,10 @@ namespace Client.Webshop.Controllers {
         IEnumerable<Product> products = new List<Product>();
 
         public ActionResult Index() {
+
+            //Reset session category
+            Session["Category"] = "Bestsellers";
+
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
             if (orderlines != null) {
@@ -50,6 +54,7 @@ namespace Client.Webshop.Controllers {
         // GET: Category
         public ActionResult GetSalesByCategory(string name) {
             Category c = tc.GetSalesByCategory(name);
+            Session["Category"] = name;
             return View("Index", c.Products);
         }
 
