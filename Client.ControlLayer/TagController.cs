@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Client.Domain;
 using Client.ServiceLayer;
 
@@ -17,23 +13,17 @@ namespace Client.ControlLayer {
             return tagService.FindTagByName(name);
         }
 
-        public Category GetSalesByCategory(string name)
-        {
+        public Category GetSalesByCategory(string name) {
             return tagService.GetSalesByCategory(name);
         }
 
-        public Tag FindBestSellers(string name)
-        {
+        public Tag FindBestSellers(string name) {
             return tagService.FindTagByName("Bestseller");
         }
 
-        public IEnumerable<Product> GetBestsellersInCategory (string name)
-        {
+        public IEnumerable<Product> GetBestsellersInCategory(string name) {
             return tagService.GetBestsellersInCategory(name);
         }
-
-
-
     }
 }
 

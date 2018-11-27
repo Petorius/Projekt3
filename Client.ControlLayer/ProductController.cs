@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Client.Domain;
 using Client.ServiceLayer;
 
@@ -29,8 +25,7 @@ namespace Client.ControlLayer {
             return productService.Update(ID, name, price, stock, minStock, maxStock, description);
         }
 
-        public IEnumerable<Product> GetAllProducts()
-        {
+        public IEnumerable<Product> GetAllProducts() {
             return productService.GetAllProducts();
         }
     }

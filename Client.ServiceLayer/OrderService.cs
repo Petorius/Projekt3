@@ -1,18 +1,19 @@
 ﻿using Client.Domain;
 using Client.ServiceLayer.Interface;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace Client.ServiceLayer {
     public class OrderService : IOrderService {
+        OrderReference.OrderServiceClient myProxy;
+
+        public OrderService() {
+            myProxy = new OrderReference.OrderServiceClient();
+        }
 
         public Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email,
             int number, IEnumerable<Orderline> ol) {
-            OrderReference.OrderServiceClient myProxy = new OrderReference.OrderServiceClient();
             List<OrderReference.OrderLine> serviceOrderLines = GetServiceOrderLines(ol);
 
             var order = myProxy.CreateOrder(firstName, lastName, street, zip, city, email, number, serviceOrderLines.ToArray());
@@ -21,20 +22,18 @@ namespace Client.ServiceLayer {
         }
 
         public bool CreateOrderLine(int quantity, decimal subTotal, int ID) {
-            OrderReference.OrderServiceClient myProxy = new OrderReference.OrderServiceClient();
             return myProxy.CreateOrderLine(quantity, subTotal, ID);
         }
 
         public bool DeleteOrderLine(int ID, decimal subTotal, int quantity) {
-            OrderReference.OrderServiceClient myProxy = new OrderReference.OrderServiceClient();
             return myProxy.DeleteOrderLine(ID, subTotal, quantity);
         }
 
         public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {
-            OrderReference.OrderServiceClient myProxy = new OrderReference.OrderServiceClient();
             return myProxy.UpdateOrderLine(ID, subTotal, quantity);
         }
         
+        // Helping method used to convert orderlines from server.domain to client.domain.
         private List<OrderReference.OrderLine> GetServiceOrderLines(IEnumerable<Orderline> pols) {
             OrderReference.OrderLine tempOl;
             OrderReference.Product tempProduct;
@@ -56,15 +55,19 @@ namespace Client.ServiceLayer {
             return serviceOrderLines;
         }
 
+        // Helping method used to convert an order from server.domain to client.domain.
         private Order BuildOrderFromServices(OrderReference.Order order, List<Orderline> ol) {
+
             Customer c = new Customer(order.Customer.FirstName, order.Customer.LastName, order.Customer.Phone,
                 order.Customer.Email, order.Customer.Address, order.Customer.ZipCode, order.Customer.City);
-            Order o = new Order(c);
-            o.Orderlines = ol;
-            o.ID = order.ID;
-            o.DateCreated = order.DateCreated;
-            o.Total = order.Total;
-            o.Validation = order.Validation;
+
+            Order o = new Order(c) {
+                Orderlines = ol,
+                ID = order.ID,
+                DateCreated = order.DateCreated,
+                Total = order.Total,
+                Validation = order.Validation
+            };
             return o;
         }
            
