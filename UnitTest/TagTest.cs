@@ -24,9 +24,9 @@ namespace UnitTest {
         [TestMethod]
         public void GetTagTest() {
             Tag t = new Tag();
-            t.Name = tagDB.Get("Sort").Name;
+            t.Name = tagDB.Get("Safirglas").Name;
 
-            Assert.AreEqual("Sort", t.Name);
+            Assert.AreEqual("Safirglas", t.Name);
         }
 
         [TestMethod]
@@ -39,7 +39,7 @@ namespace UnitTest {
 
         [TestMethod]
         public void GetProductsInTag() {
-            Tag t = tagDB.Get("Sort");
+            Tag t = tagDB.Get("Safirglas");
 
             Assert.AreEqual(t.Products.Count, 2);
         }

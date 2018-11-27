@@ -38,7 +38,7 @@ namespace UnitTest {
 
             p = productDB.Get(1);
 
-            Assert.AreEqual(p.Name, "Tissot Classic");
+            Assert.AreEqual(p.Name, "Rolex Oyster");
         }
 
         [TestMethod]
@@ -53,20 +53,20 @@ namespace UnitTest {
             Assert.AreEqual(p.Name, "Tissot Prime");
 
             Product p1 = productDB.Get(1);
-            p1.Name = "Tissot Classic";
+            p1.Name = "Rolex Oyster";
             productDB.Update(p1, true, true);
         }
 
-        //[TestMethod]
-        //public void DeleteProductTestExpectedToFail() {
-        //    Product p = new Product();
-        //    p.ID = 1;
-        //    productDB.Delete(p, true);
+        [TestMethod]
+        public void DeleteProductTestExpectedToFail() {
+            Product p = new Product();
+            p.ID = 1;
+            productDB.Delete(p, true);
 
-        //    p = productDB.Get(1);
+            p = productDB.Get(1);
 
-        //    Assert.IsNotNull(p);
-        //}
+            Assert.IsTrue(p.IsActive);
+        }
 
         // Method to help testing by finding a product
         private Product FindHelperTest(int id) {
