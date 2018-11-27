@@ -22,20 +22,10 @@ namespace Client.ServiceLayer {
         public Product Find(int ID) {
             var p = myProxy.FindProduct(ID);
             Product product = new Product();
-            if (p != null) {
-                product.ID = p.ID;
-                product.Name = p.Name;
-                product.Price = p.Price;
-                product.Stock = p.Stock;
-                product.Description = p.Description;
-                product.Rating = p.Rating;
-                product.MinStock = p.MinStock;
-                product.MaxStock = p.MaxStock;
-
                 if (p != null) {
                     product = BuildServiceProduct(p);
                 }
-            }
+            
             return product;
         }
 
@@ -63,7 +53,8 @@ namespace Client.ServiceLayer {
                 Description = p.Description,
                 Rating = p.Rating,
                 MinStock = p.MinStock,
-                MaxStock = p.MaxStock
+                MaxStock = p.MaxStock,
+                Sales = p.Sales
             };
 
             foreach (var i in p.Images) {
