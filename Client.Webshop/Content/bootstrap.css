@@ -4974,9 +4974,6 @@ a.badge:focus {
   margin-left: 3px;
 }
 .jumbotron {
-  padding-top: 30px;
-  padding-bottom: 30px;
-  margin-bottom: 30px;
   color: inherit;
   background-color: #eee;
 }
@@ -4985,7 +4982,6 @@ a.badge:focus {
   color: inherit;
 }
 .jumbotron p {
-  margin-bottom: 15px;
   font-size: 21px;
   font-weight: 200;
 }
@@ -5003,7 +4999,7 @@ a.badge:focus {
 }
 @media screen and (min-width: 768px) {
   .jumbotron {
-    padding-top: 48px;
+    padding-top: 15px;
     padding-bottom: 48px;
   }
   .container .jumbotron,
@@ -6782,4 +6778,32 @@ button.close {
     display: none !important;
   }
 }
+categoryMenu {
+    
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #FFF;
+}
+categoryli {
+    margin-left: 50px;
+    float: left;
+    
+}
+
+    categoryli a {
+        display: block;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: dimgrey;
+    }
+
+        /* Change the link color to #111 (black) on hover */
+        categoryli a:hover {
+            background-color: #FFF;
+            color: black;
+        }
 /*# sourceMappingURL=bootstrap.css.map */
