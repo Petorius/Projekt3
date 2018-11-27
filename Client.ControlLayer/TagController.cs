@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Client.Domain;
 using Client.ServiceLayer;
 
@@ -28,9 +24,6 @@ namespace Client.ControlLayer {
         public IEnumerable<Product> GetBestsellersInCategory(string name) {
             return tagService.GetBestsellersInCategory(name);
         }
-
-
-
     }
 }
 

@@ -13,6 +13,21 @@ namespace Client.Webshop.Controllers {
         UserController uc = new UserController();
         // GET: Buy
         public ActionResult Information(bool? wasRedirected) {
+
+            if (Session["User"] != null) {
+
+                User user = (User)Session["User"];
+                
+                TempData["FirstName"] = user.FirstName;
+                TempData["LastName"] = user.LastName;
+                TempData["Address"] = user.Address;
+                TempData["ZipCode"] = user.ZipCode;
+                TempData["City"] = user.City;
+                TempData["Email"] = user.Email;
+                TempData["Phone"] = user.Phone;
+                
+            }
+
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
             if (orderlines != null) {
@@ -45,8 +60,9 @@ namespace Client.Webshop.Controllers {
         [HttpPost]
         public ActionResult Confirmation(string firstName, string lastName, string street, int zip, string city, string email, int number) {
 
-            if (!uc.IsEmailAlreadyRegistered(email)) {
+            if (!uc.IsEmailAlreadyRegistered(email) || Session["User"] != null) {
 
+                
                 var webApi = new ValuesController();
 
                 bool flag = webApi.Get();

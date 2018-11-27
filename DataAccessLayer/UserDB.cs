@@ -45,12 +45,20 @@ namespace Server.DataAccessLayer {
                 using (SqlCommand cmd = connection.CreateCommand()) {
                     User user = new User();
 
-                    cmd.CommandText = "select userid from [dbo].[user], customer where Customer.Email = @Email " +
+                    cmd.CommandText = "select userid, firstName, lastName, phone, address, zipCode, city from [dbo].[user], customer where Customer.Email = @Email " +
                         "AND customer.CustomerID = [dbo].[User].UserID;";
                     cmd.Parameters.AddWithValue("Email", email);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read()) {
                         user.ID = reader.GetInt32(reader.GetOrdinal("userid"));
+                        user.FirstName = reader.GetString(reader.GetOrdinal("firstName"));
+                        user.LastName = reader.GetString(reader.GetOrdinal("lastName"));
+                        user.Phone = reader.GetInt32(reader.GetOrdinal("phone"));
+                        user.Email = email;
+                        user.Address = reader.GetString(reader.GetOrdinal("address"));
+                        user.ZipCode = reader.GetInt32(reader.GetOrdinal("zipCode"));
+                        user.City = reader.GetString(reader.GetOrdinal("city"));
+                        
                     }
                     reader.Close();
 

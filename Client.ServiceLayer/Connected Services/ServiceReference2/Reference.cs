@@ -117,6 +117,9 @@ namespace Client.ServiceLayer.ServiceReference2 {
         private Client.ServiceLayer.ServiceReference2.Image[] ImagesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsActiveField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int MaxStockField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -182,6 +185,19 @@ namespace Client.ServiceLayer.ServiceReference2 {
                 if ((object.ReferenceEquals(this.ImagesField, value) != true)) {
                     this.ImagesField = value;
                     this.RaisePropertyChanged("Images");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsActive {
+            get {
+                return this.IsActiveField;
+            }
+            set {
+                if ((this.IsActiveField.Equals(value) != true)) {
+                    this.IsActiveField = value;
+                    this.RaisePropertyChanged("IsActive");
                 }
             }
         }

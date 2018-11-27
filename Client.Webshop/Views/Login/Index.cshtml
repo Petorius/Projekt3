@@ -18,7 +18,7 @@
         <hr>
         <div> <p style="visibility: @ViewBag.Visibility; color: red; font-size: 17px; width: 250px; height: 20px;">Forkert email eller kodeord</p> </div>
         <label id="icon" for="name"><i class="icon-envelope "></i></label>
-        <input autocomplete="off" name="email" pattern="[a-z0-9._%+-]+@("@")[a-z0-9.-]+\.[a-z]{2,}$" type="email" id="name" placeholder="E-mail" required oninvalid="this.setCustomValidity('Indtast en mailadresse')" oninput="setCustomValidity('')" />
+        <input autocomplete="off" name="email" pattern="[a-zA-ZæøåÆØÅ0-9._%+-]+@("@")[a-zA-ZæøåÆØÅ0-9.-]+\.[a-z]{2,}$" type="email" id="name" placeholder="E-mail" required oninvalid="this.setCustomValidity('Indtast en mailadresse')" oninput="setCustomValidity('')" />
         <label id="icon" for="name"><i class="icon-shield"></i></label>
         <input autocomplete="off" name="password" type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-ZÆØÅ])(?=.*[a-zæøå]).*$" id="name" placeholder="Kodeord" required oninvalid="this.setCustomValidity('Indtast minimum 8 tegn med tal, store og små bogstaver.')" oninput="setCustomValidity('')" />
 
