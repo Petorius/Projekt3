@@ -73,7 +73,7 @@ namespace Client.Webshop.Controllers {
                     List<Orderline> cart = (List<Orderline>)Session["cart"];
                     o = oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
                     if (o.Validation) {
-                        Session.Clear();
+                        Session["cart"] = null;
                         return View(o);
                     }
                     else {
