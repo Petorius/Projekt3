@@ -230,6 +230,8 @@ namespace Server.DataAccessLayer {
                         p.MinStock = reader.GetInt32(reader.GetOrdinal("minstock"));
                         p.MaxStock = reader.GetInt32(reader.GetOrdinal("maxstock"));
                         p.Description = reader.GetString(reader.GetOrdinal("description"));
+                        p.IsActive = reader.GetBoolean(reader.GetOrdinal("isActive"));
+                        p.Sales = reader.GetInt32(reader.GetOrdinal("sales"));
                         //p.Rating = reader.GetInt32(reader.GetOrdinal("rating"));
 
                         products.Add(p);

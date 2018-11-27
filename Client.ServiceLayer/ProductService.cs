@@ -31,6 +31,7 @@ namespace Client.ServiceLayer {
                 product.MinStock = p.MinStock;
                 product.MaxStock = p.MaxStock;
                 product.isActive = p.IsActive;
+                product.Sales = p.Sales;
 
                 foreach(var i in p.Images) {
                     Image image = new Image();
@@ -62,6 +63,7 @@ namespace Client.ServiceLayer {
                     product.Rating = p.Rating;
                     product.MinStock = p.MinStock;
                     product.MaxStock = p.MaxStock;
+                    product.Sales = p.Sales;
 
                     foreach (var i in p.Images) {
                         Image image = new Image();

@@ -44,9 +44,6 @@ namespace Client.Webshop.Controllers {
 
         [HttpPost]
         public ActionResult Confirmation(string firstName, string lastName, string street, int zip, string city, string email, int number) {
-            // Skal kalde på mail og se om den mail tilhører en person som har et userID.
-            // Hvis den tilhører en user, får han en fejl om han den mail ikke kan bruges.
-            //if (!uc.isEmailAlreadyRegistered(email)) {
 
             if (!uc.IsEmailAlreadyRegistered(email)) {
 
@@ -60,7 +57,7 @@ namespace Client.Webshop.Controllers {
                     List<Orderline> cart = (List<Orderline>)Session["cart"];
                     o = oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
                     if (o.Validation) {
-                        Session.Abandon();
+                        Session.Clear();
                         return View(o);
                     }
                     else {

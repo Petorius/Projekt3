@@ -17,18 +17,15 @@ namespace Client.ControlLayer {
             return tagService.FindTagByName(name);
         }
 
-        public Category GetSalesByCategory(string name)
-        {
+        public Category GetSalesByCategory(string name) {
             return tagService.GetSalesByCategory(name);
         }
 
-        public Tag FindBestSellers(string name)
-        {
+        public Tag FindBestSellers(string name) {
             return tagService.FindTagByName("Bestseller");
         }
 
-        public IEnumerable<Product> GetBestsellersInCategory (string name)
-        {
+        public IEnumerable<Product> GetBestsellersInCategory(string name) {
             return tagService.GetBestsellersInCategory(name);
         }
 
