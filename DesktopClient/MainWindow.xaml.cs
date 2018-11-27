@@ -39,17 +39,18 @@ namespace DesktopClient {
                 int maxStock = Int32.Parse(maxStockTextBox.Text);
                 string description = descriptionTextBox.Text;
                 bool res = false;
-                if(ImageName != "" && ImageURL != "") {
+                if (ImageName != "" && ImageURL != "") {
                     res = productController.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
                 }
-                if(res) {
+                if (res) {
                     addProductText.Content = "Produktet blev tilføjet";
                     clearFields();
-                } else {
+                }
+                else {
                     addProductText.Content = "Der skete en fejl";
                 }
-                
-                
+
+
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
@@ -86,19 +87,20 @@ namespace DesktopClient {
         private void Produkt_Slet_SletProdukt_Clicked_Click(object sender, RoutedEventArgs e) {
             int value = Int32.Parse(deleteTextBox.Text);
             bool res = productController.DeleteProduct(value);
-            if(res == true) {
+            if (res == true) {
                 deleteStatusLabel.Content = "Produktet blev slettet";
                 deleteTextBox.Text = "";
             }
             else {
                 deleteStatusLabel.Content = "Der opstod en fejl. Prøv igen";
             }
-            
+
         }
 
         private void Søgbutton_Click(object sender, RoutedEventArgs e) {
             Product p = productController.Find(Int32.Parse(_inputIDtextBox.Text));
             try {
+                IsActiveButton.IsChecked = p.isActive;
                 updateNameTextBox.Text = p.Name;
                 updatePriceTextBox.Text = p.Price.ToString();
                 updateStockTextBox.Text = p.Stock.ToString();
@@ -114,6 +116,7 @@ namespace DesktopClient {
 
         private void OKUpdateButton_Click(object sender, RoutedEventArgs e) {
             try {
+                bool isActive = (bool)IsActiveButton.IsChecked;
                 int id = Int32.Parse(_inputIDtextBox.Text);
                 string name = updateNameTextBox.Text;
                 decimal price = decimal.Parse(updatePriceTextBox.Text);
@@ -121,16 +124,16 @@ namespace DesktopClient {
                 int minStock = Int32.Parse(updateMinStockTextBox.Text);
                 int maxStock = Int32.Parse(updateMaxStockTextBox.Text);
                 string description = updateDescriptionTextBox.Text;
-                bool isUpdated = productController.Update(id, name, price, stock, minStock, maxStock, description);
-                if(isUpdated) {
+                bool isUpdated = productController.Update(id, name, price, stock, minStock, maxStock, description, isActive);
+                if (isUpdated) {
                     updateProductText.Content = "Produktet blev opdateret";
                     ProductClearUpdateFields();
                     _inputIDtextBox.IsEnabled = true;
-                } 
+                }
                 else {
                     updateProductText.Content = "Der opstod en fejl. Prøv igen";
                 }
-                
+
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
@@ -152,12 +155,9 @@ namespace DesktopClient {
             ProductClearUpdateFields();
         }
 
-        private void AddImageButton_Click(object sender, RoutedEventArgs e)
-        {
+        private void AddImageButton_Click(object sender, RoutedEventArgs e) {
             AddImagesWindow addImagesWindow = new AddImagesWindow();
             addImagesWindow.Show();
         }
-
-
     }
 }

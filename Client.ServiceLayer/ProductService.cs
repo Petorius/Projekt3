@@ -30,6 +30,7 @@ namespace Client.ServiceLayer {
                 product.Rating = p.Rating;
                 product.MinStock = p.MinStock;
                 product.MaxStock = p.MaxStock;
+                product.isActive = p.IsActive;
 
                 foreach(var i in p.Images) {
                     Image image = new Image();
@@ -74,9 +75,9 @@ namespace Client.ServiceLayer {
             return productList;
         }
 
-        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description) {
+        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
             ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
-            return myProxy.Update(ID, name, price, stock, minStock, maxStock, description);
+            return myProxy.Update(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
     }
 }

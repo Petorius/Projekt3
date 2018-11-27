@@ -76,6 +76,7 @@
                                 <TextBox x:Name="updateMaxStockTextBox" Text="" HorizontalAlignment="Left" Height="23" Margin="198,268,0,0" VerticalAlignment="Top" Width="120"/>
                                 <Button x:Name="OKUpdateButton" Content="Opdater" Height="23" HorizontalAlignment="Left" Margin="590,328,0,0" VerticalAlignment="Top" Width="75" Click="OKUpdateButton_Click"/>
                                 <Button x:Name="CancelUpdateButton" Content="Afbryd" Height="23" HorizontalAlignment="Left" Margin="670,328,0,0" VerticalAlignment="Top" Width="75" Click="CancelUpdateButton_Click"/>
+                                <CheckBox x:Name="IsActiveButton" Content="Aktiv" HorizontalAlignment="Left" Margin="198,61,0,0" VerticalAlignment="Top"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Slet">

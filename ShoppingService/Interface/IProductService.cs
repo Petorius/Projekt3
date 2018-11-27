@@ -19,7 +19,7 @@ namespace Server.ServiceLayer {
         bool DeleteProduct(int id);
 
         [OperationContract]
-        bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description);
+        bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);
 
         [OperationContract]
         IEnumerable<Product> GetAllProducts();

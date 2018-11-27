@@ -38,8 +38,9 @@ namespace Server.ServiceLayer {
             return productDb.GetAll();
         }
 
-        public bool Update(int id, string name, decimal price, int stock, int minStock, int maxStock, string description) {
+        public bool Update(int id, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
             Product p = new Product(name, price, stock, minStock, maxStock, description);
+            p.IsActive = isActive;
             p.ID = id;
             return productDb.Update(p);
         }

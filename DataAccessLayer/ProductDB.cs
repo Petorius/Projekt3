@@ -25,8 +25,8 @@ namespace Server.DataAccessLayer {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
 
-                    cmd.CommandText = "Insert into Product(Name, Price, Stock, MinStock, MaxStock, Description, Sales) OUTPUT INSERTED.ProductID values" +
-                            " (@Name, @Price, @Stock, @MinStock, @MaxStock, @Description, @Sales)";
+                    cmd.CommandText = "Insert into Product(Name, Price, Stock, MinStock, MaxStock, Description, Sales, IsActive) OUTPUT INSERTED.ProductID values" +
+                            " (@Name, @Price, @Stock, @MinStock, @MaxStock, @Description, @Sales, @IsActive)";
                     cmd.Parameters.AddWithValue("Name", Entity.Name);
                     cmd.Parameters.AddWithValue("Price", Entity.Price);
                     cmd.Parameters.AddWithValue("Stock", Entity.Stock);
@@ -34,6 +34,7 @@ namespace Server.DataAccessLayer {
                     cmd.Parameters.AddWithValue("MaxStock", Entity.MaxStock);
                     cmd.Parameters.AddWithValue("Description", Entity.Description);
                     cmd.Parameters.AddWithValue("Sales", Entity.Sales);
+                    cmd.Parameters.AddWithValue("IsActive", true);
                     insertedID = (int)cmd.ExecuteScalar();
 
                     foreach (Image i in Entity.Images) {
@@ -76,7 +77,7 @@ namespace Server.DataAccessLayer {
                             reader.Close();
 
                             //try {
-                            cmd.CommandText = "DELETE FROM Product WHERE ProductID = @productID AND rowID = @rowId";
+                            cmd.CommandText = "UPDATE Product set isActive = 0 where ProductID = @productID AND rowID = @rowId";
                             cmd.Parameters.AddWithValue("rowID", rowId);
                             rowCount = cmd.ExecuteNonQuery();
 
@@ -113,7 +114,7 @@ namespace Server.DataAccessLayer {
                 using (SqlCommand cmd = connection.CreateCommand()) {
                     Product p = new Product();
 
-                    cmd.CommandText = "SELECT productid, name, price, stock, description, rating, minstock, maxstock, sales from Product where productID = @ProductID";
+                    cmd.CommandText = "SELECT productid, name, price, stock, description, rating, minstock, maxstock, sales, isActive from Product where productID = @ProductID";
                     cmd.Parameters.AddWithValue("ProductID", id);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read()) {
@@ -124,7 +125,8 @@ namespace Server.DataAccessLayer {
                         p.MinStock = reader.GetInt32(reader.GetOrdinal("minstock"));
                         p.MaxStock = reader.GetInt32(reader.GetOrdinal("maxstock"));
                         p.Description = reader.GetString(reader.GetOrdinal("description"));
-                        //p.Sales = reader.GetInt32(reader.GetOrdinal("sales"));
+                        p.Sales = reader.GetInt32(reader.GetOrdinal("sales"));
+                        p.IsActive = reader.GetBoolean(reader.GetOrdinal("isActive"));
                         //p.Rating = reader.GetInt32(reader.GetOrdinal("rating"));
                     }
                     reader.Close();
@@ -173,7 +175,7 @@ namespace Server.DataAccessLayer {
 
                             //try {
                             cmd.CommandText = "UPDATE Product " +
-                                "SET name = @name, price = @price, stock = @stock, minStock = @minStock, maxStock = @maxStock, description = @description " +
+                                "SET name = @name, price = @price, stock = @stock, minStock = @minStock, maxStock = @maxStock, description = @description, isActive = @isActive " +
                                 "WHERE productID = @productID AND rowID = @rowId";
                             cmd.Parameters.AddWithValue("name", p.Name);
                             cmd.Parameters.AddWithValue("price", p.Price);
@@ -181,6 +183,7 @@ namespace Server.DataAccessLayer {
                             cmd.Parameters.AddWithValue("minStock", p.MinStock);
                             cmd.Parameters.AddWithValue("maxStock", p.MaxStock);
                             cmd.Parameters.AddWithValue("description", p.Description);
+                            cmd.Parameters.AddWithValue("isActive", p.IsActive);
                             cmd.Parameters.AddWithValue("rowID", rowId);
                             rowCount = cmd.ExecuteNonQuery();
 
@@ -216,7 +219,7 @@ namespace Server.DataAccessLayer {
                 using (SqlCommand cmd = connection.CreateCommand()) {
 
 
-                    cmd.CommandText = "SELECT * from Product";
+                    cmd.CommandText = "SELECT * from Product where isActive = 1";
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read()) {
                         Product p = new Product();
