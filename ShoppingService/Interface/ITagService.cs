@@ -8,14 +8,5 @@ namespace Server.ServiceLayer {
     {
         [OperationContract]
         Tag FindTagByName(string name);
-
-        [OperationContract]
-        Category GetSalesByCategory(string name);
-
-        [OperationContract]
-        IEnumerable<Product> GetAllSales();
-
-        [OperationContract]
-        Tag FindBestSellers(string name);
     }
 }
