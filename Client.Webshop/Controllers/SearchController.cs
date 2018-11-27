@@ -31,14 +31,8 @@ namespace Client.Webshop.Controllers {
             }
 
             Session["Search"] = searchString;
-            
-
-            //Int32.TryParse(searchString, out int ID);
-
-            //Product p = pc.Find(ID);
-
+           
             Tag t = tc.FindTagByName(searchString);
-
 
             return View(t.Products);
         }
