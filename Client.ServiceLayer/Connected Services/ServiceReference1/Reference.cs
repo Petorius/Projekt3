@@ -32,6 +32,9 @@ namespace Client.ServiceLayer.ServiceReference1 {
         private Client.ServiceLayer.ServiceReference1.Image[] ImagesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsActiveField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int MaxStockField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -97,6 +100,19 @@ namespace Client.ServiceLayer.ServiceReference1 {
                 if ((object.ReferenceEquals(this.ImagesField, value) != true)) {
                     this.ImagesField = value;
                     this.RaisePropertyChanged("Images");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsActive {
+            get {
+                return this.IsActiveField;
+            }
+            set {
+                if ((this.IsActiveField.Equals(value) != true)) {
+                    this.IsActiveField = value;
+                    this.RaisePropertyChanged("IsActive");
                 }
             }
         }
@@ -286,10 +302,10 @@ namespace Client.ServiceLayer.ServiceReference1 {
         System.Threading.Tasks.Task<bool> DeleteProductAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/Update", ReplyAction="http://tempuri.org/IProductService/UpdateResponse")]
-        bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description);
+        bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/Update", ReplyAction="http://tempuri.org/IProductService/UpdateResponse")]
-        System.Threading.Tasks.Task<bool> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description);
+        System.Threading.Tasks.Task<bool> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetAllProducts", ReplyAction="http://tempuri.org/IProductService/GetAllProductsResponse")]
         Client.ServiceLayer.ServiceReference1.Product[] GetAllProducts();
@@ -349,12 +365,12 @@ namespace Client.ServiceLayer.ServiceReference1 {
             return base.Channel.DeleteProductAsync(id);
         }
         
-        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description) {
-            return base.Channel.Update(ID, name, price, stock, minStock, maxStock, description);
+        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
+            return base.Channel.Update(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description) {
-            return base.Channel.UpdateAsync(ID, name, price, stock, minStock, maxStock, description);
+        public System.Threading.Tasks.Task<bool> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
+            return base.Channel.UpdateAsync(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
         
         public Client.ServiceLayer.ServiceReference1.Product[] GetAllProducts() {

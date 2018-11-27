@@ -5,11 +5,9 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Domain
-{
+namespace Server.Domain {
     [DataContract]
-    public class Category : Tag
-    {
+    public class Category : Tag {
 
     }
 }

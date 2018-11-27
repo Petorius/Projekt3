@@ -22,15 +22,6 @@ namespace UnitTest {
             productDB = new ProductDB(connectionString);
         }
 
-        //[TestMethod]
-        //public void InsertProductTest() {
-        //    Product p = new Product("Tissot Classic", 4000, 10, 4, 20, "Tissot Classic er designet som det fedeste ur");
-
-        //    productDB.Create(p);
-
-        //    Assert.AreEqual(p.Name, FindHelperTest(1).Name);
-        //}
-
         [TestMethod]
         public void FindProductTest() {
 
@@ -77,28 +68,7 @@ namespace UnitTest {
         //    Assert.IsNotNull(p);
         //}
 
-        //[TestMethod]
-        //public void DeleteProductTest() {
-        //    Product p = new Product();
-        //    p.ID = 1;
-        //    productDB.Delete(p, true, true);
-
-        //    p = productDB.Get(1);
-
-        //    Assert.IsNull(p);
-        //}
-
-        [ClassCleanup]
-        public static void CleanUp() {
-            //using (SqlConnection connection = new SqlConnection(connectionString)) {
-            //    connection.Open();
-            //    using (SqlCommand cmd = connection.CreateCommand()) {
-            //        cmd.CommandText = "Truncate table Product";
-            //        cmd.ExecuteNonQuery();
-            //    }
-
-        }
-
+        // Method to help testing by finding a product
         private Product FindHelperTest(int id) {
             Product p = new Product();
             using (SqlConnection connection = new SqlConnection(connectionString)) {

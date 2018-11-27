@@ -13,7 +13,7 @@ namespace Client.ServiceLayer {
 
         bool Delete(int id);
 
-        bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description);
+        bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);
 
         IEnumerable<Product> GetAllProducts();
     }
