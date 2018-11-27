@@ -51,7 +51,7 @@ namespace Client.Webshop.Controllers {
 
             if (result) {
                 Session.Add("User", uc.GetUser(email));
-                Session.Add("UserName", uc.GetUser(email).FirstName);
+                
                 return RedirectToAction("Index", "Home");
             }
 

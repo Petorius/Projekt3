@@ -12,6 +12,7 @@
         <fieldset>
             <legend>Leveringsadresse</legend>
             <div>
+                @if(Session["User"] == null) {
                 <div style="text-align: center;">
                     <p>Har du handlet ved os før? <br /> Find dine oplysninger ved at indtaste din mail</p>
                     <form name="getCustomer" method="post" , action="@Url.Action("GetCustomerInfo", "Buy")">
@@ -20,7 +21,7 @@
 
                     </form>
                 </div>
-
+                }
             </div>
 
             <div class="formArea formRow">
@@ -46,11 +47,15 @@
                     </div>
                     <div class="formRow textNormal">
                         By.*
-                        <input class="textboxMedium2 textNormal marginRightMedium2" value="@(TempData["City"])" name="city" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name"  required oninvalid="this.setCustomValidity('Indtast en dansk by')" oninput="setCustomValidity('')" />
+                        <input class="textboxMedium2 textNormal marginRightMedium2" value="@(TempData["City"])" name="city" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" required oninvalid="this.setCustomValidity('Indtast en dansk by')" oninput="setCustomValidity('')" />
                     </div>
+
+                    @if (Session["User"] != null) {
+                        ViewBag.Enabled = "readonly";
+                    }
                     <div class="formRow textNormal">
                         Email.*
-                        <input autocomplete="off" class="textboxWide2 textNormal margin" value="@(TempData["Email"])" name="email" type="email" id="name"  required />
+                        <input autocomplete="off" class="textboxWide2 textNormal margin" value="@(TempData["Email"])" name="email" type="email" id="name" required @ViewBag.Enabled />
                     </div>
                     <div class="formRow textNormal">
                         Telefonnummer.*

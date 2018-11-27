@@ -22,6 +22,15 @@ namespace Client.ServiceLayer {
         public Product Find(int ID) {
             var p = myProxy.FindProduct(ID);
             Product product = new Product();
+            if (p != null) {
+                product.ID = p.ID;
+                product.Name = p.Name;
+                product.Price = p.Price;
+                product.Stock = p.Stock;
+                product.Description = p.Description;
+                product.Rating = p.Rating;
+                product.MinStock = p.MinStock;
+                product.MaxStock = p.MaxStock;
 
             if (p != null) {
                 product = BuildServiceProduct(p);
@@ -68,9 +77,9 @@ namespace Client.ServiceLayer {
             return product;
         }
 
-        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description) {
+        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
             ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
-            return myProxy.Update(ID, name, price, stock, minStock, maxStock, description);
+            return myProxy.Update(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
     }
 }
