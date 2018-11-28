@@ -47,6 +47,7 @@
     <Compile Include="Interface\ICRUD.cs" />
     <Compile Include="Interface\ICustomer.cs" />
     <Compile Include="Interface\IOrder.cs" />
+    <Compile Include="Interface\IProduct.cs" />
     <Compile Include="Interface\IUserDB.cs" />
     <Compile Include="OrderDB.cs" />
     <Compile Include="OrderLineDB.cs" />

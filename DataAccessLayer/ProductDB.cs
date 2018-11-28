@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using Server.Domain;
 using System.Data.SqlClient;
-
+using DataAccessLayer.Interface;
 
 namespace Server.DataAccessLayer {
-    public class ProductDB : ICRUD<Product> {
+    public class ProductDB : IProduct {
         private string connectionString;
 
         // Database test constructor. Only used for unit testing.

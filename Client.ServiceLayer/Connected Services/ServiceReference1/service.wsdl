@@ -19,6 +19,12 @@
   <wsdl:message name="IProductService_FindProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindProductResponse" />
   </wsdl:message>
+  <wsdl:message name="IProductService_FindProductByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindProductByName" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_FindProductByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindProductByNameResponse" />
+  </wsdl:message>
   <wsdl:message name="IProductService_DeleteProduct_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteProduct" />
   </wsdl:message>
@@ -46,6 +52,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/FindProduct" message="tns:IProductService_FindProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/FindProductResponse" message="tns:IProductService_FindProduct_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="FindProductByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/FindProductByName" message="tns:IProductService_FindProductByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/FindProductByNameResponse" message="tns:IProductService_FindProductByName_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DeleteProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/DeleteProduct" message="tns:IProductService_DeleteProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/DeleteProductResponse" message="tns:IProductService_DeleteProduct_OutputMessage" />
@@ -72,6 +82,15 @@
     </wsdl:operation>
     <wsdl:operation name="FindProduct">
       <soap:operation soapAction="http://tempuri.org/IProductService/FindProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindProductByName">
+      <soap:operation soapAction="http://tempuri.org/IProductService/FindProductByName" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

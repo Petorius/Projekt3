@@ -30,7 +30,9 @@ namespace DesktopClient {
         public CrudOverview() {
             InitializeComponent();
             productController = new ProductController();
+            orderController = new OrderController();
             orderlines = new List<Orderline>();
+            userController = new UserController();
         }
 
 
