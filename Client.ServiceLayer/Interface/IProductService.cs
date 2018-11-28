@@ -7,6 +7,8 @@ namespace Client.ServiceLayer {
 
         Product Find(int ID);
 
+        Product FindByName(string name);
+
         bool Delete(int id);
 
         bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);

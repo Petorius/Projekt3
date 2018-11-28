@@ -13,6 +13,9 @@ namespace Server.ServiceLayer {
         Product FindProduct(int ID);
 
         [OperationContract]
+        Product FindProductByName(string name);
+
+        [OperationContract]
         bool DeleteProduct(int id);
 
         [OperationContract]

@@ -295,6 +295,12 @@ namespace Client.ServiceLayer.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductAsync(int ID);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductByName", ReplyAction="http://tempuri.org/IProductService/FindProductByNameResponse")]
+        Client.ServiceLayer.ServiceReference1.Product FindProductByName(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductByName", ReplyAction="http://tempuri.org/IProductService/FindProductByNameResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductByNameAsync(string name);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteProduct", ReplyAction="http://tempuri.org/IProductService/DeleteProductResponse")]
         bool DeleteProduct(int id);
         
@@ -355,6 +361,14 @@ namespace Client.ServiceLayer.ServiceReference1 {
         
         public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductAsync(int ID) {
             return base.Channel.FindProductAsync(ID);
+        }
+        
+        public Client.ServiceLayer.ServiceReference1.Product FindProductByName(string name) {
+            return base.Channel.FindProductByName(name);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductByNameAsync(string name) {
+            return base.Channel.FindProductByNameAsync(name);
         }
         
         public bool DeleteProduct(int id) {
