@@ -33,8 +33,8 @@ namespace DesktopClient
         {
             try
             {
-                ((MainWindow)Application.Current.MainWindow).ImageURL = ImageURLTextBox.Text;
-                ((MainWindow)Application.Current.MainWindow).ImageName = ImageNameTextBox.Text;
+                ((CrudOverview)Application.Current.MainWindow).ImageURL = ImageURLTextBox.Text;
+                ((CrudOverview)Application.Current.MainWindow).ImageName = ImageNameTextBox.Text;
             }
             catch (FormatException)
             {
