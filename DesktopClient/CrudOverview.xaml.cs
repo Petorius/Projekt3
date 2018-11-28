@@ -23,10 +23,16 @@ namespace DesktopClient {
         public string ImageURL { get; set; }
         public string ImageName { get; set; }
         private ProductController productController;
+        private OrderController orderController;
+        private List<Orderline> orderlines;
+        private UserController userController;
 
         public CrudOverview() {
             InitializeComponent();
             productController = new ProductController();
+            orderController = new OrderController();
+            orderlines = new List<Orderline>();
+            userController = new UserController();
         }
 
 
@@ -160,6 +166,49 @@ namespace DesktopClient {
         private void AddImageButton_Click(object sender, RoutedEventArgs e) {
             AddImagesWindow addImagesWindow = new AddImagesWindow();
             addImagesWindow.Show();
+        }
+
+        private void OrdrelineClearFields() {
+            findCustomerTextBox.Text = "";
+            findProductTextBox.Text = "";
+            inputQuantityTextBox.Text = "";
+        }
+
+        private void findProductTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+        
+        }
+
+        private void addOrderlineButton_Click(object sender, RoutedEventArgs e) {
+
+            Product p = productController.FindByName(findProductTextBox.Text);
+            int quantity = Int32.Parse(inputQuantityTextBox.Text);
+            decimal subTotal = p.Price * quantity;
+            Orderline ol = new Orderline(quantity, subTotal, p);
+            bool result = orderController.CreateOrderLine(quantity, subTotal, p.ID);
+
+            if (result) {
+                orderlines.Add(ol);
+                updateProductText.Content = "Ordrelinjen blev oprettet";
+                OrdrelineClearFields();
+
+            }
+            else {
+                updateProductText.Content = "Der opstod en fejl. Prøv igen";
+            }
+        }
+
+        private void addOrderButton_Click(object sender, RoutedEventArgs e) {
+            Customer c = userController.GetCustomerByMail(findCustomerTextBox.Text);
+
+            if (c != null) {
+                Order order = orderController.CreateOrder(c.FirstName, c.LastName, c.Address, c.ZipCode, c.City, c.Email, c.Phone, orderlines);
+                updateProductText.Content = "Ordren blev oprettet";
+                OrdrelineClearFields();
+            }
+        }
+            
+        private void cancelButton_Click(object sender, RoutedEventArgs e) {
+            OrdrelineClearFields();
         }
     }
 }

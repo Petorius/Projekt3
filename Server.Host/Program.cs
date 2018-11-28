@@ -11,8 +11,9 @@ namespace Server.Host {
             using (ServiceHost productHost = new ServiceHost(typeof(serviceToHost.ProductService)))
             using (ServiceHost orderHost = new ServiceHost(typeof(serviceToHost.OrderService)))
             using (ServiceHost userHost = new ServiceHost(typeof(serviceToHost.UserService)))
-            using (ServiceHost tagHost = new ServiceHost(typeof(serviceToHost.TagService))) {
-                
+            using (ServiceHost tagHost = new ServiceHost(typeof(serviceToHost.TagService)))
+            using (ServiceHost logInHost = new ServiceHost(typeof(serviceToHost.LogInService))) {
+
                 // Open the product host and start listening for oncoming calls
                 productHost.Open();
                 DisplayHostInfo(productHost);
@@ -39,6 +40,13 @@ namespace Server.Host {
                 // Open the tag host and start listening for oncoming calls.
                 tagHost.Open();
                 DisplayHostInfo(tagHost);
+                // Display status.
+                Console.WriteLine("The service is ready");
+
+
+                // Open the log in host and start listening for oncoming calls.
+                logInHost.Open();
+                DisplayHostInfo(logInHost);
                 // Display status.
                 Console.WriteLine("The service is ready");
 

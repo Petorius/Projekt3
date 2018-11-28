@@ -43,12 +43,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Image" nillable="true" type="tns:Image" />
-  <xs:complexType name="Category">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:Tag">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="Category" nillable="true" type="tns:Category" />
 </xs:schema>

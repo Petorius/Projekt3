@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using Server.Domain;
 using System.Data.SqlClient;
-
+using DataAccessLayer.Interface;
 
 namespace Server.DataAccessLayer {
-    public class ProductDB : ICRUD<Product> {
+    public class ProductDB : IProduct {
         private string connectionString;
 
         // Database test constructor. Only used for unit testing.
@@ -147,6 +147,50 @@ namespace Server.DataAccessLayer {
                     imageReader.Close();
 
                     if (id == p.ID) {
+                        return p;
+                    }
+                }
+                return null;
+            }
+        }
+
+        public Product GetByName(string name) {
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                connection.Open();
+                using (SqlCommand cmd = connection.CreateCommand()) {
+                    Product p = new Product();
+
+                    cmd.CommandText = "SELECT productid, name, price, stock, description, rating, minstock, maxstock, sales, isActive from Product where name = @Name";
+                    cmd.Parameters.AddWithValue("name", name);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read()) {
+                        p.ID = reader.GetInt32(reader.GetOrdinal("productid"));
+                        p.Name = reader.GetString(reader.GetOrdinal("name"));
+                        p.Price = reader.GetDecimal(reader.GetOrdinal("price"));
+                        p.Stock = reader.GetInt32(reader.GetOrdinal("stock"));
+                        p.MinStock = reader.GetInt32(reader.GetOrdinal("minstock"));
+                        p.MaxStock = reader.GetInt32(reader.GetOrdinal("maxstock"));
+                        p.Description = reader.GetString(reader.GetOrdinal("description"));
+                        p.Sales = reader.GetInt32(reader.GetOrdinal("sales"));
+                        p.IsActive = reader.GetBoolean(reader.GetOrdinal("isActive"));
+                        //p.Rating = reader.GetInt32(reader.GetOrdinal("rating"));
+                    }
+                    reader.Close();
+                    cmd.Parameters.Clear();
+                    
+                    cmd.CommandText = "Select ImageSource, Name from Image where Image.ProductID = @productID";
+                    cmd.Parameters.AddWithValue("productID", p.ID);
+                    SqlDataReader imageReader = cmd.ExecuteReader();
+                    while (imageReader.Read()) {
+                        Image i = new Image();
+                        i.ImageSource = imageReader.GetString(imageReader.GetOrdinal("ImageSource"));
+                        i.Name = imageReader.GetString(imageReader.GetOrdinal("Name"));
+
+                        p.Images.Add(i);
+                    }
+                    imageReader.Close();
+
+                    if (name == p.Name) {
                         return p;
                     }
                 }

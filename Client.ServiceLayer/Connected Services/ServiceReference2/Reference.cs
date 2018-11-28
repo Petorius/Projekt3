@@ -17,7 +17,6 @@ namespace Client.ServiceLayer.ServiceReference2 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Tag", Namespace="http://schemas.datacontract.org/2004/07/Server.Domain")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.ServiceLayer.ServiceReference2.Category))]
     public partial class Tag : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -89,13 +88,6 @@ namespace Client.ServiceLayer.ServiceReference2 {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Category", Namespace="http://schemas.datacontract.org/2004/07/Server.Domain")]
-    [System.SerializableAttribute()]
-    public partial class Category : Client.ServiceLayer.ServiceReference2.Tag {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -373,24 +365,6 @@ namespace Client.ServiceLayer.ServiceReference2 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/FindTagByName", ReplyAction="http://tempuri.org/ITagService/FindTagByNameResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Tag> FindTagByNameAsync(string name);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetSalesByCategory", ReplyAction="http://tempuri.org/ITagService/GetSalesByCategoryResponse")]
-        Client.ServiceLayer.ServiceReference2.Category GetSalesByCategory(string name);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetSalesByCategory", ReplyAction="http://tempuri.org/ITagService/GetSalesByCategoryResponse")]
-        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Category> GetSalesByCategoryAsync(string name);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAllSales", ReplyAction="http://tempuri.org/ITagService/GetAllSalesResponse")]
-        Client.ServiceLayer.ServiceReference2.Product[] GetAllSales();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAllSales", ReplyAction="http://tempuri.org/ITagService/GetAllSalesResponse")]
-        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Product[]> GetAllSalesAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/FindBestSellers", ReplyAction="http://tempuri.org/ITagService/FindBestSellersResponse")]
-        Client.ServiceLayer.ServiceReference2.Tag FindBestSellers(string name);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/FindBestSellers", ReplyAction="http://tempuri.org/ITagService/FindBestSellersResponse")]
-        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Tag> FindBestSellersAsync(string name);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -426,30 +400,6 @@ namespace Client.ServiceLayer.ServiceReference2 {
         
         public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Tag> FindTagByNameAsync(string name) {
             return base.Channel.FindTagByNameAsync(name);
-        }
-        
-        public Client.ServiceLayer.ServiceReference2.Category GetSalesByCategory(string name) {
-            return base.Channel.GetSalesByCategory(name);
-        }
-        
-        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Category> GetSalesByCategoryAsync(string name) {
-            return base.Channel.GetSalesByCategoryAsync(name);
-        }
-        
-        public Client.ServiceLayer.ServiceReference2.Product[] GetAllSales() {
-            return base.Channel.GetAllSales();
-        }
-        
-        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Product[]> GetAllSalesAsync() {
-            return base.Channel.GetAllSalesAsync();
-        }
-        
-        public Client.ServiceLayer.ServiceReference2.Tag FindBestSellers(string name) {
-            return base.Channel.FindBestSellers(name);
-        }
-        
-        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference2.Tag> FindBestSellersAsync(string name) {
-            return base.Channel.FindBestSellersAsync(name);
         }
     }
 }

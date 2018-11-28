@@ -73,5 +73,15 @@ namespace Client.ServiceLayer {
             ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
             return myProxy.Update(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
+
+        public Product FindByName(string name) {
+            var p = myProxy.FindProductByName(name);
+            Product product = new Product();
+            if (p != null) {
+                product = BuildServiceProduct(p);
+            }
+
+            return product;
+        }
     }
 }

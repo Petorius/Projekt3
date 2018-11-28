@@ -6,11 +6,12 @@ using System.ServiceModel;
 using System.Text;
 using Server.Domain;
 using Server.DataAccessLayer;
+using DataAccessLayer.Interface;
 
 namespace Server.ServiceLayer {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class ProductService : IProductService {
-        private ICRUD<Product> productDb;
+        private IProduct productDb;
 
         public ProductService() {
             productDb = new ProductDB();
@@ -34,6 +35,11 @@ namespace Server.ServiceLayer {
 
         public Product FindProduct(int ID) {
             Product product = productDb.Get(ID);
+            return product;
+        }
+
+        public Product FindProductByName(string name) {
+            Product product = productDb.GetByName(name);
             return product;
         }
 
