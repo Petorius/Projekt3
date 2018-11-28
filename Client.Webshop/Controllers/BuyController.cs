@@ -13,7 +13,9 @@ namespace Client.Webshop.Controllers {
         UserController uc = new UserController();
         // GET: Buy
         public ActionResult Information(bool? wasRedirected) {
-
+            if (Session["cart"] == null) {
+                return RedirectToAction("Index", "Home");
+            }
             if (Session["User"] != null) {
 
                 User user = (User)Session["User"];
@@ -57,9 +59,15 @@ namespace Client.Webshop.Controllers {
             return View();
         }
 
+        public ActionResult Confirmation() {
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost]
         public ActionResult Confirmation(string firstName, string lastName, string street, int zip, string city, string email, int number) {
-
+            if(Session["cart"] == null) {
+                return RedirectToAction("Index", "Home");
+            }
             if (!uc.IsEmailAlreadyRegistered(email) || Session["User"] != null) {
 
                 

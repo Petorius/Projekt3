@@ -22,14 +22,23 @@ namespace DesktopClient {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-
+        private AdminController ac;
         public MainWindow() {
             InitializeComponent();
+            ac = new AdminController();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
-            CrudOverview crudView = new CrudOverview();
-            crudView.Show();
+        private void Button_Click_1(object sender, RoutedEventArgs e) {
+            string email = emploEmail.Text;
+            string pass = employPassword.Password.ToString();
+            if(ac.ValidateAdminLogin) {
+                CrudOverview crudView = new CrudOverview();
+                crudView.Show();
+            }
+            else {
+                wrongLogin.Content = "Email eller password er forkert";
+            }
+            
         }
     }
 }

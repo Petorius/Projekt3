@@ -11,6 +11,7 @@ namespace Client.Webshop.Controllers {
         
         OrderController orderController = new OrderController();
         UserController uc = new UserController();
+        AdminController ac = new AdminController();
 
         // GET: Signup
         public ActionResult Index(bool? wasRedirected) {
@@ -48,7 +49,7 @@ namespace Client.Webshop.Controllers {
         public ActionResult Signup(string firstName, string lastName, int number, string street, int zip, string city, string email, string password) {
 
             if(!uc.IsEmailAlreadyRegistered(email)) { 
-                bool result = uc.CreateUserWithPassword(firstName, lastName, street, zip, city, email, number, password);
+                bool result = ac.CreateUserWithPassword(firstName, lastName, street, zip, city, email, number, password);
 
                 if (result) {
                     return RedirectToAction("Index", "Login");

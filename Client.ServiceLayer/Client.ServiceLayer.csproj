@@ -63,10 +63,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Interface\ILoginService.cs" />
     <Compile Include="Interface\IOrderService.cs" />
     <Compile Include="Interface\IProductService.cs" />
     <Compile Include="Interface\ITagService.cs" />
     <Compile Include="Interface\IUserService.cs" />
+    <Compile Include="LoginService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

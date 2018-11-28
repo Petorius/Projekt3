@@ -17,5 +17,6 @@ namespace Server.ServiceLayer {
 
         [OperationContract]
         Customer GetCustomerByMail(string email);
+
     }
 }

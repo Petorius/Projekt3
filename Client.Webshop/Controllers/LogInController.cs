@@ -11,6 +11,7 @@ namespace Client.Webshop.Controllers {
 
         OrderController orderController = new OrderController();
         UserController uc = new UserController();
+        AdminController ac = new AdminController();
 
         // GET: LogIn
         public ActionResult Index(bool? wasRedirected) {
@@ -47,7 +48,7 @@ namespace Client.Webshop.Controllers {
 
         public ActionResult Login(string email, string password) {
 
-            bool result = uc.ValidatePassword(email, password);
+            bool result = ac.ValidatePassword(email, password);
 
             if (result) {
                 Session.Add("User", uc.GetUser(email));

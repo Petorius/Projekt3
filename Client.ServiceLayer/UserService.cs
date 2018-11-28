@@ -9,11 +9,6 @@ namespace Client.ServiceLayer {
             myProxy = new UserReference.UserServiceClient();
         }
 
-        public bool CreateUserWithPassword(string firstName, string lastName, string street, int zip, 
-                                                string city, string email, int number, string password) {
-            return myProxy.CreateUserWithPassword(firstName, lastName, street, zip, city, email, number, password);
-        }
-
         public User GetUser(string email) {
             var u = myProxy.GetUser(email);
             User user = new User();
@@ -29,10 +24,6 @@ namespace Client.ServiceLayer {
             }
 
             return user;
-        }
-
-        public bool ValidatePassword(string email, string password) {
-            return myProxy.ValidatePassword(email, password);
         }
 
         public Customer GetCustomerByEmail(string email) {
