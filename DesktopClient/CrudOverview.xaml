@@ -104,14 +104,14 @@
                         <TabItem Header="Opret">
                             <Grid Background="#FFE5E5E5">
                                 <Label x:Name="label" Content="Find produkt:" HorizontalAlignment="Left" Margin="220,84,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="findProductTextBox" HorizontalAlignment="Left" Height="23" Margin="348,88,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" TextChanged="findProductTextBox_TextChanged"/>
-                                <Label x:Name="label1" Content="Quantity:" HorizontalAlignment="Left" Margin="220,133,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="inputQuantityTextBox" HorizontalAlignment="Left" Height="23" Margin="348,133,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                <TextBox x:Name="findProductTextBox" HorizontalAlignment="Left" Height="23" Margin="348,88,0,0" TextWrapping="Wrap" Text="Indtast produkt navn" VerticalAlignment="Top" Width="120" TextChanged="findProductTextBox_TextChanged" FontStyle="Italic"/>
+                                <Label x:Name="label1" Content="Antal:" HorizontalAlignment="Left" Margin="220,133,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="inputQuantityTextBox" HorizontalAlignment="Left" Height="23" Margin="348,133,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
                                 <Button x:Name="addOrderButton" Content="Opret ordre" HorizontalAlignment="Left" Margin="578,331,0,0" VerticalAlignment="Top" Width="82" Click="addOrderButton_Click"/>
                                 <Button x:Name="cancelButton" Content="Annuller" HorizontalAlignment="Left" Margin="676,331,0,0" VerticalAlignment="Top" Width="75" Click="cancelButton_Click"/>
                                 <Button x:Name="addOrderlineButton" Content="Tilføj ordrelinje" HorizontalAlignment="Left" Margin="348,199,0,0" VerticalAlignment="Top" Width="120" Click="addOrderlineButton_Click"/>
                                 <Label x:Name="findCustomerLabel" Content="Find kunde:" HorizontalAlignment="Left" Margin="220,37,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="findCustomerTextBox" HorizontalAlignment="Left" Height="23" Margin="348,42,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                <TextBox x:Name="findCustomerTextBox" HorizontalAlignment="Left" Height="23" Margin="348,42,0,0" TextWrapping="Wrap" Text="Indtast email" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Søg">
