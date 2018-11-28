@@ -169,6 +169,11 @@ namespace DesktopClient {
         }
 
         private void OrdrelineClearFields() {
+            findProductTextBox.Text = "";
+            inputQuantityTextBox.Text = "";
+        }
+
+        private void OrderClearFields() {
             findCustomerTextBox.Text = "";
             findProductTextBox.Text = "";
             inputQuantityTextBox.Text = "";
@@ -203,12 +208,13 @@ namespace DesktopClient {
             if (c != null) {
                 Order order = orderController.CreateOrder(c.FirstName, c.LastName, c.Address, c.ZipCode, c.City, c.Email, c.Phone, orderlines);
                 updateProductText.Content = "Ordren blev oprettet";
-                OrdrelineClearFields();
+                OrderClearFields();
+                orderlines = new List<Orderline>();
             }
         }
             
         private void cancelButton_Click(object sender, RoutedEventArgs e) {
-            OrdrelineClearFields();
+            OrderClearFields();
         }
     }
 }
