@@ -2,14 +2,19 @@
 
 namespace Client.ServiceLayer {
     public class UserService : IUserService {
+
+        UserReference.UserServiceClient myProxy;
+
+        public UserService() {
+            myProxy = new UserReference.UserServiceClient();
+        }
+
         public bool CreateUserWithPassword(string firstName, string lastName, string street, int zip, 
                                                 string city, string email, int number, string password) {
-            UserReference.UserServiceClient myProxy = new UserReference.UserServiceClient();
             return myProxy.CreateUserWithPassword(firstName, lastName, street, zip, city, email, number, password);
         }
 
         public User GetUser(string email) {
-            UserReference.UserServiceClient myProxy = new UserReference.UserServiceClient();
             var u = myProxy.GetUser(email);
             User user = new User();
             if (u != null) {
@@ -22,17 +27,15 @@ namespace Client.ServiceLayer {
                 user.ZipCode = u.ZipCode;
                 user.City = u.City;
             }
+
             return user;
         }
 
         public bool ValidatePassword(string email, string password) {
-            UserReference.UserServiceClient myProxy = new UserReference.UserServiceClient();
             return myProxy.ValidatePassword(email, password);
         }
 
-
         public Customer GetCustomerByEmail(string email) {
-            UserReference.UserServiceClient myProxy = new UserReference.UserServiceClient();
             var customer = myProxy.GetCustomerByMail(email);
             Customer c = new Customer();
             if (customer != null) {

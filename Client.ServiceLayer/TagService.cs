@@ -7,38 +7,41 @@ using Client.Domain;
 
 namespace Client.ServiceLayer {
     public class TagService : ITagService {
-        public Tag FindBestSellers(string name) {
-            return FindTagByName(name);
+
+        ServiceReference2.TagServiceClient myProxy;
+
+        public TagService() {
+            myProxy = new ServiceReference2.TagServiceClient();
         }
 
         public Tag FindTagByName(string name) {
-            ServiceReference2.TagServiceClient myProxy = new ServiceReference2.TagServiceClient();
             var t = myProxy.FindTagByName(name);
             Tag tag = new Tag();
             if (t != null) {
                 foreach (var p in t.Products) {
-                    Product product = new Product();
-                    product.ID = p.ID;
-                    product.Name = p.Name;
-                    product.Price = p.Price;
-                    product.Stock = p.Stock;
-                    product.Description = p.Description;
-                    product.Rating = p.Rating;
-                    product.MinStock = p.MinStock;
-                    product.MaxStock = p.MaxStock;
+                    Product product = new Product {
+                        ID = p.ID,
+                        Name = p.Name,
+                        Price = p.Price,
+                        Stock = p.Stock,
+                        Description = p.Description,
+                        Rating = p.Rating,
+                        MinStock = p.MinStock,
+                        MaxStock = p.MaxStock
+                    };
 
                     foreach (var i in p.Images) {
-                        Image image = new Image();
-                        image.ImageSource = i.ImageSource;
-                        image.Name = i.Name;
+                        Image image = new Image {
+                            ImageSource = i.ImageSource,
+                            Name = i.Name
+                        };
                         product.Images.Add(image);
                     }
 
                     tag.Products.Add(product);
                 }
-                return tag;
             }
-            return null;
+            return tag;
         }
     }
 }

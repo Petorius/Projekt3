@@ -74,5 +74,4 @@ namespace Client.ServiceLayer {
             return myProxy.Update(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
     }
-
 }
