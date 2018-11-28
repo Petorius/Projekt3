@@ -21,6 +21,10 @@ namespace Client.ControlLayer {
             return productService.Find(ID);
         }
 
+        public Product FindByName(string name) {
+            return productService.FindByName(name);
+        }
+
         public bool DeleteProduct(int ID) {
             return productService.Delete(ID);
         }

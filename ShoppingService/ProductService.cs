@@ -37,6 +37,11 @@ namespace Server.ServiceLayer {
             return product;
         }
 
+        public Product FindProductByName(string name) {
+            Product product = productDb.GetByName(name);
+            return product;
+        }
+
         public IEnumerable<Product> GetAllProducts() {
             return productDb.GetAll();
         }
