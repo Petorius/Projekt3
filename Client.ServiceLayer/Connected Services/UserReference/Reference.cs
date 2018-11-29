@@ -720,17 +720,23 @@ namespace Client.ServiceLayer.UserReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUser", ReplyAction="http://tempuri.org/IUserService/GetUserResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.User> GetUserAsync(string email);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserWithOrders", ReplyAction="http://tempuri.org/IUserService/GetUserWithOrdersResponse")]
+        Client.ServiceLayer.UserReference.User GetUserWithOrders(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserWithOrders", ReplyAction="http://tempuri.org/IUserService/GetUserWithOrdersResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.User> GetUserWithOrdersAsync(string email);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetCustomerByMail", ReplyAction="http://tempuri.org/IUserService/GetCustomerByMailResponse")]
         Client.ServiceLayer.UserReference.Customer GetCustomerByMail(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetCustomerByMail", ReplyAction="http://tempuri.org/IUserService/GetCustomerByMailResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.Customer> GetCustomerByMailAsync(string email);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserWithOrders", ReplyAction="http://tempuri.org/IUserService/GetUserWithOrdersResponse")]
-        Client.ServiceLayer.UserReference.User GetUserWithOrders(string email);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateCustomer", ReplyAction="http://tempuri.org/IUserService/UpdateCustomerResponse")]
+        bool UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserWithOrders", ReplyAction="http://tempuri.org/IUserService/GetUserWithOrdersResponse")]
-        System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.User> GetUserWithOrdersAsync(string email);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateCustomer", ReplyAction="http://tempuri.org/IUserService/UpdateCustomerResponse")]
+        System.Threading.Tasks.Task<bool> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -768,6 +774,14 @@ namespace Client.ServiceLayer.UserReference {
             return base.Channel.GetUserAsync(email);
         }
         
+        public Client.ServiceLayer.UserReference.User GetUserWithOrders(string email) {
+            return base.Channel.GetUserWithOrders(email);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.User> GetUserWithOrdersAsync(string email) {
+            return base.Channel.GetUserWithOrdersAsync(email);
+        }
+        
         public Client.ServiceLayer.UserReference.Customer GetCustomerByMail(string email) {
             return base.Channel.GetCustomerByMail(email);
         }
@@ -776,12 +790,12 @@ namespace Client.ServiceLayer.UserReference {
             return base.Channel.GetCustomerByMailAsync(email);
         }
         
-        public Client.ServiceLayer.UserReference.User GetUserWithOrders(string email) {
-            return base.Channel.GetUserWithOrders(email);
+        public bool UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
+            return base.Channel.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city);
         }
         
-        public System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.User> GetUserWithOrdersAsync(string email) {
-            return base.Channel.GetUserWithOrdersAsync(email);
+        public System.Threading.Tasks.Task<bool> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
+            return base.Channel.UpdateCustomerAsync(firstName, lastName, phone, email, address, zipCode, city);
         }
     }
 }

@@ -165,7 +165,26 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Opdater">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <Label x:Name="Kunde_Opdater_SøgEmail_Label" Content="Søg på email" HorizontalAlignment="Left" Margin="241,30,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="Kunde_Opdater_SøgEmail_TextBox" HorizontalAlignment="Left" Height="23" Margin="352,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152"/>
+                                <Label x:Name="Kunde_Opdater_FirstName_Label" Content="Fornavn:" HorizontalAlignment="Left" Margin="241,74,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Kunde_Opdater_LastName_Label" Content="Efternavn:" HorizontalAlignment="Left" Margin="241,105,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Kunde_Opdater_Address_Label" Content="Adresse:" HorizontalAlignment="Left" Margin="241,131,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Kunde_Opdater_ZipCode_Label" Content="Postnummer:" HorizontalAlignment="Left" Margin="241,157,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Kunde_Opdater_City_Label" Content="By:" HorizontalAlignment="Left" Margin="241,183,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Kunde_Opdater_Phone_Label" Content="Telefonnummer:" HorizontalAlignment="Left" Margin="241,209,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Kunde_Opdater_Email_Label" Content="Mailadresse:" HorizontalAlignment="Left" Margin="241,235,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Kunde_Opdater_FirstName_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,74,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Kunde_Opdater_LastName_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,105,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Kunde_Opdater_Address_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,131,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Kunde_Opdater_ZipCode_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,157,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Kunde_Opdater_City_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,183,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Kunde_Opdater_Phone_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,209,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Kunde_Opdater_Email_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,235,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="Kunde_Opdater_OK" Content="OK" HorizontalAlignment="Left" Margin="591,315,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Opdater_OK_Click"/>
+                                <Button x:Name="Kunde_Opdater_Anuller" Content="Annuller" HorizontalAlignment="Left" Margin="671,315,0,0" VerticalAlignment="Top" Width="75"/>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Slet">
                             <Grid Background="#FFE5E5E5"/>

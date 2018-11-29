@@ -24,12 +24,16 @@ namespace Client.ControlLayer {
             return userService.GetUser(email);
         }
 
+        public User GetUserWithOrders(string email) {
+            return userService.GetUserWithOrder(email);
+        }
+
         public Customer GetCustomerByMail(string email) {
             return userService.GetCustomerByEmail(email);
         }
 
-        public User GetUserWithOrders(string email) {
-            return userService.GetUserWithOrder(email);
+        public bool UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
+            return userService.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city);
         }
     }
 }

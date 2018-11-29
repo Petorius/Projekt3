@@ -239,6 +239,19 @@ namespace DesktopClient {
             }
         }
 
+        private void Kunde_Opdater_OK_Click(object sender, RoutedEventArgs e) {
+            User user = userController.GetUser(Kunde_Opdater_SøgEmail_TextBox.Text);
+            if (user != null) {
+                Kunde_Opdater_FirstName_Label_Display.Content = user.FirstName;
+                Kunde_Opdater_LastName_Label_Display.Content = user.LastName;
+                Kunde_Opdater_Address_Label_Display.Content = user.Address;
+                Kunde_Opdater_ZipCode_Label_Display.Content = user.ZipCode;
+                Kunde_Opdater_City_Label_Display.Content = user.City;
+                Kunde_Opdater_Phone_Label_Display.Content = user.Phone;
+                Kunde_Opdater_Email_Label_Display.Content = user.Email;
+            }
 
+            userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
+        }
     }
 }
