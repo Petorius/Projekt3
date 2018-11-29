@@ -52,7 +52,7 @@ namespace Server.DataAccessLayer {
                         Order order = new Order();
                         order.ID = reader.GetInt32(reader.GetOrdinal("orderID"));
 
-                        user.OrderList.Add(order);
+                        user.Orders.Add(order);
                     }
                     reader.Close();
                 }

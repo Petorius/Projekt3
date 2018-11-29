@@ -26,8 +26,8 @@ namespace DesktopClient {
         private OrderController orderController;
         private List<Orderline> orderlines;
         private UserController userController;
-       
         private List<string> userOrderListWithID;
+        private List<string> orderlineItems;
 
         public CrudOverview() {
             InitializeComponent();
@@ -37,6 +37,7 @@ namespace DesktopClient {
             userController = new UserController();
 
             userOrderListWithID = new List<string>();
+            orderlineItems = new List<string>();
         }
 
 
@@ -173,14 +174,14 @@ namespace DesktopClient {
         }
 
         private void OrdrelineClearFields() {
-            findProductTextBox.Text = "";
-            inputQuantityTextBox.Text = "";
+            Ordre_Opret_Find_Product_TextBox.Text = "";
+            Ordre_Opret_Antal_TextBox.Text = "";
         }
 
         private void OrderClearFields() {
-            findCustomerTextBox.Text = "";
-            findProductTextBox.Text = "";
-            inputQuantityTextBox.Text = "";
+            Ordre_Opret_Find_Kunde_TextBox.Text = "";
+            Ordre_Opret_Find_Product_TextBox.Text = "";
+            Ordre_Opret_Antal_TextBox.Text = "";
         }
 
         private void findProductTextBox_TextChanged(object sender, TextChangedEventArgs e) {
@@ -189,8 +190,8 @@ namespace DesktopClient {
 
         private void addOrderlineButton_Click(object sender, RoutedEventArgs e) {
 
-            Product p = productController.FindByName(findProductTextBox.Text);
-            int quantity = Int32.Parse(inputQuantityTextBox.Text);
+            Product p = productController.FindByName(Ordre_Opret_Find_Product_TextBox.Text);
+            int quantity = Int32.Parse(Ordre_Opret_Antal_TextBox.Text);
             decimal subTotal = p.Price * quantity;
             Orderline ol = new Orderline(quantity, subTotal, p);
             bool result = orderController.CreateOrderLine(quantity, subTotal, p.ID);
@@ -207,7 +208,7 @@ namespace DesktopClient {
         }
 
         private void addOrderButton_Click(object sender, RoutedEventArgs e) {
-            Customer c = userController.GetCustomerByMail(findCustomerTextBox.Text);
+            Customer c = userController.GetCustomerByMail(Ordre_Opret_Find_Kunde_TextBox.Text);
 
             if (c != null) {
                 Order order = orderController.CreateOrder(c.FirstName, c.LastName, c.Address, c.ZipCode, c.City, c.Email, c.Phone, orderlines);
@@ -221,6 +222,38 @@ namespace DesktopClient {
             OrderClearFields();
         }
 
+        private void Ordre_Søg_Find_Ordre_TextBox_TextChanged(object sender, TextChangedEventArgs e) {
+
+        }
+
+        private void Ordre_Søg_Ok_Knap_Click(object sender, RoutedEventArgs e) {
+
+            int id = Int32.Parse(Ordre_Søg_Find_Ordre_TextBox.Text);
+            Order o = orderController.FindOrder(id);
+            Ordre_Søg_Kunde_Email_Label_Output.Content = o.Customer.Email;
+            Ordre_Søg_Total_Label_Output.Content = o.Total;
+            Ordre_Søg_Købsdato_Label_Output.Content = o.DateCreated;
+
+            foreach(Orderline ol in o.Orderlines) {
+                orderlineItems.Add("Orderlinje ID: " + ol.ID.ToString() + " " + "Antal: " + ol.Quantity.ToString() + " " + "Sub-total: " + ol.SubTotal.ToString() + " " + "Product ID: " + ol.Product.ID.ToString());
+            }
+
+            Ordre_Søg_Ordrelinjer_ListBox.ItemsSource = orderlineItems;
+            orderlineItems = new List<string>();
+        }
+
+        private void Ordre_Søg_Ordrelinjer_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+        }
+
+        private void Ordre_Søg_Annuller_Knap_Click(object sender, RoutedEventArgs e) {
+            Ordre_Søg_Find_Ordre_TextBox.Text = "";
+            Ordre_Søg_Kunde_Email_Label_Output.Content = "";
+            Ordre_Søg_Total_Label_Output.Content = "";
+            Ordre_Søg_Købsdato_Label_Output.Content = "";
+            Ordre_Søg_Ordrelinjer_ListBox.ItemsSource = new List<string>();
+        }
+
         private void Kunde_Søg_Ok_Click(object sender, RoutedEventArgs e) {
             User user = userController.GetUserWithOrders(findUserByMailTextBox1.Text);
             if (user != null) {
@@ -230,7 +263,7 @@ namespace DesktopClient {
                 userFindZipCodeLabel.Content = user.ZipCode;
                 userFindCityLabel.Content = user.City;
                 userFindPhoneLabel.Content = user.Phone;
-                foreach (Order order in user.OrderList) {
+                foreach (Order order in user.Orders) {
                     userOrderListWithID.Add("Ordrenummer #" + order.ID);
 
                 }
@@ -241,17 +274,63 @@ namespace DesktopClient {
 
         private void Kunde_Opdater_OK_Click(object sender, RoutedEventArgs e) {
             User user = userController.GetUser(Kunde_Opdater_SøgEmail_TextBox.Text);
-            if (user != null) {
-                Kunde_Opdater_FirstName_Label_Display.Content = user.FirstName;
-                Kunde_Opdater_LastName_Label_Display.Content = user.LastName;
-                Kunde_Opdater_Address_Label_Display.Content = user.Address;
-                Kunde_Opdater_ZipCode_Label_Display.Content = user.ZipCode;
-                Kunde_Opdater_City_Label_Display.Content = user.City;
-                Kunde_Opdater_Phone_Label_Display.Content = user.Phone;
-                Kunde_Opdater_Email_Label_Display.Content = user.Email;
-            }
 
-            userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
+            user.FirstName = Kunde_Opdater_FirstName_TextBox.Text;
+            user.LastName = Kunde_Opdater_LastName_TextBox.Text;
+            user.Address = Kunde_Opdater_Address_TextBox.Text;
+            user.ZipCode = Int32.Parse(Kunde_Opdater_ZipCode_TextBox.Text);
+            user.City = Kunde_Opdater_City_TextBox.Text;
+            user.Phone = Int32.Parse(Kunde_Opdater_Phone_TextBox.Text);
+            user.Email = Kunde_Opdater_Email_TextBox.Text;
+
+            bool res = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
+            if(res) {
+                Kunde_Opdater_Result_Label.Content = "Kunden blev opdateret!";
+            }
+            else {
+                Kunde_Opdater_Result_Label.Content = "Der skete en fejl! Prøv igen.";
+            }
+            ClearCustomerFields();
+        }
+
+        private void Kunde_Opdater_Anuller_Click(object sender, RoutedEventArgs e) {
+            ClearCustomerFields();
+        }
+
+        private void ClearCustomerFields() {
+            Kunde_Opdater_FirstName_TextBox.Text = "";
+            Kunde_Opdater_LastName_TextBox.Text = "";
+            Kunde_Opdater_Address_TextBox.Text = "";
+            Kunde_Opdater_ZipCode_TextBox.Text = "";
+            Kunde_Opdater_City_TextBox.Text = "";
+            Kunde_Opdater_Phone_TextBox.Text = "";
+            Kunde_Opdater_Email_TextBox.Text = "";
+            Kunde_Opdater_SøgEmail_TextBox.Text = "";
+            Kunde_Opdater_SøgEmail_TextBox.IsEnabled = true;
+            Kunde_Opdater_FindKunde_Resultat_Label.Content = "";
+        }
+
+        private void Kunde_Opdater_FindKunde_Click(object sender, RoutedEventArgs e) {
+            User user = userController.GetUser(Kunde_Opdater_SøgEmail_TextBox.Text);
+            if(user.ID > 0) {
+                SetCustomerFields(user);
+                Kunde_Opdater_FindKunde_Resultat_Label.Content = "";
+            }
+            else {
+                Kunde_Opdater_FindKunde_Resultat_Label.Content = "Kunden findes ikke!";
+            }
+            Kunde_Opdater_Result_Label.Content = "";
+        }
+
+        private void SetCustomerFields(User user) {
+            Kunde_Opdater_FirstName_TextBox.Text = user.FirstName;
+            Kunde_Opdater_LastName_TextBox.Text = user.LastName;
+            Kunde_Opdater_Address_TextBox.Text = user.Address;
+            Kunde_Opdater_ZipCode_TextBox.Text = user.ZipCode.ToString();
+            Kunde_Opdater_City_TextBox.Text = user.City;
+            Kunde_Opdater_Phone_TextBox.Text = user.Phone.ToString();
+            Kunde_Opdater_Email_TextBox.Text = user.Email;
+            Kunde_Opdater_SøgEmail_TextBox.IsEnabled = false;
         }
 
         private void Kunde_Slet_Find_Clicked(object sender, RoutedEventArgs e) {

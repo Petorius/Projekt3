@@ -38,6 +38,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="FindOrder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindOrderResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="FindOrderResult" nillable="true" type="q3:Order" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UpdateOrderLine">
     <xs:complexType>
       <xs:sequence>

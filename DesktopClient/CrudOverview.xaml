@@ -104,19 +104,40 @@
                     <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="389" Margin="10,25,0,0" VerticalAlignment="Top" Width="778">
                         <TabItem Header="Opret">
                             <Grid Background="#FFE5E5E5">
-                                <Label x:Name="label" Content="Find produkt:" HorizontalAlignment="Left" Margin="220,84,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="findProductTextBox" HorizontalAlignment="Left" Height="23" Margin="348,88,0,0" TextWrapping="Wrap" Text="Indtast produkt navn" VerticalAlignment="Top" Width="120" TextChanged="findProductTextBox_TextChanged" FontStyle="Italic"/>
-                                <Label x:Name="label1" Content="Antal:" HorizontalAlignment="Left" Margin="220,133,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="inputQuantityTextBox" HorizontalAlignment="Left" Height="23" Margin="348,133,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
-                                <Button x:Name="addOrderButton" Content="Opret ordre" HorizontalAlignment="Left" Margin="578,331,0,0" VerticalAlignment="Top" Width="82" Click="addOrderButton_Click"/>
-                                <Button x:Name="cancelButton" Content="Annuller" HorizontalAlignment="Left" Margin="676,331,0,0" VerticalAlignment="Top" Width="75" Click="cancelButton_Click"/>
-                                <Button x:Name="addOrderlineButton" Content="Tilføj ordrelinje" HorizontalAlignment="Left" Margin="348,199,0,0" VerticalAlignment="Top" Width="120" Click="addOrderlineButton_Click"/>
-                                <Label x:Name="findCustomerLabel" Content="Find kunde:" HorizontalAlignment="Left" Margin="220,37,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="findCustomerTextBox" HorizontalAlignment="Left" Height="23" Margin="348,42,0,0" TextWrapping="Wrap" Text="Indtast email" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="59*"/>
+                                    <ColumnDefinition Width="713*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label x:Name="Ordre_Opret_Find_Product_Label" Content="Find produkt:" HorizontalAlignment="Left" Margin="161,84,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <TextBox x:Name="Ordre_Opret_Find_Product_TextBox" HorizontalAlignment="Left" Height="23" Margin="289,88,0,0" TextWrapping="Wrap" Text="Indtast produkt navn" VerticalAlignment="Top" Width="120" TextChanged="findProductTextBox_TextChanged" FontStyle="Italic" Grid.Column="1"/>
+                                <Label x:Name="Ordre_Opret_Antal" Content="Antal:" HorizontalAlignment="Left" Margin="161,133,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <TextBox x:Name="Ordre_Opret_Antal_TextBox" HorizontalAlignment="Left" Height="23" Margin="289,133,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontStyle="Italic" Grid.Column="1"/>
+                                <Button x:Name="Ordre_Opret_Opret_Ordre_Knap" Content="Opret ordre" HorizontalAlignment="Left" Margin="519,331,0,0" VerticalAlignment="Top" Width="82" Click="addOrderButton_Click" Grid.Column="1"/>
+                                <Button x:Name="Ordre_Opret_Annuller_Ordre_Knap" Content="Annuller" HorizontalAlignment="Left" Margin="617,331,0,0" VerticalAlignment="Top" Width="75" Click="cancelButton_Click" Grid.Column="1"/>
+                                <Button x:Name="Ordre_Opret_Tilføj_Ordrelinje_Knap" Content="Tilføj ordrelinje" HorizontalAlignment="Left" Margin="289,199,0,0" VerticalAlignment="Top" Width="120" Click="addOrderlineButton_Click" Grid.Column="1"/>
+                                <Label x:Name="Ordre_Opret_Find_Kunde_Label" Content="Find kunde:" HorizontalAlignment="Left" Margin="161,37,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <TextBox x:Name="Ordre_Opret_Find_Kunde_TextBox" HorizontalAlignment="Left" Height="23" Margin="289,42,0,0" TextWrapping="Wrap" Text="Indtast email" VerticalAlignment="Top" Width="120" FontStyle="Italic" Grid.Column="1"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Søg">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6*"/>
+                                    <ColumnDefinition Width="187*"/>
+                                </Grid.ColumnDefinitions>
+                                <ListBox x:Name="Ordre_Søg_Ordrelinjer_ListBox" HorizontalAlignment="Left" Height="208" Margin="405,70,0,0" VerticalAlignment="Top" Width="320" Grid.Column="1" SelectionChanged="Ordre_Søg_Ordrelinjer_ListBox_SelectionChanged"/>
+                                <Label x:Name="Ordre_Søg_Ordrelinjer_Label" Content="Ordrelinjer:" HorizontalAlignment="Left" Margin="405,39,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <Label x:Name="Ordre_Søg_Find_Ordre_Label" Content="Find ordre:" HorizontalAlignment="Left" Margin="46,70,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <TextBox x:Name="Ordre_Søg_Find_Ordre_TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="160,73,0,0" TextWrapping="Wrap" Text="Indtast ordre ID" VerticalAlignment="Top" Width="120" FontStyle="italic" TextChanged="Ordre_Søg_Find_Ordre_TextBox_TextChanged"/>
+                                <Label x:Name="Ordre_Søg_Total_Label" Content="Total:" Grid.Column="1" HorizontalAlignment="Left" Margin="46,206,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Ordre_Søg_Total_Label_Output" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="160,206,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Ordre_Søg_Kunde_Email_Label" Content="Kunde e-mail:" Grid.Column="1" HorizontalAlignment="Left" Margin="46,161,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Ordre_Søg_Kunde_Email_Label_Output" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="160,161,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Ordre_Søg_Købsdato_Label" Content="Købsdato:" Grid.Column="1" HorizontalAlignment="Left" Margin="46,252,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Ordre_Søg_Købsdato_Label_Output" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="160,252,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="Ordre_Søg_Ok_Knap" Content="OK" Grid.Column="1" HorizontalAlignment="Left" Margin="551,320,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Søg_Ok_Knap_Click"/>
+                                <Button x:Name="Ordre_Søg_Annuller_Knap" Content="Annuller" Grid.Column="1" HorizontalAlignment="Left" Margin="650,320,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Søg_Annuller_Knap_Click"/>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Opdater">
                             <Grid Background="#FFE5E5E5"/>
@@ -194,15 +215,18 @@
                                 <Label x:Name="Kunde_Opdater_City_Label" Content="By:" HorizontalAlignment="Left" Margin="241,183,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="Kunde_Opdater_Phone_Label" Content="Telefonnummer:" HorizontalAlignment="Left" Margin="241,209,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="Kunde_Opdater_Email_Label" Content="Mailadresse:" HorizontalAlignment="Left" Margin="241,235,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_FirstName_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,74,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_LastName_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,105,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_Address_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,131,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_ZipCode_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,157,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_City_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,183,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_Phone_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,209,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_Email_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,235,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="Kunde_Opdater_FirstName_TextBox" Text="" HorizontalAlignment="Left" Margin="352,74,0,0" VerticalAlignment="Top" Width="152"/>
+                                <TextBox x:Name="Kunde_Opdater_LastName_TextBox" Text="" HorizontalAlignment="Left" Margin="352,105,0,0" VerticalAlignment="Top" Width="152"/>
+                                <TextBox x:Name="Kunde_Opdater_Address_TextBox" Text="" HorizontalAlignment="Left" Margin="352,131,0,0" VerticalAlignment="Top" Width="152"/>
+                                <TextBox x:Name="Kunde_Opdater_ZipCode_TextBox" Text="" HorizontalAlignment="Left" Margin="352,157,0,0" VerticalAlignment="Top" Width="152"/>
+                                <TextBox x:Name="Kunde_Opdater_City_TextBox" Text="" HorizontalAlignment="Left" Margin="352,183,0,0" VerticalAlignment="Top" Width="152"/>
+                                <TextBox x:Name="Kunde_Opdater_Phone_TextBox" Text="" HorizontalAlignment="Left" Margin="352,209,0,0" VerticalAlignment="Top" Width="152"/>
+                                <TextBox x:Name="Kunde_Opdater_Email_TextBox" Text="" HorizontalAlignment="Left" Margin="352,235,0,0" VerticalAlignment="Top" Width="152"/>
                                 <Button x:Name="Kunde_Opdater_OK" Content="OK" HorizontalAlignment="Left" Margin="591,315,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Opdater_OK_Click"/>
-                                <Button x:Name="Kunde_Opdater_Anuller" Content="Annuller" HorizontalAlignment="Left" Margin="671,315,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="Kunde_Opdater_Anuller" Content="Annuller" HorizontalAlignment="Left" Margin="671,315,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Opdater_Anuller_Click"/>
+                                <Button x:Name="Kunde_Opdater_FindKunde" Content="Find" HorizontalAlignment="Left" Margin="521,33,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Opdater_FindKunde_Click"/>
+                                <Label x:Name="Kunde_Opdater_Result_Label" Content="" HorizontalAlignment="Left" Margin="521,148,0,0" VerticalAlignment="Top" Height="49" Width="251" FontSize="20"/>
+                                <Label x:Name="Kunde_Opdater_FindKunde_Resultat_Label" Content="" HorizontalAlignment="Left" Margin="352,2,0,0" VerticalAlignment="Top" Width="152"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Slet">

@@ -19,6 +19,12 @@
   <wsdl:message name="IOrderService_CreateOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateOrderResponse" />
   </wsdl:message>
+  <wsdl:message name="IOrderService_FindOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrder" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_FindOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrderResponse" />
+  </wsdl:message>
   <wsdl:message name="IOrderService_UpdateOrderLine_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateOrderLine" />
   </wsdl:message>
@@ -39,6 +45,10 @@
     <wsdl:operation name="CreateOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/CreateOrder" message="tns:IOrderService_CreateOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/CreateOrderResponse" message="tns:IOrderService_CreateOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/FindOrder" message="tns:IOrderService_FindOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/FindOrderResponse" message="tns:IOrderService_FindOrder_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateOrderLine">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/UpdateOrderLine" message="tns:IOrderService_UpdateOrderLine_InputMessage" />
@@ -62,6 +72,15 @@
     </wsdl:operation>
     <wsdl:operation name="CreateOrder">
       <soap:operation soapAction="http://tempuri.org/IOrderService/CreateOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrder">
+      <soap:operation soapAction="http://tempuri.org/IOrderService/FindOrder" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
