@@ -26,6 +26,8 @@ namespace DesktopClient {
         private OrderController orderController;
         private List<Orderline> orderlines;
         private UserController userController;
+       
+        private List<string> userOrderListWithID;
 
         public CrudOverview() {
             InitializeComponent();
@@ -33,6 +35,8 @@ namespace DesktopClient {
             orderController = new OrderController();
             orderlines = new List<Orderline>();
             userController = new UserController();
+
+            userOrderListWithID = new List<string>();
         }
 
 
@@ -133,12 +137,12 @@ namespace DesktopClient {
                 string description = updateDescriptionTextBox.Text;
                 bool isUpdated = productController.Update(id, name, price, stock, minStock, maxStock, description, isActive);
                 if (isUpdated) {
-                    updateProductText.Content = "Produktet blev opdateret";
+                    updateProductText1.Content = "Produktet blev opdateret";
                     ProductClearUpdateFields();
                     _inputIDtextBox.IsEnabled = true;
                 }
                 else {
-                    updateProductText.Content = "Der opstod en fejl. Prøv igen";
+                    updateProductText1.Content = "Der opstod en fejl. Prøv igen";
                 }
 
             }
@@ -180,7 +184,7 @@ namespace DesktopClient {
         }
 
         private void findProductTextBox_TextChanged(object sender, TextChangedEventArgs e) {
-        
+
         }
 
         private void addOrderlineButton_Click(object sender, RoutedEventArgs e) {
@@ -193,12 +197,12 @@ namespace DesktopClient {
 
             if (result) {
                 orderlines.Add(ol);
-                updateProductText.Content = "Ordrelinjen blev oprettet";
+                //updateProductText.Content = "Ordrelinjen blev oprettet";
                 OrdrelineClearFields();
 
             }
             else {
-                updateProductText.Content = "Der opstod en fejl. Prøv igen";
+                //updateProductText.Content = "Der opstod en fejl. Prøv igen";
             }
         }
 
@@ -207,14 +211,34 @@ namespace DesktopClient {
 
             if (c != null) {
                 Order order = orderController.CreateOrder(c.FirstName, c.LastName, c.Address, c.ZipCode, c.City, c.Email, c.Phone, orderlines);
-                updateProductText.Content = "Ordren blev oprettet";
+                //updateProductText.Content = "Ordren blev oprettet";
                 OrderClearFields();
                 orderlines = new List<Orderline>();
             }
         }
-            
+
         private void cancelButton_Click(object sender, RoutedEventArgs e) {
             OrderClearFields();
         }
+
+        private void Kunde_Søg_Ok_Click(object sender, RoutedEventArgs e) {
+            User user = userController.GetUserWithOrders(findUserByMailTextBox1.Text);
+            if (user != null) {
+                userFindFirstNameLabel.Content = user.FirstName;
+                userFindLastNameLabel.Content = user.LastName;
+                userFindAddressLabel.Content = user.Address;
+                userFindZipCodeLabel.Content = user.ZipCode;
+                userFindCityLabel.Content = user.City;
+                userFindPhoneLabel.Content = user.Phone;
+                foreach (Order order in user.OrderList) {
+                    userOrderListWithID.Add("Ordrenummer #" + order.ID);
+
+                }
+                userOrderListWithID.Reverse();
+                Kunde_Søg_Orderbox.ItemsSource = userOrderListWithID;
+            }
+        }
+
+
     }
 }

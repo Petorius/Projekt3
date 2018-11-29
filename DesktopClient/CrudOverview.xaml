@@ -59,6 +59,7 @@
                         </TabItem>
                         <TabItem Header="Opdater">
                             <Grid Background="#FFE5E5E5">
+                                <Label x:Name="updateProductText1" Content="" HorizontalAlignment="Center" Margin="463,194,9.6,0" VerticalAlignment="Top" Height="101" Width="321" FontSize="24"/>
                                 <TextBox x:Name="_inputIDtextBox" HorizontalAlignment="Left" Height="23" Margin="198,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.388,0.557"/>
                                 <Label x:Name="_searchByIDlabel" Content="Søg på ID" HorizontalAlignment="Left" Margin="40,21,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="_namelabel" Content="Navn:" HorizontalAlignment="Left" Margin="40,90,0,0" VerticalAlignment="Top"/>
@@ -143,7 +144,25 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Søg">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <Label Content="Søg på email" HorizontalAlignment="Left" Margin="79,32,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Efternavn:" HorizontalAlignment="Left" Margin="79,124,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Adresse:" HorizontalAlignment="Left" Margin="79,155,0,0" VerticalAlignment="Top"/>
+                                <Label Content="By:" HorizontalAlignment="Left" Margin="79,216,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Telefonnummer:" HorizontalAlignment="Left" Margin="79,247,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Postnummer:" HorizontalAlignment="Left" Margin="79,186,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Fornavn:" HorizontalAlignment="Left" Margin="79,93,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="findUserByMailTextBox1" HorizontalAlignment="Left" Height="23" Margin="190,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152"/>
+                                <Label x:Name="userFindFirstNameLabel" Content="" HorizontalAlignment="Left" Margin="190,93,0,0" VerticalAlignment="Top" Width="152"/>
+                                <Label x:Name="userFindCityLabel" Content="" HorizontalAlignment="Left" Margin="190,216,0,0" VerticalAlignment="Top" Width="152"/>
+                                <Label x:Name="userFindPhoneLabel" Content="" HorizontalAlignment="Left" Margin="190,247,0,0" VerticalAlignment="Top" Width="152"/>
+                                <Label x:Name="userFindZipCodeLabel" Content="" HorizontalAlignment="Left" Margin="190,186,0,0" VerticalAlignment="Top" Width="152"/>
+                                <Label x:Name="userFindLastNameLabel" Content="" HorizontalAlignment="Left" Margin="190,124,0,0" VerticalAlignment="Top" Width="152"/>
+                                <Label x:Name="userFindAddressLabel" Content="" HorizontalAlignment="Left" Margin="190,155,0,0" VerticalAlignment="Top" Width="152"/>
+                                <Button x:Name="Kunde_Søg_Ok" Content="OK" HorizontalAlignment="Left" Margin="608,300,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Søg_Ok_Click"/>
+                                <ListBox x:Name="Kunde_Søg_Orderbox" HorizontalAlignment="Left" Height="180" Margin="439,93,0,0" VerticalAlignment="Top" Width="177"/>
+                                <Label Content="Kunden har følgende ordre:" HorizontalAlignment="Left" Margin="439,62,0,0" VerticalAlignment="Top" Width="177"/>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Opdater">
                             <Grid Background="#FFE5E5E5"/>
@@ -177,6 +196,5 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Label x:Name="updateProductText" Content="" HorizontalAlignment="Center" Margin="463,194,9.6,0" VerticalAlignment="Top" Height="101" Width="321" FontSize="24"/>
     </Grid>
 </Window>

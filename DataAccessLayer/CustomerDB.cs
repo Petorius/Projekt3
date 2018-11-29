@@ -42,13 +42,7 @@ namespace Server.DataAccessLayer {
             return res;
         }
 
-        public Customer Get(int id) {
-            throw new NotImplementedException();
-        }
 
-        public IEnumerable<Customer> GetAll() {
-            throw new NotImplementedException();
-        }
 
         // Method with optimistic concurreny. If anything is changed, we rollback our transaction after trying for 4 times
         public bool Update(Customer Entity, bool test = false, bool testResult = false) {
@@ -141,6 +135,14 @@ namespace Server.DataAccessLayer {
         }
 
         public bool Create(Customer Entity, bool test = false, bool testResult = false) {
+            throw new NotImplementedException();
+        }
+
+        public Customer Get(int id) {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Customer> GetAll() {
             throw new NotImplementedException();
         }
     }

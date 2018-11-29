@@ -39,6 +39,27 @@ namespace Server.DataAccessLayer {
             }
         }
 
+        public User GetUserWithOrders(string email) {
+            User user = GetUser(email);
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                connection.Open();
+                using (SqlCommand cmd = connection.CreateCommand()) {
+                    cmd.CommandText = "select orderID from [dbo].[order] where [dbo].[order].[customerID] = @userID";
+                    cmd.Parameters.AddWithValue("userID", user.ID);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    
+                    while(reader.Read()) {
+                        Order order = new Order();
+                        order.ID = reader.GetInt32(reader.GetOrdinal("orderID"));
+
+                        user.OrderList.Add(order);
+                    }
+                    reader.Close();
+                }
+            }
+            return user;
+        }
+
         public User GetUser(string email) {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();

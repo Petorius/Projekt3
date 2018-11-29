@@ -14,6 +14,7 @@ namespace Client.Domain {
         public string Address { get; set; }
         public int ZipCode { get; set; }
         public string City { get; set; }
+        public List<Order> OrderList { get; set; }
 
         public Customer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
             FirstName = firstName;
@@ -23,10 +24,11 @@ namespace Client.Domain {
             Address = address;
             ZipCode = zipCode;
             City = city;
+            OrderList = new List<Order>();
         }
 
         public Customer() {
-
+            OrderList = new List<Order>();
         }
     }
 }

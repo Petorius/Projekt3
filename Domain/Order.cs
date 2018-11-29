@@ -27,6 +27,10 @@ namespace Server.Domain {
             Orderlines = new List<OrderLine>();
             DateCreated = DateTime.Today;
         }
+
+        public Order() {
+            Orderlines = new List<OrderLine>();
+        }
     }
 
 }
