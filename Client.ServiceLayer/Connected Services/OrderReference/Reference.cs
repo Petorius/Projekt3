@@ -525,6 +525,9 @@ namespace Client.ServiceLayer.OrderReference {
         private string LastNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.ServiceLayer.OrderReference.Order[] OrderListField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PhoneField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -614,6 +617,19 @@ namespace Client.ServiceLayer.OrderReference {
                 if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
                     this.LastNameField = value;
                     this.RaisePropertyChanged("LastName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.ServiceLayer.OrderReference.Order[] OrderList {
+            get {
+                return this.OrderListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrderListField, value) != true)) {
+                    this.OrderListField = value;
+                    this.RaisePropertyChanged("OrderList");
                 }
             }
         }
