@@ -140,7 +140,26 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Opdater">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="9*"/>
+                                    <ColumnDefinition Width="763*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label x:Name="Ordre_Opdater_Find_Ordre_Label" Content="Find ordre:" HorizontalAlignment="Left" Margin="80,54,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <ListBox x:Name="Ordre_Opdater_ListBox" HorizontalAlignment="Left" Height="180" Margin="415,123,0,0" VerticalAlignment="Top" Width="235" Grid.Column="1" SelectionChanged="listBox_SelectionChanged"/>
+                                <Label x:Name="Ordre_Opdater_Ordrelinjer_Label" Content="Ordrelinjer:" HorizontalAlignment="Left" Margin="415,97,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <TextBox x:Name="Ordre_Opdater_Find_Ordre_TextBox" HorizontalAlignment="Left" Height="23" Margin="210,57,0,0" TextWrapping="Wrap" Text="Indtast ordre ID" VerticalAlignment="Top" Width="120" FontStyle="Italic" Grid.Column="1" TextChanged="Ordre_Opdater_Find_Ordre_TextBox_TextChanged"/>
+                                <Label x:Name="Ordre_Opdater_Antal_Label" Content="Antal:" Grid.Column="1" HorizontalAlignment="Left" Margin="80,128,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="Ordre_Opdater_Tilføj_Ordrelinje_Knap" Content="Tilføj" Grid.Column="1" HorizontalAlignment="Left" Margin="655,184,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Opdater_Tilføj_Ordrelinje_Knap_Click"/>
+                                <Button x:Name="Ordre_Opdater_Slet_Ordrelinje_Knap" Content="Slet" Grid.Column="1" HorizontalAlignment="Left" Margin="655,220,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="Ordre_Opdater_Annuller_Knap" Content="Annuller" Grid.Column="1" HorizontalAlignment="Left" Margin="655,330,0,0" VerticalAlignment="Top" Width="75"/>
+                                <TextBox x:Name="Ordre_Opdater_Antal_TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="210,131,0,0" TextWrapping="Wrap" Text="Indtast antal" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
+                                <Label x:Name="Ordre_Opdater_SubTotal_Label" Content="Subtotal:" Grid.Column="1" HorizontalAlignment="Left" Margin="80,173,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="Ordre_Opdater_Subtotal_TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="210,177,0,0" TextWrapping="Wrap" Text="Indtast subtotal" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
+                                <Label x:Name="Ordre_Opdater_ProductID_Label" Content="Produkt ID:" Grid.Column="1" HorizontalAlignment="Left" Margin="80,218,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="Ordre_Opdater_ProductID_TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="210,221,0,0" TextWrapping="Wrap" Text="Indtast produkt ID" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
+                                <Button x:Name="Ordre_Opdater_Søg_Knap" Content="Søg" Grid.Column="1" HorizontalAlignment="Left" Margin="415,60,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Opdater_Søg_Knap_Click"/>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Slet">
                             <Grid Background="#FFE5E5E5"/>

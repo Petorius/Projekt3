@@ -334,5 +334,29 @@ namespace DesktopClient {
             Kunde_Opdater_Email_TextBox.Text = user.Email;
             Kunde_Opdater_SøgEmail_TextBox.IsEnabled = false;
         }
+
+        private void Ordre_Opdater_Find_Ordre_TextBox_TextChanged(object sender, TextChangedEventArgs e) {
+
+        }
+
+        private void Ordre_Opdater_Søg_Knap_Click(object sender, RoutedEventArgs e) {
+            int id = Int32.Parse(Ordre_Opdater_Find_Ordre_TextBox.Text);
+            Order o = orderController.FindOrder(id);
+            
+            foreach (Orderline ol in o.Orderlines) {
+                orderlineItems.Add("Orderlinje ID: " + ol.ID.ToString() + " " + "Antal: " + ol.Quantity.ToString() + " " + "Sub-total: " + ol.SubTotal.ToString() + " " + "Product ID: " + ol.Product.ID.ToString());
+            }
+
+            Ordre_Opdater_ListBox.ItemsSource = orderlineItems;
+            orderlineItems = new List<string>();
+        }
+
+        private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+        }
+
+        private void Ordre_Opdater_Tilføj_Ordrelinje_Knap_Click(object sender, RoutedEventArgs e) {
+
+        }
     }
 }
