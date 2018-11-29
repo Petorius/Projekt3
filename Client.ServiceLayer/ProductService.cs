@@ -84,22 +84,8 @@ namespace Client.ServiceLayer {
             return product;
         }
 
-        public bool CreateReview(string name, string description, int productID, string reviewerEmail) {
-            return myProxy.CreateReview(name, description, productID, reviewerEmail);
-        }
-
-        public IEnumerable<Review> GetProductReviews(int productID) {
-            var incomingReviews = myProxy.GetProductReviews(productID);
-            List<Review> productReviews = new List<Review>();
-            Review review = new Review();
-            foreach (var r in incomingReviews) {
-                review.ReviewID = r.ReviewID;
-                review.Name = r.Name;
-                review.Description = r.Description;
-                review.ProductID = productID;
-                review.ReviewerEmail = r.ReviewerEmail;
-            }
-            return productReviews;
+        public bool CreateReview(string text, int productID, int userID) {
+            return myProxy.CreateReview(text, productID, userID);
         }
     }
 }

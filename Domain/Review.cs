@@ -10,25 +10,19 @@ namespace Server.Domain {
     [DataContract]
     public class Review {
         [DataMember]
-        public int ReviewID { get; set; }
+        public string Text { get; set; }
         [DataMember]
-        public string Name { get; set; }
+        public User User { get; set; }
         [DataMember]
-        public string Description { get; set; }
-        [DataMember]
-        public int ProductID { get; set; }
-        [DataMember]
-        public string ReviewerEmail { get; set; }
+        public DateTime DateCreated { get; set; }
 
-        public Review(string name, string decription, int productID, string reviewerEmail) {
-            Name = name;
-            Description = decription;
-            ProductID = productID;
-            ReviewerEmail = reviewerEmail;
+        public Review(string text) {
+            Text = text;
+            DateCreated = DateTime.Today;
         }
 
         public Review() {
-
+            DateCreated = DateTime.Today;
         }
 
 

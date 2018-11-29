@@ -263,7 +263,7 @@ namespace DesktopClient {
                 userFindZipCodeLabel.Content = user.ZipCode;
                 userFindCityLabel.Content = user.City;
                 userFindPhoneLabel.Content = user.Phone;
-                foreach (Order order in user.OrderList) {
+                foreach (Order order in user.Orders) {
                     userOrderListWithID.Add("Ordrenummer #" + order.ID);
 
                 }
@@ -285,11 +285,9 @@ namespace DesktopClient {
 
             bool res = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
             if(res) {
-                // user updated
                 Kunde_Opdater_Result_Label.Content = "Kunden blev opdateret!";
             }
             else {
-                // user update error message
                 Kunde_Opdater_Result_Label.Content = "Der skete en fejl! Prøv igen.";
             }
             ClearCustomerFields();

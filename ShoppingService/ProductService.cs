@@ -31,9 +31,9 @@ namespace Server.ServiceLayer {
             return productDb.Create(p);
         }
 
-        public bool CreateReview(string name, string description, int productID, string reviewerEmail) {
-            Review review = new Review(name, description, productID, reviewerEmail);
-            return reviewDB.Create(review);
+        public bool CreateReview(string text, int productID, int userID) {
+            Review review = new Review(text);
+            return reviewDB.CreateReview(review, productID, userID);
         }
 
         public bool DeleteProduct(int id) {
@@ -53,10 +53,6 @@ namespace Server.ServiceLayer {
 
         public IEnumerable<Product> GetAllProducts() {
             return productDb.GetAll();
-        }
-
-        public IEnumerable<Review> GetProductReviews(int productID) {
-            return reviewDB.GetProductReviews(productID);
         }
 
         public bool Update(int id, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {

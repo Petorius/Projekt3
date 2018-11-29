@@ -113,9 +113,6 @@
     <None Include="Connected Services\ServiceReference1\Client.ServiceLayer.ServiceReference1.Product.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ServiceReference1\Client.ServiceLayer.ServiceReference1.Review.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\ServiceReference1\Server.Domain.xsd">
       <SubType>Designer</SubType>
     </None>

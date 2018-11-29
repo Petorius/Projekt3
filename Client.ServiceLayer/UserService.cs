@@ -44,10 +44,10 @@ namespace Client.ServiceLayer {
                 user.ZipCode = u.ZipCode;
                 user.City = u.City;
             }
-            foreach (var order in u.OrderList) {
+            foreach (var order in u.Orders) {
                 Order o = new Order();
                 o.ID = order.ID;
-                user.OrderList.Add(o);
+                user.Orders.Add(o);
             }
             return user;
 

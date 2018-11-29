@@ -6,10 +6,18 @@ using System.Threading.Tasks;
 
 namespace Client.Domain {
     public class Review {
-        public int ReviewID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int ProductID { get; set; }
-        public string ReviewerEmail { get; set; }
+        public string Text { get; set; }
+        public User User { get; set; }
+        public DateTime DateCreated { get; set; }
+
+        public Review(string text, User user) {
+            Text = text;
+            User = user;
+            DateCreated = DateTime.Today;
+        }
+
+        public Review() {
+            DateCreated = DateTime.Today;
+        }
     }
 }

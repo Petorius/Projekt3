@@ -15,8 +15,6 @@ namespace Client.ServiceLayer {
 
         IEnumerable<Product> GetAllProducts();
 
-        bool CreateReview(string name, string description, int productID, string reviewerEmail);
-
-        IEnumerable<Review> GetProductReviews(int productID);
+        bool CreateReview(string text, int productID, int userID);
     }
 }
