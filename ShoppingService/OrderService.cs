@@ -2,12 +2,13 @@
 using Server.DataAccessLayer;
 using Server.BusinessLogic;
 using System.Collections.Generic;
+using DataAccessLayer.Interface;
 
 namespace Server.ServiceLayer {
 
     public class OrderService : IOrderService {
         private ICRUD<OrderLine> orderLineDB;
-        private ICRUD<Product> productDB;
+        private IProduct productDB;
         private OrderLogic orderLogic;
 
         public OrderService() {

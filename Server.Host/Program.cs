@@ -12,7 +12,7 @@ namespace Server.Host {
             using (ServiceHost orderHost = new ServiceHost(typeof(serviceToHost.OrderService)))
             using (ServiceHost userHost = new ServiceHost(typeof(serviceToHost.UserService)))
             using (ServiceHost tagHost = new ServiceHost(typeof(serviceToHost.TagService)))
-            using (ServiceHost logInHost = new ServiceHost(typeof(serviceToHost.LogInService))) {
+            using (ServiceHost loginHost = new ServiceHost(typeof(serviceToHost.LoginService))) {
 
                 // Open the product host and start listening for oncoming calls
                 productHost.Open();
@@ -45,8 +45,8 @@ namespace Server.Host {
 
 
                 // Open the log in host and start listening for oncoming calls.
-                logInHost.Open();
-                DisplayHostInfo(logInHost);
+                loginHost.Open();
+                DisplayHostInfo(loginHost);
                 // Display status.
                 Console.WriteLine("The service is ready");
 

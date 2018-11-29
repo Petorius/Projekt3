@@ -20,12 +20,12 @@ namespace Server.BusinessLogic {
 
         // Checks if the given password matches the users password by 
         // hashing it with the same salt and iterations.
-        public bool ValidateUserLogin(User user, string password) {
+        public bool ValidateLogin(string databaseSalt, string databaseHash, string password) {
             bool res = false;
-            byte[] userSalt = Convert.FromBase64String(user.Salt);
-            byte[] userHash = Convert.FromBase64String(user.HashPassword);
-            byte[] hashValue = GenerateHashValue(password, userSalt, IterationCount);
-            if (userHash.SequenceEqual(hashValue)) {
+            byte[] salt = Convert.FromBase64String(databaseSalt);
+            byte[] hash = Convert.FromBase64String(databaseHash);
+            byte[] newHashValue = GenerateHashValue(password, salt, IterationCount);
+            if (hash.SequenceEqual(newHashValue)) {
                 res = true;
             }
             return res;

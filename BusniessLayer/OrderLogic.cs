@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Server.Domain;
 using Server.DataAccessLayer;
+using DataAccessLayer.Interface;
 
 namespace Server.BusinessLogic {
     public class OrderLogic {
         private OrderDB orderDB;
         private CustomerLogic cl;
-        private ICRUD<Product> productDB;
+        private IProduct productDB;
 
         public OrderLogic() {
             orderDB = new OrderDB();

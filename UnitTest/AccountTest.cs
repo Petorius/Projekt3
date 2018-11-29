@@ -54,7 +54,7 @@ namespace UnitTest {
         public void AccountValidateUserLogin() {
             string password = "SuperTester123!";
 
-            bool validation = acc.ValidateUserLogin(user, password);
+            bool validation = acc.ValidateLogin(user.Salt, user.HashPassword, password);
 
             Assert.AreEqual(true, validation);
         }
@@ -63,7 +63,7 @@ namespace UnitTest {
         public void AccountValidateUserLoginExpectedToFail() {
             string password = "FailPassword";
 
-            bool validation = acc.ValidateUserLogin(user, password);
+            bool validation = acc.ValidateLogin(user.Salt, user.HashPassword, password);
 
             Assert.AreEqual(false, validation);
         }

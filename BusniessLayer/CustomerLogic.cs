@@ -1,9 +1,10 @@
-﻿using Server.DataAccessLayer;
+﻿using DataAccessLayer.Interface;
+using Server.DataAccessLayer;
 using Server.Domain;
 
 namespace Server.BusinessLogic {
     public class CustomerLogic {
-        private CustomerDB customerDB;
+        private ICustomer customerDB;
 
         public CustomerLogic() {
             customerDB = new CustomerDB();

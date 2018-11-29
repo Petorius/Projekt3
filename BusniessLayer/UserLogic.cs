@@ -12,11 +12,13 @@ namespace Server.BusinessLogic {
         private IUserDB userDB;
         private Account account;
         private CustomerLogic cl;
+        private AdminDB adminDB;
 
         public UserLogic() {
             userDB = new UserDB();
             account = new Account();
             cl = new CustomerLogic();
+            adminDB = new AdminDB();
         }
 
         // Database test constructor. Only used for testing.
@@ -50,9 +52,28 @@ namespace Server.BusinessLogic {
             bool res = false;
             User user = userDB.GetUser(email);
             if(user.ID > 0) {
-                res = account.ValidateUserLogin(user, password);
+                res = account.ValidateLogin(user.Salt, user.HashPassword, password);
             }
             return res;
+        }
+
+        public bool ValidateAdminLogin(string email, string password) {
+            bool res = false;
+            Admin admin = adminDB.GetAdmin(email);
+            if(admin.ID > 0) {
+                res = account.ValidateLogin(admin.Salt, admin.HashPassword, password);
+            }
+            return res;
+        }
+
+        public bool CreateAdminLogin(string email, string password) {
+            string s = account.CreatePasswordHash(password);
+            char[] splitter = { ':' };
+            var split = s.Split(splitter);
+            string salt = split[0];
+            string hashValue = split[1];
+
+            return adminDB.CreateAdmin(email, hashValue, salt);
         }
     }
 }

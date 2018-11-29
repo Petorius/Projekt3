@@ -31,7 +31,7 @@ namespace DesktopClient {
         private void Button_Click_1(object sender, RoutedEventArgs e) {
             string email = emploEmail.Text;
             string pass = employPassword.Password.ToString();
-            if(ac.ValidateAdminLogin) {
+            if(ac.ValidateAdminLogin(email, pass)) {
                 CrudOverview crudView = new CrudOverview();
                 crudView.Show();
             }

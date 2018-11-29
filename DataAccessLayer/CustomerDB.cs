@@ -6,7 +6,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 
 namespace Server.DataAccessLayer {
-    public class CustomerDB : ICRUD<Customer>, ICustomer {
+    public class CustomerDB : ICustomer {
         private string connectionString;
 
         // Database test constructor. Only used for unit testing.

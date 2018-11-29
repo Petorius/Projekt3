@@ -10,7 +10,7 @@ namespace Client.ServiceLayer {
         LoginReference.LoginServiceClient myProxy;
 
         public LoginService() {
-            myProxy = new UserReference.UserServiceClient();
+            myProxy = new LoginReference.LoginServiceClient();
         }
 
         public bool ValidatePassword(string email, string password) {

@@ -58,7 +58,7 @@ namespace Server.DataAccessLayer {
                         user.Address = reader.GetString(reader.GetOrdinal("address"));
                         user.ZipCode = reader.GetInt32(reader.GetOrdinal("zipCode"));
                         user.City = reader.GetString(reader.GetOrdinal("city"));
-                        
+
                     }
                     reader.Close();
 
