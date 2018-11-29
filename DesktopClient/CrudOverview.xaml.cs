@@ -241,17 +241,65 @@ namespace DesktopClient {
 
         private void Kunde_Opdater_OK_Click(object sender, RoutedEventArgs e) {
             User user = userController.GetUser(Kunde_Opdater_SøgEmail_TextBox.Text);
-            if (user != null) {
-                Kunde_Opdater_FirstName_Label_Display.Content = user.FirstName;
-                Kunde_Opdater_LastName_Label_Display.Content = user.LastName;
-                Kunde_Opdater_Address_Label_Display.Content = user.Address;
-                Kunde_Opdater_ZipCode_Label_Display.Content = user.ZipCode;
-                Kunde_Opdater_City_Label_Display.Content = user.City;
-                Kunde_Opdater_Phone_Label_Display.Content = user.Phone;
-                Kunde_Opdater_Email_Label_Display.Content = user.Email;
-            }
 
-            userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
+            user.FirstName = Kunde_Opdater_FirstName_TextBox.Text;
+            user.LastName = Kunde_Opdater_LastName_TextBox.Text;
+            user.Address = Kunde_Opdater_Address_TextBox.Text;
+            user.ZipCode = Int32.Parse(Kunde_Opdater_ZipCode_TextBox.Text);
+            user.City = Kunde_Opdater_City_TextBox.Text;
+            user.Phone = Int32.Parse(Kunde_Opdater_Phone_TextBox.Text);
+            user.Email = Kunde_Opdater_Email_TextBox.Text;
+
+            bool res = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
+            if(res) {
+                // user updated
+                Kunde_Opdater_Result_Label.Content = "Kunden blev opdateret!";
+            }
+            else {
+                // user update error message
+                Kunde_Opdater_Result_Label.Content = "Der skete en fejl! Prøv igen.";
+            }
+            ClearCustomerFields();
+        }
+
+        private void Kunde_Opdater_Anuller_Click(object sender, RoutedEventArgs e) {
+            ClearCustomerFields();
+        }
+
+        private void ClearCustomerFields() {
+            Kunde_Opdater_FirstName_TextBox.Text = "";
+            Kunde_Opdater_LastName_TextBox.Text = "";
+            Kunde_Opdater_Address_TextBox.Text = "";
+            Kunde_Opdater_ZipCode_TextBox.Text = "";
+            Kunde_Opdater_City_TextBox.Text = "";
+            Kunde_Opdater_Phone_TextBox.Text = "";
+            Kunde_Opdater_Email_TextBox.Text = "";
+            Kunde_Opdater_SøgEmail_TextBox.Text = "";
+            Kunde_Opdater_SøgEmail_TextBox.IsEnabled = true;
+            Kunde_Opdater_FindKunde_Resultat_Label.Content = "";
+        }
+
+        private void Kunde_Opdater_FindKunde_Click(object sender, RoutedEventArgs e) {
+            User user = userController.GetUser(Kunde_Opdater_SøgEmail_TextBox.Text);
+            if(user.ID > 0) {
+                SetCustomerFields(user);
+                Kunde_Opdater_FindKunde_Resultat_Label.Content = "";
+            }
+            else {
+                Kunde_Opdater_FindKunde_Resultat_Label.Content = "Kunden findes ikke!";
+            }
+            Kunde_Opdater_Result_Label.Content = "";
+        }
+
+        private void SetCustomerFields(User user) {
+            Kunde_Opdater_FirstName_TextBox.Text = user.FirstName;
+            Kunde_Opdater_LastName_TextBox.Text = user.LastName;
+            Kunde_Opdater_Address_TextBox.Text = user.Address;
+            Kunde_Opdater_ZipCode_TextBox.Text = user.ZipCode.ToString();
+            Kunde_Opdater_City_TextBox.Text = user.City;
+            Kunde_Opdater_Phone_TextBox.Text = user.Phone.ToString();
+            Kunde_Opdater_Email_TextBox.Text = user.Email;
+            Kunde_Opdater_SøgEmail_TextBox.IsEnabled = false;
         }
     }
 }
