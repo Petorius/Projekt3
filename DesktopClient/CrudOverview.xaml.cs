@@ -26,10 +26,8 @@ namespace DesktopClient {
         private OrderController orderController;
         private List<Orderline> orderlines;
         private UserController userController;
-       
         private List<string> userOrderListWithID;
-
-        private List<OrderLineItem> items;
+        private List<string> orderlineItems;
 
         public CrudOverview() {
             InitializeComponent();
@@ -39,7 +37,7 @@ namespace DesktopClient {
             userController = new UserController();
 
             userOrderListWithID = new List<string>();
-            items = new List<OrderLineItem>();
+            orderlineItems = new List<string>();
         }
 
 
@@ -237,17 +235,11 @@ namespace DesktopClient {
             Ordre_Søg_Købsdato_Label_Output.Content = o.DateCreated;
 
             foreach(Orderline ol in o.Orderlines) {
-                items.Add(new OrderLineItem() { OrderLineID = ol.ID, Quantity = ol.Quantity, SubTotal = ol.SubTotal, ProductID = ol.Product.ID});
+                orderlineItems.Add("Orderlinje ID: " + ol.ID.ToString() + " " + "Antal: " + ol.Quantity.ToString() + " " + "Sub-total: " + ol.SubTotal.ToString() + " " + "Product ID: " + ol.Product.ID.ToString());
             }
 
-            Ordre_Søg_Ordrelinjer_ListBox.ItemsSource = items;
-        }
-
-        public class OrderLineItem {
-            public int OrderLineID { get; set; }
-            public int Quantity { get; set; }
-            public decimal SubTotal { get; set; }
-            public int ProductID { get; set; }
+            Ordre_Søg_Ordrelinjer_ListBox.ItemsSource = orderlineItems;
+            orderlineItems = new List<string>();
         }
 
         private void Ordre_Søg_Ordrelinjer_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -259,7 +251,7 @@ namespace DesktopClient {
             Ordre_Søg_Kunde_Email_Label_Output.Content = "";
             Ordre_Søg_Total_Label_Output.Content = "";
             Ordre_Søg_Købsdato_Label_Output.Content = "";
-            Ordre_Søg_Ordrelinjer_ListBox.ItemsSource = new List<OrderLineItem>();
+            Ordre_Søg_Ordrelinjer_ListBox.ItemsSource = new List<string>();
         }
 
         private void Kunde_Søg_Ok_Click(object sender, RoutedEventArgs e) {
