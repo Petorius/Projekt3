@@ -10,11 +10,13 @@ namespace Server.ServiceLayer {
         private ICRUD<OrderLine> orderLineDB;
         private IProduct productDB;
         private OrderLogic orderLogic;
+        private ICRUD<Order> orderDB;
 
         public OrderService() {
             orderLineDB = new OrderLineDB();
             productDB = new ProductDB();
             orderLogic = new OrderLogic();
+            orderDB = new OrderDB();
         }
 
         public Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email,
@@ -33,6 +35,10 @@ namespace Server.ServiceLayer {
             Product p = productDB.Get(ID);
             OrderLine ol = new OrderLine(quantity, subTotal, p);
             return orderLineDB.Delete(ol);
+        }
+
+        public Order FindOrder(int id) {
+            return orderDB.Get(id);
         }
 
         public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {

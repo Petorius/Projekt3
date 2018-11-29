@@ -22,6 +22,10 @@ namespace Client.ControlLayer {
             number, ol);
         }
 
+        public Order FindOrder(int id) {
+            return orderService.FindOrder(id);
+        }
+
         public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {
             return orderService.UpdateOrderLine(ID, subTotal, quantity);
 
