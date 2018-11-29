@@ -11,5 +11,7 @@ namespace DataAccessLayer.Interface {
         User GetUser(string email);
 
         User GetUserWithOrders(string email);
+
+       // bool DeleteUser(string email);
     }
 }

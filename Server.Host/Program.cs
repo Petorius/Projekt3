@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using Server.BusinessLogic;
+using System;
 using System.ServiceModel;
 using serviceToHost = Server.ServiceLayer;
 
@@ -6,6 +8,9 @@ namespace Server.Host {
     class Program {
         static void Main(string[] args) {
             Console.WriteLine("Console based host");
+
+            //UserLogic u = new UserLogic();
+            //u.CreateAdminLogin("admin", "admin");
 
             // Services to host
             using (ServiceHost productHost = new ServiceHost(typeof(serviceToHost.ProductService)))

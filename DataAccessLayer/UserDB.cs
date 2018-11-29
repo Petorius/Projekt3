@@ -97,5 +97,19 @@ namespace Server.DataAccessLayer {
                 }
             }
         }
+
+        public bool DeleteUser(string email) {
+            bool res = false;
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                connection.Open();
+                using (SqlCommand cmd = connection.CreateCommand()) {
+                    cmd.CommandText = "delete from Customer where customer.email = @Email";
+                    cmd.Parameters.AddWithValue("Email", email);
+                    cmd.ExecuteNonQuery();
+                    res = true;
+                }
+            }
+            return res;
+        }
     }
 }
