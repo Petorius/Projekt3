@@ -43,6 +43,12 @@
   <wsdl:message name="IProductService_GetAllProducts_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllProductsResponse" />
   </wsdl:message>
+  <wsdl:message name="IProductService_CreateReview_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateReview" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_CreateReview_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateReviewResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProductService">
     <wsdl:operation name="CreateProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/CreateProduct" message="tns:IProductService_CreateProduct_InputMessage" />
@@ -67,6 +73,10 @@
     <wsdl:operation name="GetAllProducts">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/GetAllProducts" message="tns:IProductService_GetAllProducts_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/GetAllProductsResponse" message="tns:IProductService_GetAllProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateReview">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/CreateReview" message="tns:IProductService_CreateReview_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/CreateReviewResponse" message="tns:IProductService_CreateReview_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProductService" type="tns:IProductService">
@@ -118,6 +128,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllProducts">
       <soap:operation soapAction="http://tempuri.org/IProductService/GetAllProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateReview">
+      <soap:operation soapAction="http://tempuri.org/IProductService/CreateReview" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

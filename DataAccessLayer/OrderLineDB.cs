@@ -29,7 +29,6 @@ namespace Server.DataAccessLayer {
                     byte[] rowId = null;
                     int rowCount = 0;
 
-
                     using (SqlCommand cmd = connection.CreateCommand()) {
                         cmd.Transaction = trans;
                         cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";

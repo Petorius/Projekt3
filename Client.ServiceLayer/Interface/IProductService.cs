@@ -14,5 +14,7 @@ namespace Client.ServiceLayer {
         bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);
 
         IEnumerable<Product> GetAllProducts();
+
+        bool CreateReview(string text, int productID, int userID);
     }
 }
