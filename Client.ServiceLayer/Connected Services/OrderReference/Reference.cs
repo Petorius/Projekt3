@@ -670,6 +670,12 @@ namespace Client.ServiceLayer.OrderReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrder", ReplyAction="http://tempuri.org/IOrderService/CreateOrderResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.Order> CreateOrderAsync(string firstName, string lastName, string street, int zip, string city, string email, int number, Client.ServiceLayer.OrderReference.OrderLine[] ol);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/FindOrder", ReplyAction="http://tempuri.org/IOrderService/FindOrderResponse")]
+        Client.ServiceLayer.OrderReference.Order FindOrder(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/FindOrder", ReplyAction="http://tempuri.org/IOrderService/FindOrderResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.Order> FindOrderAsync(int id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/UpdateOrderLine", ReplyAction="http://tempuri.org/IOrderService/UpdateOrderLineResponse")]
         bool UpdateOrderLine(int ID, decimal subTotal, int quantity);
         
@@ -724,6 +730,14 @@ namespace Client.ServiceLayer.OrderReference {
         
         public System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.Order> CreateOrderAsync(string firstName, string lastName, string street, int zip, string city, string email, int number, Client.ServiceLayer.OrderReference.OrderLine[] ol) {
             return base.Channel.CreateOrderAsync(firstName, lastName, street, zip, city, email, number, ol);
+        }
+        
+        public Client.ServiceLayer.OrderReference.Order FindOrder(int id) {
+            return base.Channel.FindOrder(id);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.Order> FindOrderAsync(int id) {
+            return base.Channel.FindOrderAsync(id);
         }
         
         public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {

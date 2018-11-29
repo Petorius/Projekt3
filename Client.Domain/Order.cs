@@ -19,7 +19,7 @@ namespace Client.Domain {
         }
 
         public Order() {
-
+            Orderlines = new List<Orderline>();
         }
     }
 

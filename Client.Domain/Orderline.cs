@@ -8,6 +8,7 @@ namespace Client.Domain {
     public class Orderline {
 
         public Product Product { get; set; }
+        public int ID { get; set; }
         public decimal SubTotal { get; set; }
         public int Quantity { get; set; }
         public long TimeStamp { get; set; }
@@ -17,6 +18,10 @@ namespace Client.Domain {
             this.SubTotal = subTotal;
             this.Product = p;
             TimeStamp = DateTime.Now.AddMinutes(60).Ticks;
+        }
+
+        public Orderline() {
+
         }
     }
 }

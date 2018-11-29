@@ -14,6 +14,9 @@ namespace Server.ServiceLayer {
             int zip, string city, string email, int number, List<OrderLine> ol);
 
         [OperationContract]
+        Order FindOrder(int id);
+
+        [OperationContract]
         bool UpdateOrderLine(int ID, decimal subTotal, int quantity);
 
         [OperationContract]

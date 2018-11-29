@@ -70,6 +70,51 @@ namespace Client.ServiceLayer {
             };
             return o;
         }
-           
+
+        public Order FindOrder(int id) {
+
+            var o = myProxy.FindOrder(id);
+            Order order = new Order();
+            if (o != null) {
+                order = BuildServiceOrder(o);
+            }
+
+            return order;
+        }
+
+        private Order BuildServiceOrder(OrderReference.Order o) {
+
+            List<Orderline> orderlines = new List<Orderline>();
+
+            Customer c = new Customer {
+                Email = o.Customer.Email
+            };
+            
+            foreach (var ol in o.Orderlines) {
+
+                Product p = new Product {
+                    ID = ol.Product.ID
+                };
+
+                Orderline orderline = new Orderline {
+                    ID = ol.ID,
+                    Quantity = ol.Quantity,
+                    SubTotal = ol.SubTotal,
+                    Product = p
+                };
+
+                orderlines.Add(orderline);
+            }
+
+            Order order = new Order {
+                ID = o.ID,
+                Total = o.Total,
+                DateCreated = o.DateCreated,
+                Customer = c,
+                Orderlines = orderlines
+            };
+
+            return order;
+        }
     }
 }

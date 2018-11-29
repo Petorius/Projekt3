@@ -29,6 +29,8 @@ namespace DesktopClient {
        
         private List<string> userOrderListWithID;
 
+        private List<OrderLineItem> items;
+
         public CrudOverview() {
             InitializeComponent();
             productController = new ProductController();
@@ -37,6 +39,7 @@ namespace DesktopClient {
             userController = new UserController();
 
             userOrderListWithID = new List<string>();
+            items = new List<OrderLineItem>();
         }
 
 
@@ -173,14 +176,14 @@ namespace DesktopClient {
         }
 
         private void OrdrelineClearFields() {
-            findProductTextBox.Text = "";
-            inputQuantityTextBox.Text = "";
+            Ordre_Opret_Find_Product_TextBox.Text = "";
+            Ordre_Opret_Antal_TextBox.Text = "";
         }
 
         private void OrderClearFields() {
-            findCustomerTextBox.Text = "";
-            findProductTextBox.Text = "";
-            inputQuantityTextBox.Text = "";
+            Ordre_Opret_Find_Kunde_TextBox.Text = "";
+            Ordre_Opret_Find_Product_TextBox.Text = "";
+            Ordre_Opret_Antal_TextBox.Text = "";
         }
 
         private void findProductTextBox_TextChanged(object sender, TextChangedEventArgs e) {
@@ -189,8 +192,8 @@ namespace DesktopClient {
 
         private void addOrderlineButton_Click(object sender, RoutedEventArgs e) {
 
-            Product p = productController.FindByName(findProductTextBox.Text);
-            int quantity = Int32.Parse(inputQuantityTextBox.Text);
+            Product p = productController.FindByName(Ordre_Opret_Find_Product_TextBox.Text);
+            int quantity = Int32.Parse(Ordre_Opret_Antal_TextBox.Text);
             decimal subTotal = p.Price * quantity;
             Orderline ol = new Orderline(quantity, subTotal, p);
             bool result = orderController.CreateOrderLine(quantity, subTotal, p.ID);
@@ -207,7 +210,7 @@ namespace DesktopClient {
         }
 
         private void addOrderButton_Click(object sender, RoutedEventArgs e) {
-            Customer c = userController.GetCustomerByMail(findCustomerTextBox.Text);
+            Customer c = userController.GetCustomerByMail(Ordre_Opret_Find_Kunde_TextBox.Text);
 
             if (c != null) {
                 Order order = orderController.CreateOrder(c.FirstName, c.LastName, c.Address, c.ZipCode, c.City, c.Email, c.Phone, orderlines);
@@ -219,6 +222,44 @@ namespace DesktopClient {
 
         private void cancelButton_Click(object sender, RoutedEventArgs e) {
             OrderClearFields();
+        }
+
+        private void Ordre_Søg_Find_Ordre_TextBox_TextChanged(object sender, TextChangedEventArgs e) {
+
+        }
+
+        private void Ordre_Søg_Ok_Knap_Click(object sender, RoutedEventArgs e) {
+
+            int id = Int32.Parse(Ordre_Søg_Find_Ordre_TextBox.Text);
+            Order o = orderController.FindOrder(id);
+            Ordre_Søg_Kunde_Email_Label_Output.Content = o.Customer.Email;
+            Ordre_Søg_Total_Label_Output.Content = o.Total;
+            Ordre_Søg_Købsdato_Label_Output.Content = o.DateCreated;
+
+            foreach(Orderline ol in o.Orderlines) {
+                items.Add(new OrderLineItem() { OrderLineID = ol.ID, Quantity = ol.Quantity, SubTotal = ol.SubTotal, ProductID = ol.Product.ID});
+            }
+
+            Ordre_Søg_Ordrelinjer_ListBox.ItemsSource = items;
+        }
+
+        public class OrderLineItem {
+            public int OrderLineID { get; set; }
+            public int Quantity { get; set; }
+            public decimal SubTotal { get; set; }
+            public int ProductID { get; set; }
+        }
+
+        private void Ordre_Søg_Ordrelinjer_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+        }
+
+        private void Ordre_Søg_Annuller_Knap_Click(object sender, RoutedEventArgs e) {
+            Ordre_Søg_Find_Ordre_TextBox.Text = "";
+            Ordre_Søg_Kunde_Email_Label_Output.Content = "";
+            Ordre_Søg_Total_Label_Output.Content = "";
+            Ordre_Søg_Købsdato_Label_Output.Content = "";
+            Ordre_Søg_Ordrelinjer_ListBox.ItemsSource = new List<OrderLineItem>();
         }
 
         private void Kunde_Søg_Ok_Click(object sender, RoutedEventArgs e) {
