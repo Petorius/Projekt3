@@ -525,6 +525,9 @@ namespace Client.ServiceLayer.OrderReference {
         private string LastNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.ServiceLayer.OrderReference.Order[] OrderListField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PhoneField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -619,6 +622,19 @@ namespace Client.ServiceLayer.OrderReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.ServiceLayer.OrderReference.Order[] OrderList {
+            get {
+                return this.OrderListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrderListField, value) != true)) {
+                    this.OrderListField = value;
+                    this.RaisePropertyChanged("OrderList");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Phone {
             get {
                 return this.PhoneField;
@@ -687,6 +703,12 @@ namespace Client.ServiceLayer.OrderReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrderLine", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderLineResponse")]
         System.Threading.Tasks.Task<bool> DeleteOrderLineAsync(int ID, decimal subTotal, int quantity);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrder", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderResponse")]
+        bool DeleteOrder(int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrder", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderResponse")]
+        System.Threading.Tasks.Task<bool> DeleteOrderAsync(int ID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -754,6 +776,14 @@ namespace Client.ServiceLayer.OrderReference {
         
         public System.Threading.Tasks.Task<bool> DeleteOrderLineAsync(int ID, decimal subTotal, int quantity) {
             return base.Channel.DeleteOrderLineAsync(ID, subTotal, quantity);
+        }
+        
+        public bool DeleteOrder(int ID) {
+            return base.Channel.DeleteOrder(ID);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteOrderAsync(int ID) {
+            return base.Channel.DeleteOrderAsync(ID);
         }
     }
 }

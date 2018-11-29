@@ -31,6 +31,11 @@ namespace Server.ServiceLayer {
             return orderLineDB.Create(ol);
         }
 
+        public bool DeleteOrder(int ID) {
+            Order o = orderDB.Get(ID);
+            return orderDB.Delete(o);
+        }
+
         public bool DeleteOrderLine(int ID, decimal subTotal, int quantity) {
             Product p = productDB.Get(ID);
             OrderLine ol = new OrderLine(quantity, subTotal, p);

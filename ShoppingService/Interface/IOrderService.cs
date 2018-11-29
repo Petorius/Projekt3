@@ -21,5 +21,8 @@ namespace Server.ServiceLayer {
 
         [OperationContract]
         bool DeleteOrderLine(int ID, decimal subTotal, int quantity);
+
+        [OperationContract]
+        bool DeleteOrder(int ID);
     }
 }

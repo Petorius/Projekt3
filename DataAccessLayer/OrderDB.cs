@@ -54,7 +54,19 @@ namespace Server.DataAccessLayer {
         }
 
         public bool Delete(Order Entity, bool test = false, bool testResult = false) {
-            throw new NotImplementedException();
+            bool res = false;
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                connection.Open();
+                using (SqlCommand cmd = connection.CreateCommand()) {
+                    cmd.CommandText = "DELETE from [dbo].[Order] WHERE OrderID = @OrderID";
+                    cmd.Parameters.AddWithValue("OrderID", Entity.ID);
+                    cmd.ExecuteNonQuery();
+                    res = true;
+
+                    //Mangler at tælle stock og quantity op
+                }
+            }
+            return res;
         }
 
         public Order Get(int id) {

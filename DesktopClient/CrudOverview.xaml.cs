@@ -334,5 +334,22 @@ namespace DesktopClient {
             Kunde_Opdater_Email_TextBox.Text = user.Email;
             Kunde_Opdater_SøgEmail_TextBox.IsEnabled = false;
         }
+
+        private void Ordre_Slet_FindOrdre_Input_TextChanged(object sender, TextChangedEventArgs e) {
+
+        }
+
+        private void Ordre_Slet_SletOrdre_Button_Click(object sender, RoutedEventArgs e) {
+            int value = Int32.Parse(Ordre_Slet_FindOrdre_Input.Text);
+            bool res = orderController.DeleteOrder(value);
+            if (res == true) {
+                Ordre_Slet_SletStatus_Label.Content = "Produktet blev slettet";
+                Ordre_Slet_FindOrdre_Input.Text = "";
+            }
+            else {
+                deleteStatusLabel.Content = "Der opstod en fejl. Prøv igen";
+            }
+        }
     }
+    
 }

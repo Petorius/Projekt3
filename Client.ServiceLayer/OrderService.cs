@@ -116,5 +116,9 @@ namespace Client.ServiceLayer {
 
             return order;
         }
+
+        public bool DeleteOrder(int ID) {
+            return myProxy.DeleteOrder(ID);
+        }
     }
 }

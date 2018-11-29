@@ -95,7 +95,7 @@
                     </TabControl>
                 </Grid>
             </TabItem>
-            <TabItem Header="Ordre" Margin="-2,-2,-2,0">
+            <TabItem Header="Ordre" Margin="-2,-2,-1.5,0" Height="22" VerticalAlignment="Top">
                 <Grid Background="#FFE5E5E5" Margin="0,-25,0,0.2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0*"/>
@@ -140,10 +140,17 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Opdater">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <Label Content="" HorizontalAlignment="Left" Margin="120,50,0,0" VerticalAlignment="Top"/>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Slet">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <Label Name="Ordre_Slet_FindOrdre_Label" Content="Søg på OrdreID:" HorizontalAlignment="Left" Margin="223,93,0,0" VerticalAlignment="Top"/>
+                                <TextBox Name="Ordre_Slet_FindOrdre_Input" HorizontalAlignment="Left" Height="23" Margin="320,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149" RenderTransformOrigin="0.209,1.408" TextChanged="Ordre_Slet_FindOrdre_Input_TextChanged"/>
+                                <Button Name="Ordre_Slet_SletOrdre_Button" Content="Slet" HorizontalAlignment="Left" Margin="602,286,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Slet_SletOrdre_Button_Click"/>
+                                <Label Name="Ordre_Slet_SletStatus_Label" Content="&#xD;&#xA;" HorizontalAlignment="Left" Margin="320,124,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.373,-0.463" Width="149" Height="34"/>
+                            </Grid>
                         </TabItem>
                     </TabControl>
                 </Grid>

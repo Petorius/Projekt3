@@ -34,5 +34,9 @@ namespace Client.ControlLayer {
         public bool DeleteOrderLine(int ID, decimal subTotal, int quantity) {
             return orderService.DeleteOrderLine(ID, subTotal, quantity);
         }
+
+        public bool DeleteOrder(int ID) {
+            return orderService.DeleteOrder(ID);
+        }
     }
 }

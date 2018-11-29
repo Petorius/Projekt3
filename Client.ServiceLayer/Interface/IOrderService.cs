@@ -13,5 +13,7 @@ namespace Client.ServiceLayer.Interface {
         bool UpdateOrderLine(int ID, decimal subTotal, int quantity);
 
         bool DeleteOrderLine(int ID, decimal subTotal, int quantity);
+
+        bool DeleteOrder(int ID);
     }
 }
