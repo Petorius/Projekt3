@@ -184,10 +184,6 @@ namespace DesktopClient {
             Ordre_Opret_Antal_TextBox.Text = "";
         }
 
-        private void findProductTextBox_TextChanged(object sender, TextChangedEventArgs e) {
-
-        }
-
         private void addOrderlineButton_Click(object sender, RoutedEventArgs e) {
 
             Product p = productController.FindByName(Ordre_Opret_Find_Product_TextBox.Text);
@@ -222,10 +218,6 @@ namespace DesktopClient {
             OrderClearFields();
         }
 
-        private void Ordre_Søg_Find_Ordre_TextBox_TextChanged(object sender, TextChangedEventArgs e) {
-
-        }
-
         private void Ordre_Søg_Ok_Knap_Click(object sender, RoutedEventArgs e) {
 
             int id = Int32.Parse(Ordre_Søg_Find_Ordre_TextBox.Text);
@@ -240,10 +232,6 @@ namespace DesktopClient {
 
             Ordre_Søg_Ordrelinjer_ListBox.ItemsSource = orderlineItems;
             orderlineItems = new List<string>();
-        }
-
-        private void Ordre_Søg_Ordrelinjer_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
         }
 
         private void Ordre_Søg_Annuller_Knap_Click(object sender, RoutedEventArgs e) {
@@ -374,33 +362,16 @@ namespace DesktopClient {
             userDeleteMailLabel.Content = "";
         }
 
-        private void Ordre_Opdater_Find_Ordre_TextBox_TextChanged(object sender, TextChangedEventArgs e) {
-
-        }
-
         private void Ordre_Opdater_Søg_Knap_Click(object sender, RoutedEventArgs e) {
             int id = Int32.Parse(Ordre_Opdater_Find_Ordre_TextBox.Text);
             Order o = orderController.FindOrder(id);
-            
+
             foreach (Orderline ol in o.Orderlines) {
                 orderlineItems.Add("Orderlinje ID: " + ol.ID.ToString() + " " + "Antal: " + ol.Quantity.ToString() + " " + "Sub-total: " + ol.SubTotal.ToString() + " " + "Product ID: " + ol.Product.ID.ToString());
             }
 
             Ordre_Opdater_ListBox.ItemsSource = orderlineItems;
             orderlineItems = new List<string>();
-        }
-
-        private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
-        }
-
-        private void Ordre_Opdater_Tilføj_Ordrelinje_Knap_Click(object sender, RoutedEventArgs e) {
-
-        }
-    }
-
-        private void Ordre_Slet_FindOrdre_Input_TextChanged(object sender, TextChangedEventArgs e) {
-
         }
 
         private void Ordre_Slet_SletOrdre_Button_Click(object sender, RoutedEventArgs e) {
@@ -414,6 +385,11 @@ namespace DesktopClient {
                 deleteStatusLabel.Content = "Der opstod en fejl. Prøv igen";
             }
         }
+
+        private void Ordre_Opdater_Tilføj_Ordrelinje_Knap_Click(object sender, RoutedEventArgs e) {
+
+        }
     }
-    
 }
+    
+
