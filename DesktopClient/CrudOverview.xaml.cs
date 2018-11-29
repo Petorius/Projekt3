@@ -253,5 +253,46 @@ namespace DesktopClient {
 
             userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
         }
+
+        private void Kunde_Slet_Find_Clicked(object sender, RoutedEventArgs e) {
+            Customer customer = userController.GetCustomerByMail(findUserByMailDeleteTextBox.Text);
+            findUserByMailDeleteTextBox.Text = "";
+            userDeleteUserDontExLabel.Content = "";
+            userDeleteCompleteLabel.Content = "";
+            if(customer.ID > 0) {
+                userDeleteFirstNameLabel.Content = customer.FirstName;
+                userDeleteLastNameLabel.Content = customer.LastName;
+                userDeleteAddressLabel.Content = customer.Address;
+                userDeleteZipCodeLabel.Content = customer.ZipCode;
+                userDeleteCityLabel.Content = customer.City;
+                userDeletePhoneLabel.Content = customer.Phone;
+                userDeleteMailLabel.Content = customer.Email;
+            } 
+            else {
+                userDeleteUserDontExLabel.Content = "Brugeren findes ikke";
+            }
+        }
+
+        private void Kunde_Slet_SletKunde_Clicked(object sender, RoutedEventArgs e) {
+            bool res = userController.DeleteUser(userDeleteMailLabel.Content.ToString());
+            if (res) {
+                userDeleteCompleteLabel.Content = "Brugeren blev slettet";
+                Kunde_Slet_ClearFields();
+            }
+            else {
+                userDeleteCompleteLabel.Content = "Der skete en fejl. Prøv igen";
+                Kunde_Slet_ClearFields();
+            }
+        }
+
+        private void  Kunde_Slet_ClearFields() {
+            userDeleteFirstNameLabel.Content = "";
+            userDeleteLastNameLabel.Content = "";
+            userDeleteAddressLabel.Content = "";
+            userDeleteZipCodeLabel.Content = "";
+            userDeleteCityLabel.Content = "";
+            userDeletePhoneLabel.Content = "";
+            userDeleteMailLabel.Content = "";
+        }
     }
 }

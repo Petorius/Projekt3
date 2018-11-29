@@ -737,6 +737,12 @@ namespace Client.ServiceLayer.UserReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateCustomer", ReplyAction="http://tempuri.org/IUserService/UpdateCustomerResponse")]
         System.Threading.Tasks.Task<bool> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
+        bool DeleteUser(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
+        System.Threading.Tasks.Task<bool> DeleteUserAsync(string email);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -796,6 +802,14 @@ namespace Client.ServiceLayer.UserReference {
         
         public System.Threading.Tasks.Task<bool> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
             return base.Channel.UpdateCustomerAsync(firstName, lastName, phone, email, address, zipCode, city);
+        }
+        
+        public bool DeleteUser(string email) {
+            return base.Channel.DeleteUser(email);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteUserAsync(string email) {
+            return base.Channel.DeleteUserAsync(email);
         }
     }
 }
