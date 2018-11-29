@@ -83,5 +83,9 @@ namespace Client.ServiceLayer {
 
             return product;
         }
+
+        public bool CreateReview(string text, int productID, int userID) {
+            return myProxy.CreateReview(text, productID, userID);
+        }
     }
 }

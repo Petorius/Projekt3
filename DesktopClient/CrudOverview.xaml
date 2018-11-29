@@ -202,6 +202,25 @@
                                 <Button x:Name="Kunde_Søg_Ok" Content="OK" HorizontalAlignment="Left" Margin="608,300,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Søg_Ok_Click"/>
                                 <ListBox x:Name="Kunde_Søg_Orderbox" HorizontalAlignment="Left" Height="180" Margin="439,93,0,0" VerticalAlignment="Top" Width="177"/>
                                 <Label Content="Kunden har følgende ordre:" HorizontalAlignment="Left" Margin="439,62,0,0" VerticalAlignment="Top" Width="177"/>
+                                <Grid Background="#FFE5E5E5">
+                                    <Label Content="Søg på email" HorizontalAlignment="Left" Margin="79,32,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Efternavn:" HorizontalAlignment="Left" Margin="79,124,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Adresse:" HorizontalAlignment="Left" Margin="79,155,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="By:" HorizontalAlignment="Left" Margin="79,216,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Telefonnummer:" HorizontalAlignment="Left" Margin="79,247,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Postnummer:" HorizontalAlignment="Left" Margin="79,186,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Fornavn:" HorizontalAlignment="Left" Margin="79,93,0,0" VerticalAlignment="Top"/>
+                                    <TextBox x:Name="findUserByMailTextBox2" HorizontalAlignment="Left" Height="23" Margin="190,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152"/>
+                                    <Label x:Name="userFindFirstNameLabel1" Content="" HorizontalAlignment="Left" Margin="190,93,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Label x:Name="userFindCityLabel1" Content="" HorizontalAlignment="Left" Margin="190,216,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Label x:Name="userFindPhoneLabel1" Content="" HorizontalAlignment="Left" Margin="190,247,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Label x:Name="userFindZipCodeLabel1" Content="" HorizontalAlignment="Left" Margin="190,186,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Label x:Name="userFindLastNameLabel1" Content="" HorizontalAlignment="Left" Margin="190,124,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Label x:Name="userFindAddressLabel1" Content="" HorizontalAlignment="Left" Margin="190,155,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Button x:Name="Kunde_Søg_Ok1" Content="OK" HorizontalAlignment="Left" Margin="608,300,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Søg_Ok_Click"/>
+                                    <ListBox x:Name="Kunde_Søg_Orderbox1" HorizontalAlignment="Left" Height="180" Margin="439,93,0,0" VerticalAlignment="Top" Width="177"/>
+                                    <Label Content="Kunden har følgende ordre:" HorizontalAlignment="Left" Margin="439,62,0,0" VerticalAlignment="Top" Width="177"/>
+                                </Grid>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Opdater">
@@ -230,7 +249,35 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Slet">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="57*"/>
+                                    <ColumnDefinition Width="9*"/>
+                                    <ColumnDefinition Width="707*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Background="#FFE5E5E5" Grid.ColumnSpan="3">
+                                    <Label Content="Søg på email" HorizontalAlignment="Left" Margin="79,32,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Efternavn:" HorizontalAlignment="Left" Margin="79,124,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Adresse:" HorizontalAlignment="Left" Margin="79,155,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="By:" HorizontalAlignment="Left" Margin="79,216,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Telefonnummer:" HorizontalAlignment="Left" Margin="79,247,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Postnummer:" HorizontalAlignment="Left" Margin="79,186,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Fornavn:" HorizontalAlignment="Left" Margin="79,93,0,0" VerticalAlignment="Top"/>
+                                    <TextBox x:Name="findUserByMailDeleteTextBox" HorizontalAlignment="Left" Height="23" Margin="190,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152"/>
+                                    <Label x:Name="userDeleteFirstNameLabel" Content="" HorizontalAlignment="Left" Margin="190,93,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Label x:Name="userDeleteCityLabel" Content="" HorizontalAlignment="Left" Margin="190,216,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Label x:Name="userDeletePhoneLabel" Content="" HorizontalAlignment="Left" Margin="190,247,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Label x:Name="userDeleteZipCodeLabel" Content="" HorizontalAlignment="Left" Margin="190,186,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Label x:Name="userDeleteLastNameLabel" Content="" HorizontalAlignment="Left" Margin="190,124,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Label x:Name="userDeleteAddressLabel" Content="" HorizontalAlignment="Left" Margin="190,155,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Button Content="Find" HorizontalAlignment="Left" Margin="368,38,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Slet_Find_Clicked"/>
+                                    <Button Content="Slet Kunde" HorizontalAlignment="Left" Margin="541,284,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Slet_SletKunde_Clicked"/>
+                                    <Label Content="Mail:" HorizontalAlignment="Left" Margin="79,273,0,0" VerticalAlignment="Top"/>
+                                    <Label x:Name="userDeleteMailLabel" Content="" HorizontalAlignment="Left" Margin="190,273,0,0" VerticalAlignment="Top" Width="152"/>
+                                    <Label x:Name="userDeleteUserDontExLabel" Content="" HorizontalAlignment="Left" Margin="190,0,0,0" VerticalAlignment="Top" Height="27" Width="152" Foreground="#FFF70000"/>
+                                    <Label x:Name="userDeleteCompleteLabel" Content="" HorizontalAlignment="Left" Margin="419,137,0,0" VerticalAlignment="Top" Height="90" Width="298" FontSize="22"/>
+                                </Grid>
+                            </Grid>
                         </TabItem>
                     </TabControl>
                 </Grid>

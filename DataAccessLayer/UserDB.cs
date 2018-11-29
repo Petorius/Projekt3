@@ -52,7 +52,7 @@ namespace Server.DataAccessLayer {
                         Order order = new Order();
                         order.ID = reader.GetInt32(reader.GetOrdinal("orderID"));
 
-                        user.OrderList.Add(order);
+                        user.Orders.Add(order);
                     }
                     reader.Close();
                 }
@@ -98,15 +98,45 @@ namespace Server.DataAccessLayer {
             }
         }
 
-        public bool DeleteUser(string email) {
+        public bool DeleteUser(string email, bool test = false, bool testResult = false) {
             bool res = false;
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
-                    cmd.CommandText = "delete from Customer where customer.email = @Email";
-                    cmd.Parameters.AddWithValue("Email", email);
-                    cmd.ExecuteNonQuery();
-                    res = true;
+            for (int i = 0; i < 5; i++) {
+                using (SqlConnection connection = new SqlConnection(connectionString)) {
+                    connection.Open();
+                    using (SqlTransaction trans = connection.BeginTransaction()) {
+                        byte[] rowId = null;
+                        int rowCount = 0;
+                        using (SqlCommand cmd = connection.CreateCommand()) {
+                            cmd.Transaction = trans;
+                            cmd.CommandText = "SELECT rowID FROM customer WHERE customer.email = @email";
+                            cmd.Parameters.AddWithValue("email", email);
+                            SqlDataReader reader = cmd.ExecuteReader();
+
+                            while (reader.Read()) {
+                                rowId = (byte[])reader["rowId"];
+                            }
+                            reader.Close();
+
+                            //try {
+                            cmd.CommandText = "delete from Customer where customer.email = @email AND rowID = @rowId";
+                            cmd.Parameters.AddWithValue("rowID", rowId);
+                            rowCount = cmd.ExecuteNonQuery();
+
+                            // Used to unit test. If test is true, we can set rowCount to 0 and fake a optimistic concurreny problem
+                            if (test) {
+                                rowCount = testResult ? 1 : 0;
+                            }
+
+                            if (rowCount == 0) {
+                                cmd.Transaction.Rollback();
+                            }
+                            else {
+                                res = true;
+                                cmd.Transaction.Commit();
+                                break;
+                            }
+                        }
+                    }
                 }
             }
             return res;

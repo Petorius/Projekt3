@@ -49,11 +49,13 @@
     <Compile Include="Interface\ICustomer.cs" />
     <Compile Include="Interface\IOrder.cs" />
     <Compile Include="Interface\IProduct.cs" />
+    <Compile Include="Interface\IReview.cs" />
     <Compile Include="Interface\IUserDB.cs" />
     <Compile Include="OrderDB.cs" />
     <Compile Include="OrderLineDB.cs" />
     <Compile Include="ProductDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReviewDB.cs" />
     <Compile Include="TagDB.cs" />
     <Compile Include="UserDB.cs" />
   </ItemGroup>

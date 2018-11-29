@@ -7,14 +7,17 @@ using System.Text;
 using Server.Domain;
 using Server.DataAccessLayer;
 using DataAccessLayer.Interface;
+using DataAccessLayer;
 
 namespace Server.ServiceLayer {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class ProductService : IProductService {
         private IProduct productDb;
+        private ReviewDB reviewDB;
 
         public ProductService() {
             productDb = new ProductDB();
+            reviewDB = new ReviewDB();
         }
 
         public bool CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
@@ -26,6 +29,11 @@ namespace Server.ServiceLayer {
             p.Images.Add(i);
 
             return productDb.Create(p);
+        }
+
+        public bool CreateReview(string text, int productID, int userID) {
+            Review review = new Review(text);
+            return reviewDB.CreateReview(review, productID, userID);
         }
 
         public bool DeleteProduct(int id) {

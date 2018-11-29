@@ -17,27 +17,28 @@ namespace Client.Domain {
         public int Sales { get; set; }
         public bool IsActive { get; set; }
         public List<Image> Images { get; set; }
-        public List<Keyword> Keywords { get; set; }
-        public Review Review { get; set; }
+        public List<Review> Reviews { get; set; }
 
-        public Product(string name, decimal price, int stock, int minStock, int maxStock, string description, List<Keyword> keywords) {
+        public Product(string name, decimal price, int stock, int minStock, int maxStock, string description) {
             Name = name;
             Price = price;
             Stock = stock;
             MinStock = minStock;
             MaxStock = maxStock;
             Description = description;
-            Keywords = keywords;
-            
+            Reviews = new List<Review>();
+            Images = new List<Image>();
         }
 
         public Product() {
             Images = new List<Image>();
-
+            Reviews = new List<Review>();
         }
 
         public Product(int id) {
             ID = id;
+            Reviews = new List<Review>();
+            Images = new List<Image>();
         }
     }
 }

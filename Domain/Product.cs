@@ -30,6 +30,8 @@ namespace Server.Domain {
         public bool IsActive { get; set; }
         [DataMember]
         public List<Image> Images { get; set; }
+        [DataMember]
+        public List<Review> Reviews { get; set; }
 
         public Product(string name, decimal price, int stock, int minStock, int maxStock, string description) {
             Name = name;
@@ -39,10 +41,12 @@ namespace Server.Domain {
             MaxStock = maxStock;
             Description = description;
             Images = new List<Image>();
+            Reviews = new List<Review>();
         }
 
         public Product() {
             Images = new List<Image>();
+            Reviews = new List<Review>();
         }
     }
 }

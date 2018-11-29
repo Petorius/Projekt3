@@ -44,10 +44,10 @@ namespace Client.ServiceLayer {
                 user.ZipCode = u.ZipCode;
                 user.City = u.City;
             }
-            foreach (var order in u.OrderList) {
+            foreach (var order in u.Orders) {
                 Order o = new Order();
                 o.ID = order.ID;
-                user.OrderList.Add(o);
+                user.Orders.Add(o);
             }
             return user;
 
@@ -55,6 +55,10 @@ namespace Client.ServiceLayer {
 
         public bool UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
             return myProxy.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city);
+        }
+
+        public bool DeleteUser(string email) {
+            return myProxy.DeleteUser(email);
         }
     }
 }

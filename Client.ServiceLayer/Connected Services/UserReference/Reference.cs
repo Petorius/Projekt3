@@ -42,9 +42,6 @@ namespace Client.ServiceLayer.UserReference {
         private string LastNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.ServiceLayer.UserReference.Order[] OrderListField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PhoneField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -139,19 +136,6 @@ namespace Client.ServiceLayer.UserReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.ServiceLayer.UserReference.Order[] OrderList {
-            get {
-                return this.OrderListField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.OrderListField, value) != true)) {
-                    this.OrderListField = value;
-                    this.RaisePropertyChanged("OrderList");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Phone {
             get {
                 return this.PhoneField;
@@ -194,33 +178,33 @@ namespace Client.ServiceLayer.UserReference {
     public partial class User : Client.ServiceLayer.UserReference.Customer {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string HashPasswordField;
+        private Client.ServiceLayer.UserReference.Order[] OrdersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SaltField;
+        private Client.ServiceLayer.UserReference.Review[] ReviewsField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string HashPassword {
+        public Client.ServiceLayer.UserReference.Order[] Orders {
             get {
-                return this.HashPasswordField;
+                return this.OrdersField;
             }
             set {
-                if ((object.ReferenceEquals(this.HashPasswordField, value) != true)) {
-                    this.HashPasswordField = value;
-                    this.RaisePropertyChanged("HashPassword");
+                if ((object.ReferenceEquals(this.OrdersField, value) != true)) {
+                    this.OrdersField = value;
+                    this.RaisePropertyChanged("Orders");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Salt {
+        public Client.ServiceLayer.UserReference.Review[] Reviews {
             get {
-                return this.SaltField;
+                return this.ReviewsField;
             }
             set {
-                if ((object.ReferenceEquals(this.SaltField, value) != true)) {
-                    this.SaltField = value;
-                    this.RaisePropertyChanged("Salt");
+                if ((object.ReferenceEquals(this.ReviewsField, value) != true)) {
+                    this.ReviewsField = value;
+                    this.RaisePropertyChanged("Reviews");
                 }
             }
         }
@@ -337,6 +321,83 @@ namespace Client.ServiceLayer.UserReference {
                 if ((this.ValidationField.Equals(value) != true)) {
                     this.ValidationField = value;
                     this.RaisePropertyChanged("Validation");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Review", Namespace="http://schemas.datacontract.org/2004/07/Server.Domain")]
+    [System.SerializableAttribute()]
+    public partial class Review : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateCreatedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TextField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.ServiceLayer.UserReference.User UserField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DateCreated {
+            get {
+                return this.DateCreatedField;
+            }
+            set {
+                if ((this.DateCreatedField.Equals(value) != true)) {
+                    this.DateCreatedField = value;
+                    this.RaisePropertyChanged("DateCreated");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Text {
+            get {
+                return this.TextField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TextField, value) != true)) {
+                    this.TextField = value;
+                    this.RaisePropertyChanged("Text");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.ServiceLayer.UserReference.User User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
                 }
             }
         }
@@ -481,6 +542,9 @@ namespace Client.ServiceLayer.UserReference {
         private int RatingField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.ServiceLayer.UserReference.Review[] ReviewsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int SalesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -614,6 +678,19 @@ namespace Client.ServiceLayer.UserReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.ServiceLayer.UserReference.Review[] Reviews {
+            get {
+                return this.ReviewsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReviewsField, value) != true)) {
+                    this.ReviewsField = value;
+                    this.RaisePropertyChanged("Reviews");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Sales {
             get {
                 return this.SalesField;
@@ -737,6 +814,12 @@ namespace Client.ServiceLayer.UserReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateCustomer", ReplyAction="http://tempuri.org/IUserService/UpdateCustomerResponse")]
         System.Threading.Tasks.Task<bool> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
+        bool DeleteUser(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
+        System.Threading.Tasks.Task<bool> DeleteUserAsync(string email);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -796,6 +879,14 @@ namespace Client.ServiceLayer.UserReference {
         
         public System.Threading.Tasks.Task<bool> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
             return base.Channel.UpdateCustomerAsync(firstName, lastName, phone, email, address, zipCode, city);
+        }
+        
+        public bool DeleteUser(string email) {
+            return base.Channel.DeleteUser(email);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteUserAsync(string email) {
+            return base.Channel.DeleteUserAsync(email);
         }
     }
 }
