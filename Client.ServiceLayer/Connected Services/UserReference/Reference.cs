@@ -214,18 +214,6 @@ namespace Client.ServiceLayer.UserReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserReference.IUserService")]
     public interface IUserService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUserWithPassword", ReplyAction="http://tempuri.org/IUserService/CreateUserWithPasswordResponse")]
-        bool CreateUserWithPassword(string firstName, string lastName, string street, int zip, string city, string email, int number, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateUserWithPassword", ReplyAction="http://tempuri.org/IUserService/CreateUserWithPasswordResponse")]
-        System.Threading.Tasks.Task<bool> CreateUserWithPasswordAsync(string firstName, string lastName, string street, int zip, string city, string email, int number, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ValidatePassword", ReplyAction="http://tempuri.org/IUserService/ValidatePasswordResponse")]
-        bool ValidatePassword(string email, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ValidatePassword", ReplyAction="http://tempuri.org/IUserService/ValidatePasswordResponse")]
-        System.Threading.Tasks.Task<bool> ValidatePasswordAsync(string email, string password);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUser", ReplyAction="http://tempuri.org/IUserService/GetUserResponse")]
         Client.ServiceLayer.UserReference.User GetUser(string email);
         
@@ -264,22 +252,6 @@ namespace Client.ServiceLayer.UserReference {
         
         public UserServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        public bool CreateUserWithPassword(string firstName, string lastName, string street, int zip, string city, string email, int number, string password) {
-            return base.Channel.CreateUserWithPassword(firstName, lastName, street, zip, city, email, number, password);
-        }
-        
-        public System.Threading.Tasks.Task<bool> CreateUserWithPasswordAsync(string firstName, string lastName, string street, int zip, string city, string email, int number, string password) {
-            return base.Channel.CreateUserWithPasswordAsync(firstName, lastName, street, zip, city, email, number, password);
-        }
-        
-        public bool ValidatePassword(string email, string password) {
-            return base.Channel.ValidatePassword(email, password);
-        }
-        
-        public System.Threading.Tasks.Task<bool> ValidatePasswordAsync(string email, string password) {
-            return base.Channel.ValidatePasswordAsync(email, password);
         }
         
         public Client.ServiceLayer.UserReference.User GetUser(string email) {

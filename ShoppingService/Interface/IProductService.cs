@@ -23,5 +23,12 @@ namespace Server.ServiceLayer {
 
         [OperationContract]
         IEnumerable<Product> GetAllProducts();
+
+        [OperationContract]
+        bool CreateReview(string name, string description, int productID, string reviewerEmail);
+
+        [OperationContract]
+        IEnumerable<Review> GetProductReviews(int productID);
+
     }
 }

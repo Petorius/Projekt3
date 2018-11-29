@@ -279,6 +279,115 @@ namespace Client.ServiceLayer.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Review", Namespace="http://schemas.datacontract.org/2004/07/Server.Domain")]
+    [System.SerializableAttribute()]
+    public partial class Review : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ProductIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ReviewIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReviewerEmailField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ProductID {
+            get {
+                return this.ProductIDField;
+            }
+            set {
+                if ((this.ProductIDField.Equals(value) != true)) {
+                    this.ProductIDField = value;
+                    this.RaisePropertyChanged("ProductID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ReviewID {
+            get {
+                return this.ReviewIDField;
+            }
+            set {
+                if ((this.ReviewIDField.Equals(value) != true)) {
+                    this.ReviewIDField = value;
+                    this.RaisePropertyChanged("ReviewID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReviewerEmail {
+            get {
+                return this.ReviewerEmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReviewerEmailField, value) != true)) {
+                    this.ReviewerEmailField = value;
+                    this.RaisePropertyChanged("ReviewerEmail");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IProductService")]
     public interface IProductService {
@@ -318,6 +427,18 @@ namespace Client.ServiceLayer.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetAllProducts", ReplyAction="http://tempuri.org/IProductService/GetAllProductsResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product[]> GetAllProductsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateReview", ReplyAction="http://tempuri.org/IProductService/CreateReviewResponse")]
+        bool CreateReview(string name, string description, int productID, string reviewerEmail);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateReview", ReplyAction="http://tempuri.org/IProductService/CreateReviewResponse")]
+        System.Threading.Tasks.Task<bool> CreateReviewAsync(string name, string description, int productID, string reviewerEmail);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetProductReviews", ReplyAction="http://tempuri.org/IProductService/GetProductReviewsResponse")]
+        Client.ServiceLayer.ServiceReference1.Review[] GetProductReviews(int productID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetProductReviews", ReplyAction="http://tempuri.org/IProductService/GetProductReviewsResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Review[]> GetProductReviewsAsync(int productID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -393,6 +514,22 @@ namespace Client.ServiceLayer.ServiceReference1 {
         
         public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product[]> GetAllProductsAsync() {
             return base.Channel.GetAllProductsAsync();
+        }
+        
+        public bool CreateReview(string name, string description, int productID, string reviewerEmail) {
+            return base.Channel.CreateReview(name, description, productID, reviewerEmail);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreateReviewAsync(string name, string description, int productID, string reviewerEmail) {
+            return base.Channel.CreateReviewAsync(name, description, productID, reviewerEmail);
+        }
+        
+        public Client.ServiceLayer.ServiceReference1.Review[] GetProductReviews(int productID) {
+            return base.Channel.GetProductReviews(productID);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Review[]> GetProductReviewsAsync(int productID) {
+            return base.Channel.GetProductReviewsAsync(productID);
         }
     }
 }

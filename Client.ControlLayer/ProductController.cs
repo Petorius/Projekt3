@@ -36,5 +36,14 @@ namespace Client.ControlLayer {
         public IEnumerable<Product> GetAllProducts() {
             return productService.GetAllProducts().OrderByDescending(x => x.Sales);
         }
+
+        public bool CreateReview(string name, string description, int productID, string reviewerEmail) {
+            return productService.CreateReview(name, description, productID, reviewerEmail);
+        }
+
+        public IEnumerable<Review> GetProductReviews(int productID) {
+            return productService.GetProductReviews(productID);
+        }
+
     }
 }
