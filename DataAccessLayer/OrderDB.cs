@@ -58,7 +58,67 @@ namespace Server.DataAccessLayer {
         }
 
         public Order Get(int id) {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                connection.Open();
+                using (SqlCommand cmd = connection.CreateCommand()) {
+                    Order o = new Order();
+                    int customerID = -1;
+                    Customer c = new Customer();
+                    //build order
+                    cmd.CommandText = "SELECT orderID, total, purchaseTime, customerID from [dbo].[Order] where orderID = @orderID";
+                    cmd.Parameters.AddWithValue("orderID", id);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read()) {
+                        o.ID = reader.GetInt32(reader.GetOrdinal("orderID"));
+                        o.Total = reader.GetDecimal(reader.GetOrdinal("total"));
+                        o.DateCreated = reader.GetDateTime(reader.GetOrdinal("purchaseTime"));
+                        customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
+                    }
+                    reader.Close();
+                    cmd.Parameters.Clear();
+
+                    if(customerID > 0) {
+                        cmd.CommandText = "SELECT customerID, email from Customer where customerID = @customerID";
+                        cmd.Parameters.AddWithValue("customerID", customerID);
+                        SqlDataReader customerReader = cmd.ExecuteReader();
+                        while (customerReader.Read()) {
+                            c.Email = customerReader.GetString(customerReader.GetOrdinal("email"));
+                        }
+                        customerReader.Close();
+                        cmd.Parameters.Clear();
+
+                        o.Customer = c;
+                    }
+                    else {
+
+                        c.Email = "deleted user";
+                        o.Customer = c;
+                    }
+                    
+
+                    //build orderlines
+                    cmd.CommandText = "Select orderlineID, quantity, subTotal, orderID, productID from Orderline where Orderline.orderID = @orderID";
+                    cmd.Parameters.AddWithValue("orderID", o.ID);
+                    SqlDataReader orderLineReader = cmd.ExecuteReader();
+                    while (orderLineReader.Read()) {
+                        OrderLine ol = new OrderLine();
+                        ol.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("orderlineID"));
+                        ol.Quantity = orderLineReader.GetInt32(orderLineReader.GetOrdinal("quantity"));
+                        ol.SubTotal = orderLineReader.GetDecimal(orderLineReader.GetOrdinal("subtotal"));
+                        Product p = new Product();
+                        p.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("productID"));
+                        ol.Product = p;
+
+                        o.Orderlines.Add(ol);
+                    }
+                    orderLineReader.Close();
+
+                    if (id == o.ID) {
+                        return o;
+                    }
+                }
+                return null;
+            }
         }
 
         public IEnumerable<Order> GetAll() {

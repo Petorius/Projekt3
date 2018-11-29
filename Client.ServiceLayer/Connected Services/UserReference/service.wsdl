@@ -13,20 +13,40 @@
   <wsdl:message name="IUserService_GetUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_GetUserWithOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserWithOrders" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUserWithOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserWithOrdersResponse" />
+  </wsdl:message>
   <wsdl:message name="IUserService_GetCustomerByMail_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomerByMail" />
   </wsdl:message>
   <wsdl:message name="IUserService_GetCustomerByMail_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomerByMailResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_UpdateCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCustomerResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUserService">
     <wsdl:operation name="GetUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUser" message="tns:IUserService_GetUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUserResponse" message="tns:IUserService_GetUser_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetUserWithOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUserWithOrders" message="tns:IUserService_GetUserWithOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUserWithOrdersResponse" message="tns:IUserService_GetUserWithOrders_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetCustomerByMail">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetCustomerByMail" message="tns:IUserService_GetCustomerByMail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetCustomerByMailResponse" message="tns:IUserService_GetCustomerByMail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateCustomer" message="tns:IUserService_UpdateCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateCustomerResponse" message="tns:IUserService_UpdateCustomer_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserService" type="tns:IUserService">
@@ -40,8 +60,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUserWithOrders">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetUserWithOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetCustomerByMail">
       <soap:operation soapAction="http://tempuri.org/IUserService/GetCustomerByMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdateCustomer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

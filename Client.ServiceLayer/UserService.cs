@@ -10,20 +10,7 @@ namespace Client.ServiceLayer {
         }
 
         public User GetUser(string email) {
-            var u = myProxy.GetUser(email);
-            User user = new User();
-            if (u != null) {
-                user.ID = u.ID;
-                user.FirstName = u.FirstName;
-                user.LastName = u.LastName;
-                user.Phone = u.Phone;
-                user.Email = u.Email;
-                user.Address = u.Address;
-                user.ZipCode = u.ZipCode;
-                user.City = u.City;
-            }
-
-            return user;
+            return BuildUser(myProxy.GetUser(email));
         }
 
         public Customer GetCustomerByEmail(string email) {
@@ -39,6 +26,35 @@ namespace Client.ServiceLayer {
                 c.City = customer.City;
             }
             return c;
+        }
+
+        public User GetUserWithOrder(string email) {
+            return BuildUser(myProxy.GetUserWithOrders(email));
+        }
+
+        private User BuildUser(UserReference.User u) {
+            User user = new User();
+            if (u != null) {
+                user.ID = u.ID;
+                user.FirstName = u.FirstName;
+                user.LastName = u.LastName;
+                user.Phone = u.Phone;
+                user.Email = u.Email;
+                user.Address = u.Address;
+                user.ZipCode = u.ZipCode;
+                user.City = u.City;
+            }
+            foreach (var order in u.OrderList) {
+                Order o = new Order();
+                o.ID = order.ID;
+                user.OrderList.Add(o);
+            }
+            return user;
+
+        }
+
+        public bool UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
+            return myProxy.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city);
         }
     }
 }

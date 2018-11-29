@@ -23,5 +23,9 @@ namespace Server.Domain {
             SubTotal = subTotal;
             Product = p;
         }
+
+        public OrderLine() {
+
+        }
     }
 }

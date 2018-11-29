@@ -39,5 +39,18 @@ namespace Server.BusinessLogic {
         public Customer GetCustomerByMail(string email) {
             return customerDB.GetByMail(email);
         }
+
+        public bool UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
+            Customer c = GetCustomerByMail(email);
+            c.FirstName = firstName;
+            c.LastName = lastName;
+            c.Address = address;
+            c.ZipCode = zipCode;
+            c.City = city;
+            c.Email = email;
+            c.Phone = phone;
+
+            return customerDB.Update(c);
+        }
     }
 }

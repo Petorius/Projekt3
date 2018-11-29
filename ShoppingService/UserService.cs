@@ -19,8 +19,16 @@ namespace Server.ServiceLayer {
             return userDB.GetUser(email);
         }
 
+        public User GetUserWithOrders(string email) {
+            return userDB.GetUserWithOrders(email);
+        }
+
         public Customer GetCustomerByMail(string email) {
             return customerLogic.GetCustomerByMail(email);
+        }
+
+        public bool UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
+            return customerLogic.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city);
         }
     }
 }
