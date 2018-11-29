@@ -196,15 +196,18 @@
                                 <Label x:Name="Kunde_Opdater_City_Label" Content="By:" HorizontalAlignment="Left" Margin="241,183,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="Kunde_Opdater_Phone_Label" Content="Telefonnummer:" HorizontalAlignment="Left" Margin="241,209,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="Kunde_Opdater_Email_Label" Content="Mailadresse:" HorizontalAlignment="Left" Margin="241,235,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_FirstName_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,74,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_LastName_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,105,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_Address_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,131,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_ZipCode_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,157,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_City_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,183,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_Phone_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,209,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="Kunde_Opdater_Email_Label_Display" Content="" HorizontalAlignment="Left" Margin="352,235,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="Kunde_Opdater_FirstName_TextBox" Text="" HorizontalAlignment="Left" Margin="352,74,0,0" VerticalAlignment="Top" Width="152"/>
+                                <TextBox x:Name="Kunde_Opdater_LastName_TextBox" Text="" HorizontalAlignment="Left" Margin="352,105,0,0" VerticalAlignment="Top" Width="152"/>
+                                <TextBox x:Name="Kunde_Opdater_Address_TextBox" Text="" HorizontalAlignment="Left" Margin="352,131,0,0" VerticalAlignment="Top" Width="152"/>
+                                <TextBox x:Name="Kunde_Opdater_ZipCode_TextBox" Text="" HorizontalAlignment="Left" Margin="352,157,0,0" VerticalAlignment="Top" Width="152"/>
+                                <TextBox x:Name="Kunde_Opdater_City_TextBox" Text="" HorizontalAlignment="Left" Margin="352,183,0,0" VerticalAlignment="Top" Width="152"/>
+                                <TextBox x:Name="Kunde_Opdater_Phone_TextBox" Text="" HorizontalAlignment="Left" Margin="352,209,0,0" VerticalAlignment="Top" Width="152"/>
+                                <TextBox x:Name="Kunde_Opdater_Email_TextBox" Text="" HorizontalAlignment="Left" Margin="352,235,0,0" VerticalAlignment="Top" Width="152"/>
                                 <Button x:Name="Kunde_Opdater_OK" Content="OK" HorizontalAlignment="Left" Margin="591,315,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Opdater_OK_Click"/>
-                                <Button x:Name="Kunde_Opdater_Anuller" Content="Annuller" HorizontalAlignment="Left" Margin="671,315,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="Kunde_Opdater_Anuller" Content="Annuller" HorizontalAlignment="Left" Margin="671,315,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Opdater_Anuller_Click"/>
+                                <Button x:Name="Kunde_Opdater_FindKunde" Content="Find" HorizontalAlignment="Left" Margin="521,33,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Opdater_FindKunde_Click"/>
+                                <Label x:Name="Kunde_Opdater_Result_Label" Content="" HorizontalAlignment="Left" Margin="521,148,0,0" VerticalAlignment="Top" Height="49" Width="251" FontSize="20"/>
+                                <Label x:Name="Kunde_Opdater_FindKunde_Resultat_Label" Content="" HorizontalAlignment="Left" Margin="352,2,0,0" VerticalAlignment="Top" Width="152"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Slet">
