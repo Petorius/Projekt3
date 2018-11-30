@@ -120,5 +120,32 @@ namespace Client.ServiceLayer {
         public bool DeleteOrder(int ID) {
             return myProxy.DeleteOrder(ID);
         }
+
+        public bool CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
+            return myProxy.CreateOrderLineInDesktop(quantity, subTotal, productID, orderID);
+        }
+
+        public bool DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID) {
+            return myProxy.DeleteOrderLineInDesktop(ID, subTotal, quantity, orderLineID);
+        }
+
+        public Orderline FindOrderLine(int id) {
+
+            var ol = myProxy.FindOrderLine(id);
+            Orderline orderline = new Orderline();
+
+            if (ol != null) {
+                Product p = new Product {
+                    ID = ol.Product.ID
+                };
+
+                orderline.ID = ol.ID;
+                orderline.Quantity = ol.Quantity;
+                orderline.SubTotal = ol.SubTotal;
+                orderline.Product = p;
+            }
+                
+            return orderline;
+        }
     }
 }

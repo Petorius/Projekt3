@@ -146,27 +146,29 @@
                                     <ColumnDefinition Width="763*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label x:Name="Ordre_Opdater_Find_Ordre_Label" Content="Find ordre:" HorizontalAlignment="Left" Margin="80,54,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                                <ListBox x:Name="Ordre_Opdater_ListBox" HorizontalAlignment="Left" Height="180" Margin="415,123,0,0" VerticalAlignment="Top" Width="235" Grid.Column="1" />
+                                <ListBox x:Name="Ordre_Opdater_ListBox" HorizontalAlignment="Left" Height="180" Margin="415,123,0,0" VerticalAlignment="Top" Width="235" Grid.Column="1" SelectionChanged="Ordre_Opdater_ListBox_SelectionChanged" />
                                 <Label x:Name="Ordre_Opdater_Ordrelinjer_Label" Content="Ordrelinjer:" HorizontalAlignment="Left" Margin="415,97,0,0" VerticalAlignment="Top" Grid.Column="1"/>
                                 <TextBox x:Name="Ordre_Opdater_Find_Ordre_TextBox" HorizontalAlignment="Left" Height="23" Margin="210,57,0,0" TextWrapping="Wrap" Text="Indtast ordre ID" VerticalAlignment="Top" Width="120" FontStyle="Italic" Grid.Column="1" />
                                 <Label x:Name="Ordre_Opdater_Antal_Label" Content="Antal:" Grid.Column="1" HorizontalAlignment="Left" Margin="80,128,0,0" VerticalAlignment="Top"/>
                                 <Button x:Name="Ordre_Opdater_Tilføj_Ordrelinje_Knap" Content="Tilføj" Grid.Column="1" HorizontalAlignment="Left" Margin="655,184,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Opdater_Tilføj_Ordrelinje_Knap_Click"/>
-                                <Button x:Name="Ordre_Opdater_Slet_Ordrelinje_Knap" Content="Slet" Grid.Column="1" HorizontalAlignment="Left" Margin="655,220,0,0" VerticalAlignment="Top" Width="75"/>
-                                <Button x:Name="Ordre_Opdater_Annuller_Knap" Content="Annuller" Grid.Column="1" HorizontalAlignment="Left" Margin="655,330,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="Ordre_Opdater_Slet_Ordrelinje_Knap" Content="Slet" Grid.Column="1" HorizontalAlignment="Left" Margin="655,220,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Opdater_Slet_Ordrelinje_Knap_Click"/>
+                                <Button x:Name="Ordre_Opdater_Afslut_Knap" Content="Annuller" Grid.Column="1" HorizontalAlignment="Left" Margin="655,330,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Opdater_Afslut_Knap_Click"/>
                                 <TextBox x:Name="Ordre_Opdater_Antal_TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="210,131,0,0" TextWrapping="Wrap" Text="Indtast antal" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
-                                <Label x:Name="Ordre_Opdater_SubTotal_Label" Content="Subtotal:" Grid.Column="1" HorizontalAlignment="Left" Margin="80,173,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="Ordre_Opdater_Subtotal_TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="210,177,0,0" TextWrapping="Wrap" Text="Indtast subtotal" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
-                                <Label x:Name="Ordre_Opdater_ProductID_Label" Content="Produkt ID:" Grid.Column="1" HorizontalAlignment="Left" Margin="80,218,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="Ordre_Opdater_ProductID_TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="210,221,0,0" TextWrapping="Wrap" Text="Indtast produkt ID" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
+                                <Label x:Name="Ordre_Opdater_ProductID_Label" Content="Produkt navn:" Grid.Column="1" HorizontalAlignment="Left" Margin="80,181,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="Ordre_Opdater_ProductName_TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="210,184,0,0" TextWrapping="Wrap" Text="Indtast produkt navn" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
                                 <Button x:Name="Ordre_Opdater_Søg_Knap" Content="Søg" Grid.Column="1" HorizontalAlignment="Left" Margin="415,60,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Opdater_Søg_Knap_Click"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Slet">
                             <Grid Background="#FFE5E5E5">
-                                <Label Name="Ordre_Slet_FindOrdre_Label" Content="Søg på OrdreID:" HorizontalAlignment="Left" Margin="223,93,0,0" VerticalAlignment="Top"/>
-                                <TextBox Name="Ordre_Slet_FindOrdre_Input" HorizontalAlignment="Left" Height="23" Margin="320,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149" RenderTransformOrigin="0.209,1.408"/>
-                                <Button Name="Ordre_Slet_SletOrdre_Button" Content="Slet" HorizontalAlignment="Left" Margin="602,286,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Slet_SletOrdre_Button_Click"/>
-                                <Label Name="Ordre_Slet_SletStatus_Label" Content="&#xD;&#xA;" HorizontalAlignment="Left" Margin="320,124,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.373,-0.463" Width="149" Height="34"/>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="99*"/>
+                                    <ColumnDefinition Width="673*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Name="Ordre_Slet_FindOrdre_Label" Content="Søg på Ordre ID:" HorizontalAlignment="Left" Margin="123,132,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <TextBox Name="Ordre_Slet_FindOrdre_Input" HorizontalAlignment="Left" Height="23" Margin="261,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149" RenderTransformOrigin="0.209,1.408" Grid.Column="1"/>
+                                <Button Name="Ordre_Slet_SletOrdre_Button" Content="Slet" HorizontalAlignment="Left" Margin="480,308,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Slet_SletOrdre_Button_Click" Grid.Column="1"/>
+                                <Label Name="Ordre_Slet_SletStatus_Label" Content="&#xD;&#xA;" HorizontalAlignment="Left" Margin="221,124,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.373,-0.463" Width="149" Height="34" Grid.Column="1"/>
                             </Grid>
                         </TabItem>
                     </TabControl>

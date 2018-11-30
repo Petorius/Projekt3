@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Client.Domain;
 using Client.ControlLayer;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace DesktopClient {
     /// <summary>
@@ -28,6 +30,8 @@ namespace DesktopClient {
         private UserController userController;
         private List<string> userOrderListWithID;
         private List<string> orderlineItems;
+        private int selectedListItemOrderLineID;
+        private string selectedListItem = "";
 
         public CrudOverview() {
             InitializeComponent();
@@ -363,6 +367,11 @@ namespace DesktopClient {
         }
 
         private void Ordre_Opdater_Søg_Knap_Click(object sender, RoutedEventArgs e) {
+            Ordre_Opdater_Find_Ordre_TextBox.IsEnabled = false;
+            CreateOrderlineHandler();
+        }
+
+        private void CreateOrderlineHandler() {
             int id = Int32.Parse(Ordre_Opdater_Find_Ordre_TextBox.Text);
             Order o = orderController.FindOrder(id);
 
@@ -370,8 +379,13 @@ namespace DesktopClient {
                 orderlineItems.Add("Orderlinje ID: " + ol.ID.ToString() + " " + "Antal: " + ol.Quantity.ToString() + " " + "Sub-total: " + ol.SubTotal.ToString() + " " + "Product ID: " + ol.Product.ID.ToString());
             }
 
+            UpdateOrderlineListBox();
+        }
+
+        private void UpdateOrderlineListBox() {
             Ordre_Opdater_ListBox.ItemsSource = orderlineItems;
             orderlineItems = new List<string>();
+
         }
 
         private void Ordre_Slet_SletOrdre_Button_Click(object sender, RoutedEventArgs e) {
@@ -386,8 +400,54 @@ namespace DesktopClient {
             }
         }
 
-        private void Ordre_Opdater_Tilføj_Ordrelinje_Knap_Click(object sender, RoutedEventArgs e) {
+        private void ClearOrderLineFields() {
+            Ordre_Opdater_ProductName_TextBox.Text = "";
+            Ordre_Opdater_Antal_TextBox.Text = "";
+            
+        }
 
+        private void Ordre_Opdater_Tilføj_Ordrelinje_Knap_Click(object sender, RoutedEventArgs e) {
+            Product p = productController.FindByName(Ordre_Opdater_ProductName_TextBox.Text);
+            int quantity = Int32.Parse(Ordre_Opdater_Antal_TextBox.Text);
+            decimal subTotal = p.Price * quantity;
+            int orderID = Int32.Parse(Ordre_Opdater_Find_Ordre_TextBox.Text);
+            bool result = orderController.CreateOrderLineInDesktop(quantity, subTotal, p.ID, orderID);
+
+            if (result) {
+                //updateProductText.Content = "Ordrelinjen blev oprettet";
+                CreateOrderlineHandler();
+                ClearOrderLineFields();
+                
+            }
+            else {
+                //updateProductText.Content = "Der opstod en fejl. Prøv igen";
+            }
+        }
+
+        private void Ordre_Opdater_Afslut_Knap_Click(object sender, RoutedEventArgs e) {
+            Ordre_Opdater_Find_Ordre_TextBox.IsEnabled = true;
+            ClearOrderLineFields();
+            UpdateOrderlineListBox();
+        }
+
+        private void Ordre_Opdater_Slet_Ordrelinje_Knap_Click(object sender, RoutedEventArgs e) {
+
+            Orderline ol = orderController.FindOrderLine(selectedListItemOrderLineID);
+
+            bool result = orderController.DeleteOrderLineInDesktop(ol.Product.ID, ol.SubTotal, ol.Quantity, selectedListItemOrderLineID);
+
+            if(result) {
+
+            }
+        }
+
+        private void Ordre_Opdater_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+            //Fix this
+            selectedListItem = Ordre_Opdater_ListBox.Items[Ordre_Opdater_ListBox.SelectedIndex].ToString();
+            selectedListItemOrderLineID = Int32.Parse(Regex.Match(selectedListItem, @"\d+").Value);
+            Debug.Write(selectedListItemOrderLineID);
+            Ordre_Opdater_ListBox.UnselectAll();
         }
     }
 }

@@ -40,5 +40,6 @@ namespace Client.Domain {
             Reviews = new List<Review>();
             Images = new List<Image>();
         }
+
     }
 }

@@ -9,6 +9,7 @@
   <xs:complexType name="OrderLine">
     <xs:sequence>
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderID" type="xs:int" />
       <xs:element minOccurs="0" name="Product" nillable="true" type="tns:Product" />
       <xs:element minOccurs="0" name="Quantity" type="xs:int" />
       <xs:element minOccurs="0" name="SubTotal" type="xs:decimal" />
@@ -78,7 +79,6 @@
       <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="OrderList" nillable="true" type="tns:ArrayOfOrder" />
       <xs:element minOccurs="0" name="Phone" type="xs:int" />
       <xs:element minOccurs="0" name="ZipCode" type="xs:int" />
     </xs:sequence>

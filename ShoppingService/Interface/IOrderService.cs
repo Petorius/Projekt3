@@ -10,6 +10,9 @@ namespace Server.ServiceLayer {
         bool CreateOrderLine(int quantity, decimal subTotal, int ID);
 
         [OperationContract]
+        bool CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID);
+
+        [OperationContract]
         Order CreateOrder(string firstName, string lastName, string street,
             int zip, string city, string email, int number, List<OrderLine> ol);
 
@@ -17,10 +20,16 @@ namespace Server.ServiceLayer {
         Order FindOrder(int id);
 
         [OperationContract]
+        OrderLine FindOrderLine(int id);
+
+        [OperationContract]
         bool UpdateOrderLine(int ID, decimal subTotal, int quantity);
 
         [OperationContract]
         bool DeleteOrderLine(int ID, decimal subTotal, int quantity);
+
+        [OperationContract]
+        bool DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID);
 
         [OperationContract]
         bool DeleteOrder(int ID);

@@ -15,6 +15,10 @@ namespace Client.ControlLayer {
             return orderService.CreateOrderLine(quantity,subTotal, ID);
         }
 
+        public bool CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
+            return orderService.CreateOrderLineInDesktop(quantity, subTotal, productID, orderID);
+        }
+
         public Order CreateOrder(string firstName, string lastName, string street,
             int zip, string city, string email, int number, IEnumerable<Orderline> ol) {
 
@@ -26,6 +30,10 @@ namespace Client.ControlLayer {
             return orderService.FindOrder(id);
         }
 
+        public Orderline FindOrderLine(int id) {
+            return orderService.FindOrderLine(id);
+        }
+
         public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {
             return orderService.UpdateOrderLine(ID, subTotal, quantity);
 
@@ -33,6 +41,10 @@ namespace Client.ControlLayer {
 
         public bool DeleteOrderLine(int ID, decimal subTotal, int quantity) {
             return orderService.DeleteOrderLine(ID, subTotal, quantity);
+        }
+
+        public bool DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID) {
+            return orderService.DeleteOrderLineInDesktop(ID, subTotal, quantity, orderLineID);
         }
 
         public bool DeleteOrder(int ID) {

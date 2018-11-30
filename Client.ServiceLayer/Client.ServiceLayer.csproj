@@ -100,6 +100,9 @@
     <None Include="Connected Services\OrderReference\Client.ServiceLayer.OrderReference.Order.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\OrderReference\Client.ServiceLayer.OrderReference.OrderLine.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\OrderReference\Server.Domain.xsd">
       <SubType>Designer</SubType>
     </None>
