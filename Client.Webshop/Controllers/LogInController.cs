@@ -46,6 +46,7 @@ namespace Client.Webshop.Controllers {
             return View();
         }
 
+
         public ActionResult Login(string email, string password) {
 
             bool result = ac.ValidatePassword(email, password);

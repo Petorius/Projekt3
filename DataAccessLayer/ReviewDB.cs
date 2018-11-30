@@ -39,7 +39,24 @@ namespace DataAccessLayer {
         }
 
         public bool DeleteReview(Review review) {
-            throw new NotImplementedException();
+            bool isDeleted = false;
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                connection.Open();
+                using (SqlCommand cmd = connection.CreateCommand()) {
+                    try {
+                        cmd.CommandText = "Delete from Review where reviewID = @reviewID";
+                        cmd.Parameters.AddWithValue("reviewID", review.ID);
+                        cmd.ExecuteNonQuery();
+                        isDeleted = true;
+                    }
+                    catch (SqlException) {
+                        return isDeleted;
+                    }
+                }
+            }
+            return isDeleted;
         }
+
+
     }
 }
