@@ -132,8 +132,6 @@ namespace Server.DataAccessLayer {
                     reader.Close();
                     cmd.Parameters.Clear();
 
-
-
                     cmd.CommandText = "Select ImageSource, Name from Image where Image.ProductID = @productID";
                     cmd.Parameters.AddWithValue("productID", p.ID);
                     SqlDataReader imageReader = cmd.ExecuteReader();
@@ -145,12 +143,37 @@ namespace Server.DataAccessLayer {
                         p.Images.Add(i);
                     }
                     imageReader.Close();
+                    cmd.Parameters.Clear();
 
-                    if (id == p.ID) {
-                        return p;
+                    cmd.CommandText = "SELECT Text, DateCreated, UserID, ReviewID from Review where Review.ProductID = @productID";
+                    cmd.Parameters.AddWithValue("productID", p.ID);
+                    SqlDataReader reviewReader = cmd.ExecuteReader();
+                    while(reviewReader.Read()) {
+                        Review r = new Review();
+                        r.Text = reviewReader.GetString(reviewReader.GetOrdinal("Text"));
+                        r.DateCreated = reviewReader.GetDateTime(reviewReader.GetOrdinal("DateCreated"));
+                        r.User.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("UserID"));
+                        r.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("ReviewID"));
+
+                        p.Reviews.Add(r);
                     }
+                    reviewReader.Close();
+                    cmd.Parameters.Clear();
+
+                    foreach (Review review in p.Reviews) {
+                        cmd.CommandText = "SELECT FirstName FROM Customer WHERE CustomerID = @UserID";
+                        cmd.Parameters.AddWithValue("UserID", review.User.ID);
+
+                        SqlDataReader userReader = cmd.ExecuteReader();
+                        while(userReader.Read()) {
+                            review.User.FirstName = userReader.GetString(userReader.GetOrdinal("FirstName"));
+                        }
+                        userReader.Close();
+                        cmd.Parameters.Clear();
+                    }
+                    return p;
                 }
-                return null;
+                
             }
         }
 

@@ -10,6 +10,8 @@ namespace Server.Domain {
     [DataContract]
     public class Review {
         [DataMember]
+        public int ID { get; set; }
+        [DataMember]
         public string Text { get; set; }
         [DataMember]
         public User User { get; set; }
