@@ -145,7 +145,7 @@ namespace Server.DataAccessLayer {
                     imageReader.Close();
                     cmd.Parameters.Clear();
 
-                    cmd.CommandText = "SELECT Text, DateCreated, UserID from Review where Review.ProductID = @productID";
+                    cmd.CommandText = "SELECT Text, DateCreated, UserID, ReviewID from Review where Review.ProductID = @productID";
                     cmd.Parameters.AddWithValue("productID", p.ID);
                     SqlDataReader reviewReader = cmd.ExecuteReader();
                     while(reviewReader.Read()) {
@@ -153,6 +153,7 @@ namespace Server.DataAccessLayer {
                         r.Text = reviewReader.GetString(reviewReader.GetOrdinal("Text"));
                         r.DateCreated = reviewReader.GetDateTime(reviewReader.GetOrdinal("DateCreated"));
                         r.User.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("UserID"));
+                        r.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("ReviewID"));
 
                         p.Reviews.Add(r);
                     }

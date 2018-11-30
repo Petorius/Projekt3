@@ -68,6 +68,7 @@ namespace Client.ServiceLayer {
 
             foreach (var r in p.Reviews) {
                 Review review = new Review();
+                review.ID = r.ID;
                 review.Text = r.Text;
                 review.DateCreated = r.DateCreated;
                 review.User.ID = r.User.ID;
