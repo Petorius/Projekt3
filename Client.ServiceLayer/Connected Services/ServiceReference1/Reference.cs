@@ -308,6 +308,9 @@ namespace Client.ServiceLayer.ServiceReference1 {
         private System.DateTime DateCreatedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TextField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -332,6 +335,19 @@ namespace Client.ServiceLayer.ServiceReference1 {
                 if ((this.DateCreatedField.Equals(value) != true)) {
                     this.DateCreatedField = value;
                     this.RaisePropertyChanged("DateCreated");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
                 }
             }
         }
@@ -832,6 +848,12 @@ namespace Client.ServiceLayer.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateReview", ReplyAction="http://tempuri.org/IProductService/CreateReviewResponse")]
         System.Threading.Tasks.Task<bool> CreateReviewAsync(string text, int productID, int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteReview", ReplyAction="http://tempuri.org/IProductService/DeleteReviewResponse")]
+        bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteReview", ReplyAction="http://tempuri.org/IProductService/DeleteReviewResponse")]
+        System.Threading.Tasks.Task<bool> DeleteReviewAsync(int reviewID, int reviewUserID, int sessionUserID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -915,6 +937,14 @@ namespace Client.ServiceLayer.ServiceReference1 {
         
         public System.Threading.Tasks.Task<bool> CreateReviewAsync(string text, int productID, int userID) {
             return base.Channel.CreateReviewAsync(text, productID, userID);
+        }
+        
+        public bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID) {
+            return base.Channel.DeleteReview(reviewID, reviewUserID, sessionUserID);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteReviewAsync(int reviewID, int reviewUserID, int sessionUserID) {
+            return base.Channel.DeleteReviewAsync(reviewID, reviewUserID, sessionUserID);
         }
     }
 }

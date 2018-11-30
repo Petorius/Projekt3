@@ -18,7 +18,9 @@ namespace Client.ControlLayer {
         }
 
         public Product Find(int ID) {
-            return productService.Find(ID);
+            Product p = productService.Find(ID);
+            p.Reviews.Reverse();
+            return p;
         }
 
         public Product FindByName(string name) {
@@ -41,5 +43,8 @@ namespace Client.ControlLayer {
             return productService.CreateReview(text, productID, userID);
         }
 
+        public  bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID) {
+            return productService.DeleteReview(reviewID, reviewUserID, sessionUserID);
+        }
     }
 }

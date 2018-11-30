@@ -16,5 +16,7 @@ namespace Client.ServiceLayer {
         IEnumerable<Product> GetAllProducts();
 
         bool CreateReview(string text, int productID, int userID);
+
+        bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID);
     }
 }

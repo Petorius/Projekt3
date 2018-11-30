@@ -77,5 +77,19 @@ namespace Client.Webshop.Controllers {
             return Redirect(url);
 
         }
+
+        public ActionResult CreateReview(string reviewText, int productID, string url) {
+            User user = (User)Session["user"];
+            bool res = pc.CreateReview(reviewText, productID, user.ID);
+            if(res) {
+                return Redirect(url);
+            }
+
+            return 
+        }
+
+        public ActionResult DeleteReview() {
+            return View();
+        }
     }
 }

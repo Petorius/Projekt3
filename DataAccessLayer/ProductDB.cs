@@ -150,6 +150,7 @@ namespace Server.DataAccessLayer {
                     SqlDataReader reviewReader = cmd.ExecuteReader();
                     while(reviewReader.Read()) {
                         Review r = new Review();
+                        r.User = new User();
                         r.Text = reviewReader.GetString(reviewReader.GetOrdinal("Text"));
                         r.DateCreated = reviewReader.GetDateTime(reviewReader.GetOrdinal("DateCreated"));
                         r.User.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("UserID"));

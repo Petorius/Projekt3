@@ -68,6 +68,7 @@ namespace Client.ServiceLayer {
 
             foreach (var r in p.Reviews) {
                 Review review = new Review();
+                review.User = new User();
                 review.ID = r.ID;
                 review.Text = r.Text;
                 review.DateCreated = r.DateCreated;
@@ -96,6 +97,10 @@ namespace Client.ServiceLayer {
 
         public bool CreateReview(string text, int productID, int userID) {
             return myProxy.CreateReview(text, productID, userID);
+        }
+
+        public bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID) {
+            return myProxy.DeleteReview(reviewID, reviewUserID, sessionUserID);
         }
     }
 }

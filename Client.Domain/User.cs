@@ -20,5 +20,11 @@ namespace Client.Domain {
             Orders = new List<Order>();
             Reviews = new List<Review>();
         }
+
+        public override string ToString() {
+            return ""+ID;
+        }
     }
+
+
 }

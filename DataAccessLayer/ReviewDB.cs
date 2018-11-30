@@ -44,8 +44,9 @@ namespace DataAccessLayer {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
                     try {
-                        cmd.CommandText = "Delete from Review where reviewID = @reviewID";
+                        cmd.CommandText = "Delete from Review where reviewID = @reviewID and review.userID = @userID";
                         cmd.Parameters.AddWithValue("reviewID", review.ID);
+                        cmd.Parameters.AddWithValue("userID", review.User.ID);
                         cmd.ExecuteNonQuery();
                         isDeleted = true;
                     }

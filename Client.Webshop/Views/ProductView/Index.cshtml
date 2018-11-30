@@ -20,23 +20,66 @@
                 <h1 class="boldText">@Model.Name</h1>
                 <h2 class="boldText">Pris @Model.Price DKK</h2>
                 <h2 class="boldText"> Antal </h2>
-                <form action="/ProductView/AddProduct/" method="post">
-                    <input id="id" name="id" value="@Model.ID" hidden />
-                    <input id="quantity" name="quantity" type="number" min="1" value="1" style="width:40px; text-align:center"; />
-                    <button class="add-button" type="submit">Tilføj til kurv</button>
-                </form>
 
-                
+                <input id="id" name="id" value="@Model.ID" hidden />
+                <input id="quantity" name="quantity" type="number" min="1" value="1" style="width:40px; text-align:center" ; />
+                <button class="add-button" type="submit">Tilføj til kurv</button>
 
                 <h2 class="boldText"> Beskrivelse </h2>
                 <h3> @Model.Description</h3>
             </div>
-
-
         </div>
     }
 
-    @if(TempData["Message"] != null) {
+    <div class="container">
+
+        <div style="height:180px;">
+            <h3>Skriv en anmeldelse af produktet</h3>
+            @if (Session["user"] == null) {
+                <textarea rows="1" cols="150" class="textAreaForm" id="noneUserTextReview" disabled>
+                        Du skal være logget ind for at kunne skrive en anmeldelse
+                    </textarea>
+            }
+            else {
+                using (Html.BeginForm("CreateReview", "ProductView", FormMethod.Post, null)) {
+                    @Html.ValidationSummary(true)
+                    @Html.Hidden("url", this.Request.RawUrl)
+                    <form>
+                        <input id="productID" name="productID" value = "@Model.ID" hidden/>
+                        <textarea rows="1" cols="150" id="reviewText" name="reviewText"class="textAreaForm2"></textarea>
+                        <button id="reviewButton" type="submit"> Indsæt anmeldelse</button>
+                    </form>
+                }
+            }
+
+        </div>
+        @if (Model.Reviews.Count == 0) {
+            <h3>Der er ingen anmeldelser på det pågældende produkt endnu.</h3>
+        }
+        else {
+            <h3 style="margin-bottom:20px;">Hvad andre synes om produktet</h3>
+            foreach (var item in Model.Reviews) {
+                <div id="productReview">
+                    <p style="font-weight:bold;">Skrevet af @item.User.FirstName den @item.DateCreated.ToString("dd-MM-yyyy")</p>
+                    <p>@item.Text</p>
+
+                    @if (Session["user"] != null) {
+                        if (Session["user"].ToString() == item.User.ToString()) {
+                            <button> Slet </button>
+                        }
+
+                    }
+
+
+
+                </div>
+            }
+        }
+
+
+    </div>
+
+    @if (TempData["Message"] != null) {
         <script type="text/javascript">
             window.onload = function () {
                 alert(@TempData["Message"]);

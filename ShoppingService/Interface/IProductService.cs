@@ -26,5 +26,8 @@ namespace Server.ServiceLayer {
 
         [OperationContract]
         bool CreateReview(string text, int productID, int userID);
+
+        [OperationContract]
+        bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID);
     }
 }

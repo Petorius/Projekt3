@@ -41,6 +41,13 @@ namespace Server.ServiceLayer {
             return productDb.Delete(p);
         }
 
+        public bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID) {
+            Review r = new Review();
+            r.ID = reviewID;
+            r.User.ID = reviewUserID;
+            return reviewDB.DeleteReview(r);
+        }
+
         public Product FindProduct(int ID) {
             Product product = productDb.Get(ID);
             return product;
