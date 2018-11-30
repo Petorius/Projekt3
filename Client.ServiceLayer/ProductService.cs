@@ -66,6 +66,15 @@ namespace Client.ServiceLayer {
                 product.Images.Add(image);
             }
 
+            foreach (var r in p.Reviews) {
+                Review review = new Review();
+                review.Text = r.Text;
+                review.DateCreated = r.DateCreated;
+                review.User = new User();
+                review.User.FirstName = r.User.FirstName;
+                product.Reviews.Add(review);
+            }
+
             return product;
         }
 
