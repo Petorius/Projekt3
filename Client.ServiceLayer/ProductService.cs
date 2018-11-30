@@ -70,7 +70,7 @@ namespace Client.ServiceLayer {
                 Review review = new Review();
                 review.Text = r.Text;
                 review.DateCreated = r.DateCreated;
-                review.User = new User();
+                review.User.ID = r.User.ID;
                 review.User.FirstName = r.User.FirstName;
                 product.Reviews.Add(review);
             }

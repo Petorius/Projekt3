@@ -165,8 +165,7 @@ namespace Server.DataAccessLayer {
 
                         SqlDataReader userReader = cmd.ExecuteReader();
                         while(userReader.Read()) {
-                            User user = new User();
-                            user.FirstName = userReader.GetString(userReader.GetOrdinal("FirstName"));
+                            review.User.FirstName = userReader.GetString(userReader.GetOrdinal("FirstName"));
                         }
                         userReader.Close();
                         cmd.Parameters.Clear();
