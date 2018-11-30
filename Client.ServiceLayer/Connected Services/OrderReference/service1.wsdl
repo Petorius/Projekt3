@@ -13,6 +13,12 @@
   <wsdl:message name="IOrderService_CreateOrderLine_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateOrderLineResponse" />
   </wsdl:message>
+  <wsdl:message name="IOrderService_CreateOrderLineInDesktop_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrderLineInDesktop" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_CreateOrderLineInDesktop_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrderLineInDesktopResponse" />
+  </wsdl:message>
   <wsdl:message name="IOrderService_CreateOrder_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateOrder" />
   </wsdl:message>
@@ -24,6 +30,12 @@
   </wsdl:message>
   <wsdl:message name="IOrderService_FindOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_FindOrderLine_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrderLine" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_FindOrderLine_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrderLineResponse" />
   </wsdl:message>
   <wsdl:message name="IOrderService_UpdateOrderLine_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateOrderLine" />
@@ -37,6 +49,12 @@
   <wsdl:message name="IOrderService_DeleteOrderLine_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteOrderLineResponse" />
   </wsdl:message>
+  <wsdl:message name="IOrderService_DeleteOrderLineInDesktop_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrderLineInDesktop" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_DeleteOrderLineInDesktop_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrderLineInDesktopResponse" />
+  </wsdl:message>
   <wsdl:message name="IOrderService_DeleteOrder_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteOrder" />
   </wsdl:message>
@@ -48,6 +66,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/CreateOrderLine" message="tns:IOrderService_CreateOrderLine_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/CreateOrderLineResponse" message="tns:IOrderService_CreateOrderLine_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="CreateOrderLineInDesktop">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/CreateOrderLineInDesktop" message="tns:IOrderService_CreateOrderLineInDesktop_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/CreateOrderLineInDesktopResponse" message="tns:IOrderService_CreateOrderLineInDesktop_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/CreateOrder" message="tns:IOrderService_CreateOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/CreateOrderResponse" message="tns:IOrderService_CreateOrder_OutputMessage" />
@@ -56,6 +78,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/FindOrder" message="tns:IOrderService_FindOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/FindOrderResponse" message="tns:IOrderService_FindOrder_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="FindOrderLine">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/FindOrderLine" message="tns:IOrderService_FindOrderLine_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/FindOrderLineResponse" message="tns:IOrderService_FindOrderLine_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="UpdateOrderLine">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/UpdateOrderLine" message="tns:IOrderService_UpdateOrderLine_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/UpdateOrderLineResponse" message="tns:IOrderService_UpdateOrderLine_OutputMessage" />
@@ -63,6 +89,10 @@
     <wsdl:operation name="DeleteOrderLine">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/DeleteOrderLine" message="tns:IOrderService_DeleteOrderLine_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/DeleteOrderLineResponse" message="tns:IOrderService_DeleteOrderLine_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrderLineInDesktop">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/DeleteOrderLineInDesktop" message="tns:IOrderService_DeleteOrderLineInDesktop_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/DeleteOrderLineInDesktopResponse" message="tns:IOrderService_DeleteOrderLineInDesktop_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/DeleteOrder" message="tns:IOrderService_DeleteOrder_InputMessage" />
@@ -73,6 +103,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="CreateOrderLine">
       <soap:operation soapAction="http://tempuri.org/IOrderService/CreateOrderLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrderLineInDesktop">
+      <soap:operation soapAction="http://tempuri.org/IOrderService/CreateOrderLineInDesktop" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -98,6 +137,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="FindOrderLine">
+      <soap:operation soapAction="http://tempuri.org/IOrderService/FindOrderLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="UpdateOrderLine">
       <soap:operation soapAction="http://tempuri.org/IOrderService/UpdateOrderLine" style="document" />
       <wsdl:input>
@@ -109,6 +157,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteOrderLine">
       <soap:operation soapAction="http://tempuri.org/IOrderService/DeleteOrderLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrderLineInDesktop">
+      <soap:operation soapAction="http://tempuri.org/IOrderService/DeleteOrderLineInDesktop" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

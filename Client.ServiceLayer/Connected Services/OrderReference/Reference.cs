@@ -26,6 +26,9 @@ namespace Client.ServiceLayer.OrderReference {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int OrderIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Client.ServiceLayer.OrderReference.Product ProductField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -53,6 +56,19 @@ namespace Client.ServiceLayer.OrderReference {
                 if ((this.IDField.Equals(value) != true)) {
                     this.IDField = value;
                     this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int OrderID {
+            get {
+                return this.OrderIDField;
+            }
+            set {
+                if ((this.OrderIDField.Equals(value) != true)) {
+                    this.OrderIDField = value;
+                    this.RaisePropertyChanged("OrderID");
                 }
             }
         }
@@ -533,9 +549,6 @@ namespace Client.ServiceLayer.OrderReference {
         private string LastNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.ServiceLayer.OrderReference.Order[] OrderListField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PhoneField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -625,19 +638,6 @@ namespace Client.ServiceLayer.OrderReference {
                 if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
                     this.LastNameField = value;
                     this.RaisePropertyChanged("LastName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.ServiceLayer.OrderReference.Order[] OrderList {
-            get {
-                return this.OrderListField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.OrderListField, value) != true)) {
-                    this.OrderListField = value;
-                    this.RaisePropertyChanged("OrderList");
                 }
             }
         }
@@ -813,6 +813,12 @@ namespace Client.ServiceLayer.OrderReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrderLine", ReplyAction="http://tempuri.org/IOrderService/CreateOrderLineResponse")]
         System.Threading.Tasks.Task<bool> CreateOrderLineAsync(int quantity, decimal subTotal, int ID);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrderLineInDesktop", ReplyAction="http://tempuri.org/IOrderService/CreateOrderLineInDesktopResponse")]
+        bool CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrderLineInDesktop", ReplyAction="http://tempuri.org/IOrderService/CreateOrderLineInDesktopResponse")]
+        System.Threading.Tasks.Task<bool> CreateOrderLineInDesktopAsync(int quantity, decimal subTotal, int productID, int orderID);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrder", ReplyAction="http://tempuri.org/IOrderService/CreateOrderResponse")]
         Client.ServiceLayer.OrderReference.Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email, int number, Client.ServiceLayer.OrderReference.OrderLine[] ol);
         
@@ -825,6 +831,12 @@ namespace Client.ServiceLayer.OrderReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/FindOrder", ReplyAction="http://tempuri.org/IOrderService/FindOrderResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.Order> FindOrderAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/FindOrderLine", ReplyAction="http://tempuri.org/IOrderService/FindOrderLineResponse")]
+        Client.ServiceLayer.OrderReference.OrderLine FindOrderLine(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/FindOrderLine", ReplyAction="http://tempuri.org/IOrderService/FindOrderLineResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.OrderLine> FindOrderLineAsync(int id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/UpdateOrderLine", ReplyAction="http://tempuri.org/IOrderService/UpdateOrderLineResponse")]
         bool UpdateOrderLine(int ID, decimal subTotal, int quantity);
         
@@ -836,6 +848,12 @@ namespace Client.ServiceLayer.OrderReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrderLine", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderLineResponse")]
         System.Threading.Tasks.Task<bool> DeleteOrderLineAsync(int ID, decimal subTotal, int quantity);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrderLineInDesktop", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderLineInDesktopResponse")]
+        bool DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrderLineInDesktop", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderLineInDesktopResponse")]
+        System.Threading.Tasks.Task<bool> DeleteOrderLineInDesktopAsync(int ID, decimal subTotal, int quantity, int orderLineID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrder", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderResponse")]
         bool DeleteOrder(int ID);
@@ -879,6 +897,14 @@ namespace Client.ServiceLayer.OrderReference {
             return base.Channel.CreateOrderLineAsync(quantity, subTotal, ID);
         }
         
+        public bool CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
+            return base.Channel.CreateOrderLineInDesktop(quantity, subTotal, productID, orderID);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreateOrderLineInDesktopAsync(int quantity, decimal subTotal, int productID, int orderID) {
+            return base.Channel.CreateOrderLineInDesktopAsync(quantity, subTotal, productID, orderID);
+        }
+        
         public Client.ServiceLayer.OrderReference.Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email, int number, Client.ServiceLayer.OrderReference.OrderLine[] ol) {
             return base.Channel.CreateOrder(firstName, lastName, street, zip, city, email, number, ol);
         }
@@ -895,6 +921,14 @@ namespace Client.ServiceLayer.OrderReference {
             return base.Channel.FindOrderAsync(id);
         }
         
+        public Client.ServiceLayer.OrderReference.OrderLine FindOrderLine(int id) {
+            return base.Channel.FindOrderLine(id);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.OrderLine> FindOrderLineAsync(int id) {
+            return base.Channel.FindOrderLineAsync(id);
+        }
+        
         public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {
             return base.Channel.UpdateOrderLine(ID, subTotal, quantity);
         }
@@ -909,6 +943,14 @@ namespace Client.ServiceLayer.OrderReference {
         
         public System.Threading.Tasks.Task<bool> DeleteOrderLineAsync(int ID, decimal subTotal, int quantity) {
             return base.Channel.DeleteOrderLineAsync(ID, subTotal, quantity);
+        }
+        
+        public bool DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID) {
+            return base.Channel.DeleteOrderLineInDesktop(ID, subTotal, quantity, orderLineID);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteOrderLineInDesktopAsync(int ID, decimal subTotal, int quantity, int orderLineID) {
+            return base.Channel.DeleteOrderLineInDesktopAsync(ID, subTotal, quantity, orderLineID);
         }
         
         public bool DeleteOrder(int ID) {

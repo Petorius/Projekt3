@@ -7,7 +7,7 @@ using DataAccessLayer.Interface;
 namespace Server.ServiceLayer {
 
     public class OrderService : IOrderService {
-        private ICRUD<OrderLine> orderLineDB;
+        private IOrderLine orderLineDB;
         private IProduct productDB;
         private OrderLogic orderLogic;
         private ICRUD<Order> orderDB;
@@ -31,6 +31,13 @@ namespace Server.ServiceLayer {
             return orderLineDB.Create(ol);
         }
 
+        public bool CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
+            Product p = productDB.Get(productID);
+            OrderLine ol = new OrderLine(quantity, subTotal, p);
+            ol.OrderID = orderID;
+            return orderLineDB.CreateInDesktop(ol);
+        }
+
         public bool DeleteOrder(int ID) {
             Order o = orderDB.Get(ID);
             return orderDB.Delete(o);
@@ -42,8 +49,19 @@ namespace Server.ServiceLayer {
             return orderLineDB.Delete(ol);
         }
 
+        public bool DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID) {
+            Product p = productDB.Get(ID);
+            OrderLine ol = new OrderLine(quantity, subTotal, p);
+            ol.ID = orderLineID;
+            return orderLineDB.DeleteInDesktop(ol);
+        }
+
         public Order FindOrder(int id) {
             return orderDB.Get(id);
+        }
+
+        public OrderLine FindOrderLine(int id) {
+            return orderLineDB.Get(id);
         }
 
         public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {

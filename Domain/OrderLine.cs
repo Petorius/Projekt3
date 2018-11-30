@@ -17,6 +17,8 @@ namespace Server.Domain {
         public decimal SubTotal { get; set; }
         [DataMember]
         public Product Product { get; set; }
+        [DataMember]
+        public int OrderID { get; set; }
 
         public OrderLine(int quantity, decimal subTotal, Product p) {
             Quantity = quantity;
