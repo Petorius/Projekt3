@@ -102,7 +102,7 @@ namespace UnitTest {
 
             ol.Product = productDB.Get(3);
 
-            Assert.AreEqual(p.Stock - 3, ol.Product.Stock);
+            Assert.AreEqual(p.Stock + 3, ol.Product.Stock);
         }
 
         [TestMethod]
@@ -112,7 +112,7 @@ namespace UnitTest {
 
             orderlineDB.DeleteInDesktop(ol, true, false);
 
-            ol.Product = productDB.Get(3);
+            ol.Product = productDB.Get(2);
 
             Assert.AreEqual(p.Stock, ol.Product.Stock);
         }
