@@ -58,12 +58,37 @@ namespace Server.DataAccessLayer {
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     connection.Open();
-                    using (SqlCommand cmd = connection.CreateCommand()) {
-                        cmd.CommandText = "DELETE from [dbo].[Order] WHERE OrderID = @OrderID";
-                        cmd.Parameters.AddWithValue("OrderID", Entity.ID);
-                        cmd.ExecuteNonQuery();
-                        deleted = true;
-                        break;
+                    using (SqlTransaction transaction = connection.BeginTransaction()) {
+                        byte[] rowID = null;
+                        int rowCount = 0;
+                        using (SqlCommand cmd = connection.CreateCommand()) {
+                            cmd.Transaction = transaction;
+                            cmd.CommandText = "SELECT rowID from [dbo].[order] WHERE orderID = @OrderID";
+                            cmd.Parameters.AddWithValue("orderID", Entity.ID);
+                            SqlDataReader reader = cmd.ExecuteReader();
+
+                            while (reader.Read()) {
+                                rowID = (byte[])reader["rowID"];
+                            }
+                            reader.Close();
+
+                            cmd.CommandText = "DELETE from [dbo].[Order] WHERE OrderID = @OrderID AND rowID = @RowID";
+                            cmd.Parameters.AddWithValue("rowID", rowID);
+                            rowCount = cmd.ExecuteNonQuery();
+                            deleted = true;
+
+                            if (test) {
+                                rowCount = testResult ? 1 : 0;
+                            }
+
+                            if (rowCount == 0) {
+                                cmd.Transaction.Rollback();
+                            }
+                            else {
+                                deleted = true;
+                                cmd.Transaction.Commit();
+                            }
+                        }
                     }
                 }
             }
@@ -90,7 +115,7 @@ namespace Server.DataAccessLayer {
                     reader.Close();
                     cmd.Parameters.Clear();
 
-                    if(customerID > 0) {
+                    if (customerID > 0) {
                         cmd.CommandText = "SELECT customerID, email from Customer where customerID = @customerID";
                         cmd.Parameters.AddWithValue("customerID", customerID);
                         SqlDataReader customerReader = cmd.ExecuteReader();
@@ -107,7 +132,7 @@ namespace Server.DataAccessLayer {
                         c.Email = "deleted user";
                         o.Customer = c;
                     }
-                    
+
 
                     //build orderlines
                     cmd.CommandText = "Select orderlineID, quantity, subTotal, orderID, productID from Orderline where Orderline.orderID = @orderID";

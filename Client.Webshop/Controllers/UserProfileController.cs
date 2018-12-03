@@ -11,8 +11,6 @@ namespace Client.Webshop.Controllers {
         private UserController userController = new UserController();
 
         // GET: UserProfile
-        private UserController userController = new UserController();
-
         public ActionResult Index() {
             if (Session["User"] == null) {
                 return RedirectToAction("Index", "Login");
