@@ -1,4 +1,4 @@
-﻿    using Server.DataAccessLayer;
+﻿using Server.DataAccessLayer;
 using Server.Domain;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -29,12 +29,12 @@ namespace DataAccessLayer {
                         cmd.Parameters.AddWithValue("ProductID", productID);
                         cmd.Parameters.AddWithValue("UserID", userID);
                         cmd.ExecuteNonQuery();
-                    isCompleted = true;
-                }
+                        isCompleted = true;
+                    }
                     catch (SqlException) {
-                    isCompleted = false;
+                        isCompleted = false;
+                    }
                 }
-            }
             }
             return isCompleted;
         }
@@ -48,43 +48,43 @@ namespace DataAccessLayer {
                         byte[] rowID = null;
                         int rowCount = 0;
                         using (SqlCommand cmd = connection.CreateCommand()) {
-                            try {
-                                cmd.Transaction = transaction;
-                                cmd.CommandText = "SELECT rowID from Review WHERE reviewID = @reviewID";
-                                cmd.Parameters.AddWithValue("reviewID", review.ID);
-                                SqlDataReader reader = cmd.ExecuteReader();
+                            //try {
+                            cmd.Transaction = transaction;
+                            cmd.CommandText = "SELECT rowID from Review WHERE reviewID = @reviewID";
+                            cmd.Parameters.AddWithValue("reviewID", review.ID);
+                            SqlDataReader reader = cmd.ExecuteReader();
 
-                                while (reader.Read()) {
-                                    rowID = (byte[])reader["rowId"];
-                                }
-                                reader.Close();
-
-                                cmd.CommandText = "Delete from Review where reviewID = @reviewID and review.userID = @userID";
-                                cmd.Parameters.AddWithValue("reviewID", review.ID);
-                                cmd.Parameters.AddWithValue("userID", review.User.ID);
-                                cmd.ExecuteNonQuery();
-                                isDeleted = true;
-
-                                if (test) {
-                                    rowCount = testResult ? 1 : 0;
-                                }
-
-                                if (rowCount == 0) {
-                                    cmd.Transaction.Rollback();
-                                }
-                                else {
-                                    isDeleted = true;
-                                    cmd.Transaction.Commit();
-                                    break;
-                                }
+                            while (reader.Read()) {
+                                rowID = (byte[])reader["rowID"];
                             }
-                            catch (SqlException) {
-                                isDeleted = false;
+                            reader.Close();
+
+                            cmd.CommandText = "Delete from Review where reviewID = @reviewID and review.userID = @userID and rowID = @rowID";
+                            cmd.Parameters.AddWithValue("userID", review.User.ID);
+                            cmd.Parameters.AddWithValue("rowID", rowID);
+                            rowCount = cmd.ExecuteNonQuery();
+                            isDeleted = true;
+
+                            if (test) {
+                                rowCount = testResult ? 1 : 0;
+                            }
+
+                            if (rowCount == 0) {
+                                cmd.Transaction.Rollback();
+                            }
+                            else {
+                                isDeleted = true;
+                                cmd.Transaction.Commit();
+                                break;
                             }
                         }
+                        //catch (SqlException) {
+                        //    isDeleted = false;
+                        //}
                     }
                 }
             }
+
             return isDeleted;
         }
     }

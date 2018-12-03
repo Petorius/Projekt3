@@ -43,6 +43,7 @@ namespace Server.ServiceLayer {
 
         public bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID) {
             Review r = new Review();
+            r.User = new User();
             r.ID = reviewID;
             r.User.ID = reviewUserID;
             return reviewDB.DeleteReview(r);

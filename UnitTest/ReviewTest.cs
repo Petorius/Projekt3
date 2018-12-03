@@ -64,6 +64,8 @@ namespace UnitTest {
             reviewDB.CreateReview(review, product.ID, user.ID);
 
             bool isDeleted = reviewDB.DeleteReview(review, true);
+
+            Assert.AreEqual(true, isDeleted);
         }
     }
 }

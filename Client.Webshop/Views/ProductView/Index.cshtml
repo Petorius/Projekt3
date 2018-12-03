@@ -44,11 +44,9 @@
                 using (Html.BeginForm("CreateReview", "ProductView", FormMethod.Post, null)) {
                     @Html.ValidationSummary(true)
                     @Html.Hidden("url", this.Request.RawUrl)
-                    <form>
-                        <input id="productID" name="productID" value = "@Model.ID" hidden/>
-                        <textarea rows="1" cols="150" id="reviewText" name="reviewText"class="textAreaForm2"></textarea>
-                        <button id="reviewButton" type="submit"> Indsæt anmeldelse</button>
-                    </form>
+                    <input id="productID" name="productID" value="@Model.ID" hidden />
+                    <textarea rows="1" cols="150" id="reviewText" name="reviewText" class="textAreaForm2"></textarea>
+                    <button id="reviewButton" type="submit"> Indsæt anmeldelse</button>
                 }
             }
 
@@ -65,13 +63,16 @@
 
                     @if (Session["user"] != null) {
                         if (Session["user"].ToString() == item.User.ToString()) {
-                            <button> Slet </button>
+
+                            using (Html.BeginForm("DeleteReview", "ProductView", FormMethod.Post, null)) {
+                                @Html.ValidationSummary(true)
+                                @Html.Hidden("url", this.Request.RawUrl)
+                                <input id="reviewID" name="reviewID" value="@item.ID" hidden />
+                                <input id="reviewUserID" name="reviewUserID" value="@item.User.ID" hidden />
+                                <button id="deleteReviewButton" type="submit">SLET</button>
+                            }
                         }
-
                     }
-
-
-
                 </div>
             }
         }

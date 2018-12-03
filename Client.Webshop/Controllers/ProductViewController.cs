@@ -88,8 +88,16 @@ namespace Client.Webshop.Controllers {
             //return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult DeleteReview() {
-            return View();
+        public ActionResult DeleteReview(int reviewID, int reviewUserID, string url) {
+            User user = (User)Session["user"];
+
+            if(reviewID > 0 && reviewUserID > 0) {
+                pc.DeleteReview(reviewID, reviewUserID, user.ID);
+                return Redirect(url);
+            }
+            else {
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }
