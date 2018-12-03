@@ -391,7 +391,7 @@ namespace DesktopClient {
         private void Ordre_Slet_SletOrdre_Button_Click(object sender, RoutedEventArgs e) {
             int value = Int32.Parse(Ordre_Slet_FindOrdre_Input.Text);
             bool res = orderController.DeleteOrder(value);
-            if (res == true) {
+            if (res) {
                 Ordre_Slet_SletStatus_Label.Content = "Produktet blev slettet";
                 Ordre_Slet_FindOrdre_Input.Text = "";
             }
@@ -416,8 +416,7 @@ namespace DesktopClient {
             if (result) {
                 //updateProductText.Content = "Ordrelinjen blev oprettet";
                 CreateOrderlineHandler();
-                ClearOrderLineFields();
-                
+                ClearOrderLineFields();   
             }
             else {
                 //updateProductText.Content = "Der opstod en fejl. Prøv igen";
@@ -435,19 +434,18 @@ namespace DesktopClient {
             Orderline ol = orderController.FindOrderLine(selectedListItemOrderLineID);
 
             bool result = orderController.DeleteOrderLineInDesktop(ol.Product.ID, ol.SubTotal, ol.Quantity, selectedListItemOrderLineID);
+ 
+            UpdateOrderlineListBox();
+            CreateOrderlineHandler();
 
-            if(result) {
-
-            }
         }
 
         private void Ordre_Opdater_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
-            //Fix this
-            selectedListItem = Ordre_Opdater_ListBox.Items[Ordre_Opdater_ListBox.SelectedIndex].ToString();
-            selectedListItemOrderLineID = Int32.Parse(Regex.Match(selectedListItem, @"\d+").Value);
-            Debug.Write(selectedListItemOrderLineID);
-            Ordre_Opdater_ListBox.UnselectAll();
+            
+            if(Ordre_Opdater_ListBox.Items.Count > 0) {
+                selectedListItem = Ordre_Opdater_ListBox.Items[Ordre_Opdater_ListBox.SelectedIndex].ToString();
+                selectedListItemOrderLineID = Int32.Parse(Regex.Match(selectedListItem, @"\d+").Value);
+            }
         }
     }
 }

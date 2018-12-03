@@ -417,6 +417,9 @@ namespace Client.ServiceLayer.OrderReference {
         private System.DateTime DateCreatedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TextField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -441,6 +444,19 @@ namespace Client.ServiceLayer.OrderReference {
                 if ((this.DateCreatedField.Equals(value) != true)) {
                     this.DateCreatedField = value;
                     this.RaisePropertyChanged("DateCreated");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
                 }
             }
         }

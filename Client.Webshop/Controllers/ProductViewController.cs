@@ -85,7 +85,7 @@ namespace Client.Webshop.Controllers {
                 return Redirect(url);
             }
 
-            return 
+            return null;
         }
 
         public ActionResult DeleteReview() {

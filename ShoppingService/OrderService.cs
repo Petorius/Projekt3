@@ -40,7 +40,8 @@ namespace Server.ServiceLayer {
 
         public bool DeleteOrder(int ID) {
             Order o = orderDB.Get(ID);
-            return orderDB.Delete(o);
+            return orderLogic.DeleteOrder(o);
+            
         }
 
         public bool DeleteOrderLine(int ID, decimal subTotal, int quantity) {

@@ -2,17 +2,21 @@
 using Server.Domain;
 using Server.DataAccessLayer;
 using DataAccessLayer.Interface;
+using System;
 
 namespace Server.BusinessLogic {
     public class OrderLogic {
         private OrderDB orderDB;
         private CustomerLogic cl;
         private IProduct productDB;
+        private OrderLineDB orderLineDB;
 
         public OrderLogic() {
             orderDB = new OrderDB();
             cl = new CustomerLogic();
             productDB = new ProductDB();
+            orderLineDB = new OrderLineDB();
+
         }
 
         // Database test constructor. Only used for testing.
@@ -20,6 +24,7 @@ namespace Server.BusinessLogic {
             orderDB = new OrderDB(connectionString);
             cl = new CustomerLogic(connectionString);
             productDB = new ProductDB(connectionString);
+            orderLineDB = new OrderLineDB();
 
         }
 
@@ -44,6 +49,15 @@ namespace Server.BusinessLogic {
                 o.Validation = false;
             }
             return o;
+        }
+
+        public bool DeleteOrder(Order o) {
+            foreach (OrderLine ol in o.Orderlines) {
+                Product p = productDB.Get(ol.Product.ID);
+                ol.Product = p;
+                orderLineDB.DeleteInDesktop(ol);
+            }
+            return orderDB.Delete(o);
         }
 
         // Helping method used to check if the prices on each orderline matches
