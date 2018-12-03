@@ -93,6 +93,37 @@ namespace UnitTest {
             Assert.AreEqual(p.Stock, ol.Product.Stock);
         }
 
+        [TestMethod]
+        public void DeleteOrderlineInDesktop() {
+            Product p = productDB.Get(3);
+            OrderLine ol = new OrderLine(3, 15000, p);
+
+            orderlineDB.DeleteInDesktop(ol);
+
+            ol.Product = productDB.Get(3);
+
+            Assert.AreEqual(p.Stock + 3, ol.Product.Stock);
+        }
+
+        [TestMethod]
+        public void DeleteOrderlineInDesktopFail() {
+            Product p = productDB.Get(2);
+            OrderLine ol = new OrderLine(4, 14000, p);
+
+            orderlineDB.DeleteInDesktop(ol, true, false);
+
+            ol.Product = productDB.Get(2);
+
+            Assert.AreEqual(p.Stock, ol.Product.Stock);
+        }
+
+        [TestMethod]
+        public void FindOrderline() {
+            
+            OrderLine ol = orderlineDB.Get(1);
+
+            Assert.IsNotNull(ol);
+        }
 
         [ClassCleanup]
         public static void CleanUp() {

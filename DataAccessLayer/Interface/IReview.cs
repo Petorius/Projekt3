@@ -7,7 +7,7 @@ using Server.Domain;
 
 namespace Server.DataAccessLayer {
     public interface IReview {
-        bool CreateReview(Review review, int productID, int userID);
-        bool DeleteReview(Review review);
+        bool CreateReview(Review review, int productID, int userID, bool test = false, bool testResult = false);
+        bool DeleteReview(Review review, bool test = false, bool testResult = false);
     }
 }

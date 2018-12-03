@@ -391,12 +391,12 @@ namespace DesktopClient {
         private void Ordre_Slet_SletOrdre_Button_Click(object sender, RoutedEventArgs e) {
             int value = Int32.Parse(Ordre_Slet_FindOrdre_Input.Text);
             bool res = orderController.DeleteOrder(value);
-            if (res) {
-                Ordre_Slet_SletStatus_Label.Content = "Produktet blev slettet";
+            if (res == true) {
+                Ordre_Slet_SletStatus_Label.Content = "Ordren blev slettet";
                 Ordre_Slet_FindOrdre_Input.Text = "";
             }
             else {
-                deleteStatusLabel.Content = "Der opstod en fejl. Prøv igen";
+                Ordre_Slet_SletStatus_Label.Content = "Der opstod en fejl. Prøv igen";
             }
         }
 

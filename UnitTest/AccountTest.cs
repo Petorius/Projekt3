@@ -13,10 +13,10 @@ namespace UnitTest {
     [TestClass]
     public class AccountTest {
         private static string connectionString = "Server=kraka.ucn.dk; Database=dmab0917_1067354; User Id=dmab0917_1067354; Password=Password1! ";
-        Account acc;
-        UserLogic userLogic;
-        IUserDB userDB;
-        User user;
+        private Account acc;
+        private UserLogic userLogic;
+        private IUserDB userDB;
+        private User user;
 
         [TestInitialize]
         public void SetUp() {
