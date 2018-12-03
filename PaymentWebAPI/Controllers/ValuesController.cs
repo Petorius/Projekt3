@@ -11,10 +11,9 @@ namespace PaymentWebAPI.Controllers {
         // GET api/values/5
         public bool Get() {
 
-            if (true) {
-                return true;
-            }
-            //return false;
+            
+            return true;
+            
         }
 
         // POST api/values

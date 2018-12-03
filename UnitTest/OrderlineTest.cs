@@ -22,6 +22,19 @@ namespace UnitTest {
         }
 
         [TestMethod]
+        public void CreateOrderlineInDesktop() {
+            Product p = productDB.Get(1);
+            OrderLine ol = new OrderLine(1, 2000, p);
+            ol.OrderID = 2;
+            
+            orderlineDB.CreateInDesktop(ol);
+
+            ol.Product = productDB.Get(1);
+
+            Assert.AreEqual(p.Stock - 1, ol.Product.Stock);
+        }
+
+        [TestMethod]
         public void OptimisticConcurrencyWithStock() {
             Product p = productDB.Get(1);
             OrderLine ol = new OrderLine(1, 2000, p);
@@ -120,13 +133,14 @@ namespace UnitTest {
         [TestMethod]
         public void FindOrderline() {
             
-            OrderLine ol = orderlineDB.Get(1);
+            OrderLine ol = orderlineDB.Get(2);
 
             Assert.IsNotNull(ol);
         }
 
         [ClassCleanup]
         public static void CleanUp() {
+
             //using (SqlConnection connection = new SqlConnection(connectionString)) {
             //    connection.Open();
             //    using (SqlCommand cmd = connection.CreateCommand()) {

@@ -54,6 +54,28 @@ namespace UnitTest {
 
         }
 
+        [TestMethod]
+        public void FindOrder() {
+
+            Order o = orderDB.Get(2);
+
+            Assert.IsNotNull(o);
+        }
+
+        [TestMethod]
+        public void  DeleteOrder() {
+
+            Customer c = customerDB.GetByMail("Morten@hotmail.com");
+            Order o = new Order(c);
+            o.Orderlines.Add(new OrderLine(2, 200, productDB.Get(1)));
+
+            int res = orderDB.CreateReturnID(o);
+
+            orderDB.Delete(o, true, true);
+
+            Assert.IsNull(orderDB.Get(1));
+        }
+
 
 
     }
