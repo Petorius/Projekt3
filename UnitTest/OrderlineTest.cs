@@ -25,7 +25,7 @@ namespace UnitTest {
         public void CreateOrderlineInDesktop() {
             Product p = productDB.Get(1);
             OrderLine ol = new OrderLine(1, 2000, p);
-            ol.OrderID = 2;
+            ol.OrderID = 1;
             
             orderlineDB.CreateInDesktop(ol);
 
@@ -133,7 +133,7 @@ namespace UnitTest {
         [TestMethod]
         public void FindOrderline() {
             
-            OrderLine ol = orderlineDB.Get(2);
+            OrderLine ol = orderlineDB.Get(1);
 
             Assert.IsNotNull(ol);
         }

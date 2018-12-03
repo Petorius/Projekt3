@@ -73,7 +73,7 @@ namespace UnitTest {
 
             orderDB.Delete(o, true, true);
 
-            Assert.IsNull(orderDB.Get(1));
+            Assert.IsNull(orderDB.Get(res));
         }
 
 
