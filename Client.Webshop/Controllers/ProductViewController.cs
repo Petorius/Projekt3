@@ -81,11 +81,11 @@ namespace Client.Webshop.Controllers {
         public ActionResult CreateReview(string reviewText, int productID, string url) {
             User user = (User)Session["user"];
             bool res = pc.CreateReview(reviewText, productID, user.ID);
-            if(res) {
+            //if(res) {
                 return Redirect(url);
-            }
+            //}
 
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
         }
 
         public ActionResult DeleteReview() {

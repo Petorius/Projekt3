@@ -29,37 +29,6 @@ namespace UnitTest {
         }
 
         [TestMethod]
-        public void OrderFindCustomerByMail() {
-            Customer c = customerDB.GetByMail("Morten@hotmail.com");
-
-            Assert.AreEqual(c.FirstName, "Morten");
-        }
-
-        [TestMethod]
-        public void OrderFindCustomerAndUpdate() {
-            Customer c = customerDB.GetByMail("Morten@hotmail.com");
-            c.FirstName = "Rune";
-
-            customerDB.Update(c, true, true);
-            c = customerDB.GetByMail("Morten@hotmail.com");
-
-            Assert.AreEqual(c.FirstName, "Rune");
-            c.FirstName = "Morten";
-            customerDB.Update(c, true, true);
-        }
-
-        [TestMethod]
-        public void OrderFindCustomerAndUpdateExpectedToFail() {
-            Customer c = customerDB.GetByMail("Morten@hotmail.com");
-            c.FirstName = "Rune";
-
-            customerDB.Update(c, true, false);
-            c = customerDB.GetByMail("Morten@hotmail.com");
-
-            Assert.AreEqual(c.FirstName, "Morten");
-        }
-
-        [TestMethod]
         public void CreateOrderWithReturnedPrimaryKey() {
             Customer c = customerDB.GetByMail("Morten@hotmail.com");
             Order o = new Order(c);
