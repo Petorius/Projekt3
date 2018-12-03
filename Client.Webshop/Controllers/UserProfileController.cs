@@ -11,8 +11,10 @@ namespace Client.Webshop.Controllers {
         private UserController userController = new UserController();
 
         // GET: UserProfile
+        private UserController userController = new UserController();
+
         public ActionResult Index() {
-            if(Session["User"] == null) {
+            if (Session["User"] == null) {
                 return RedirectToAction("Index", "Login");
             }
             return View((User)Session["User"]);
@@ -33,6 +35,18 @@ namespace Client.Webshop.Controllers {
             Session["User"] = null;
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult DeleteAccount() {
+            User user = (User)Session["user"];
+            bool isCompleted = userController.DeleteUser(user.Email);
+            if (isCompleted) {
+                Session["user"] = null;
+                return RedirectToAction("Index", "Home");
+            }
+            else {
+                return RedirectToAction("Index");
+            }
         }
     }
 }

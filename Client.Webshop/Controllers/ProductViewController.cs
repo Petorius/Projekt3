@@ -33,7 +33,7 @@ namespace Client.Webshop.Controllers {
             return View(product);
         }
 
-        [HttpPost]
+        
         public ActionResult AddProduct(int id, int quantity, string url) {
             Product product = pc.Find(id);
             decimal subTotal = product.Price * quantity;

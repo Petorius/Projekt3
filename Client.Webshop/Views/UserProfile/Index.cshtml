@@ -66,6 +66,9 @@
             @Html.DisplayFor(model => model.City)
         </dd>
 
+
+
+@Html.ActionLink("Slet din bruger", "DeleteAccount", "UserProfile", new { @onclick = "return ConfirmDelete();" } )
     </dl>
 </div>
 <p>

@@ -69,8 +69,6 @@ namespace Client.Webshop.Controllers {
                 return RedirectToAction("Index", "Home");
             }
             if (!uc.IsEmailAlreadyRegistered(email) || Session["User"] != null) {
-
-                
                 var webApi = new ValuesController();
 
                 bool flag = webApi.Get();
@@ -102,7 +100,7 @@ namespace Client.Webshop.Controllers {
             }
         }
 
-        [HttpPost]
+        
         public ActionResult GetCustomerInfo(string prevEmail) {
             Customer c = uc.GetCustomerByMail(prevEmail);
 

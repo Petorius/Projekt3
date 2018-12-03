@@ -24,45 +24,47 @@ namespace Server.DataAccessLayer {
         // Method with optimistic concurreny. If anything is changed, we rollback our transaction after trying for 4 times
         public bool Create(OrderLine Entity, bool test = false, bool testResult = false) {
             bool isCompleted = true;
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlTransaction trans = connection.BeginTransaction()) {
-                    byte[] rowId = null;
-                    int rowCount = 0;
+            for (int i = 0; i < 5; i++) {
+                using (SqlConnection connection = new SqlConnection(connectionString)) {
+                    connection.Open();
+                    using (SqlTransaction trans = connection.BeginTransaction()) {
+                        byte[] rowId = null;
+                        int rowCount = 0;
 
-                    using (SqlCommand cmd = connection.CreateCommand()) {
-                        cmd.Transaction = trans;
-                        cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
-                        cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
-                        SqlDataReader reader = cmd.ExecuteReader();
+                        using (SqlCommand cmd = connection.CreateCommand()) {
+                            cmd.Transaction = trans;
+                            cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                            cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
+                            SqlDataReader reader = cmd.ExecuteReader();
 
-                        while (reader.Read()) {
-                            rowId = (byte[])reader["rowId"];
-                        }
-                        reader.Close();
-                        try {
-                            cmd.CommandText = "UPDATE Product " +
-                                "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
-                            cmd.Parameters.AddWithValue("stock", Entity.Product.Stock - Entity.Quantity);
-                            cmd.Parameters.AddWithValue("sales", Entity.Product.Sales + Entity.Quantity);
-                            cmd.Parameters.AddWithValue("rowID", rowId);
-                            rowCount = cmd.ExecuteNonQuery();
-
-                            // Used to unit test. If test is true, we can set rowCount to 0 and fake a optimistic concurreny problem
-                            if (test) {
-                                rowCount = testResult ? 1 : 0;
+                            while (reader.Read()) {
+                                rowId = (byte[])reader["rowId"];
                             }
-                            if (rowCount == 0) {
-                                cmd.Transaction.Rollback();
-                            }
-                            else {
-                                cmd.Transaction.Commit();
-                            }
-                        }
-                        catch (SqlException) {
-                            isCompleted = false;
-                        }
+                            reader.Close();
+                            try {
+                                cmd.CommandText = "UPDATE Product " +
+                                    "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
+                                cmd.Parameters.AddWithValue("stock", Entity.Product.Stock - Entity.Quantity);
+                                cmd.Parameters.AddWithValue("sales", Entity.Product.Sales + Entity.Quantity);
+                                cmd.Parameters.AddWithValue("rowID", rowId);
+                                rowCount = cmd.ExecuteNonQuery();
 
+                                // Used to unit test. If test is true, we can set rowCount to 0 and fake a optimistic concurreny problem
+                                if (test) {
+                                    rowCount = testResult ? 1 : 0;
+                                }
+                                if (rowCount == 0) {
+                                    cmd.Transaction.Rollback();
+                                }
+                                else {
+                                    cmd.Transaction.Commit();
+                                    break;
+                                }
+                            }
+                            catch (SqlException) {
+                                isCompleted = false;
+                            }
+                        }
                     }
                 }
             }
@@ -106,6 +108,7 @@ namespace Server.DataAccessLayer {
                                 }
                                 else {
                                     cmd.Transaction.Commit();
+                                    break;
                                 }
                             }
                             catch (SqlException) {
@@ -208,51 +211,55 @@ namespace Server.DataAccessLayer {
         
         public bool CreateInDesktop(OrderLine Entity, bool test = false, bool testResult = false) {
             bool isCompleted = true;
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlTransaction trans = connection.BeginTransaction()) {
-                    byte[] rowId = null;
-                    int rowCount = 0;
+            for (int i = 0; i < 5; i++) {
+                using (SqlConnection connection = new SqlConnection(connectionString)) {
+                    connection.Open();
+                    using (SqlTransaction trans = connection.BeginTransaction()) {
+                        byte[] rowId = null;
+                        int rowCount = 0;
 
-                    using (SqlCommand cmd = connection.CreateCommand()) {
-                        cmd.Transaction = trans;
-                        cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
-                        cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
-                        SqlDataReader reader = cmd.ExecuteReader();
+                        using (SqlCommand cmd = connection.CreateCommand()) {
+                            cmd.Transaction = trans;
+                            cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                            cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
+                            SqlDataReader reader = cmd.ExecuteReader();
 
-                        while (reader.Read()) {
-                            rowId = (byte[])reader["rowId"];
-                        }
-                        reader.Close();
-                        try {
-                            cmd.CommandText = "UPDATE Product " +
-                                "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
-                            cmd.Parameters.AddWithValue("stock", Entity.Product.Stock - Entity.Quantity);
-                            cmd.Parameters.AddWithValue("sales", Entity.Product.Sales + Entity.Quantity);
-                            cmd.Parameters.AddWithValue("rowID", rowId);
-                            rowCount = cmd.ExecuteNonQuery();
-
-                            cmd.CommandText = "INSERT INTO Orderline (Quantity, SubTotal, OrderID, ProductID) Values " +
-                                                            "(@Quantity, @SubTotal, @OrderID, @ProductID)";
-                            cmd.Parameters.AddWithValue("Quantity", Entity.Quantity);
-                            cmd.Parameters.AddWithValue("SubTotal", Entity.SubTotal);
-                            cmd.Parameters.AddWithValue("OrderID", Entity.OrderID);
-                            cmd.ExecuteNonQuery();
-                            cmd.Parameters.Clear();
-
-                            // Used to unit test. If test is true, we can set rowCount to 0 and fake a optimistic concurreny problem
-                            if (test) {
-                                rowCount = testResult ? 1 : 0;
+                            while (reader.Read()) {
+                                rowId = (byte[])reader["rowId"];
                             }
-                            if (rowCount == 0) {
-                                cmd.Transaction.Rollback();
+                            reader.Close();
+                            try {
+                                cmd.CommandText = "UPDATE Product " +
+                                    "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
+                                cmd.Parameters.AddWithValue("stock", Entity.Product.Stock - Entity.Quantity);
+                                cmd.Parameters.AddWithValue("sales", Entity.Product.Sales + Entity.Quantity);
+                                cmd.Parameters.AddWithValue("rowID", rowId);
+                                rowCount = cmd.ExecuteNonQuery();
+
+                                cmd.CommandText = "INSERT INTO Orderline (Quantity, SubTotal, OrderID, ProductID) Values " +
+                                                                "(@Quantity, @SubTotal, @OrderID, @ProductID)";
+                                cmd.Parameters.AddWithValue("Quantity", Entity.Quantity);
+                                cmd.Parameters.AddWithValue("SubTotal", Entity.SubTotal);
+                                cmd.Parameters.AddWithValue("OrderID", Entity.OrderID);
+                                cmd.ExecuteNonQuery();
+                                cmd.Parameters.Clear();
+
+                                // Used to unit test. If test is true, we can set rowCount to 0 and fake a optimistic concurreny problem
+                                if (test) {
+                                    rowCount = testResult ? 1 : 0;
+                                }
+                                if (rowCount == 0) {
+                                    cmd.Transaction.Rollback();
+                                }
+                                else {
+                                    cmd.Transaction.Commit();
+                                    break;
+                                }
                             }
-                            else {
-                                cmd.Transaction.Commit();
+                            catch (SqlException) {
+                                isCompleted = false;
+                                
                             }
-                        }
-                        catch (SqlException) {
-                            isCompleted = false;
                         }
                     }
                 }
@@ -300,10 +307,12 @@ namespace Server.DataAccessLayer {
                                 }
                                 else {
                                     cmd.Transaction.Commit();
+                                    break;
                                 }
                             }
                             catch (SqlException) {
                                 deleted = false;
+                                
                             }
 
                         }

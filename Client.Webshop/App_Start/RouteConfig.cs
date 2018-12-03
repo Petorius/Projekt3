@@ -10,6 +10,11 @@ namespace Client.Webshop {
         public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+                name: "UserProfile",
+                url: "UserProfile",
+                defaults: new { controller = "UserProfile", action="Index", res = UrlParameter.Optional}
+            );
            
             routes.MapRoute(
                 name: "Login",
