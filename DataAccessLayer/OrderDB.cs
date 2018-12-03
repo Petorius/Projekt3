@@ -87,6 +87,7 @@ namespace Server.DataAccessLayer {
                             else {
                                 deleted = true;
                                 cmd.Transaction.Commit();
+                                break;
                             }
                         }
                     }
