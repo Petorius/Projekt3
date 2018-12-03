@@ -75,5 +75,6 @@ namespace Server.BusinessLogic {
 
             return adminDB.CreateAdmin(email, hashValue, salt);
         }
+
     }
 }

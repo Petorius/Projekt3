@@ -64,7 +64,6 @@ namespace Server.DataAccessLayer {
                             catch (SqlException) {
                                 isCompleted = false;
                             }
-
                         }
                     }
                 }

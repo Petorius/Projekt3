@@ -36,6 +36,7 @@ namespace Client.ControlLayer {
             return userService.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city);
         }
 
+      
         public bool DeleteUser(string email) {
             return userService.DeleteUser(email);
         }
