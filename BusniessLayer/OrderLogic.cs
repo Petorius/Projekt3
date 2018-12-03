@@ -24,7 +24,7 @@ namespace Server.BusinessLogic {
             orderDB = new OrderDB(connectionString);
             cl = new CustomerLogic(connectionString);
             productDB = new ProductDB(connectionString);
-            orderLineDB = new OrderLineDB();
+            orderLineDB = new OrderLineDB(connectionString);
 
         }
 
