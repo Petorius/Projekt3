@@ -1,77 +1,42 @@
 ﻿@model Client.Domain.User
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = Model.FirstName + "'s panel";
 }
 
-<h2>View</h2>
-
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ZipCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-
-
-@Html.ActionLink("Slet din bruger", "DeleteAccount", "UserProfile", new { @onclick = "return ConfirmDelete();" } )
-    </dl>
+<div class="container">
+    <h2>@Model.FirstName's brugerpanel</h2>
+    <p>Nedenunder kan du se dine oplysninger og eventuelt opdatere dem</p>
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">Oplysninger</div>
+            <div class="panel-body">@Model.FirstName @Model.LastName</div>
+            <div class="panel-body">@Model.Phone</div>
+            <div class="panel-body">@Model.Email</div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Leveringsaddresse</div>
+            <div class="panel-body">
+                @Model.Address <br />
+                @Model.ZipCode, @Model.City
+            </div>
+        </div>
+        @*<div class="panel panel-default">
+            <div class="panel-heading">Tidligere ordre</div>
+            @foreach (var order in Model.Orders) {
+                <div class="panel-body">
+                    Ordre #: @order.ID
+                    <br />
+                    @foreach (var orderline in order.Orderlines) {
+                        @(orderline.Product.Name + " - " + orderline.Quantity + " - " + orderline.SubTotal)
+                    }
+                    Total Pris: @order.Total
+                </div>
+            }
+        </div>*@
+        <div class="btn-group" style="margin-top: 15px;">
+            <input type="button" value="Opdater" onclick="location.href='@Url.Action("Edit", "UserProfile")'" class="btn btn-default" />
+            <button class="btn btn-default">@Html.ActionLink("Slet", "DeleteAccount", "UserProfile", new { @onclick = "return ConfirmDelete();" })</button>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.ID })
-</p>

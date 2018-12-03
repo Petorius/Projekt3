@@ -72,7 +72,7 @@ namespace Server.DataAccessLayer {
                             }
                             reader.Close();
 
-                            cmd.CommandText = "DELETE from [dbo].[Order] WHERE OrderID = @OrderID AND rowID = @RowID";
+                            cmd.CommandText = "DELETE from [dbo].[Order] WHERE OrderID = @OrderID AND rowID = @rowID";
                             cmd.Parameters.AddWithValue("rowID", rowID);
                             rowCount = cmd.ExecuteNonQuery();
                             deleted = true;
