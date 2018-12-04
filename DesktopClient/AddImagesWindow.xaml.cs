@@ -12,27 +12,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace DesktopClient {
+namespace DesktopClient
+{
     /// <summary>
     /// Interaction logic for AddImagesWindow.xaml
     /// </summary>
-    public partial class AddImagesWindow : Window {
-        public AddImagesWindow() {
+    public partial class AddImagesWindow : Window
+    {
+        public AddImagesWindow()
+        {
             InitializeComponent();
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e) {
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
             Close();
         }
 
-        private void CreateImageButton_Click(object sender, RoutedEventArgs e) {
-            try {
-                ((CrudOverview)Application.Current.MainWindow).ImageURL = ImageURLTextBox.Text;
-                ((CrudOverview)Application.Current.MainWindow).ImageName = ImageNameTextBox.Text;
-            }
-            catch (FormatException) {
-                MessageBox.Show("Ugyldig tekst indsat");
-            }
+        private void CreateImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            CrudOverview.ImageURL = ImageURLTextBox.Text;
+            CrudOverview.ImageName = ImageNameTextBox.Text;
+            
+           
 
             Close();
         }
