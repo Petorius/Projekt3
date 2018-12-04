@@ -84,6 +84,7 @@ namespace DesktopClient {
             minStockTextBox.Text = "";
             maxStockTextBox.Text = "";
             descriptionTextBox.Text = "";
+            addProductText.Content = "";
         }
 
         private void Produkt_Søg_Ok_Clicked(object sender, RoutedEventArgs e) {
@@ -124,6 +125,7 @@ namespace DesktopClient {
                 updateMinStockTextBox.Text = p.MinStock.ToString();
                 updateMaxStockTextBox.Text = p.MaxStock.ToString();
                 _inputIDtextBox.IsEnabled = false;
+                updateProductText1.Content = "";
             }
             catch (NullReferenceException) {
                 MessageBox.Show("Produktet findes ikke");
@@ -169,6 +171,7 @@ namespace DesktopClient {
 
         private void CancelUpdateButton_Click(object sender, RoutedEventArgs e) {
             _inputIDtextBox.IsEnabled = true;
+            updateProductText1.Content = "";
             ProductClearUpdateFields();
         }
 
