@@ -9,7 +9,6 @@ using System.Web.Mvc;
 namespace Client.Webshop.Controllers {
     public class UserProfileController : Controller {
         private UserController userController = new UserController();
-
         // GET: UserProfile
         public ActionResult Index() {
             if (Session["User"] == null) {
@@ -18,14 +17,21 @@ namespace Client.Webshop.Controllers {
             return View((User)Session["User"]);
         }
 
-        public ActionResult Edit(User user) {
-            userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
-
+        // GET: UserProfile/Edit
+        public ActionResult Edit() {
             return View((User)Session["User"]);
         }
 
-        public ActionResult Delete() {
-            return View((User)Session["User"]);
+        public ActionResult Update(User user) {
+            bool isUpdated = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, 
+                user.Email, user.Address, user.ZipCode, user.City);
+
+            if(isUpdated) {
+                Session["User"] = null;
+                Session.Add("User", userController.GetUser(user.Email));
+            }
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult Logout() {

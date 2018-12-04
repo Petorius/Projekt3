@@ -4,15 +4,14 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Opdater oplysninger</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Update", "UserProfile", FormMethod.Post, null))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>User</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
@@ -75,15 +74,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Gem Ændringer" onclick="@Url.Action("Index")" class="btn btn-default" />
+                @*<button class="btn btn-default" onclick="@Url.Action("Index")">@Html.ActionLink("Tilbage", "Index")</button>*@
+                <input type="button" value="Tilbage" onclick="location.href='@Url.Action("Index", "UserProfile")'" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -94,7 +94,6 @@ namespace Server.DataAccessLayer {
                             catch (SqlException) {
                                 return isUpdated;
                             }
-
                         }
                     }
                 }

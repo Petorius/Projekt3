@@ -45,7 +45,7 @@ namespace DataAccessLayer {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     connection.Open();
                     using (SqlTransaction transaction = connection.BeginTransaction()) {
-                        byte[] rowID = null;
+                        byte[] rowId = null;
                         int rowCount = 0;
                         using (SqlCommand cmd = connection.CreateCommand()) {
                             //try {
@@ -55,13 +55,13 @@ namespace DataAccessLayer {
                             SqlDataReader reader = cmd.ExecuteReader();
 
                             while (reader.Read()) {
-                                rowID = (byte[])reader["rowID"];
+                                rowId = (byte[])reader["rowId"];
                             }
                             reader.Close();
 
-                            cmd.CommandText = "Delete from Review where reviewID = @reviewID and review.userID = @userID and rowID = @rowID";
+                            cmd.CommandText = "Delete from Review where reviewID = @reviewID and review.userID = @userID and rowId = @rowId";
                             cmd.Parameters.AddWithValue("userID", review.User.ID);
-                            cmd.Parameters.AddWithValue("rowID", rowID);
+                            cmd.Parameters.AddWithValue("rowId", rowId);
                             rowCount = cmd.ExecuteNonQuery();
                             isDeleted = true;
 
@@ -84,7 +84,6 @@ namespace DataAccessLayer {
                     }
                 }
             }
-
             return isDeleted;
         }
     }
