@@ -33,7 +33,7 @@ namespace DesktopClient
         {
             
             CrudOverview.ImageURL = ImageURLTextBox.Text;
-            CrudOverview.ImageName = ImageURLTextBox.Text;
+            CrudOverview.ImageName = ImageNameTextBox.Text;
             
            
 
