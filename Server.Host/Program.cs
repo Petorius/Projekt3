@@ -9,8 +9,8 @@ namespace Server.Host {
         static void Main(string[] args) {
             Console.WriteLine("Console based host");
 
-            UserLogic u = new UserLogic();
-            u.CreateAdminLogin("admin", "admin");
+            //UserLogic u = new UserLogic();
+            //u.CreateAdminLogin("admin", "admin");
 
             // Services to host
             using (ServiceHost productHost = new ServiceHost(typeof(serviceToHost.ProductService)))

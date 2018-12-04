@@ -22,37 +22,48 @@ namespace Server.DataAccessLayer {
 
         public Admin GetAdmin(string email) {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
-                    Admin admin = new Admin();
+                try {
+                    connection.Open();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
+                        Admin admin = new Admin();
 
-                    cmd.CommandText = "select adminID, employeeEmail, hashPassword, salt from [dbo].[Admin] where [dbo].[Admin].EmployeeEmail = @Email ";
-                    cmd.Parameters.AddWithValue("Email", email);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read()) {
-                        admin.ID = reader.GetInt32(reader.GetOrdinal("adminID"));
-                        admin.EmployeeEmail = reader.GetString(reader.GetOrdinal("employeeEmail"));
-                        admin.HashPassword = reader.GetString(reader.GetOrdinal("hashPassword"));
-                        admin.Salt = reader.GetString(reader.GetOrdinal("salt"));
+                        cmd.CommandText = "select adminID, employeeEmail, hashPassword, salt from [dbo].[Admin] where [dbo].[Admin].EmployeeEmail = @Email ";
+                        cmd.Parameters.AddWithValue("Email", email);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read()) {
+                            admin.ID = reader.GetInt32(reader.GetOrdinal("adminID"));
+                            admin.EmployeeEmail = reader.GetString(reader.GetOrdinal("employeeEmail"));
+                            admin.HashPassword = reader.GetString(reader.GetOrdinal("hashPassword"));
+                            admin.Salt = reader.GetString(reader.GetOrdinal("salt"));
+                        }
+                        reader.Close();
+                        return admin;
                     }
-                    reader.Close();
-                    return admin;
                 }
+                catch (SqlException) {
+                    return null;
+                }
+
             }
         }
 
         public bool CreateAdmin(string email, string hashValue, string salt) {
             bool res = false;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
+                try {
+                    connection.Open();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
 
-                    cmd.CommandText = "Insert into [dbo].[Admin](EmployeeEmail, HashPassword, Salt) values (@EmployeeEmail, @HashPassword, @Salt)";
-                    cmd.Parameters.AddWithValue("EmployeeEmail", email);
-                    cmd.Parameters.AddWithValue("HashPassword", hashValue);
-                    cmd.Parameters.AddWithValue("Salt", salt);
-                    cmd.ExecuteNonQuery();
-                    res = true;   
+                        cmd.CommandText = "Insert into [dbo].[Admin](EmployeeEmail, HashPassword, Salt) values (@EmployeeEmail, @HashPassword, @Salt)";
+                        cmd.Parameters.AddWithValue("EmployeeEmail", email);
+                        cmd.Parameters.AddWithValue("HashPassword", hashValue);
+                        cmd.Parameters.AddWithValue("Salt", salt);
+                        cmd.ExecuteNonQuery();
+                        res = true;
+                    }
+                }
+                catch (SqlException) {
+                    res = false;
                 }
             }
             return res;

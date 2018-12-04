@@ -21,9 +21,9 @@ namespace Server.DataAccessLayer {
         public int CreateReturnedID(Customer Entity) {
             int res = -1;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
+                try {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
-                    //try {
                         cmd.CommandText = "Insert into Customer(FirstName, LastName, Phone, Email, Address, ZipCode, City) OUTPUT INSERTED.CustomerID values" +
                                 " (@FirstName, @LastName, @Phone, @Email, @Address, @ZipCode, @City)";
                         cmd.Parameters.AddWithValue("FirstName", Entity.FirstName);
@@ -35,9 +35,10 @@ namespace Server.DataAccessLayer {
                         cmd.Parameters.AddWithValue("City", Entity.City);
                         res = (int)cmd.ExecuteScalar();
                     }
-                    //catch (SqlException) {
-                    //    isCompleted = false;
-                    //}
+                }
+                catch(SqlException) {
+                    res = -1;
+                }
             }
             return res;
         }
