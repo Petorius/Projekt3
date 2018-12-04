@@ -26,11 +26,16 @@ namespace Client.Webshop.Controllers {
                 Session["cart"] = orderlines;
 
             }
-            Product product = pc.Find(id);
 
-            //ViewBag.Message = "Product view controller ;D";
-            //Product p = new Product("Johnny", 200, 1, 1, 1, "LKmasdlkmaslkdmalskdlmsad sakkasdlaksld kasmdkmsd ksmd kask kasm ksadnf jen jsaj jsje jasju sj", null, null, null);
-            return View(product);
+            Product product = pc.Find(id);
+            if(product.ID > 0) {
+                return View(product);
+            }
+            else {
+                return RedirectToAction("Index", "Home");
+            }
+            
+            
         }
 
         

@@ -19,7 +19,7 @@ namespace Client.Webshop.Controllers {
             if (Session["User"] != null) {
 
                 User user = (User)Session["User"];
-               
+
                 TempData["FirstName"] = user.FirstName;
                 TempData["LastName"] = user.LastName;
                 TempData["Address"] = user.Address;
@@ -27,7 +27,7 @@ namespace Client.Webshop.Controllers {
                 TempData["City"] = user.City;
                 TempData["Email"] = user.Email;
                 TempData["Phone"] = user.Phone;
-                
+
             }
 
             long timeNow = DateTime.Now.Ticks;
@@ -65,7 +65,7 @@ namespace Client.Webshop.Controllers {
 
         [HttpPost]
         public ActionResult Confirmation(string firstName, string lastName, string street, int zip, string city, string email, int number) {
-            if(Session["cart"] == null) {
+            if (Session["cart"] == null) {
                 return RedirectToAction("Index", "Home");
             }
             if (!uc.IsEmailAlreadyRegistered(email) || Session["User"] != null) {
@@ -100,17 +100,22 @@ namespace Client.Webshop.Controllers {
             }
         }
 
-        
+
         public ActionResult GetCustomerInfo(string prevEmail) {
             Customer c = uc.GetCustomerByMail(prevEmail);
+            if (c.ID > 0) {
+                TempData["FirstName"] = c.FirstName;
+                TempData["LastName"] = c.LastName;
+                TempData["Address"] = c.Address;
+                TempData["ZipCode"] = c.ZipCode;
+                TempData["City"] = c.City;
+                TempData["Email"] = c.Email;
+                TempData["Phone"] = c.Phone;
+            }
+            else {
+                TempData["Fail"] = "Du har ikke handlet her før med denne mail";
+            }
 
-            TempData["FirstName"] = c.FirstName;
-            TempData["LastName"] = c.LastName;
-            TempData["Address"] = c.Address;
-            TempData["ZipCode"] = c.ZipCode;
-            TempData["City"] = c.City;
-            TempData["Email"] = c.Email;
-            TempData["Phone"] = c.Phone;
             return RedirectToAction("Information");
         }
     }

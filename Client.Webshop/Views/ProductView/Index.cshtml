@@ -45,7 +45,7 @@
                     @Html.ValidationSummary(true)
                     @Html.Hidden("url", this.Request.RawUrl)
                     <input id="productID" name="productID" value="@Model.ID" hidden />
-                    <textarea rows="1" cols="150" id="reviewText" name="reviewText" class="textAreaForm2"></textarea>
+                    <textarea rows="1" cols="150" id="reviewText" minlength="1" maxlength="1000" name="reviewText" class="textAreaForm2"></textarea>
                     <button id="reviewButton" type="submit"> Indsæt anmeldelse</button>
                 }
             }
@@ -57,7 +57,7 @@
         else {
             <h3 style="margin-bottom:20px;">Hvad andre synes om produktet</h3>
             foreach (var item in Model.Reviews) {
-                <div id="productReview">
+                <div id="productReview" class="container">
                     <p style="font-weight:bold;">Skrevet af @item.User.FirstName den @item.DateCreated.ToString("dd-MM-yyyy")</p>
                     <p>@item.Text</p>
 

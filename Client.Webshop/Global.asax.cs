@@ -35,11 +35,9 @@ namespace Client.Webshop {
         protected void Application_Error(Object sender, EventArgs e) {
             var exception = Server.GetLastError();
             if (exception is HttpRequestValidationException) {
-
                 Server.ClearError();
                 Response.Redirect("/Error/Error");
             }
-            
         }
     }
 }
