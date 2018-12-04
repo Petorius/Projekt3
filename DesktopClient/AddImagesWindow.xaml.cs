@@ -31,15 +31,11 @@ namespace DesktopClient
 
         private void CreateImageButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                ((CrudOverview)Application.Current.MainWindow).ImageURL = ImageURLTextBox.Text;
-                ((CrudOverview)Application.Current.MainWindow).ImageName = ImageNameTextBox.Text;
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Ugyldig tekst indsat");
-            }
+            
+            CrudOverview.ImageURL = ImageURLTextBox.Text;
+            CrudOverview.ImageName = ImageURLTextBox.Text;
+            
+           
 
             Close();
         }

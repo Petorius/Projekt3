@@ -22,8 +22,8 @@ namespace DesktopClient {
     /// </summary>
 
     public partial class CrudOverview : Window {
-        public string ImageURL { get; set; }
-        public string ImageName { get; set; }
+        public static string ImageURL { get; set; }
+        public static string ImageName { get; set; }
         private ProductController productController;
         private OrderController orderController;
         private List<Orderline> orderlines;
@@ -44,8 +44,6 @@ namespace DesktopClient {
             orderlineItems = new List<string>();
         }
 
-
-
         private void Produkt_Opret_OpretProdukt_Clicked(object sender, RoutedEventArgs e) {
             try {
                 string name = nameTextBox.Text;
@@ -55,7 +53,7 @@ namespace DesktopClient {
                 int maxStock = Int32.Parse(maxStockTextBox.Text);
                 string description = descriptionTextBox.Text;
                 bool res = false;
-                if (ImageName != "" && ImageURL != "") {
+                if (ImageName != null && ImageURL != null) {
                     res = productController.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
                 }
                 if (res) {
@@ -87,8 +85,8 @@ namespace DesktopClient {
         }
 
         private void Produkt_Søg_Ok_Clicked(object sender, RoutedEventArgs e) {
-            Product p = productController.Find(Int32.Parse(inputIDtextBox.Text));
             try {
+                Product p = productController.Find(Int32.Parse(inputIDtextBox.Text));
                 foundNamelabel.Content = p.Name;
                 foundPricelabel.Content = p.Price;
                 foundStocklabel.Content = p.Stock;
@@ -98,24 +96,32 @@ namespace DesktopClient {
             catch (NullReferenceException) {
                 MessageBox.Show("Produktet findes ikke");
             }
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
+            }
         }
 
         private void Produkt_Slet_SletProdukt_Clicked_Click(object sender, RoutedEventArgs e) {
-            int value = Int32.Parse(deleteTextBox.Text);
-            bool res = productController.DeleteProduct(value);
-            if (res == true) {
-                deleteStatusLabel.Content = "Produktet blev slettet";
-                deleteTextBox.Text = "";
+            try {
+                int value = Int32.Parse(deleteTextBox.Text);
+                bool res = productController.DeleteProduct(value);
+                if (res == true) {
+                    deleteStatusLabel.Content = "Produktet blev slettet";
+                    deleteTextBox.Text = "";
+                }
+                else {
+                    deleteStatusLabel.Content = "Der opstod en fejl. Prøv igen";
+                }
             }
-            else {
-                deleteStatusLabel.Content = "Der opstod en fejl. Prøv igen";
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
             }
-
         }
 
         private void Søgbutton_Click(object sender, RoutedEventArgs e) {
-            Product p = productController.Find(Int32.Parse(_inputIDtextBox.Text));
+            
             try {
+                Product p = productController.Find(Int32.Parse(_inputIDtextBox.Text));
                 IsActiveButton.IsChecked = p.IsActive;
                 updateNameTextBox.Text = p.Name;
                 updatePriceTextBox.Text = p.Price.ToString();
@@ -127,6 +133,9 @@ namespace DesktopClient {
             }
             catch (NullReferenceException) {
                 MessageBox.Show("Produktet findes ikke");
+            }
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
             }
         }
 
@@ -189,33 +198,48 @@ namespace DesktopClient {
         }
 
         private void addOrderlineButton_Click(object sender, RoutedEventArgs e) {
+            try {
+                Product p = productController.FindByName(Ordre_Opret_Find_Product_TextBox.Text);
+                int quantity = Int32.Parse(Ordre_Opret_Antal_TextBox.Text);
+                decimal subTotal = p.Price * quantity;
+                Orderline ol = new Orderline(quantity, subTotal, p);
+                bool result = orderController.CreateOrderLine(quantity, subTotal, p.ID);
 
-            Product p = productController.FindByName(Ordre_Opret_Find_Product_TextBox.Text);
-            int quantity = Int32.Parse(Ordre_Opret_Antal_TextBox.Text);
-            decimal subTotal = p.Price * quantity;
-            Orderline ol = new Orderline(quantity, subTotal, p);
-            bool result = orderController.CreateOrderLine(quantity, subTotal, p.ID);
+                if (result) {
+                    orderlines.Add(ol);
+                    Ordre_Opret_Tilføjet_Label.Content = "Ordrelinjen blev oprettet";
+                    OrdrelineClearFields();
 
-            if (result) {
-                orderlines.Add(ol);
-                //updateProductText.Content = "Ordrelinjen blev oprettet";
-                OrdrelineClearFields();
-
+                }
+                else {
+                    Ordre_Opret_Tilføjet_Label.Content = "Der opstod en fejl. Prøv igen";
+                }
             }
-            else {
-                //updateProductText.Content = "Der opstod en fejl. Prøv igen";
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
             }
         }
 
         private void addOrderButton_Click(object sender, RoutedEventArgs e) {
-            Customer c = userController.GetCustomerByMail(Ordre_Opret_Find_Kunde_TextBox.Text);
 
-            if (c != null) {
-                Order order = orderController.CreateOrder(c.FirstName, c.LastName, c.Address, c.ZipCode, c.City, c.Email, c.Phone, orderlines);
-                //updateProductText.Content = "Ordren blev oprettet";
-                OrderClearFields();
-                orderlines = new List<Orderline>();
+            try {
+                Customer c = userController.GetCustomerByMail(Ordre_Opret_Find_Kunde_TextBox.Text);
+
+                if (c != null) {
+                    Order order = orderController.CreateOrder(c.FirstName, c.LastName, c.Address, c.ZipCode, c.City, c.Email, c.Phone, orderlines);
+                    Ordre_Opret_Tilføjet_Label.Content = "Ordren blev oprettet";
+                    OrderClearFields();
+                    orderlines = new List<Orderline>();
+                }
+                else {
+                    Ordre_Opret_Tilføjet_Label.Content = "Der opstod en fejl. Prøv igen";
+                }
             }
+            
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
+            }
+
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e) {
@@ -224,18 +248,27 @@ namespace DesktopClient {
 
         private void Ordre_Søg_Ok_Knap_Click(object sender, RoutedEventArgs e) {
 
-            int id = Int32.Parse(Ordre_Søg_Find_Ordre_TextBox.Text);
-            Order o = orderController.FindOrder(id);
-            Ordre_Søg_Kunde_Email_Label_Output.Content = o.Customer.Email;
-            Ordre_Søg_Total_Label_Output.Content = o.Total;
-            Ordre_Søg_Købsdato_Label_Output.Content = o.DateCreated;
+            try {
+                int id = Int32.Parse(Ordre_Søg_Find_Ordre_TextBox.Text);
+                Order o = orderController.FindOrder(id);
+                Ordre_Søg_Kunde_Email_Label_Output.Content = o.Customer.Email;
+                Ordre_Søg_Total_Label_Output.Content = o.Total;
+                Ordre_Søg_Købsdato_Label_Output.Content = o.DateCreated;
 
-            foreach(Orderline ol in o.Orderlines) {
-                orderlineItems.Add("Orderlinje ID: " + ol.ID.ToString() + " " + "Antal: " + ol.Quantity.ToString() + " " + "Sub-total: " + ol.SubTotal.ToString() + " " + "Product ID: " + ol.Product.ID.ToString());
+                foreach (Orderline ol in o.Orderlines) {
+                    orderlineItems.Add("Orderlinje ID: " + ol.ID.ToString() + " " + "Antal: " + ol.Quantity.ToString() + " " + "Sub-total: " + ol.SubTotal.ToString() + " " + "Product ID: " + ol.Product.ID.ToString());
+                }
+
+                Ordre_Søg_Ordrelinjer_ListBox.ItemsSource = orderlineItems;
+                orderlineItems = new List<string>();
+            }
+            catch (NullReferenceException) {
+                MessageBox.Show("Ordren findes ikke");
+            }
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
             }
 
-            Ordre_Søg_Ordrelinjer_ListBox.ItemsSource = orderlineItems;
-            orderlineItems = new List<string>();
         }
 
         private void Ordre_Søg_Annuller_Knap_Click(object sender, RoutedEventArgs e) {
@@ -247,42 +280,54 @@ namespace DesktopClient {
         }
 
         private void Kunde_Søg_Ok_Click(object sender, RoutedEventArgs e) {
-            User user = userController.GetUserWithOrders(findUserByMailTextBox1.Text);
-            if (user != null) {
-                userFindFirstNameLabel.Content = user.FirstName;
-                userFindLastNameLabel.Content = user.LastName;
-                userFindAddressLabel.Content = user.Address;
-                userFindZipCodeLabel.Content = user.ZipCode;
-                userFindCityLabel.Content = user.City;
-                userFindPhoneLabel.Content = user.Phone;
-                foreach (Order order in user.Orders) {
-                    userOrderListWithID.Add("Ordrenummer #" + order.ID);
+            try {
+                User user = userController.GetUserWithOrders(findUserByMailTextBox1.Text);
+                if (user != null) {
+                    userFindFirstNameLabel.Content = user.FirstName;
+                    userFindLastNameLabel.Content = user.LastName;
+                    userFindAddressLabel.Content = user.Address;
+                    userFindZipCodeLabel.Content = user.ZipCode;
+                    userFindCityLabel.Content = user.City;
+                    userFindPhoneLabel.Content = user.Phone;
+                    foreach (Order order in user.Orders) {
+                        userOrderListWithID.Add("Ordrenummer #" + order.ID);
 
+                    }
+                    userOrderListWithID.Reverse();
+                    Kunde_Søg_Orderbox.ItemsSource = userOrderListWithID;
                 }
-                userOrderListWithID.Reverse();
-                Kunde_Søg_Orderbox.ItemsSource = userOrderListWithID;
+            }
+            catch (NullReferenceException) {
+                MessageBox.Show("Kunden findes ikke");
+            }
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
             }
         }
 
         private void Kunde_Opdater_OK_Click(object sender, RoutedEventArgs e) {
-            User user = userController.GetUser(Kunde_Opdater_SøgEmail_TextBox.Text);
+            try {
+                User user = userController.GetUser(Kunde_Opdater_SøgEmail_TextBox.Text);
+                user.FirstName = Kunde_Opdater_FirstName_TextBox.Text;
+                user.LastName = Kunde_Opdater_LastName_TextBox.Text;
+                user.Address = Kunde_Opdater_Address_TextBox.Text;
+                user.ZipCode = Int32.Parse(Kunde_Opdater_ZipCode_TextBox.Text);
+                user.City = Kunde_Opdater_City_TextBox.Text;
+                user.Phone = Int32.Parse(Kunde_Opdater_Phone_TextBox.Text);
+                user.Email = Kunde_Opdater_Email_TextBox.Text;
 
-            user.FirstName = Kunde_Opdater_FirstName_TextBox.Text;
-            user.LastName = Kunde_Opdater_LastName_TextBox.Text;
-            user.Address = Kunde_Opdater_Address_TextBox.Text;
-            user.ZipCode = Int32.Parse(Kunde_Opdater_ZipCode_TextBox.Text);
-            user.City = Kunde_Opdater_City_TextBox.Text;
-            user.Phone = Int32.Parse(Kunde_Opdater_Phone_TextBox.Text);
-            user.Email = Kunde_Opdater_Email_TextBox.Text;
-
-            bool res = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
-            if(res) {
-                Kunde_Opdater_Result_Label.Content = "Kunden blev opdateret!";
+                bool res = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
+                if (res) {
+                    Kunde_Opdater_Result_Label.Content = "Kunden blev opdateret!";
+                }
+                else {
+                    Kunde_Opdater_Result_Label.Content = "Der skete en fejl! Prøv igen.";
+                }
+                ClearCustomerFields();
             }
-            else {
-                Kunde_Opdater_Result_Label.Content = "Der skete en fejl! Prøv igen.";
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
             }
-            ClearCustomerFields();
         }
 
         private void Kunde_Opdater_Anuller_Click(object sender, RoutedEventArgs e) {
@@ -372,14 +417,26 @@ namespace DesktopClient {
         }
 
         private void CreateOrderlineHandler() {
-            int id = Int32.Parse(Ordre_Opdater_Find_Ordre_TextBox.Text);
-            Order o = orderController.FindOrder(id);
+            try {
+                int id = Int32.Parse(Ordre_Opdater_Find_Ordre_TextBox.Text);
+                Order o = orderController.FindOrder(id);
 
-            foreach (Orderline ol in o.Orderlines) {
-                orderlineItems.Add("Orderlinje ID: " + ol.ID.ToString() + " " + "Antal: " + ol.Quantity.ToString() + " " + "Sub-total: " + ol.SubTotal.ToString() + " " + "Product ID: " + ol.Product.ID.ToString());
+                if (o != null) {
+
+                    foreach (Orderline ol in o.Orderlines) {
+                        orderlineItems.Add("Orderlinje ID: " + ol.ID.ToString() + " " + "Antal: " + ol.Quantity.ToString() + " " + "Sub-total: " + ol.SubTotal.ToString() + " " + "Product ID: " + ol.Product.ID.ToString());
+
+
+                        UpdateOrderlineListBox();
+                    }
+                }
             }
-
-            UpdateOrderlineListBox();
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
+            }
+            catch (NullReferenceException) {
+                MessageBox.Show("Ordren findes ikke");
+            }
         }
 
         private void UpdateOrderlineListBox() {
@@ -389,14 +446,19 @@ namespace DesktopClient {
         }
 
         private void Ordre_Slet_SletOrdre_Button_Click(object sender, RoutedEventArgs e) {
-            int value = Int32.Parse(Ordre_Slet_FindOrdre_Input.Text);
-            bool res = orderController.DeleteOrder(value);
-            if (res == true) {
-                Ordre_Slet_SletStatus_Label.Content = "Ordren blev slettet";
-                Ordre_Slet_FindOrdre_Input.Text = "";
+            try {
+                int value = Int32.Parse(Ordre_Slet_FindOrdre_Input.Text);
+                bool res = orderController.DeleteOrder(value);
+                if (res == true) {
+                    Ordre_Slet_SletStatus_Label.Content = "Ordren blev slettet";
+                    Ordre_Slet_FindOrdre_Input.Text = "";
+                }
+                else {
+                    Ordre_Slet_SletStatus_Label.Content = "Der opstod en fejl. Prøv igen";
+                }
             }
-            else {
-                Ordre_Slet_SletStatus_Label.Content = "Der opstod en fejl. Prøv igen";
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
             }
         }
 
@@ -407,19 +469,24 @@ namespace DesktopClient {
         }
 
         private void Ordre_Opdater_Tilføj_Ordrelinje_Knap_Click(object sender, RoutedEventArgs e) {
-            Product p = productController.FindByName(Ordre_Opdater_ProductName_TextBox.Text);
-            int quantity = Int32.Parse(Ordre_Opdater_Antal_TextBox.Text);
-            decimal subTotal = p.Price * quantity;
-            int orderID = Int32.Parse(Ordre_Opdater_Find_Ordre_TextBox.Text);
-            bool result = orderController.CreateOrderLineInDesktop(quantity, subTotal, p.ID, orderID);
+            try {
+                Product p = productController.FindByName(Ordre_Opdater_ProductName_TextBox.Text);
+                int quantity = Int32.Parse(Ordre_Opdater_Antal_TextBox.Text);
+                decimal subTotal = p.Price * quantity;
+                int orderID = Int32.Parse(Ordre_Opdater_Find_Ordre_TextBox.Text);
+                bool result = orderController.CreateOrderLineInDesktop(quantity, subTotal, p.ID, orderID);
 
-            if (result) {
-                //updateProductText.Content = "Ordrelinjen blev oprettet";
-                CreateOrderlineHandler();
-                ClearOrderLineFields();   
+                if (result) {
+                    Ordre_Opdater_Label_Tilføjet.Content = "Ordrelinjen blev oprettet";
+                    CreateOrderlineHandler();
+                    ClearOrderLineFields();
+                }
+                else {
+                    Ordre_Opdater_Label_Tilføjet.Content = "Der opstod en fejl. Prøv igen";
+                }
             }
-            else {
-                //updateProductText.Content = "Der opstod en fejl. Prøv igen";
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
             }
         }
 
@@ -430,14 +497,27 @@ namespace DesktopClient {
         }
 
         private void Ordre_Opdater_Slet_Ordrelinje_Knap_Click(object sender, RoutedEventArgs e) {
+            try {
+                Orderline ol = orderController.FindOrderLine(selectedListItemOrderLineID);
 
-            Orderline ol = orderController.FindOrderLine(selectedListItemOrderLineID);
+                if(ol != null) {
+                    bool result = orderController.DeleteOrderLineInDesktop(ol.Product.ID, ol.SubTotal, ol.Quantity, selectedListItemOrderLineID);
 
-            bool result = orderController.DeleteOrderLineInDesktop(ol.Product.ID, ol.SubTotal, ol.Quantity, selectedListItemOrderLineID);
- 
-            UpdateOrderlineListBox();
-            CreateOrderlineHandler();
+                    if (result) {
+                        Ordre_Opdater_Label_Tilføjet.Content = "Ordrelinjen blev slettet";
 
+                    }
+                    else {
+                        Ordre_Opdater_Label_Tilføjet.Content = "Der opstod en fejl. Prøv igen";
+                    }
+
+                    UpdateOrderlineListBox();
+                    CreateOrderlineHandler();
+                }
+            }
+            catch (NullReferenceException) {
+                MessageBox.Show("Ordrelinjen findes ikke");
+            }
         }
 
         private void Ordre_Opdater_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
