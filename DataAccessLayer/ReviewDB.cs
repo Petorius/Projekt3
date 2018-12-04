@@ -18,11 +18,11 @@ namespace DataAccessLayer {
 
         public bool CreateReview(Review review, int productID, int userID, bool test = false, bool testResult = false) {
             bool isCompleted = false;
-
             using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
-                    try {
+                try {
+                    connection.Open();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
+
                         cmd.CommandText = "INSERT INTO review(text, dateCreated, productID, userID) VALUES(@Text, @DateCreated, @ProductID, @UserID)";
                         cmd.Parameters.AddWithValue("Text", review.Text);
                         cmd.Parameters.AddWithValue("DateCreated", review.DateCreated);
@@ -31,9 +31,9 @@ namespace DataAccessLayer {
                         cmd.ExecuteNonQuery();
                         isCompleted = true;
                     }
-                    catch (SqlException) {
-                        isCompleted = false;
-                    }
+                }
+                catch (SqlException) {
+                    isCompleted = false;
                 }
             }
             return isCompleted;
@@ -43,44 +43,45 @@ namespace DataAccessLayer {
             bool isDeleted = false;
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
-                    connection.Open();
-                    using (SqlTransaction transaction = connection.BeginTransaction()) {
-                        byte[] rowId = null;
-                        int rowCount = 0;
-                        using (SqlCommand cmd = connection.CreateCommand()) {
-                            //try {
-                            cmd.Transaction = transaction;
-                            cmd.CommandText = "SELECT rowID from Review WHERE reviewID = @reviewID";
-                            cmd.Parameters.AddWithValue("reviewID", review.ID);
-                            SqlDataReader reader = cmd.ExecuteReader();
+                    try {
+                        connection.Open();
+                        using (SqlTransaction transaction = connection.BeginTransaction()) {
+                            byte[] rowId = null;
+                            int rowCount = 0;
+                            using (SqlCommand cmd = connection.CreateCommand()) {
+                                cmd.Transaction = transaction;
+                                cmd.CommandText = "SELECT rowID from Review WHERE reviewID = @reviewID";
+                                cmd.Parameters.AddWithValue("reviewID", review.ID);
+                                SqlDataReader reader = cmd.ExecuteReader();
 
-                            while (reader.Read()) {
-                                rowId = (byte[])reader["rowId"];
-                            }
-                            reader.Close();
+                                while (reader.Read()) {
+                                    rowId = (byte[])reader["rowId"];
+                                }
+                                reader.Close();
 
-                            cmd.CommandText = "Delete from Review where reviewID = @reviewID and review.userID = @userID and rowId = @rowId";
-                            cmd.Parameters.AddWithValue("userID", review.User.ID);
-                            cmd.Parameters.AddWithValue("rowId", rowId);
-                            rowCount = cmd.ExecuteNonQuery();
-                            isDeleted = true;
-
-                            if (test) {
-                                rowCount = testResult ? 1 : 0;
-                            }
-
-                            if (rowCount == 0) {
-                                cmd.Transaction.Rollback();
-                            }
-                            else {
+                                cmd.CommandText = "Delete from Review where reviewID = @reviewID and review.userID = @userID and rowId = @rowId";
+                                cmd.Parameters.AddWithValue("userID", review.User.ID);
+                                cmd.Parameters.AddWithValue("rowId", rowId);
+                                rowCount = cmd.ExecuteNonQuery();
                                 isDeleted = true;
-                                cmd.Transaction.Commit();
-                                break;
+
+                                if (test) {
+                                    rowCount = testResult ? 1 : 0;
+                                }
+
+                                if (rowCount == 0) {
+                                    cmd.Transaction.Rollback();
+                                }
+                                else {
+                                    isDeleted = true;
+                                    cmd.Transaction.Commit();
+                                    break;
+                                }
                             }
                         }
-                        //catch (SqlException) {
-                        //    isDeleted = false;
-                        //}
+                    }
+                    catch (SqlException) {
+                        isDeleted = false;
                     }
                 }
             }

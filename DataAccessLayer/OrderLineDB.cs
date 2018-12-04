@@ -23,25 +23,25 @@ namespace Server.DataAccessLayer {
 
         // Method with optimistic concurreny. If anything is changed, we rollback our transaction after trying for 4 times
         public bool Create(OrderLine Entity, bool test = false, bool testResult = false) {
-            bool isCompleted = true;
+            bool isCompleted = false;
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
-                    connection.Open();
-                    using (SqlTransaction trans = connection.BeginTransaction()) {
-                        byte[] rowId = null;
-                        int rowCount = 0;
+                    try {
+                        connection.Open();
+                        using (SqlTransaction trans = connection.BeginTransaction()) {
+                            byte[] rowId = null;
+                            int rowCount = 0;
 
-                        using (SqlCommand cmd = connection.CreateCommand()) {
-                            cmd.Transaction = trans;
-                            cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
-                            cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
-                            SqlDataReader reader = cmd.ExecuteReader();
+                            using (SqlCommand cmd = connection.CreateCommand()) {
+                                cmd.Transaction = trans;
+                                cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                                cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
+                                SqlDataReader reader = cmd.ExecuteReader();
 
-                            while (reader.Read()) {
-                                rowId = (byte[])reader["rowId"];
-                            }
-                            reader.Close();
-                            try {
+                                while (reader.Read()) {
+                                    rowId = (byte[])reader["rowId"];
+                                }
+                                reader.Close();
                                 cmd.CommandText = "UPDATE Product " +
                                     "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
                                 cmd.Parameters.AddWithValue("stock", Entity.Product.Stock - Entity.Quantity);
@@ -57,41 +57,42 @@ namespace Server.DataAccessLayer {
                                     cmd.Transaction.Rollback();
                                 }
                                 else {
+                                    isCompleted = true;
                                     cmd.Transaction.Commit();
                                     break;
                                 }
                             }
-                            catch (SqlException) {
-                                isCompleted = false;
-                            }
                         }
+                    }
+                    catch (SqlException) {
+                        isCompleted = false;
                     }
                 }
             }
             return isCompleted;
         }
 
+
         // Method with optimistic concurreny. If anything is changed, we rollback our transaction after trying for 4 times
         public bool Delete(OrderLine Entity, bool test = false, bool testResult = false) {
             bool deleted = false;
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
-                    connection.Open();
-                    using (SqlTransaction trans = connection.BeginTransaction()) {
-                        byte[] rowId = null;
-                        int rowCount = 0;
-                        using (SqlCommand cmd = connection.CreateCommand()) {
-                            cmd.Transaction = trans;
-                            cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
-                            cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
-                            SqlDataReader reader = cmd.ExecuteReader();
+                    try {
+                        connection.Open();
+                        using (SqlTransaction trans = connection.BeginTransaction()) {
+                            byte[] rowId = null;
+                            int rowCount = 0;
+                            using (SqlCommand cmd = connection.CreateCommand()) {
+                                cmd.Transaction = trans;
+                                cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                                cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
+                                SqlDataReader reader = cmd.ExecuteReader();
 
-                            while (reader.Read()) {
-                                rowId = (byte[])reader["rowId"];
-                            }
-                            reader.Close();
-
-                            try {
+                                while (reader.Read()) {
+                                    rowId = (byte[])reader["rowId"];
+                                }
+                                reader.Close();
                                 cmd.CommandText = "UPDATE Product " +
                                     "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
                                 cmd.Parameters.AddWithValue("stock", Entity.Product.Stock + Entity.Quantity);
@@ -107,48 +108,52 @@ namespace Server.DataAccessLayer {
                                     cmd.Transaction.Rollback();
                                 }
                                 else {
+                                    deleted = true;
                                     cmd.Transaction.Commit();
                                     break;
                                 }
                             }
-                            catch (SqlException) {
-                                deleted = false;
-                            }
-
                         }
-                    }
 
+
+                    }
+                    catch (SqlException) {
+                        deleted = false;
+                    }
                 }
+
+
             }
             return deleted;
         }
 
         public OrderLine Get(int id) {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
+                try {
+                    connection.Open();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
+                        OrderLine ol = new OrderLine();
+                        cmd.CommandText = "Select orderlineID, quantity, subTotal, orderID, productID from Orderline where orderlineID = @orderlineID";
+                        cmd.Parameters.AddWithValue("orderlineID", id);
+                        SqlDataReader orderLineReader = cmd.ExecuteReader();
+                        while (orderLineReader.Read()) {
 
-                    OrderLine ol = new OrderLine();
+                            ol.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("orderlineID"));
+                            ol.Quantity = orderLineReader.GetInt32(orderLineReader.GetOrdinal("quantity"));
+                            ol.SubTotal = orderLineReader.GetDecimal(orderLineReader.GetOrdinal("subtotal"));
+                            Product p = new Product();
+                            p.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("productID"));
+                            ol.Product = p;
+                        }
+                        orderLineReader.Close();
 
-                    cmd.CommandText = "Select orderlineID, quantity, subTotal, orderID, productID from Orderline where orderlineID = @orderlineID";
-                    cmd.Parameters.AddWithValue("orderlineID", id);
-                    SqlDataReader orderLineReader = cmd.ExecuteReader();
-                    while (orderLineReader.Read()) {
-                        
-                        ol.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("orderlineID"));
-                        ol.Quantity = orderLineReader.GetInt32(orderLineReader.GetOrdinal("quantity"));
-                        ol.SubTotal = orderLineReader.GetDecimal(orderLineReader.GetOrdinal("subtotal"));
-                        Product p = new Product();
-                        p.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("productID"));
-                        ol.Product = p;
-                    }
-                    orderLineReader.Close();
-
-                    if (id == ol.ID) {
                         return ol;
                     }
+
                 }
-                return null;
+                catch (SqlException) {
+                    return null;
+                }
             }
         }
 
@@ -161,22 +166,22 @@ namespace Server.DataAccessLayer {
             bool isUpdated = false;
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
-                    connection.Open();
-                    using (SqlTransaction trans = connection.BeginTransaction()) {
-                        byte[] rowId = null;
-                        int rowCount = 0;
-                        using (SqlCommand cmd = connection.CreateCommand()) {
-                            cmd.Transaction = trans;
-                            cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
-                            cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
-                            SqlDataReader reader = cmd.ExecuteReader();
+                    try {
+                        connection.Open();
+                        using (SqlTransaction trans = connection.BeginTransaction()) {
+                            byte[] rowId = null;
+                            int rowCount = 0;
+                            using (SqlCommand cmd = connection.CreateCommand()) {
+                                cmd.Transaction = trans;
+                                cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                                cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
+                                SqlDataReader reader = cmd.ExecuteReader();
 
-                            while (reader.Read()) {
-                                rowId = (byte[])reader["rowId"];
-                            }
-                            reader.Close();
+                                while (reader.Read()) {
+                                    rowId = (byte[])reader["rowId"];
+                                }
+                                reader.Close();
 
-                            try {
                                 cmd.CommandText = "UPDATE Product " +
                                     "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
                                 cmd.Parameters.AddWithValue("stock", Entity.Product.Stock + 1);
@@ -198,17 +203,18 @@ namespace Server.DataAccessLayer {
                                     break;
                                 }
                             }
-                            catch (SqlException) {
-                                isUpdated = false;
-                            }
-
                         }
                     }
+                    catch (SqlException) {
+                        isUpdated = false;
+                    }
+
+
                 }
             }
             return isUpdated;
         }
-        
+
         public bool CreateInDesktop(OrderLine Entity, bool test = false, bool testResult = false) {
             bool isCompleted = true;
             for (int i = 0; i < 5; i++) {
@@ -258,7 +264,7 @@ namespace Server.DataAccessLayer {
                             }
                             catch (SqlException) {
                                 isCompleted = false;
-                                
+
                             }
                         }
                     }
@@ -306,18 +312,16 @@ namespace Server.DataAccessLayer {
                                     cmd.Transaction.Rollback();
                                 }
                                 else {
+                                    deleted = true;
                                     cmd.Transaction.Commit();
                                     break;
                                 }
                             }
                             catch (SqlException) {
                                 deleted = false;
-                                
                             }
-
                         }
                     }
-
                 }
             }
             return deleted;

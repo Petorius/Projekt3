@@ -24,31 +24,32 @@ namespace Server.DataAccessLayer {
         public int CreateReturnID(Order Entity, bool test = false, bool testResult = false) {
             int insertedID = -1;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
+                try {
+                    connection.Open();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
 
+                        cmd.CommandText = "Insert into [dbo].[Order](total, purchaseTime, customerID) OUTPUT INSERTED.OrderID values (@Total, @PurchaseTime, @CustomerID)";
+                        cmd.Parameters.AddWithValue("Total", Entity.Total);
+                        cmd.Parameters.AddWithValue("PurchaseTime", Entity.DateCreated);
+                        cmd.Parameters.AddWithValue("CustomerID", Entity.Customer.ID);
+                        insertedID = (int)cmd.ExecuteScalar();
 
-                    cmd.CommandText = "Insert into [dbo].[Order](total, purchaseTime, customerID) OUTPUT INSERTED.OrderID values (@Total, @PurchaseTime, @CustomerID)";
-                    cmd.Parameters.AddWithValue("Total", Entity.Total);
-                    cmd.Parameters.AddWithValue("PurchaseTime", Entity.DateCreated);
-                    cmd.Parameters.AddWithValue("CustomerID", Entity.Customer.ID);
-                    insertedID = (int)cmd.ExecuteScalar();
-
-                    foreach (OrderLine ol in Entity.Orderlines) {
-                        cmd.CommandText = "INSERT INTO Orderline (Quantity, SubTotal, OrderID, ProductID) Values " +
-                                                    "(@Quantity, @SubTotal, @OrderID, @ProductID)";
-                        cmd.Parameters.AddWithValue("Quantity", ol.Quantity);
-                        cmd.Parameters.AddWithValue("SubTotal", ol.SubTotal);
-                        cmd.Parameters.AddWithValue("OrderID", insertedID);
-                        cmd.Parameters.AddWithValue("ProductID", ol.Product.ID);
-                        cmd.ExecuteNonQuery();
-                        cmd.Parameters.Clear();
+                        foreach (OrderLine ol in Entity.Orderlines) {
+                            cmd.CommandText = "INSERT INTO Orderline (Quantity, SubTotal, OrderID, ProductID) Values " +
+                                                        "(@Quantity, @SubTotal, @OrderID, @ProductID)";
+                            cmd.Parameters.AddWithValue("Quantity", ol.Quantity);
+                            cmd.Parameters.AddWithValue("SubTotal", ol.SubTotal);
+                            cmd.Parameters.AddWithValue("OrderID", insertedID);
+                            cmd.Parameters.AddWithValue("ProductID", ol.Product.ID);
+                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
+                        }
                     }
-
-                    //catch (SqlException) {
-
-                    //}
                 }
+                catch (SqlException) {
+                    insertedID = -1;
+                }
+
             }
             return insertedID;
         }
@@ -57,39 +58,44 @@ namespace Server.DataAccessLayer {
             bool deleted = false;
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
-                    connection.Open();
-                    using (SqlTransaction transaction = connection.BeginTransaction()) {
-                        byte[] rowID = null;
-                        int rowCount = 0;
-                        using (SqlCommand cmd = connection.CreateCommand()) {
-                            cmd.Transaction = transaction;
-                            cmd.CommandText = "SELECT rowID from [dbo].[order] WHERE orderID = @OrderID";
-                            cmd.Parameters.AddWithValue("orderID", Entity.ID);
-                            SqlDataReader reader = cmd.ExecuteReader();
+                    try {
+                        connection.Open();
+                        using (SqlTransaction transaction = connection.BeginTransaction()) {
+                            byte[] rowID = null;
+                            int rowCount = 0;
+                            using (SqlCommand cmd = connection.CreateCommand()) {
+                                cmd.Transaction = transaction;
+                                cmd.CommandText = "SELECT rowID from [dbo].[order] WHERE orderID = @OrderID";
+                                cmd.Parameters.AddWithValue("orderID", Entity.ID);
+                                SqlDataReader reader = cmd.ExecuteReader();
 
-                            while (reader.Read()) {
-                                rowID = (byte[])reader["rowID"];
-                            }
-                            reader.Close();
+                                while (reader.Read()) {
+                                    rowID = (byte[])reader["rowID"];
+                                }
+                                reader.Close();
 
-                            cmd.CommandText = "DELETE from [dbo].[Order] WHERE OrderID = @OrderID AND rowID = @rowID";
-                            cmd.Parameters.AddWithValue("rowID", rowID);
-                            rowCount = cmd.ExecuteNonQuery();
-                            deleted = true;
-
-                            if (test) {
-                                rowCount = testResult ? 1 : 0;
-                            }
-
-                            if (rowCount == 0) {
-                                cmd.Transaction.Rollback();
-                            }
-                            else {
+                                cmd.CommandText = "DELETE from [dbo].[Order] WHERE OrderID = @OrderID AND rowID = @rowID";
+                                cmd.Parameters.AddWithValue("rowID", rowID);
+                                rowCount = cmd.ExecuteNonQuery();
                                 deleted = true;
-                                cmd.Transaction.Commit();
-                                break;
+
+                                if (test) {
+                                    rowCount = testResult ? 1 : 0;
+                                }
+
+                                if (rowCount == 0) {
+                                    cmd.Transaction.Rollback();
+                                }
+                                else {
+                                    deleted = true;
+                                    cmd.Transaction.Commit();
+                                    break;
+                                }
                             }
                         }
+                    }
+                    catch (SqlException) {
+                        deleted = false;
                     }
                 }
             }
@@ -98,65 +104,69 @@ namespace Server.DataAccessLayer {
 
         public Order Get(int id) {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
-                    Order o = new Order();
-                    int customerID = -1;
-                    Customer c = new Customer();
-                    //build order
-                    cmd.CommandText = "SELECT orderID, total, purchaseTime, customerID from [dbo].[Order] where orderID = @orderID";
-                    cmd.Parameters.AddWithValue("orderID", id);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read()) {
-                        o.ID = reader.GetInt32(reader.GetOrdinal("orderID"));
-                        o.Total = reader.GetDecimal(reader.GetOrdinal("total"));
-                        o.DateCreated = reader.GetDateTime(reader.GetOrdinal("purchaseTime"));
-                        customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
-                    }
-                    reader.Close();
-                    cmd.Parameters.Clear();
-
-                    if (customerID > 0) {
-                        cmd.CommandText = "SELECT customerID, email from Customer where customerID = @customerID";
-                        cmd.Parameters.AddWithValue("customerID", customerID);
-                        SqlDataReader customerReader = cmd.ExecuteReader();
-                        while (customerReader.Read()) {
-                            c.Email = customerReader.GetString(customerReader.GetOrdinal("email"));
+                try {
+                    connection.Open();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
+                        Order o = new Order();
+                        int customerID = -1;
+                        Customer c = new Customer();
+                        //build order
+                        cmd.CommandText = "SELECT orderID, total, purchaseTime, customerID from [dbo].[Order] where orderID = @orderID";
+                        cmd.Parameters.AddWithValue("orderID", id);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read()) {
+                            o.ID = reader.GetInt32(reader.GetOrdinal("orderID"));
+                            o.Total = reader.GetDecimal(reader.GetOrdinal("total"));
+                            o.DateCreated = reader.GetDateTime(reader.GetOrdinal("purchaseTime"));
+                            customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
                         }
-                        customerReader.Close();
+                        reader.Close();
                         cmd.Parameters.Clear();
 
-                        o.Customer = c;
-                    }
-                    else {
+                        if (customerID > 0) {
+                            cmd.CommandText = "SELECT customerID, email from Customer where customerID = @customerID";
+                            cmd.Parameters.AddWithValue("customerID", customerID);
+                            SqlDataReader customerReader = cmd.ExecuteReader();
+                            while (customerReader.Read()) {
+                                c.Email = customerReader.GetString(customerReader.GetOrdinal("email"));
+                            }
+                            customerReader.Close();
+                            cmd.Parameters.Clear();
 
-                        c.Email = "deleted user";
-                        o.Customer = c;
-                    }
+                            o.Customer = c;
+                        }
+                        else {
+
+                            c.Email = "deleted user";
+                            o.Customer = c;
+                        }
 
 
-                    //build orderlines
-                    cmd.CommandText = "Select orderlineID, quantity, subTotal, orderID, productID from Orderline where Orderline.orderID = @orderID";
-                    cmd.Parameters.AddWithValue("orderID", o.ID);
-                    SqlDataReader orderLineReader = cmd.ExecuteReader();
-                    while (orderLineReader.Read()) {
-                        OrderLine ol = new OrderLine();
-                        ol.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("orderlineID"));
-                        ol.Quantity = orderLineReader.GetInt32(orderLineReader.GetOrdinal("quantity"));
-                        ol.SubTotal = orderLineReader.GetDecimal(orderLineReader.GetOrdinal("subtotal"));
-                        Product p = new Product();
-                        p.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("productID"));
-                        ol.Product = p;
+                        //build orderlines
+                        cmd.CommandText = "Select orderlineID, quantity, subTotal, orderID, productID from Orderline where Orderline.orderID = @orderID";
+                        cmd.Parameters.AddWithValue("orderID", o.ID);
+                        SqlDataReader orderLineReader = cmd.ExecuteReader();
+                        while (orderLineReader.Read()) {
+                            OrderLine ol = new OrderLine();
+                            ol.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("orderlineID"));
+                            ol.Quantity = orderLineReader.GetInt32(orderLineReader.GetOrdinal("quantity"));
+                            ol.SubTotal = orderLineReader.GetDecimal(orderLineReader.GetOrdinal("subtotal"));
+                            Product p = new Product();
+                            p.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("productID"));
+                            ol.Product = p;
 
-                        o.Orderlines.Add(ol);
-                    }
-                    orderLineReader.Close();
+                            o.Orderlines.Add(ol);
+                        }
+                        orderLineReader.Close();
 
-                    if (id == o.ID) {
                         return o;
                     }
                 }
-                return null;
+                catch (SqlException) {
+                    return null;
+                }
+
+
             }
         }
 
