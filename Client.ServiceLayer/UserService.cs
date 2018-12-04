@@ -17,6 +17,7 @@ namespace Client.ServiceLayer {
             var customer = myProxy.GetCustomerByMail(email);
             Customer c = new Customer();
             if (customer != null) {
+                c.ID = customer.ID;
                 c.FirstName = customer.FirstName;
                 c.LastName = customer.LastName;
                 c.Phone = customer.Phone;

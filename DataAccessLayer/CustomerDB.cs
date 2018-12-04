@@ -22,8 +22,8 @@ namespace Server.DataAccessLayer {
             int res = -1;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
+                    connection.Open();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
                         cmd.CommandText = "Insert into Customer(FirstName, LastName, Phone, Email, Address, ZipCode, City) OUTPUT INSERTED.CustomerID values" +
                                 " (@FirstName, @LastName, @Phone, @Email, @Address, @ZipCode, @City)";
                         cmd.Parameters.AddWithValue("FirstName", Entity.FirstName);
@@ -36,7 +36,7 @@ namespace Server.DataAccessLayer {
                         res = (int)cmd.ExecuteScalar();
                     }
                 }
-                catch(SqlException) {
+                catch (SqlException) {
                     res = -1;
                 }
             }
@@ -101,31 +101,37 @@ namespace Server.DataAccessLayer {
             }
             return isUpdated;
         }
-    
+
 
         public Customer GetByMail(string email) {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
-                    Customer c = new Customer();
+                try {
+                    connection.Open();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
+                        Customer c = new Customer();
 
-                    cmd.CommandText = "SELECT customerID, FirstName, LastName, Phone, Email, Address, ZipCode, City" +
-                        " from Customer where Email = @Email";
-                    cmd.Parameters.AddWithValue("Email", email);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read()) {
-                        c.ID = reader.GetInt32(reader.GetOrdinal("customerID"));
-                        c.FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
-                        c.LastName = reader.GetString(reader.GetOrdinal("LastName"));
-                        c.Phone = reader.GetInt32(reader.GetOrdinal("Phone"));
-                        c.Email = reader.GetString(reader.GetOrdinal("Email"));
-                        c.Address = reader.GetString(reader.GetOrdinal("Address"));
-                        c.ZipCode = reader.GetInt32(reader.GetOrdinal("ZipCode"));
-                        c.City = reader.GetString(reader.GetOrdinal("City"));
+                        cmd.CommandText = "SELECT customerID, FirstName, LastName, Phone, Email, Address, ZipCode, City" +
+                            " from Customer where Email = @Email";
+                        cmd.Parameters.AddWithValue("Email", email);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read()) {
+                            c.ID = reader.GetInt32(reader.GetOrdinal("customerID"));
+                            c.FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
+                            c.LastName = reader.GetString(reader.GetOrdinal("LastName"));
+                            c.Phone = reader.GetInt32(reader.GetOrdinal("Phone"));
+                            c.Email = reader.GetString(reader.GetOrdinal("Email"));
+                            c.Address = reader.GetString(reader.GetOrdinal("Address"));
+                            c.ZipCode = reader.GetInt32(reader.GetOrdinal("ZipCode"));
+                            c.City = reader.GetString(reader.GetOrdinal("City"));
+                        }
+                        reader.Close();
+                        return c;
                     }
-                    reader.Close();
-                    return c;
                 }
+                catch (SqlException) {
+                    return null;
+                }
+
 
             }
         }
@@ -147,5 +153,5 @@ namespace Server.DataAccessLayer {
         }
     }
 }
-    
+
 

@@ -15,8 +15,8 @@
         </Grid.ColumnDefinitions>
         <Label x:Name="AddImageNameLabel" Content="Indtast navn" Grid.Column="1" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top"/>
         <Label x:Name="AddImageURLLabel" Content="Indtast URL" Grid.Column="1" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="ImageNameTextBox" Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="0,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Text="Indtast her" Cursor="None" FontStyle="Italic" />
-        <TextBox x:Name="ImageURLTextBox" Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="0,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Text="Indtast her" Cursor="None" FontStyle="Italic"/>
+        <TextBox x:Name="ImageNameTextBox" Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="0,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Cursor="None" FontStyle="Italic" />
+        <TextBox x:Name="ImageURLTextBox" Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="0,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Cursor="None" FontStyle="Italic"/>
         <Button x:Name="CancelButton" Content="Annuller" Grid.Column="3" HorizontalAlignment="Left" Margin="135,113,0,0" VerticalAlignment="Top" Width="75" Click="CancelButton_Click"/>
         <Button x:Name="CreateImageButton" Content="Opret" Grid.Column="3" HorizontalAlignment="Left" Margin="135,80,0,0" VerticalAlignment="Top" Width="75" Click="CreateImageButton_Click"/>
 

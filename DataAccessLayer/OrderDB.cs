@@ -118,7 +118,12 @@ namespace Server.DataAccessLayer {
                             o.ID = reader.GetInt32(reader.GetOrdinal("orderID"));
                             o.Total = reader.GetDecimal(reader.GetOrdinal("total"));
                             o.DateCreated = reader.GetDateTime(reader.GetOrdinal("purchaseTime"));
-                            customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
+                            if (!reader.IsDBNull(reader.GetOrdinal("customerID"))) {
+                                customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
+                            }
+                            else {
+                                customerID = 0;
+                            }
                         }
                         reader.Close();
                         cmd.Parameters.Clear();
