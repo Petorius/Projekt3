@@ -93,8 +93,15 @@ namespace DesktopClient {
 
         private void Produkt_Søg_Ok_Clicked(object sender, RoutedEventArgs e) {
             try {
-                Product p = productController.Find(Int32.Parse(inputIDtextBox.Text));
+                Product p = new Product();
+                if (Int32.TryParse(inputIDtextBox.Text, out int i)) {
+                    p = productController.Find(i);
+                }
+                else {
+                    p = productController.FindByName(inputIDtextBox.Text);
+                }
                 if (p.ID > 0) {
+                    productShowID.Content = p.ID;
                     foundNamelabel.Content = p.Name;
                     foundPricelabel.Content = p.Price;
                     foundStocklabel.Content = p.Stock;
@@ -109,6 +116,14 @@ namespace DesktopClient {
                     ProductSøgShowReviews.ItemsSource = showReviewList;
                 }
                 else {
+                    productShowID.Content = "";
+                    foundNamelabel.Content = "";
+                    foundPricelabel.Content = "";
+                    foundStocklabel.Content = "";
+                    foundDescriptionlabel.Content = "";
+                    foundRatinglabel.Content = "";
+                    showReviewList = new List<string>();
+                    ProductSøgShowReviews.ItemsSource = showReviewList;
                     ProductSøgLabel.Content = "Produktet findes ikke";
                 }
 
@@ -138,7 +153,13 @@ namespace DesktopClient {
         private void Søgbutton_Click(object sender, RoutedEventArgs e) {
 
             try {
-                Product p = productController.Find(Int32.Parse(_inputIDtextBox.Text));
+                Product p = new Product();
+                if (Int32.TryParse(_inputIDtextBox.Text, out int i)) {
+                    p = productController.Find(i);
+                }
+                else {
+                    p = productController.FindByName(_inputIDtextBox.Text);
+                }
                 IsActiveButton.IsChecked = p.IsActive;
                 updateNameTextBox.Text = p.Name;
                 updatePriceTextBox.Text = p.Price.ToString();
@@ -218,7 +239,13 @@ namespace DesktopClient {
 
         private void addOrderlineButton_Click(object sender, RoutedEventArgs e) {
             try {
-                Product p = productController.FindByName(Ordre_Opret_Find_Product_TextBox.Text);
+                Product p = new Product();
+                if (Int32.TryParse(Ordre_Opret_Find_Product_TextBox.Text, out int i)) {
+                    p = productController.Find(i);
+                }
+                else {
+                    p = productController.FindByName(Ordre_Opret_Find_Product_TextBox.Text);
+                }
                 int quantity = Int32.Parse(Ordre_Opret_Antal_TextBox.Text);
                 decimal subTotal = p.Price * quantity;
                 Orderline ol = new Orderline(quantity, subTotal, p);
@@ -512,7 +539,13 @@ namespace DesktopClient {
 
         private void Ordre_Opdater_Tilføj_Ordrelinje_Knap_Click(object sender, RoutedEventArgs e) {
             try {
-                Product p = productController.FindByName(Ordre_Opdater_ProductName_TextBox.Text);
+                Product p = new Product();
+                if (Int32.TryParse(Ordre_Opdater_ProductName_TextBox.Text, out int i)) {
+                    p = productController.Find(i);
+                }
+                else {
+                    p = productController.FindByName(Ordre_Opdater_ProductName_TextBox.Text);
+                }
                 int quantity = Int32.Parse(Ordre_Opdater_Antal_TextBox.Text);
                 decimal subTotal = p.Price * quantity;
                 int orderID = Int32.Parse(Ordre_Opdater_Find_Ordre_TextBox.Text);

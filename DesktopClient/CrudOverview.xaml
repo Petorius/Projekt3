@@ -43,7 +43,7 @@
                         <TabItem Header="Søg">
                             <Grid Background="#FFE5E5E5" Margin="1,1,-1,-1.2">
                                 <TextBox x:Name="inputIDtextBox" HorizontalAlignment="Left" Height="23" Margin="201,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.388,0.557"/>
-                                <Label x:Name="searchByIDlabel" Content="Søg på ID" HorizontalAlignment="Left" Margin="42,43,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="searchByIDlabel" Content="Søg på ID/Navn" HorizontalAlignment="Left" Margin="42,43,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="namelabel" Content="Navn:" HorizontalAlignment="Left" Margin="42,112,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="foundNamelabel" Content="" HorizontalAlignment="Left" Margin="201,112,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="pricelabel" Content="Pris:" HorizontalAlignment="Left" Margin="42,158,0,0" VerticalAlignment="Top"/>
@@ -59,13 +59,15 @@
                                 <ListBox x:Name="ProductSøgShowReviews" HorizontalAlignment="Left" Height="204" Margin="351,43,0,0" VerticalAlignment="Top" Width="390"/>
                                 <Label Content="Anmeldelser af pågældende produkt:" HorizontalAlignment="Left" Margin="351,10,0,0" VerticalAlignment="Top" Width="139"/>
                                 <Button x:Name="Product_Search_Slet" Content="Slet anmeldelse" HorizontalAlignment="Left" Margin="581,13,0,0" VerticalAlignment="Top" Width="102" Click="Product_Search_Slet_Click"/>
+                                <Label Content="Id." HorizontalAlignment="Left" Margin="43,81,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="productShowID" Content="" HorizontalAlignment="Left" Margin="201,81,0,0" VerticalAlignment="Top" Width="120"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Opdater">
                             <Grid Background="#FFE5E5E5">
                                 <Label x:Name="updateProductText1" Content="" HorizontalAlignment="Center" Margin="463,194,9.6,0" VerticalAlignment="Top" Height="101" Width="321" FontSize="24"/>
                                 <TextBox x:Name="_inputIDtextBox" HorizontalAlignment="Left" Height="23" Margin="198,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.388,0.557"/>
-                                <Label x:Name="_searchByIDlabel" Content="Søg på ID" HorizontalAlignment="Left" Margin="40,21,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="_searchByIDlabel" Content="Søg på ID/Navn" HorizontalAlignment="Left" Margin="40,21,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="_namelabel" Content="Navn:" HorizontalAlignment="Left" Margin="40,90,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="updateNameTextBox" Text="" HorizontalAlignment="Left" Height="23" Width="120" Margin="198,90,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="_pricelabel" Content="Pris:" HorizontalAlignment="Left" Margin="40,136,0,0" VerticalAlignment="Top"/>
@@ -112,15 +114,15 @@
                                     <ColumnDefinition Width="59*"/>
                                     <ColumnDefinition Width="713*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label x:Name="Ordre_Opret_Find_Product_Label" Content="Find produkt på navn:" HorizontalAlignment="Left" Margin="161,84,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                                <TextBox x:Name="Ordre_Opret_Find_Product_TextBox" HorizontalAlignment="Left" Height="23" Margin="289,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontStyle="Italic" Grid.Column="1"/>
+                                <Label x:Name="Ordre_Opret_Find_Product_Label" Content="Find produkt på navn/ID" HorizontalAlignment="Left" Margin="161,84,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <TextBox x:Name="Ordre_Opret_Find_Product_TextBox" HorizontalAlignment="Left" Height="23" Margin="310.8,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontStyle="Italic" Grid.Column="1"/>
                                 <Label x:Name="Ordre_Opret_Antal" Content="Antal:" HorizontalAlignment="Left" Margin="161,133,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                                <TextBox x:Name="Ordre_Opret_Antal_TextBox" HorizontalAlignment="Left" Height="23" Margin="289,133,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontStyle="Italic" Grid.Column="1"/>
+                                <TextBox x:Name="Ordre_Opret_Antal_TextBox" HorizontalAlignment="Left" Height="23" Margin="310.8,133,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontStyle="Italic" Grid.Column="1"/>
                                 <Button x:Name="Ordre_Opret_Opret_Ordre_Knap" Content="Opret ordre" HorizontalAlignment="Left" Margin="519,331,0,0" VerticalAlignment="Top" Width="82" Click="addOrderButton_Click" Grid.Column="1"/>
                                 <Button x:Name="Ordre_Opret_Annuller_Ordre_Knap" Content="Annuller" HorizontalAlignment="Left" Margin="617,331,0,0" VerticalAlignment="Top" Width="75" Click="cancelButton_Click" Grid.Column="1"/>
                                 <Button x:Name="Ordre_Opret_Tilføj_Ordrelinje_Knap" Content="Tilføj ordrelinje" HorizontalAlignment="Left" Margin="289,199,0,0" VerticalAlignment="Top" Width="120" Click="addOrderlineButton_Click" Grid.Column="1"/>
                                 <Label x:Name="Ordre_Opret_Find_Kunde_Label" Content="Find kunde på mail:" HorizontalAlignment="Left" Margin="161,37,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                                <TextBox x:Name="Ordre_Opret_Find_Kunde_TextBox" HorizontalAlignment="Left" Height="23" Margin="289,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontStyle="Italic" Grid.Column="1"/>
+                                <TextBox x:Name="Ordre_Opret_Find_Kunde_TextBox" HorizontalAlignment="Left" Height="23" Margin="310.8,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontStyle="Italic" Grid.Column="1"/>
                                 <Label x:Name="Ordre_Opret_Tilføjet_Label" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="480,183,0,0" VerticalAlignment="Top" Height="65" Width="175"/>
                             </Grid>
                         </TabItem>
@@ -159,7 +161,7 @@
                                 <Button x:Name="Ordre_Opdater_Slet_Ordrelinje_Knap" Content="Slet" Grid.Column="1" HorizontalAlignment="Left" Margin="655,220,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Opdater_Slet_Ordrelinje_Knap_Click"/>
                                 <Button x:Name="Ordre_Opdater_Afslut_Knap" Content="Annuller" Grid.Column="1" HorizontalAlignment="Left" Margin="655,330,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Opdater_Afslut_Knap_Click"/>
                                 <TextBox x:Name="Ordre_Opdater_Antal_TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="210,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
-                                <Label x:Name="Ordre_Opdater_ProductID_Label" Content="Produkt navn:" Grid.Column="1" HorizontalAlignment="Left" Margin="80,181,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="Ordre_Opdater_ProductID_Label" Content="Produkt navn eller ID:" Grid.Column="1" HorizontalAlignment="Left" Margin="80.2,181,0,0" VerticalAlignment="Top" Width="130"/>
                                 <TextBox x:Name="Ordre_Opdater_ProductName_TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="210,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
                                 <Button x:Name="Ordre_Opdater_Søg_Knap" Content="Søg" Grid.Column="1" HorizontalAlignment="Left" Margin="370.2,61,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Opdater_Søg_Knap_Click"/>
                                 <Label x:Name="Ordre_Opdater_Label_Tilføjet" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="80,268,0,0" VerticalAlignment="Top" Height="57" Width="290"/>
