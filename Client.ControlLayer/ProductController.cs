@@ -13,7 +13,7 @@ namespace Client.ControlLayer {
             productService = new ProductService();
         }
 
-        public bool CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageUrl, string ImageName) {
+        public Product CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageUrl, string ImageName) {
             return productService.Create(name, price, stock, minStock, maxStock, description, ImageUrl, ImageName);
         }
 
@@ -27,11 +27,11 @@ namespace Client.ControlLayer {
             return productService.FindByName(name);
         }
 
-        public bool DeleteProduct(int ID) {
+        public Product DeleteProduct(int ID) {
             return productService.Delete(ID);
         }
 
-        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
+        public Product Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
             return productService.Update(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
 
@@ -39,11 +39,11 @@ namespace Client.ControlLayer {
             return productService.GetAllProducts().OrderByDescending(x => x.Sales);
         }
 
-        public bool CreateReview(string text, int productID, int userID) {
+        public Review CreateReview(string text, int productID, int userID) {
             return productService.CreateReview(text, productID, userID);
         }
 
-        public  bool DeleteReview(int reviewID, int reviewUserID) {
+        public  Review DeleteReview(int reviewID, int reviewUserID) {
             return productService.DeleteReview(reviewID, reviewUserID);
         }
 

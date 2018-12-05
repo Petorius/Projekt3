@@ -26,6 +26,9 @@ namespace Client.ServiceLayer.ServiceReference1 {
         private string DescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -77,6 +80,19 @@ namespace Client.ServiceLayer.ServiceReference1 {
                 if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
                     this.DescriptionField = value;
                     this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
                 }
             }
         }
@@ -244,6 +260,9 @@ namespace Client.ServiceLayer.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ImageSourceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -256,6 +275,19 @@ namespace Client.ServiceLayer.ServiceReference1 {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
+                }
             }
         }
         
@@ -308,6 +340,9 @@ namespace Client.ServiceLayer.ServiceReference1 {
         private System.DateTime DateCreatedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -335,6 +370,19 @@ namespace Client.ServiceLayer.ServiceReference1 {
                 if ((this.DateCreatedField.Equals(value) != true)) {
                     this.DateCreatedField = value;
                     this.RaisePropertyChanged("DateCreated");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
                 }
             }
         }
@@ -447,6 +495,9 @@ namespace Client.ServiceLayer.ServiceReference1 {
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FirstNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -506,6 +557,19 @@ namespace Client.ServiceLayer.ServiceReference1 {
                 if ((object.ReferenceEquals(this.EmailField, value) != true)) {
                     this.EmailField = value;
                     this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
                 }
             }
         }
@@ -601,6 +665,9 @@ namespace Client.ServiceLayer.ServiceReference1 {
         private System.DateTime DateCreatedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -644,6 +711,19 @@ namespace Client.ServiceLayer.ServiceReference1 {
                 if ((this.DateCreatedField.Equals(value) != true)) {
                     this.DateCreatedField = value;
                     this.RaisePropertyChanged("DateCreated");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
                 }
             }
         }
@@ -720,6 +800,9 @@ namespace Client.ServiceLayer.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -741,6 +824,19 @@ namespace Client.ServiceLayer.ServiceReference1 {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
+                }
             }
         }
         
@@ -824,10 +920,10 @@ namespace Client.ServiceLayer.ServiceReference1 {
     public interface IProductService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
-        bool CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName);
+        Client.ServiceLayer.ServiceReference1.Product CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
-        System.Threading.Tasks.Task<bool> CreateProductAsync(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName);
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> CreateProductAsync(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
         Client.ServiceLayer.ServiceReference1.Product FindProduct(int ID);
@@ -848,16 +944,16 @@ namespace Client.ServiceLayer.ServiceReference1 {
         System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductByNameAsync(string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteProduct", ReplyAction="http://tempuri.org/IProductService/DeleteProductResponse")]
-        bool DeleteProduct(int id);
+        Client.ServiceLayer.ServiceReference1.Product DeleteProduct(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteProduct", ReplyAction="http://tempuri.org/IProductService/DeleteProductResponse")]
-        System.Threading.Tasks.Task<bool> DeleteProductAsync(int id);
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> DeleteProductAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/Update", ReplyAction="http://tempuri.org/IProductService/UpdateResponse")]
-        bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);
+        Client.ServiceLayer.ServiceReference1.Product Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/Update", ReplyAction="http://tempuri.org/IProductService/UpdateResponse")]
-        System.Threading.Tasks.Task<bool> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetAllProducts", ReplyAction="http://tempuri.org/IProductService/GetAllProductsResponse")]
         Client.ServiceLayer.ServiceReference1.Product[] GetAllProducts();
@@ -866,16 +962,16 @@ namespace Client.ServiceLayer.ServiceReference1 {
         System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product[]> GetAllProductsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateReview", ReplyAction="http://tempuri.org/IProductService/CreateReviewResponse")]
-        bool CreateReview(string text, int productID, int userID);
+        Client.ServiceLayer.ServiceReference1.Review CreateReview(string text, int productID, int userID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateReview", ReplyAction="http://tempuri.org/IProductService/CreateReviewResponse")]
-        System.Threading.Tasks.Task<bool> CreateReviewAsync(string text, int productID, int userID);
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Review> CreateReviewAsync(string text, int productID, int userID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteReview", ReplyAction="http://tempuri.org/IProductService/DeleteReviewResponse")]
-        bool DeleteReview(int reviewID, int reviewUserID);
+        Client.ServiceLayer.ServiceReference1.Review DeleteReview(int reviewID, int reviewUserID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteReview", ReplyAction="http://tempuri.org/IProductService/DeleteReviewResponse")]
-        System.Threading.Tasks.Task<bool> DeleteReviewAsync(int reviewID, int reviewUserID);
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Review> DeleteReviewAsync(int reviewID, int reviewUserID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -905,11 +1001,11 @@ namespace Client.ServiceLayer.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public bool CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
+        public Client.ServiceLayer.ServiceReference1.Product CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
             return base.Channel.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
         }
         
-        public System.Threading.Tasks.Task<bool> CreateProductAsync(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> CreateProductAsync(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
             return base.Channel.CreateProductAsync(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
         }
         
@@ -937,19 +1033,19 @@ namespace Client.ServiceLayer.ServiceReference1 {
             return base.Channel.FindProductByNameAsync(name);
         }
         
-        public bool DeleteProduct(int id) {
+        public Client.ServiceLayer.ServiceReference1.Product DeleteProduct(int id) {
             return base.Channel.DeleteProduct(id);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteProductAsync(int id) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> DeleteProductAsync(int id) {
             return base.Channel.DeleteProductAsync(id);
         }
         
-        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
+        public Client.ServiceLayer.ServiceReference1.Product Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
             return base.Channel.Update(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
             return base.Channel.UpdateAsync(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
         
@@ -961,19 +1057,19 @@ namespace Client.ServiceLayer.ServiceReference1 {
             return base.Channel.GetAllProductsAsync();
         }
         
-        public bool CreateReview(string text, int productID, int userID) {
+        public Client.ServiceLayer.ServiceReference1.Review CreateReview(string text, int productID, int userID) {
             return base.Channel.CreateReview(text, productID, userID);
         }
         
-        public System.Threading.Tasks.Task<bool> CreateReviewAsync(string text, int productID, int userID) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Review> CreateReviewAsync(string text, int productID, int userID) {
             return base.Channel.CreateReviewAsync(text, productID, userID);
         }
         
-        public bool DeleteReview(int reviewID, int reviewUserID) {
+        public Client.ServiceLayer.ServiceReference1.Review DeleteReview(int reviewID, int reviewUserID) {
             return base.Channel.DeleteReview(reviewID, reviewUserID);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteReviewAsync(int reviewID, int reviewUserID) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Review> DeleteReviewAsync(int reviewID, int reviewUserID) {
             return base.Channel.DeleteReviewAsync(reviewID, reviewUserID);
         }
     }

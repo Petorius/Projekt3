@@ -33,6 +33,9 @@ namespace Client.ServiceLayer.UserReference {
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FirstNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -92,6 +95,19 @@ namespace Client.ServiceLayer.UserReference {
                 if ((object.ReferenceEquals(this.EmailField, value) != true)) {
                     this.EmailField = value;
                     this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
                 }
             }
         }
@@ -226,6 +242,9 @@ namespace Client.ServiceLayer.UserReference {
         private System.DateTime DateCreatedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -269,6 +288,19 @@ namespace Client.ServiceLayer.UserReference {
                 if ((this.DateCreatedField.Equals(value) != true)) {
                     this.DateCreatedField = value;
                     this.RaisePropertyChanged("DateCreated");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
                 }
             }
         }
@@ -348,6 +380,9 @@ namespace Client.ServiceLayer.UserReference {
         private System.DateTime DateCreatedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -375,6 +410,19 @@ namespace Client.ServiceLayer.UserReference {
                 if ((this.DateCreatedField.Equals(value) != true)) {
                     this.DateCreatedField = value;
                     this.RaisePropertyChanged("DateCreated");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
                 }
             }
         }
@@ -438,6 +486,9 @@ namespace Client.ServiceLayer.UserReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -459,6 +510,19 @@ namespace Client.ServiceLayer.UserReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
+                }
             }
         }
         
@@ -550,6 +614,9 @@ namespace Client.ServiceLayer.UserReference {
         private string DescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -601,6 +668,19 @@ namespace Client.ServiceLayer.UserReference {
                 if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
                     this.DescriptionField = value;
                     this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
                 }
             }
         }
@@ -768,6 +848,9 @@ namespace Client.ServiceLayer.UserReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ImageSourceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -780,6 +863,19 @@ namespace Client.ServiceLayer.UserReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
+                }
             }
         }
         
@@ -842,16 +938,16 @@ namespace Client.ServiceLayer.UserReference {
         System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.Customer> GetCustomerByMailAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateCustomer", ReplyAction="http://tempuri.org/IUserService/UpdateCustomerResponse")]
-        bool UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
+        Client.ServiceLayer.UserReference.Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateCustomer", ReplyAction="http://tempuri.org/IUserService/UpdateCustomerResponse")]
-        System.Threading.Tasks.Task<bool> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
+        System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.Customer> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
-        bool DeleteUser(string email);
+        Client.ServiceLayer.UserReference.User DeleteUser(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
-        System.Threading.Tasks.Task<bool> DeleteUserAsync(string email);
+        System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.User> DeleteUserAsync(string email);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -905,19 +1001,19 @@ namespace Client.ServiceLayer.UserReference {
             return base.Channel.GetCustomerByMailAsync(email);
         }
         
-        public bool UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
+        public Client.ServiceLayer.UserReference.Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
             return base.Channel.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.Customer> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
             return base.Channel.UpdateCustomerAsync(firstName, lastName, phone, email, address, zipCode, city);
         }
         
-        public bool DeleteUser(string email) {
+        public Client.ServiceLayer.UserReference.User DeleteUser(string email) {
             return base.Channel.DeleteUser(email);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteUserAsync(string email) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.User> DeleteUserAsync(string email) {
             return base.Channel.DeleteUserAsync(email);
         }
     }

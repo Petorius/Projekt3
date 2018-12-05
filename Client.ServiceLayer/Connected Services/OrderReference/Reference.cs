@@ -23,6 +23,9 @@ namespace Client.ServiceLayer.OrderReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -44,6 +47,19 @@ namespace Client.ServiceLayer.OrderReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
+                }
             }
         }
         
@@ -135,6 +151,9 @@ namespace Client.ServiceLayer.OrderReference {
         private string DescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -186,6 +205,19 @@ namespace Client.ServiceLayer.OrderReference {
                 if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
                     this.DescriptionField = value;
                     this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
                 }
             }
         }
@@ -353,6 +385,9 @@ namespace Client.ServiceLayer.OrderReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ImageSourceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -365,6 +400,19 @@ namespace Client.ServiceLayer.OrderReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
+                }
             }
         }
         
@@ -417,6 +465,9 @@ namespace Client.ServiceLayer.OrderReference {
         private System.DateTime DateCreatedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -444,6 +495,19 @@ namespace Client.ServiceLayer.OrderReference {
                 if ((this.DateCreatedField.Equals(value) != true)) {
                     this.DateCreatedField = value;
                     this.RaisePropertyChanged("DateCreated");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
                 }
             }
         }
@@ -556,6 +620,9 @@ namespace Client.ServiceLayer.OrderReference {
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FirstNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -615,6 +682,19 @@ namespace Client.ServiceLayer.OrderReference {
                 if ((object.ReferenceEquals(this.EmailField, value) != true)) {
                     this.EmailField = value;
                     this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
                 }
             }
         }
@@ -710,6 +790,9 @@ namespace Client.ServiceLayer.OrderReference {
         private System.DateTime DateCreatedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -753,6 +836,19 @@ namespace Client.ServiceLayer.OrderReference {
                 if ((this.DateCreatedField.Equals(value) != true)) {
                     this.DateCreatedField = value;
                     this.RaisePropertyChanged("DateCreated");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
                 }
             }
         }
@@ -824,16 +920,16 @@ namespace Client.ServiceLayer.OrderReference {
     public interface IOrderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrderLine", ReplyAction="http://tempuri.org/IOrderService/CreateOrderLineResponse")]
-        bool CreateOrderLine(int quantity, decimal subTotal, int ID);
+        Client.ServiceLayer.OrderReference.OrderLine CreateOrderLine(int quantity, decimal subTotal, int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrderLine", ReplyAction="http://tempuri.org/IOrderService/CreateOrderLineResponse")]
-        System.Threading.Tasks.Task<bool> CreateOrderLineAsync(int quantity, decimal subTotal, int ID);
+        System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.OrderLine> CreateOrderLineAsync(int quantity, decimal subTotal, int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrderLineInDesktop", ReplyAction="http://tempuri.org/IOrderService/CreateOrderLineInDesktopResponse")]
-        bool CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID);
+        Client.ServiceLayer.OrderReference.OrderLine CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrderLineInDesktop", ReplyAction="http://tempuri.org/IOrderService/CreateOrderLineInDesktopResponse")]
-        System.Threading.Tasks.Task<bool> CreateOrderLineInDesktopAsync(int quantity, decimal subTotal, int productID, int orderID);
+        System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.OrderLine> CreateOrderLineInDesktopAsync(int quantity, decimal subTotal, int productID, int orderID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrder", ReplyAction="http://tempuri.org/IOrderService/CreateOrderResponse")]
         Client.ServiceLayer.OrderReference.Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email, int number, Client.ServiceLayer.OrderReference.OrderLine[] ol);
@@ -854,28 +950,28 @@ namespace Client.ServiceLayer.OrderReference {
         System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.OrderLine> FindOrderLineAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/UpdateOrderLine", ReplyAction="http://tempuri.org/IOrderService/UpdateOrderLineResponse")]
-        bool UpdateOrderLine(int ID, decimal subTotal, int quantity);
+        Client.ServiceLayer.OrderReference.OrderLine UpdateOrderLine(int ID, decimal subTotal, int quantity);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/UpdateOrderLine", ReplyAction="http://tempuri.org/IOrderService/UpdateOrderLineResponse")]
-        System.Threading.Tasks.Task<bool> UpdateOrderLineAsync(int ID, decimal subTotal, int quantity);
+        System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.OrderLine> UpdateOrderLineAsync(int ID, decimal subTotal, int quantity);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrderLine", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderLineResponse")]
-        bool DeleteOrderLine(int ID, decimal subTotal, int quantity);
+        Client.ServiceLayer.OrderReference.OrderLine DeleteOrderLine(int ID, decimal subTotal, int quantity);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrderLine", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderLineResponse")]
-        System.Threading.Tasks.Task<bool> DeleteOrderLineAsync(int ID, decimal subTotal, int quantity);
+        System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.OrderLine> DeleteOrderLineAsync(int ID, decimal subTotal, int quantity);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrderLineInDesktop", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderLineInDesktopResponse")]
-        bool DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID);
+        Client.ServiceLayer.OrderReference.OrderLine DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrderLineInDesktop", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderLineInDesktopResponse")]
-        System.Threading.Tasks.Task<bool> DeleteOrderLineInDesktopAsync(int ID, decimal subTotal, int quantity, int orderLineID);
+        System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.OrderLine> DeleteOrderLineInDesktopAsync(int ID, decimal subTotal, int quantity, int orderLineID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrder", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderResponse")]
-        bool DeleteOrder(int ID);
+        Client.ServiceLayer.OrderReference.Order DeleteOrder(int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrder", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderResponse")]
-        System.Threading.Tasks.Task<bool> DeleteOrderAsync(int ID);
+        System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.Order> DeleteOrderAsync(int ID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -905,19 +1001,19 @@ namespace Client.ServiceLayer.OrderReference {
                 base(binding, remoteAddress) {
         }
         
-        public bool CreateOrderLine(int quantity, decimal subTotal, int ID) {
+        public Client.ServiceLayer.OrderReference.OrderLine CreateOrderLine(int quantity, decimal subTotal, int ID) {
             return base.Channel.CreateOrderLine(quantity, subTotal, ID);
         }
         
-        public System.Threading.Tasks.Task<bool> CreateOrderLineAsync(int quantity, decimal subTotal, int ID) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.OrderLine> CreateOrderLineAsync(int quantity, decimal subTotal, int ID) {
             return base.Channel.CreateOrderLineAsync(quantity, subTotal, ID);
         }
         
-        public bool CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
+        public Client.ServiceLayer.OrderReference.OrderLine CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
             return base.Channel.CreateOrderLineInDesktop(quantity, subTotal, productID, orderID);
         }
         
-        public System.Threading.Tasks.Task<bool> CreateOrderLineInDesktopAsync(int quantity, decimal subTotal, int productID, int orderID) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.OrderLine> CreateOrderLineInDesktopAsync(int quantity, decimal subTotal, int productID, int orderID) {
             return base.Channel.CreateOrderLineInDesktopAsync(quantity, subTotal, productID, orderID);
         }
         
@@ -945,35 +1041,35 @@ namespace Client.ServiceLayer.OrderReference {
             return base.Channel.FindOrderLineAsync(id);
         }
         
-        public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {
+        public Client.ServiceLayer.OrderReference.OrderLine UpdateOrderLine(int ID, decimal subTotal, int quantity) {
             return base.Channel.UpdateOrderLine(ID, subTotal, quantity);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateOrderLineAsync(int ID, decimal subTotal, int quantity) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.OrderLine> UpdateOrderLineAsync(int ID, decimal subTotal, int quantity) {
             return base.Channel.UpdateOrderLineAsync(ID, subTotal, quantity);
         }
         
-        public bool DeleteOrderLine(int ID, decimal subTotal, int quantity) {
+        public Client.ServiceLayer.OrderReference.OrderLine DeleteOrderLine(int ID, decimal subTotal, int quantity) {
             return base.Channel.DeleteOrderLine(ID, subTotal, quantity);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteOrderLineAsync(int ID, decimal subTotal, int quantity) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.OrderLine> DeleteOrderLineAsync(int ID, decimal subTotal, int quantity) {
             return base.Channel.DeleteOrderLineAsync(ID, subTotal, quantity);
         }
         
-        public bool DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID) {
+        public Client.ServiceLayer.OrderReference.OrderLine DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID) {
             return base.Channel.DeleteOrderLineInDesktop(ID, subTotal, quantity, orderLineID);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteOrderLineInDesktopAsync(int ID, decimal subTotal, int quantity, int orderLineID) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.OrderLine> DeleteOrderLineInDesktopAsync(int ID, decimal subTotal, int quantity, int orderLineID) {
             return base.Channel.DeleteOrderLineInDesktopAsync(ID, subTotal, quantity, orderLineID);
         }
         
-        public bool DeleteOrder(int ID) {
+        public Client.ServiceLayer.OrderReference.Order DeleteOrder(int ID) {
             return base.Channel.DeleteOrder(ID);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteOrderAsync(int ID) {
+        public System.Threading.Tasks.Task<Client.ServiceLayer.OrderReference.Order> DeleteOrderAsync(int ID) {
             return base.Channel.DeleteOrderAsync(ID);
         }
     }

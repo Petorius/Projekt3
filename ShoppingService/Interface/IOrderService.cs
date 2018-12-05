@@ -7,10 +7,10 @@ namespace Server.ServiceLayer {
     public interface IOrderService {
 
         [OperationContract]
-        bool CreateOrderLine(int quantity, decimal subTotal, int ID);
+        OrderLine CreateOrderLine(int quantity, decimal subTotal, int ID);
 
         [OperationContract]
-        bool CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID);
+        OrderLine CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID);
 
         [OperationContract]
         Order CreateOrder(string firstName, string lastName, string street,
@@ -23,15 +23,15 @@ namespace Server.ServiceLayer {
         OrderLine FindOrderLine(int id);
 
         [OperationContract]
-        bool UpdateOrderLine(int ID, decimal subTotal, int quantity);
+        OrderLine UpdateOrderLine(int ID, decimal subTotal, int quantity);
 
         [OperationContract]
-        bool DeleteOrderLine(int ID, decimal subTotal, int quantity);
+        OrderLine DeleteOrderLine(int ID, decimal subTotal, int quantity);
 
         [OperationContract]
-        bool DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID);
+        OrderLine DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID);
 
         [OperationContract]
-        bool DeleteOrder(int ID);
+        Order DeleteOrder(int ID);
     }
 }

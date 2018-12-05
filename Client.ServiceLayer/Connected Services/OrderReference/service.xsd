@@ -13,7 +13,7 @@
   <xs:element name="CreateOrderLineResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="CreateOrderLineResult" type="xs:boolean" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="CreateOrderLineResult" nillable="true" type="q1:OrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -30,7 +30,7 @@
   <xs:element name="CreateOrderLineInDesktopResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="CreateOrderLineInDesktopResult" type="xs:boolean" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="CreateOrderLineInDesktopResult" nillable="true" type="q2:OrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -44,14 +44,14 @@
         <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="number" type="xs:int" />
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="ol" nillable="true" type="q1:ArrayOfOrderLine" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="ol" nillable="true" type="q3:ArrayOfOrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateOrderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="CreateOrderResult" nillable="true" type="q2:Order" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="CreateOrderResult" nillable="true" type="q4:Order" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -65,7 +65,7 @@
   <xs:element name="FindOrderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="FindOrderResult" nillable="true" type="q3:Order" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="FindOrderResult" nillable="true" type="q5:Order" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -79,7 +79,7 @@
   <xs:element name="FindOrderLineResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="FindOrderLineResult" nillable="true" type="q4:OrderLine" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="FindOrderLineResult" nillable="true" type="q6:OrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -95,7 +95,7 @@
   <xs:element name="UpdateOrderLineResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateOrderLineResult" type="xs:boolean" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="UpdateOrderLineResult" nillable="true" type="q7:OrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -111,7 +111,7 @@
   <xs:element name="DeleteOrderLineResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="DeleteOrderLineResult" type="xs:boolean" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="DeleteOrderLineResult" nillable="true" type="q8:OrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -128,7 +128,7 @@
   <xs:element name="DeleteOrderLineInDesktopResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="DeleteOrderLineInDesktopResult" type="xs:boolean" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="DeleteOrderLineInDesktopResult" nillable="true" type="q9:OrderLine" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -142,7 +142,7 @@
   <xs:element name="DeleteOrderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="DeleteOrderResult" type="xs:boolean" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="DeleteOrderResult" nillable="true" type="q10:Order" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

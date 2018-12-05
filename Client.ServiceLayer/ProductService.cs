@@ -11,20 +11,20 @@ namespace Client.ServiceLayer {
             myProxy = new ServiceReference1.ProductServiceClient();
         }
 
-        public bool Create(string name, decimal price, int stock, int minStock, int maxStock,
+        public Product Create(string name, decimal price, int stock, int minStock, int maxStock,
                         string description, string ImageURL, string ImageName) {
-            return myProxy.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
+            return BuildClientProduct(myProxy.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName));
         }
 
-        public bool Delete(int id) {
-            return myProxy.DeleteProduct(id);
+        public Product Delete(int id) {
+            return BuildClientProduct(myProxy.DeleteProduct(id));
         }
 
         public Product Find(int ID) {
             var p = myProxy.FindProduct(ID);
             Product product = new Product();
                 if (p != null) {
-                    product = BuildServiceProduct(p);
+                    product = BuildClientProduct(p);
                 }
             
             return product;
@@ -37,7 +37,7 @@ namespace Client.ServiceLayer {
 
             if (products != null) {
                 foreach (var p in products) {
-                    Product product = BuildServiceProduct(p);
+                    Product product = BuildClientProduct(p);
                     productList.Add(product);
                 }
             }
@@ -45,7 +45,7 @@ namespace Client.ServiceLayer {
         }
 
         // Helping method used to convert a product from server.domain to client.domain.
-        private Product BuildServiceProduct(ServiceReference1.Product p) {
+        private Product BuildClientProduct(ServiceReference1.Product p) {
             Product product = new Product {
                 ID = p.ID,
                 Name = p.Name,
@@ -57,7 +57,10 @@ namespace Client.ServiceLayer {
                 MaxStock = p.MaxStock,
                 Sales = p.Sales,
                 IsActive = p.IsActive
+                
             };
+            product.ErrorMessage = p.ErrorMessage;
+            
 
             foreach (var i in p.Images) {
                 Image image = new Image {
@@ -81,43 +84,43 @@ namespace Client.ServiceLayer {
             return product;
         }
 
-        public bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
+        public Product Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
             ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
-            return myProxy.Update(ID, name, price, stock, minStock, maxStock, description, isActive);
+            return BuildClientProduct(myProxy.Update(ID, name, price, stock, minStock, maxStock, description, isActive));
         }
 
         public Product FindByName(string name) {
             var p = myProxy.FindProductByName(name);
             Product product = new Product();
             if (p != null) {
-                product = BuildServiceProduct(p);
+                product = BuildClientProduct(p);
             }
 
             return product;
         }
 
-        public bool CreateReview(string text, int productID, int userID) {
-            return myProxy.CreateReview(text, productID, userID);
+        public Review CreateReview(string text, int productID, int userID) {
+            return BuildClientReview(myProxy.CreateReview(text, productID, userID));
         }
 
-        public bool DeleteReview(int reviewID, int reviewUserID) {
-            return myProxy.DeleteReview(reviewID, reviewUserID);
+        public Review DeleteReview(int reviewID, int reviewUserID) {
+            return BuildClientReview(myProxy.DeleteReview(reviewID, reviewUserID));
         }
 
         public Review FindReview(int ID) {
             var r = myProxy.FindReview(ID);
             Review review = new Review();
             if (r != null) {
-                review = BuildServiceReview(r);
+                review = BuildClientReview(r);
             }
-
             return review;
         }
 
-        private Review BuildServiceReview(ServiceReference1.Review r) {
+        private Review BuildClientReview(ServiceReference1.Review r) {
             Review review = new Review();
             review.User = new User();
             review.ID = r.ID;
+            review.ErrorMessage = r.ErrorMessage;
             review.Text = r.Text;
             review.DateCreated = r.DateCreated;
             review.User.ID = r.User.ID;

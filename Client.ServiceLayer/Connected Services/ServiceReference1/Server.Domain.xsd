@@ -3,6 +3,7 @@
   <xs:complexType name="Product">
     <xs:sequence>
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="Images" nillable="true" type="tns:ArrayOfImage" />
       <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
@@ -25,6 +26,7 @@
   <xs:element name="ArrayOfImage" nillable="true" type="tns:ArrayOfImage" />
   <xs:complexType name="Image">
     <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ImageSource" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
@@ -39,6 +41,7 @@
   <xs:complexType name="Review">
     <xs:sequence>
       <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
@@ -61,6 +64,7 @@
       <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
@@ -79,6 +83,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer" />
       <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="Orderlines" nillable="true" type="tns:ArrayOfOrderLine" />
       <xs:element minOccurs="0" name="Total" type="xs:decimal" />
@@ -94,6 +99,7 @@
   <xs:element name="ArrayOfOrderLine" nillable="true" type="tns:ArrayOfOrderLine" />
   <xs:complexType name="OrderLine">
     <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="OrderID" type="xs:int" />
       <xs:element minOccurs="0" name="Product" nillable="true" type="tns:Product" />

@@ -48,22 +48,24 @@ namespace Server.BusinessLogic {
 
         // Validates an users attempt to login. Returns true if password matches with the email
         // and returns false otherwise.
-        public bool ValidatePassword(string email, string password) {
-            bool res = false;
+        public User ValidatePassword(string email, string password) {
             User user = userDB.GetUser(email);
-            if(user.ID > 0) {
-                res = account.ValidateLogin(user.Salt, user.HashPassword, password);
+            if(user.ErrorMessage == "") {
+                if(!account.ValidateLogin(user.Salt, user.HashPassword, password)) {
+                    user.ErrorMessage = "Forkert email eller kodeord";
+                }
             }
-            return res;
+            return user;
         }
 
-        public bool ValidateAdminLogin(string email, string password) {
-            bool res = false;
+        public Admin ValidateAdminLogin(string email, string password) {
             Admin admin = adminDB.GetAdmin(email);
-            if(admin.ID > 0) {
-                res = account.ValidateLogin(admin.Salt, admin.HashPassword, password);
+            if(admin.ErrorMessage == "") {
+                if(!account.ValidateLogin(admin.Salt, admin.HashPassword, password)) {
+                    admin.ErrorMessage = "Forkert email eller kodeord";
+                }
             }
-            return res;
+            return admin;
         }
 
         public Admin CreateAdminLogin(string email, string password) {

@@ -14,19 +14,7 @@ namespace Client.ServiceLayer {
         }
 
         public Customer GetCustomerByEmail(string email) {
-            var customer = myProxy.GetCustomerByMail(email);
-            Customer c = new Customer();
-            if (customer != null) {
-                c.ID = customer.ID;
-                c.FirstName = customer.FirstName;
-                c.LastName = customer.LastName;
-                c.Phone = customer.Phone;
-                c.Email = customer.Email;
-                c.Address = customer.Address;
-                c.ZipCode = customer.ZipCode;
-                c.City = customer.City;
-            }
-            return c;
+            return BuildCustomer(myProxy.GetCustomerByMail(email));
         }
 
         public User GetUserWithOrder(string email) {
@@ -35,31 +23,46 @@ namespace Client.ServiceLayer {
 
         private User BuildUser(UserReference.User u) {
             User user = new User();
-            if (u != null) {
-                user.ID = u.ID;
-                user.FirstName = u.FirstName;
-                user.LastName = u.LastName;
-                user.Phone = u.Phone;
-                user.Email = u.Email;
-                user.Address = u.Address;
-                user.ZipCode = u.ZipCode;
-                user.City = u.City;
-            }
+            user.ID = u.ID;
+            user.FirstName = u.FirstName;
+            user.LastName = u.LastName;
+            user.Phone = u.Phone;
+            user.Email = u.Email;
+            user.Address = u.Address;
+            user.ZipCode = u.ZipCode;
+            user.City = u.City;
+            user.ErrorMessage = u.ErrorMessage;
+
             foreach (var order in u.Orders) {
                 Order o = new Order();
                 o.ID = order.ID;
+                o.ErrorMessage = order.ErrorMessage;
                 user.Orders.Add(o);
+
             }
             return user;
-
         }
 
-        public bool UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
-            return myProxy.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city);
+        public Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
+            return BuildCustomer(myProxy.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city));
         }
 
-        public bool DeleteUser(string email) {
-            return myProxy.DeleteUser(email);
+        public User DeleteUser(string email) {
+            return BuildUser(myProxy.DeleteUser(email));
+        }
+
+        private Customer BuildCustomer(UserReference.Customer c) {
+            Customer customer = new Customer();
+            customer.ID = c.ID;
+            customer.FirstName = c.FirstName;
+            customer.LastName = c.LastName;
+            customer.Phone = c.Phone;
+            customer.Email = c.Email;
+            customer.Address = c.Address;
+            customer.ZipCode = c.ZipCode;
+            customer.City = c.City;
+            customer.ErrorMessage = c.ErrorMessage;
+            return customer;
         }
     }
 }

@@ -59,7 +59,7 @@
   <xs:element name="UpdateCustomerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateCustomerResult" type="xs:boolean" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="UpdateCustomerResult" nillable="true" type="q4:Customer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -73,7 +73,7 @@
   <xs:element name="DeleteUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="DeleteUserResult" type="xs:boolean" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="DeleteUserResult" nillable="true" type="q5:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

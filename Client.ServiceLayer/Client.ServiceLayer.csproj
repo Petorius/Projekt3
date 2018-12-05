@@ -90,6 +90,15 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\LoginReference\Client.ServiceLayer.LoginReference.Admin.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\LoginReference\Client.ServiceLayer.LoginReference.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\LoginReference\Server.Domain.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\LoginReference\service.wsdl" />
     <None Include="Connected Services\LoginReference\service.xsd">
       <SubType>Designer</SubType>

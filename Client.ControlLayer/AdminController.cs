@@ -1,4 +1,5 @@
-﻿using Client.ServiceLayer;
+﻿using Client.Domain;
+using Client.ServiceLayer;
 using Client.ServiceLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -13,16 +14,16 @@ namespace Client.ControlLayer {
             loginService = new LoginService();
         }
 
-        public bool ValidateAdminLogin(string email, string password) {
+        public Admin ValidateAdminLogin(string email, string password) {
             return loginService.ValidateAdminLogin(email, password);
         }
 
-        public bool CreateUserWithPassword(string firstName, string lastName, string street, int zip,
+        public User CreateUserWithPassword(string firstName, string lastName, string street, int zip,
                                         string city, string email, int number, string password) {
             return loginService.CreateUserWithPassword(firstName, lastName, street, zip, city, email, number, password);
         }
 
-        public bool ValidatePassword(string email, string password) {
+        public User ValidatePassword(string email, string password) {
             return loginService.ValidatePassword(email, password);
         }
     }

@@ -21,19 +21,19 @@ namespace Client.ServiceLayer {
             return BuildOrderFromServices(order, ol.ToList());
         }
 
-        public bool CreateOrderLine(int quantity, decimal subTotal, int ID) {
-            return myProxy.CreateOrderLine(quantity, subTotal, ID);
+        public Orderline CreateOrderLine(int quantity, decimal subTotal, int ID) {
+            return BuildClientOrderlines(myProxy.CreateOrderLine(quantity, subTotal, ID));
         }
 
-        public bool DeleteOrderLine(int ID, decimal subTotal, int quantity) {
-            return myProxy.DeleteOrderLine(ID, subTotal, quantity);
+        public Orderline DeleteOrderLine(int ID, decimal subTotal, int quantity) {
+            return BuildClientOrderlines(myProxy.DeleteOrderLine(ID, subTotal, quantity));
         }
 
-        public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {
-            return myProxy.UpdateOrderLine(ID, subTotal, quantity);
+        public Orderline UpdateOrderLine(int ID, decimal subTotal, int quantity) {
+            return BuildClientOrderlines(myProxy.UpdateOrderLine(ID, subTotal, quantity));
         }
         
-        // Helping method used to convert orderlines from server.domain to client.domain.
+        // Helping method used to convert orderlines from client.Domain to server.Domain.
         private List<OrderReference.OrderLine> GetServiceOrderLines(IEnumerable<Orderline> pols) {
             OrderReference.OrderLine tempOl;
             OrderReference.Product tempProduct;
@@ -55,6 +55,15 @@ namespace Client.ServiceLayer {
             return serviceOrderLines;
         }
 
+        private Orderline BuildClientOrderlines(OrderReference.OrderLine orderline) {
+            Orderline ol = new Orderline();
+            ol.ID = orderline.ID;
+            ol.Quantity = orderline.Quantity;
+            ol.SubTotal = orderline.SubTotal;
+            ol.ErrorMessage = orderline.ErrorMessage;
+            return ol;
+        }
+
         // Helping method used to convert an order from server.domain to client.domain.
         private Order BuildOrderFromServices(OrderReference.Order order, List<Orderline> ol) {
 
@@ -68,6 +77,7 @@ namespace Client.ServiceLayer {
                 Total = order.Total,
                 Validation = order.Validation
             };
+            o.ErrorMessage = order.ErrorMessage;
             return o;
         }
 
@@ -76,13 +86,13 @@ namespace Client.ServiceLayer {
             var o = myProxy.FindOrder(id);
             Order order = new Order();
             if (o != null) {
-                order = BuildServiceOrder(o);
+                order = BuildClientOrder(o);
             }
 
             return order;
         }
 
-        private Order BuildServiceOrder(OrderReference.Order o) {
+        private Order BuildClientOrder(OrderReference.Order o) {
 
             List<Orderline> orderlines = new List<Orderline>();
 
@@ -117,16 +127,16 @@ namespace Client.ServiceLayer {
             return order;
         }
 
-        public bool DeleteOrder(int ID) {
-            return myProxy.DeleteOrder(ID);
+        public Order DeleteOrder(int ID) {
+            return BuildClientOrder(myProxy.DeleteOrder(ID));
         }
 
-        public bool CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
-            return myProxy.CreateOrderLineInDesktop(quantity, subTotal, productID, orderID);
+        public Orderline CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
+            return BuildClientOrderlines(myProxy.CreateOrderLineInDesktop(quantity, subTotal, productID, orderID));
         }
 
-        public bool DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID) {
-            return myProxy.DeleteOrderLineInDesktop(ID, subTotal, quantity, orderLineID);
+        public Orderline DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID) {
+            return BuildClientOrderlines(myProxy.DeleteOrderLineInDesktop(ID, subTotal, quantity, orderLineID));
         }
 
         public Orderline FindOrderLine(int id) {

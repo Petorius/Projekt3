@@ -25,32 +25,32 @@ namespace Server.ServiceLayer {
             number, ol);
         }
 
-        public bool CreateOrderLine(int quantity, decimal subTotal, int id) {
+        public OrderLine CreateOrderLine(int quantity, decimal subTotal, int id) {
             Product p = productDB.Get(id);
             OrderLine ol = new OrderLine(quantity, subTotal, p);
             return orderLineDB.Create(ol);
         }
 
-        public bool CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
+        public OrderLine CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
             Product p = productDB.Get(productID);
             OrderLine ol = new OrderLine(quantity, subTotal, p);
             ol.OrderID = orderID;
             return orderLineDB.CreateInDesktop(ol);
         }
 
-        public bool DeleteOrder(int ID) {
+        public Order DeleteOrder(int ID) {
             Order o = orderDB.Get(ID);
             return orderLogic.DeleteOrder(o);
             
         }
 
-        public bool DeleteOrderLine(int ID, decimal subTotal, int quantity) {
+        public OrderLine DeleteOrderLine(int ID, decimal subTotal, int quantity) {
             Product p = productDB.Get(ID);
             OrderLine ol = new OrderLine(quantity, subTotal, p);
             return orderLineDB.Delete(ol);
         }
 
-        public bool DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID) {
+        public OrderLine DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID) {
             Product p = productDB.Get(ID);
             OrderLine ol = new OrderLine(quantity, subTotal, p);
             ol.ID = orderLineID;
@@ -65,7 +65,7 @@ namespace Server.ServiceLayer {
             return orderLineDB.Get(id);
         }
 
-        public bool UpdateOrderLine(int ID, decimal subTotal, int quantity) {
+        public OrderLine UpdateOrderLine(int ID, decimal subTotal, int quantity) {
 
             Product p = productDB.Get(ID);
             OrderLine ol = new OrderLine(quantity, subTotal, p);

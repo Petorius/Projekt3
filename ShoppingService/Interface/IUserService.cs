@@ -15,9 +15,9 @@ namespace Server.ServiceLayer {
         Customer GetCustomerByMail(string email);
 
         [OperationContract]
-        bool UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
+        Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
 
         [OperationContract]
-        bool DeleteUser(string email);
+        User DeleteUser(string email);
     }
 }

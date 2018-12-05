@@ -20,7 +20,7 @@ namespace Server.ServiceLayer {
             reviewDB = new ReviewDB();
         }
 
-        public bool CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
+        public Product CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
             Product p = new Product(name, price, stock, minStock, maxStock, description);
             Image i = new Image {
                 ImageSource = ImageURL,
@@ -31,17 +31,17 @@ namespace Server.ServiceLayer {
             return productDb.Create(p);
         }
 
-        public bool CreateReview(string text, int productID, int userID) {
+        public Review CreateReview(string text, int productID, int userID) {
             Review review = new Review(text);
             return reviewDB.CreateReview(review, productID, userID);
         }
 
-        public bool DeleteProduct(int id) {
+        public Product DeleteProduct(int id) {
             Product p = productDb.Get(id);
             return productDb.Delete(p);
         }
 
-        public bool DeleteReview(int reviewID, int reviewUserID) {
+        public Review DeleteReview(int reviewID, int reviewUserID) {
             Review r = new Review();
             r.User = new User();
             r.ID = reviewID;
@@ -68,7 +68,7 @@ namespace Server.ServiceLayer {
             return productDb.GetAll();
         }
 
-        public bool Update(int id, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
+        public Product Update(int id, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
             Product p = new Product(name, price, stock, minStock, maxStock, description);
             p.IsActive = isActive;
             p.ID = id;

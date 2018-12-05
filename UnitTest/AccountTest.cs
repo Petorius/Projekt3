@@ -35,9 +35,9 @@ namespace UnitTest {
             string email = "g-star-raw@gmail.gcom";
             string password = "SuperTester123!";
 
-            bool validation = userLogic.ValidatePassword(email, password);
+            User user = userLogic.ValidatePassword(email, password);
 
-            Assert.AreEqual(true, validation);
+            Assert.AreEqual(user.ErrorMessage, "");
         }
 
         [TestMethod]
@@ -45,9 +45,9 @@ namespace UnitTest {
             string email = "g-star-raw@gmail.gcom";
             string password = "WrongPassword";
 
-            bool validation = userLogic.ValidatePassword(email, password);
+            User user = userLogic.ValidatePassword(email, password);
 
-            Assert.AreEqual(false, validation);
+            Assert.AreEqual(user.ErrorMessage, "");
         }
 
         [TestMethod]

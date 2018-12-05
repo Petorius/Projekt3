@@ -4,8 +4,7 @@ using Server.Domain;
 
 namespace Server.ServiceLayer {
     [ServiceContract]
-    public interface ITagService
-    {
+    public interface ITagService {
         [OperationContract]
         Tag FindTagByName(string name);
     }
