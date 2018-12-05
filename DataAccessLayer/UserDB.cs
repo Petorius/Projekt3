@@ -21,8 +21,8 @@ namespace Server.DataAccessLayer {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
         }
 
-        public bool CreateUser(int key, string salt, string hashValue) {
-            bool isCompleted = false;
+        public User CreateUser(int key, string salt, string hashValue) {
+            User user = new User();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand()) {
@@ -32,12 +32,11 @@ namespace Server.DataAccessLayer {
                         cmd.Parameters.AddWithValue("HashPassword", hashValue);
                         cmd.Parameters.AddWithValue("Salt", salt);
                         cmd.ExecuteNonQuery();
-                        isCompleted = true;
                     }
-                    catch (SqlException) {
-                        isCompleted = false;
+                    catch (SqlException e) {
+                        user.ErrorMessage = ErrorHandling.Exception(e);
                     }
-                    return isCompleted;
+                    return user;
                 }
             }
         }
@@ -61,8 +60,8 @@ namespace Server.DataAccessLayer {
                         reader.Close();
                     }
                 }
-                catch (SqlException) {
-                    return null;
+                catch (SqlException e) {
+                    user.ErrorMessage = ErrorHandling.Exception(e);
                 }
 
             }

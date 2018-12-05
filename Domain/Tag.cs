@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
 
-namespace Server.Domain
-{
+namespace Server.Domain {
     [DataContract]
-    public class Tag
-    {
+    public class Tag {
         [DataMember]
         public int ID { get; set; }
         [DataMember]
@@ -21,5 +19,7 @@ namespace Server.Domain
         public Tag() {
             Products = new List<Product>();
         }
+
+
     }
 }

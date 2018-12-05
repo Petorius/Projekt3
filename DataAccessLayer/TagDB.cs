@@ -22,9 +22,9 @@ namespace Server.DataAccessLayer {
 
         public Tag Get(string name) {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
+                Tag t = new Tag();
                 try {
                     connection.Open();
-                    Tag t = new Tag();
                     using (SqlCommand cmd = connection.CreateCommand()) {
 
                         cmd.CommandText = "SELECT tagID From Tag Where Name = @Name";
@@ -50,13 +50,22 @@ namespace Server.DataAccessLayer {
                         }
                         productReader.Close();
                     }
-                    return t;
+
+                    // Error handling
+                    if (t.ID > 0) {
+                        return t;
+                    }
+                    else {
+                        t.ErrorMessage = "Kategorien findes ikke";
+                    }
                 }
-                catch (SqlException) {
-                    return null;
+                catch (SqlException e) {
+                    t.ErrorMessage = ErrorHandling.Exception(e);
                 }
+                return t;
             }
         }
+        
     }
 }
 
