@@ -23,12 +23,12 @@ namespace Client.Webshop.Controllers {
         }
 
         public ActionResult Update(User user) {
-            bool isUpdated = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, 
+            Customer newUser = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, 
                 user.Email, user.Address, user.ZipCode, user.City);
 
-            if(isUpdated) {
+            if(newUser.ErrorMessage == "") {
                 Session["User"] = null;
-                Session.Add("User", userController.GetUser(user.Email));
+                Session.Add("User", newUser);
             }
 
             return RedirectToAction("Index");
@@ -43,13 +43,14 @@ namespace Client.Webshop.Controllers {
 
         public ActionResult DeleteAccount() {
             User user = (User)Session["user"];
-            bool isCompleted = userController.DeleteUser(user.Email);
-            if (isCompleted) {
+            User errorUser = userController.DeleteUser(user.Email);
+            if (errorUser.ErrorMessage == "") {
                 Session["user"] = null;
                 return RedirectToAction("Index", "Home");
             }
             else {
                 return RedirectToAction("Index");
+                //Show tempData mesage
             }
         }
     }

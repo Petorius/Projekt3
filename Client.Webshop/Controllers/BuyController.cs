@@ -68,7 +68,8 @@ namespace Client.Webshop.Controllers {
             if (Session["cart"] == null) {
                 return RedirectToAction("Index", "Home");
             }
-            if (!uc.IsEmailAlreadyRegistered(email) || Session["User"] != null) {
+            User user = uc.IsEmailAlreadyRegistered(email);
+            if (user.ErrorMessage == "" || Session["User"] != null) {
                 var webApi = new ValuesController();
 
                 bool flag = webApi.Get();

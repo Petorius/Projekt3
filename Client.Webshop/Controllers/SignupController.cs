@@ -47,14 +47,15 @@ namespace Client.Webshop.Controllers {
         }
 
         public ActionResult Signup(string firstName, string lastName, int number, string street, int zip, string city, string email, string password) {
+            User userError = uc.IsEmailAlreadyRegistered(email);
+            if(userError.ErrorMessage == "") { 
+                User user = ac.CreateUserWithPassword(firstName, lastName, street, zip, city, email, number, password);
 
-            if(!uc.IsEmailAlreadyRegistered(email)) { 
-                bool result = ac.CreateUserWithPassword(firstName, lastName, street, zip, city, email, number, password);
-
-                if (result) {
+                if (user.ErrorMessage == "") {
                     return RedirectToAction("Index", "Login");
                 }
             }
+            //
             return RedirectToAction("Index", new { wasRedirected = true });
         }
     }

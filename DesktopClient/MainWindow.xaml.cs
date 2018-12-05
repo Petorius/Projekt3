@@ -31,12 +31,13 @@ namespace DesktopClient {
         private void Button_Click_1(object sender, RoutedEventArgs e) {
             string email = emploEmail.Text;
             string pass = employPassword.Password.ToString();
-            if(ac.ValidateAdminLogin(email, pass)) {
+            Admin admin = ac.ValidateAdminLogin(email, pass);
+            if(admin.ErrorMessage == "") {
                 CrudOverview crudView = new CrudOverview();
                 crudView.Show();
             }
             else {
-                wrongLogin.Content = "Email eller password er forkert";
+                wrongLogin.Content = admin.ErrorMessage;
             }
             
         }

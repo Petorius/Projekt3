@@ -43,12 +43,12 @@ namespace Client.Webshop.Controllers {
             Product product = pc.Find(id);
             decimal subTotal = product.Price * quantity;
             Orderline ol = new Orderline(quantity, subTotal, product);
-            bool result = oc.CreateOrderLine(quantity, subTotal, product.ID);
+            Orderline errorOrderline = oc.CreateOrderLine(quantity, subTotal, product.ID);
 
             List<Orderline> cart;
             bool flag = true;
 
-            if (ol != null && result) {
+            if (ol != null && errorOrderline.ErrorMessage == "") {
                 if (Session["cart"] == null) {
                     cart = new List<Orderline>();
                     cart.Add(ol);
@@ -71,11 +71,11 @@ namespace Client.Webshop.Controllers {
                 Session["cart"] = cart;
             }
 
-            if (result) {
+            if (errorOrderline.ErrorMessage == "") {
                 TempData["Message"] = "Produktet blev tilføjet til kurv";
             }
             else {
-                TempData["Message"] = "Produktet blev ikke tilføjet";
+                TempData["Message"] = errorOrderline.ErrorMessage;
             }
             
 
@@ -85,12 +85,15 @@ namespace Client.Webshop.Controllers {
 
         public ActionResult CreateReview(string reviewText, int productID, string url) {
             User user = (User)Session["user"];
-            bool res = pc.CreateReview(reviewText, productID, user.ID);
-            //if(res) {
+            Review review = pc.CreateReview(reviewText, productID, user.ID);
+            
+            if(review.ErrorMessage == "") {
                 return Redirect(url);
-            //}
-
-            //return RedirectToAction("Index", "Home");
+            }
+            else {
+                // show error message
+                return View();
+            }
         }
 
         public ActionResult DeleteReview(int reviewID, int reviewUserID, string url) {

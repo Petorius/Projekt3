@@ -49,9 +49,9 @@ namespace Client.Webshop.Controllers {
 
         public ActionResult Login(string email, string password) {
 
-            bool result = ac.ValidatePassword(email, password);
+            User user = ac.ValidatePassword(email, password);
 
-            if (result) {
+            if (user.ErrorMessage == "") {
                 Session.Add("User", uc.GetUser(email));
                 
                 return RedirectToAction("Index", "Home");

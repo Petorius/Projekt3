@@ -103,7 +103,8 @@ namespace Server.DataAccessLayer {
                     }
                     if(user.ID < 1) {
                         user.ErrorMessage = "Brugeren findes ikke";
-                    }
+                    } 
+
                 }
                 catch (SqlException e) {
                     user.ErrorMessage = ErrorHandling.Exception(e);
