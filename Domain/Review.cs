@@ -17,14 +17,18 @@ namespace Server.Domain {
         public User User { get; set; }
         [DataMember]
         public DateTime DateCreated { get; set; }
+        [DataMember]
+        public string ErrorMessage { get; set; }
 
         public Review(string text) {
             Text = text;
             DateCreated = DateTime.Today;
+            ErrorMessage = "";
         }
 
         public Review() {
             DateCreated = DateTime.Today;
+            ErrorMessage = "";
         }
 
 

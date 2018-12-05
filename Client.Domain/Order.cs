@@ -12,14 +12,16 @@ namespace Client.Domain {
         public DateTime DateCreated { get; set; }
         public Customer Customer { get; set; }
         public IEnumerable<Orderline> Orderlines { get; set; }
+        public string ErrorMessage { get; set; }
 
         public Order(Customer customer) {
             Customer = customer;
-
+            ErrorMessage = "";
         }
 
         public Order() {
             Orderlines = new List<Orderline>();
+            ErrorMessage = "";
         }
     }
 
