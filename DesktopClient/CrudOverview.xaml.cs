@@ -459,10 +459,8 @@ namespace DesktopClient {
 
                     foreach (Orderline ol in o.Orderlines) {
                         orderlineItems.Add("Orderlinje ID: " + ol.ID.ToString() + " " + "Antal: " + ol.Quantity.ToString() + " " + "Sub-total: " + ol.SubTotal.ToString() + " " + "Product ID: " + ol.Product.ID.ToString());
-
-                        
-                        UpdateOrderlineListBox();
                     }
+                    UpdateOrderlineListBox();
                 }
             }
             catch (FormatException) {

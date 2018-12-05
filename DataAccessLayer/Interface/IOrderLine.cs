@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace DataAccessLayer.Interface {
     public interface IOrderLine : ICRUD<OrderLine> {
 
-        bool CreateInDesktop(OrderLine Entity, bool test = false, bool testResult = false);
+        OrderLine CreateInDesktop(OrderLine Entity, bool test = false, bool testResult = false);
 
-        bool DeleteInDesktop(OrderLine Entity, bool test = false, bool testResult = false);
+        OrderLine DeleteInDesktop(OrderLine Entity, bool test = false, bool testResult = false);
  
     }
 }

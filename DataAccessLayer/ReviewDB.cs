@@ -21,8 +21,8 @@ namespace DataAccessLayer {
             throw new System.NotImplementedException();
         }
 
-        public bool CreateReview(Review review, int productID, int userID, bool test = false, bool testResult = false) {
-            bool isCompleted = false;
+        public Review CreateReview(Review review, int productID, int userID, bool test = false, bool testResult = false) {
+            Review errorReview = new Review();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
@@ -34,18 +34,17 @@ namespace DataAccessLayer {
                         cmd.Parameters.AddWithValue("ProductID", productID);
                         cmd.Parameters.AddWithValue("UserID", userID);
                         cmd.ExecuteNonQuery();
-                        isCompleted = true;
                     }
                 }
-                catch (SqlException) {
-                    isCompleted = false;
+                catch (SqlException e) {
+                    errorReview.ErrorMessage = ErrorHandling.Exception(e);
                 }
             }
-            return isCompleted;
+            return errorReview;
         }
 
-        public bool Delete(Review Entity, bool test = false, bool testResult = false) {
-            bool isDeleted = false;
+        public Review Delete(Review Entity, bool test = false, bool testResult = false) {
+            Review review = new Review();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     try {
@@ -68,37 +67,38 @@ namespace DataAccessLayer {
                                 cmd.Parameters.AddWithValue("userID", Entity.User.ID);
                                 cmd.Parameters.AddWithValue("rowId", rowId);
                                 rowCount = cmd.ExecuteNonQuery();
-                                isDeleted = true;
 
                                 if (test) {
                                     rowCount = testResult ? 1 : 0;
                                 }
 
                                 if (rowCount == 0) {
+                                    review.ErrorMessage = "Anmeldelsen blev ikke slettet. Prøv igen";
                                     cmd.Transaction.Rollback();
                                 }
                                 else {
-                                    isDeleted = true;
+                                    review.ErrorMessage = "";
                                     cmd.Transaction.Commit();
                                     break;
                                 }
                             }
                         }
                     }
-                    catch (SqlException) {
-                        isDeleted = false;
+                    catch (SqlException e) {
+                        review.ErrorMessage = ErrorHandling.Exception(e);
                     }
                 }
             }
-            return isDeleted;
+            return review;
         }
         
         public Review Get(int id) {
+            Review r = new Review();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
-                        Review r = new Review();
+                        
                         r.User = new User();
 
                         cmd.CommandText = "SELECT reviewid, text, dateCreated, userID from Review where reviewID = @reviewID";
@@ -114,13 +114,17 @@ namespace DataAccessLayer {
                         reader.Close();
                         cmd.Parameters.Clear();
                         
-                        return r;
+                        if(r.ID < 1) {
+                            r.ErrorMessage = "Anmeldelsen findes ikke";
+                        }
+                        
                     }
                 }
-                catch (SqlException) {
-                    return null;
+                catch (SqlException e) {
+                    r.ErrorMessage = ErrorHandling.Exception(e);
                 }
             }
+            return r;
         }
 
         public IEnumerable<Review> GetAll() {

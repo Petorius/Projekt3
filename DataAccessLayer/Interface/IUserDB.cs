@@ -12,6 +12,6 @@ namespace DataAccessLayer.Interface {
 
         User GetUserWithOrders(string email);
 
-        bool DeleteUser(string email, bool test = false, bool testResult = false);
+        User DeleteUser(string email, bool test = false, bool testResult = false);
     }
 }

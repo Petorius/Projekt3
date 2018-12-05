@@ -7,10 +7,10 @@ using Server.Domain;
 
 namespace Server.DataAccessLayer {
     public interface ICRUD<T> {
-        bool Create(T Entity, bool test = false, bool testResult = false);
+        T Create(T Entity, bool test = false, bool testResult = false);
         T Get(int id);
         IEnumerable<T> GetAll();
-        bool Update(T Entity, bool test = false, bool testResult = false);
-        bool Delete(T Entity, bool test = false, bool testResult = false);
+        T Update(T Entity, bool test = false, bool testResult = false);
+        T Delete(T Entity, bool test = false, bool testResult = false);
     }
 }

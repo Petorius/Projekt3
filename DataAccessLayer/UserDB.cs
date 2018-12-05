@@ -43,6 +43,7 @@ namespace Server.DataAccessLayer {
 
         public User GetUserWithOrders(string email) {
             User user = GetUser(email);
+            Order order = new Order();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
@@ -52,16 +53,17 @@ namespace Server.DataAccessLayer {
                         SqlDataReader reader = cmd.ExecuteReader();
 
                         while (reader.Read()) {
-                            Order order = new Order();
                             order.ID = reader.GetInt32(reader.GetOrdinal("orderID"));
-
                             user.Orders.Add(order);
                         }
                         reader.Close();
                     }
+                    if(order.ID < 1) {
+                        order.ErrorMessage = "Kunden har ingen ordre";
+                    }
                 }
                 catch (SqlException e) {
-                    user.ErrorMessage = ErrorHandling.Exception(e);
+                    order.ErrorMessage = ErrorHandling.Exception(e);
                 }
 
             }
@@ -69,12 +71,11 @@ namespace Server.DataAccessLayer {
         }
 
         public User GetUser(string email) {
+        User user = new User();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
-                        User user = new User();
-
                         cmd.CommandText = "select userid, firstName, lastName, phone, address, zipCode, city from [dbo].[user], customer where Customer.Email = @Email " +
                             "AND customer.CustomerID = [dbo].[User].UserID;";
                         cmd.Parameters.AddWithValue("Email", email);
@@ -88,7 +89,6 @@ namespace Server.DataAccessLayer {
                             user.Address = reader.GetString(reader.GetOrdinal("address"));
                             user.ZipCode = reader.GetInt32(reader.GetOrdinal("zipCode"));
                             user.City = reader.GetString(reader.GetOrdinal("city"));
-
                         }
                         reader.Close();
 
@@ -100,20 +100,20 @@ namespace Server.DataAccessLayer {
                             user.Salt = userReader.GetString(userReader.GetOrdinal("Salt"));
                         }
                         userReader.Close();
-
-
-                        return user;
+                    }
+                    if(user.ID < 1) {
+                        user.ErrorMessage = "Brugeren findes ikke";
                     }
                 }
-                catch (SqlException) {
-                    return null;
+                catch (SqlException e) {
+                    user.ErrorMessage = ErrorHandling.Exception(e);
                 }
-
             }
+         return user;
         }
 
-        public bool DeleteUser(string email, bool test = false, bool testResult = false) {
-            bool res = false;
+        public User DeleteUser(string email, bool test = false, bool testResult = false) {
+            User user = new User();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     try {
@@ -141,10 +141,11 @@ namespace Server.DataAccessLayer {
                                 }
 
                                 if (rowCount == 0) {
+                                    user.ErrorMessage = "Brugeren blev ikke slettet. Prøv igen";
                                     cmd.Transaction.Rollback();
                                 }
                                 else {
-                                    res = true;
+                                    user.ErrorMessage = "";
                                     cmd.Transaction.Commit();
                                     break;
                                 }
@@ -152,11 +153,11 @@ namespace Server.DataAccessLayer {
                         }
                     }
                     catch (SqlException) {
-                        res = false;
+                        user.ErrorMessage = ErrorHandling.Exception(e);
                     }
                 }
             }
-            return res;
+            return user;
         }
     }
 }

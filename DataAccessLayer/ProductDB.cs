@@ -18,9 +18,9 @@ namespace Server.DataAccessLayer {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
         }
 
-        public bool Create(Product Entity, bool test = false, bool testResult = false) {
+        public Product Create(Product Entity, bool test = false, bool testResult = false) {
             int insertedID = -1;
-            bool isCompleted = false;
+            Product p = new Product();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
@@ -49,18 +49,17 @@ namespace Server.DataAccessLayer {
 
 
                     }
-                    isCompleted = true;
                 }
-                catch (SqlException) {
-                    isCompleted = false;
+                catch (SqlException e) {
+                    p.ErrorMessage = ErrorHandling.Exception(e);
                 }
             }
-            return isCompleted;
+            return p;
         }
 
         // Method with optimistic concurreny. If anything is changed, we rollback our transaction after trying for 4 times
-        public bool Delete(Product Entity, bool test = false, bool testResult = false) {
-            bool deleted = false;
+        public Product Delete(Product Entity, bool test = false, bool testResult = false) {
+            Product p = new Product();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     try {
@@ -89,31 +88,31 @@ namespace Server.DataAccessLayer {
                                 }
 
                                 if (rowCount == 0) {
+                                    p.ErrorMessage = "Produktet blev ikke slettet. Prøv igen";
                                     cmd.Transaction.Rollback();
                                 }
                                 else {
-                                    deleted = true;
+                                    p.ErrorMessage = "";
                                     cmd.Transaction.Commit();
                                     break;
                                 }
                             }
                         }
                     }
-                    catch (SqlException) {
-                        deleted = false;
+                    catch (SqlException e) {
+                        p.ErrorMessage = ErrorHandling.Exception(e);
                     }
                 }
             }
-            return deleted;
+            return p;
         }
 
         public Product Get(int id) {
+            Product p = new Product();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
-                        Product p = new Product();
-
                         cmd.CommandText = "SELECT productid, name, price, stock, description, rating, minstock, maxstock, sales, isActive from Product where productID = @ProductID";
                         cmd.Parameters.AddWithValue("ProductID", id);
                         SqlDataReader reader = cmd.ExecuteReader();
@@ -171,22 +170,21 @@ namespace Server.DataAccessLayer {
                             userReader.Close();
                             cmd.Parameters.Clear();
                         }
-                        return p;
                     }
                 }
-                catch (SqlException) {
-                    return null;
+                catch (SqlException e) {
+                    p.ErrorMessage = ErrorHandling.Exception(e);
                 }
             }
+            return p;
         }
 
         public Product GetByName(string name) {
+            Product p = new Product();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
-                        Product p = new Product();
-
                         cmd.CommandText = "SELECT productid, name, price, stock, description, rating, minstock, maxstock, sales, isActive from Product where name = @Name";
                         cmd.Parameters.AddWithValue("name", name);
                         SqlDataReader reader = cmd.ExecuteReader();
@@ -231,18 +229,18 @@ namespace Server.DataAccessLayer {
                             p.Reviews.Add(r);
                         }
                         reviewReader.Close();
-                        return p;
+                        
                     }
                 }
-                catch (SqlException) {
-                    return null;
+                catch (SqlException e) {
+                    p.ErrorMessage = ErrorHandling.Exception(e);
                 }
             }
-
+            return p;
         }
 
-        public bool Update(Product p, bool test = false, bool testResult = false) {
-            bool isUpdated = false;
+        public Product Update(Product p, bool test = false, bool testResult = false) {
+            Product product = new Product();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     try {
@@ -280,23 +278,24 @@ namespace Server.DataAccessLayer {
                                 }
 
                                 if (rowCount == 0) {
+                                    product.ErrorMessage = "Produktet blev ikke opdateret. Prøv igen";
                                     cmd.Transaction.Rollback();
                                 }
                                 else {
-                                    isUpdated = true;
+                                    product.ErrorMessage = "";
                                     cmd.Transaction.Commit();
                                     break;
                                 }
                             }
                         }
                     }
-                    catch (SqlException) {
-                        isUpdated = false;
+                    catch (SqlException e) {
+                        product.ErrorMessage = ErrorHandling.Exception(e);
                     }
                 }
 
             }
-            return isUpdated;
+            return product;
         }
 
         public IEnumerable<Product> GetAll() {

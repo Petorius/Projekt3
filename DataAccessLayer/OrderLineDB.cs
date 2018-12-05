@@ -22,8 +22,8 @@ namespace Server.DataAccessLayer {
         }
 
         // Method with optimistic concurreny. If anything is changed, we rollback our transaction after trying for 4 times
-        public bool Create(OrderLine Entity, bool test = false, bool testResult = false) {
-            bool isCompleted = false;
+        public OrderLine Create(OrderLine Entity, bool test = false, bool testResult = false) {
+            OrderLine orderLine = new OrderLine();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     try {
@@ -54,28 +54,29 @@ namespace Server.DataAccessLayer {
                                     rowCount = testResult ? 1 : 0;
                                 }
                                 if (rowCount == 0) {
+                                    orderLine.ErrorMessage = "Orderlinjen blev ikke oprettet. Prøv igen";
                                     cmd.Transaction.Rollback();
                                 }
                                 else {
-                                    isCompleted = true;
+                                    orderLine.ErrorMessage = "";
                                     cmd.Transaction.Commit();
                                     break;
                                 }
                             }
                         }
                     }
-                    catch (SqlException) {
-                        isCompleted = false;
+                    catch (SqlException e) {
+                        orderLine.ErrorMessage = ErrorHandling.Exception(e);
                     }
                 }
             }
-            return isCompleted;
+            return orderLine;
         }
 
 
         // Method with optimistic concurreny. If anything is changed, we rollback our transaction after trying for 4 times
-        public bool Delete(OrderLine Entity, bool test = false, bool testResult = false) {
-            bool deleted = false;
+        public OrderLine Delete(OrderLine Entity, bool test = false, bool testResult = false) {
+            OrderLine orderLine = new OrderLine();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     try {
@@ -105,10 +106,11 @@ namespace Server.DataAccessLayer {
                                     rowCount = testResult ? 1 : 0;
                                 }
                                 if (rowCount == 0) {
+                                    orderLine.ErrorMessage = "Ordrelinjen blev ikke slettet. Prøv igen";
                                     cmd.Transaction.Rollback();
                                 }
                                 else {
-                                    deleted = true;
+                                    orderLine.ErrorMessage = "";
                                     cmd.Transaction.Commit();
                                     break;
                                 }
@@ -117,22 +119,23 @@ namespace Server.DataAccessLayer {
 
 
                     }
-                    catch (SqlException) {
-                        deleted = false;
+                    catch (SqlException e) {
+                        orderLine.ErrorMessage = ErrorHandling.Exception(e);
                     }
                 }
 
 
             }
-            return deleted;
+            return orderLine;
         }
 
         public OrderLine Get(int id) {
+            OrderLine ol = new OrderLine();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
-                        OrderLine ol = new OrderLine();
+                        
                         cmd.CommandText = "Select orderlineID, quantity, subTotal, orderID, productID from Orderline where orderlineID = @orderlineID";
                         cmd.Parameters.AddWithValue("orderlineID", id);
                         SqlDataReader orderLineReader = cmd.ExecuteReader();
@@ -147,14 +150,15 @@ namespace Server.DataAccessLayer {
                         }
                         orderLineReader.Close();
 
-                        return ol;
+                        
                     }
 
                 }
-                catch (SqlException) {
-                    return null;
+                catch (SqlException e) {
+                    ol.ErrorMessage = ErrorHandling.Exception(e);
                 }
             }
+            return ol;
         }
 
         public IEnumerable<OrderLine> GetAll() {
@@ -162,8 +166,8 @@ namespace Server.DataAccessLayer {
         }
 
         // Method with optimistic concurreny. If anything is changed, we rollback our transaction after trying for 4 times
-        public bool Update(OrderLine Entity, bool test = false, bool testResult = false) {
-            bool isUpdated = false;
+        public OrderLine Update(OrderLine Entity, bool test = false, bool testResult = false) {
+            OrderLine orderLine = new OrderLine();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     try {
@@ -195,28 +199,27 @@ namespace Server.DataAccessLayer {
                                 }
 
                                 if (rowCount == 0) {
+                                    orderLine.ErrorMessage = "Ordrelinjen blev ikke opdateret. Prøv igen";
                                     cmd.Transaction.Rollback();
                                 }
                                 else {
-                                    isUpdated = true;
+                                    orderLine.ErrorMessage = "";
                                     cmd.Transaction.Commit();
                                     break;
                                 }
                             }
                         }
                     }
-                    catch (SqlException) {
-                        isUpdated = false;
+                    catch (SqlException e) {
+                        orderLine.ErrorMessage = ErrorHandling.Exception(e);
                     }
-
-
                 }
             }
-            return isUpdated;
+            return orderLine;
         }
 
-        public bool CreateInDesktop(OrderLine Entity, bool test = false, bool testResult = false) {
-            bool isCompleted = true;
+        public OrderLine CreateInDesktop(OrderLine Entity, bool test = false, bool testResult = false) {
+            OrderLine orderLine = new OrderLine();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     connection.Open();
@@ -255,26 +258,27 @@ namespace Server.DataAccessLayer {
                                     rowCount = testResult ? 1 : 0;
                                 }
                                 if (rowCount == 0) {
+                                    orderLine.ErrorMessage = "Ordrelinjen blev ikke oprettet. Prøv igen";
                                     cmd.Transaction.Rollback();
                                 }
                                 else {
+                                    orderLine.ErrorMessage = "";
                                     cmd.Transaction.Commit();
                                     break;
                                 }
                             }
-                            catch (SqlException) {
-                                isCompleted = false;
-
+                            catch (SqlException e) {
+                                orderLine.ErrorMessage = ErrorHandling.Exception(e);
                             }
                         }
                     }
                 }
             }
-            return isCompleted;
+            return orderLine;
         }
 
-        public bool DeleteInDesktop(OrderLine Entity, bool test = false, bool testResult = false) {
-            bool deleted = false;
+        public OrderLine DeleteInDesktop(OrderLine Entity, bool test = false, bool testResult = false) {
+            OrderLine orderLine = new OrderLine();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     connection.Open();
@@ -309,22 +313,23 @@ namespace Server.DataAccessLayer {
                                     rowCount = testResult ? 1 : 0;
                                 }
                                 if (rowCount == 0) {
+                                    orderLine.ErrorMessage = "Ordrelinjen blev ikke slettet. Prøv igen";
                                     cmd.Transaction.Rollback();
                                 }
                                 else {
-                                    deleted = true;
+                                    orderLine.ErrorMessage = "";
                                     cmd.Transaction.Commit();
                                     break;
                                 }
                             }
-                            catch (SqlException) {
-                                deleted = false;
+                            catch (SqlException e) {
+                                orderLine.ErrorMessage = ErrorHandling.Exception(e);
                             }
                         }
                     }
                 }
             }
-            return deleted;
+            return orderLine;
         }
     }
 }

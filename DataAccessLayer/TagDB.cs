@@ -52,10 +52,7 @@ namespace Server.DataAccessLayer {
                     }
 
                     // Error handling
-                    if (t.ID > 0) {
-                        return t;
-                    }
-                    else {
+                    if (t.ID < 1) {
                         t.ErrorMessage = "Kategorien findes ikke";
                     }
                 }
@@ -65,7 +62,7 @@ namespace Server.DataAccessLayer {
                 return t;
             }
         }
-        
+
     }
 }
 

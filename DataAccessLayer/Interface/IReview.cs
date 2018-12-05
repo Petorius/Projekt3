@@ -7,6 +7,6 @@ using Server.Domain;
 
 namespace Server.DataAccessLayer {
     public interface IReview : ICRUD<Review> {
-        bool CreateReview(Review review, int productID, int userID, bool test = false, bool testResult = false);
+        Review CreateReview(Review review, int productID, int userID, bool test = false, bool testResult = false);
     }
 }
