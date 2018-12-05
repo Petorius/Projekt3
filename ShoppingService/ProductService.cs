@@ -41,12 +41,12 @@ namespace Server.ServiceLayer {
             return productDb.Delete(p);
         }
 
-        public bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID) {
+        public bool DeleteReview(int reviewID, int reviewUserID) {
             Review r = new Review();
             r.User = new User();
             r.ID = reviewID;
             r.User.ID = reviewUserID;
-            return reviewDB.DeleteReview(r);
+            return reviewDB.Delete(r);
         }
 
         public Product FindProduct(int ID) {
@@ -57,6 +57,11 @@ namespace Server.ServiceLayer {
         public Product FindProductByName(string name) {
             Product product = productDb.GetByName(name);
             return product;
+        }
+
+        public Review FindReview(int ID) {
+            Review r = reviewDB.Get(ID);
+            return r;
         }
 
         public IEnumerable<Product> GetAllProducts() {

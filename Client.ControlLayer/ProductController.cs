@@ -43,8 +43,13 @@ namespace Client.ControlLayer {
             return productService.CreateReview(text, productID, userID);
         }
 
-        public  bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID) {
-            return productService.DeleteReview(reviewID, reviewUserID, sessionUserID);
+        public  bool DeleteReview(int reviewID, int reviewUserID) {
+            return productService.DeleteReview(reviewID, reviewUserID);
+        }
+
+        public Review FindReview(int ID) {
+            Review r = productService.FindReview(ID);
+            return r;
         }
     }
 }

@@ -36,6 +36,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="FindReview">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindReviewResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="FindReviewResult" nillable="true" type="q2:Review" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="FindProductByName">
     <xs:complexType>
       <xs:sequence>
@@ -46,7 +60,7 @@
   <xs:element name="FindProductByNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="FindProductByNameResult" nillable="true" type="q2:Product" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="FindProductByNameResult" nillable="true" type="q3:Product" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -93,7 +107,7 @@
   <xs:element name="GetAllProductsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="GetAllProductsResult" nillable="true" type="q3:ArrayOfProduct" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="GetAllProductsResult" nillable="true" type="q4:ArrayOfProduct" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -118,7 +132,6 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="reviewID" type="xs:int" />
         <xs:element minOccurs="0" name="reviewUserID" type="xs:int" />
-        <xs:element minOccurs="0" name="sessionUserID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

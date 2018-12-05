@@ -42,7 +42,7 @@
                         </TabItem>
                         <TabItem Header="Søg">
                             <Grid Background="#FFE5E5E5" Margin="1,1,-1,-1.2">
-                                <TextBox x:Name="inputIDtextBox" HorizontalAlignment="Left" Height="23" Margin="201,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.388,0.557"/>
+                                <TextBox x:Name="inputIDtextBox" HorizontalAlignment="Left" Height="23" Margin="201,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.388,0.557" TextChanged="inputIDtextBox_TextChanged"/>
                                 <Label x:Name="searchByIDlabel" Content="Søg på ID/Navn" HorizontalAlignment="Left" Margin="42,43,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="namelabel" Content="Navn:" HorizontalAlignment="Left" Margin="42,112,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="foundNamelabel" Content="" HorizontalAlignment="Left" Margin="201,112,0,0" VerticalAlignment="Top"/>
@@ -56,11 +56,12 @@
                                 <Label x:Name="foundRatinglabel" Content="" HorizontalAlignment="Left" Margin="201,295,0,0" VerticalAlignment="Top"/>
                                 <Button x:Name="OKbutton" Content="OK" HorizontalAlignment="Left" Margin="581,331,0,0" VerticalAlignment="Top" Width="75" Click="Produkt_Søg_Ok_Clicked"/>
                                 <Label x:Name="ProductSøgLabel" Content="" HorizontalAlignment="Left" Margin="201,16,0,0" VerticalAlignment="Top" Width="120" Foreground="Red"/>
-                                <ListBox x:Name="ProductSøgShowReviews" HorizontalAlignment="Left" Height="204" Margin="351,43,0,0" VerticalAlignment="Top" Width="390"/>
+                                <ListBox x:Name="ProductSøgShowReviews" HorizontalAlignment="Left" Height="204" Margin="351,43,0,0" VerticalAlignment="Top" Width="390" SelectionChanged="ProductSøgShowReviews_SelectionChanged"/>
                                 <Label Content="Anmeldelser af pågældende produkt:" HorizontalAlignment="Left" Margin="351,10,0,0" VerticalAlignment="Top" Width="139"/>
                                 <Button x:Name="Product_Search_Slet" Content="Slet anmeldelse" HorizontalAlignment="Left" Margin="581,13,0,0" VerticalAlignment="Top" Width="102" Click="Product_Search_Slet_Click"/>
                                 <Label Content="Id." HorizontalAlignment="Left" Margin="43,81,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="productShowID" Content="" HorizontalAlignment="Left" Margin="201,81,0,0" VerticalAlignment="Top" Width="120"/>
+                                <Button x:Name="Product_Søg_Annuller" Content="Annuller" HorizontalAlignment="Left" Margin="678,331,0,0" VerticalAlignment="Top" Width="75" Click="Product_Søg_Annuller_Click"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Opdater">
@@ -297,6 +298,7 @@
                     </TabControl>
                 </Grid>
             </TabItem>
+            <Button x:Name="button" Content="Button" Height="100" Width="75"/>
         </TabControl>
     </Grid>
 </Window>
