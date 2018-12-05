@@ -9,6 +9,8 @@ namespace Client.ServiceLayer {
 
         Product FindByName(string name);
 
+        Review FindReview(int ID);
+
         bool Delete(int id);
 
         bool Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);
@@ -17,6 +19,6 @@ namespace Client.ServiceLayer {
 
         bool CreateReview(string text, int productID, int userID);
 
-        bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID);
+        bool DeleteReview(int reviewID, int reviewUserID);
     }
 }

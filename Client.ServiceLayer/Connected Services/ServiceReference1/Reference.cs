@@ -723,6 +723,9 @@ namespace Client.ServiceLayer.ServiceReference1 {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int OrderIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Client.ServiceLayer.ServiceReference1.Product ProductField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -750,6 +753,19 @@ namespace Client.ServiceLayer.ServiceReference1 {
                 if ((this.IDField.Equals(value) != true)) {
                     this.IDField = value;
                     this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int OrderID {
+            get {
+                return this.OrderIDField;
+            }
+            set {
+                if ((this.OrderIDField.Equals(value) != true)) {
+                    this.OrderIDField = value;
+                    this.RaisePropertyChanged("OrderID");
                 }
             }
         }
@@ -819,6 +835,12 @@ namespace Client.ServiceLayer.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductAsync(int ID);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindReview", ReplyAction="http://tempuri.org/IProductService/FindReviewResponse")]
+        Client.ServiceLayer.ServiceReference1.Review FindReview(int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindReview", ReplyAction="http://tempuri.org/IProductService/FindReviewResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Review> FindReviewAsync(int ID);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductByName", ReplyAction="http://tempuri.org/IProductService/FindProductByNameResponse")]
         Client.ServiceLayer.ServiceReference1.Product FindProductByName(string name);
         
@@ -850,10 +872,10 @@ namespace Client.ServiceLayer.ServiceReference1 {
         System.Threading.Tasks.Task<bool> CreateReviewAsync(string text, int productID, int userID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteReview", ReplyAction="http://tempuri.org/IProductService/DeleteReviewResponse")]
-        bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID);
+        bool DeleteReview(int reviewID, int reviewUserID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteReview", ReplyAction="http://tempuri.org/IProductService/DeleteReviewResponse")]
-        System.Threading.Tasks.Task<bool> DeleteReviewAsync(int reviewID, int reviewUserID, int sessionUserID);
+        System.Threading.Tasks.Task<bool> DeleteReviewAsync(int reviewID, int reviewUserID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -899,6 +921,14 @@ namespace Client.ServiceLayer.ServiceReference1 {
             return base.Channel.FindProductAsync(ID);
         }
         
+        public Client.ServiceLayer.ServiceReference1.Review FindReview(int ID) {
+            return base.Channel.FindReview(ID);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Review> FindReviewAsync(int ID) {
+            return base.Channel.FindReviewAsync(ID);
+        }
+        
         public Client.ServiceLayer.ServiceReference1.Product FindProductByName(string name) {
             return base.Channel.FindProductByName(name);
         }
@@ -939,12 +969,12 @@ namespace Client.ServiceLayer.ServiceReference1 {
             return base.Channel.CreateReviewAsync(text, productID, userID);
         }
         
-        public bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID) {
-            return base.Channel.DeleteReview(reviewID, reviewUserID, sessionUserID);
+        public bool DeleteReview(int reviewID, int reviewUserID) {
+            return base.Channel.DeleteReview(reviewID, reviewUserID);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteReviewAsync(int reviewID, int reviewUserID, int sessionUserID) {
-            return base.Channel.DeleteReviewAsync(reviewID, reviewUserID, sessionUserID);
+        public System.Threading.Tasks.Task<bool> DeleteReviewAsync(int reviewID, int reviewUserID) {
+            return base.Channel.DeleteReviewAsync(reviewID, reviewUserID);
         }
     }
 }

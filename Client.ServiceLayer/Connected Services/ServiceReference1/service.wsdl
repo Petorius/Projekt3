@@ -19,6 +19,12 @@
   <wsdl:message name="IProductService_FindProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindProductResponse" />
   </wsdl:message>
+  <wsdl:message name="IProductService_FindReview_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindReview" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_FindReview_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindReviewResponse" />
+  </wsdl:message>
   <wsdl:message name="IProductService_FindProductByName_InputMessage">
     <wsdl:part name="parameters" element="tns:FindProductByName" />
   </wsdl:message>
@@ -64,6 +70,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/FindProduct" message="tns:IProductService_FindProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/FindProductResponse" message="tns:IProductService_FindProduct_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="FindReview">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/FindReview" message="tns:IProductService_FindReview_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/FindReviewResponse" message="tns:IProductService_FindReview_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="FindProductByName">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/FindProductByName" message="tns:IProductService_FindProductByName_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/FindProductByNameResponse" message="tns:IProductService_FindProductByName_OutputMessage" />
@@ -102,6 +112,15 @@
     </wsdl:operation>
     <wsdl:operation name="FindProduct">
       <soap:operation soapAction="http://tempuri.org/IProductService/FindProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindReview">
+      <soap:operation soapAction="http://tempuri.org/IProductService/FindReview" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

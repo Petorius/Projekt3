@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Client.Domain;
 
 namespace Client.ServiceLayer {
@@ -99,8 +100,30 @@ namespace Client.ServiceLayer {
             return myProxy.CreateReview(text, productID, userID);
         }
 
-        public bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID) {
-            return myProxy.DeleteReview(reviewID, reviewUserID, sessionUserID);
+        public bool DeleteReview(int reviewID, int reviewUserID) {
+            return myProxy.DeleteReview(reviewID, reviewUserID);
+        }
+
+        public Review FindReview(int ID) {
+            var r = myProxy.FindReview(ID);
+            Review review = new Review();
+            if (r != null) {
+                review = BuildServiceReview(r);
+            }
+
+            return review;
+        }
+
+        private Review BuildServiceReview(ServiceReference1.Review r) {
+            Review review = new Review();
+            review.User = new User();
+            review.ID = r.ID;
+            review.Text = r.Text;
+            review.DateCreated = r.DateCreated;
+            review.User.ID = r.User.ID;
+            review.User.FirstName = r.User.FirstName;
+
+            return review;
         }
     }
 }

@@ -32,6 +32,7 @@ namespace DesktopClient {
         private List<string> orderlineItems;
         private List<string> showReviewList;
         private int selectedListItemOrderLineID;
+        private int selectedListItemReviewID;
         private string selectedListItem = "";
 
         public CrudOverview() {
@@ -92,45 +93,9 @@ namespace DesktopClient {
         }
 
         private void Produkt_Søg_Ok_Clicked(object sender, RoutedEventArgs e) {
-            try {
-                Product p = new Product();
-                if (Int32.TryParse(inputIDtextBox.Text, out int i)) {
-                    p = productController.Find(i);
-                }
-                else {
-                    p = productController.FindByName(inputIDtextBox.Text);
-                }
-                if (p.ID > 0) {
-                    productShowID.Content = p.ID;
-                    foundNamelabel.Content = p.Name;
-                    foundPricelabel.Content = p.Price;
-                    foundStocklabel.Content = p.Stock;
-                    foundDescriptionlabel.Content = p.Description;
-                    foundRatinglabel.Content = p.Rating;
-                    ProductSøgLabel.Content = "";
-                    showReviewList = new List<string>();
-                    foreach (Review review in p.Reviews) {
-                        showReviewList.Add("Skrevet af " + review.User.FirstName + ": " + review.Text);
-                    }
-                    showReviewList.Reverse();
-                    ProductSøgShowReviews.ItemsSource = showReviewList;
-                }
-                else {
-                    productShowID.Content = "";
-                    foundNamelabel.Content = "";
-                    foundPricelabel.Content = "";
-                    foundStocklabel.Content = "";
-                    foundDescriptionlabel.Content = "";
-                    foundRatinglabel.Content = "";
-                    showReviewList = new List<string>();
-                    ProductSøgShowReviews.ItemsSource = showReviewList;
-                    ProductSøgLabel.Content = "Produktet findes ikke";
-                }
-
-            }
-            catch (FormatException) {
-                MessageBox.Show("Ugyldig tekst indsat");
-            }
+            inputIDtextBox.IsEnabled = false;
+            CreateReviewHandler();
+            
         }
 
         private void Produkt_Slet_SletProdukt_Clicked_Click(object sender, RoutedEventArgs e) {
@@ -605,6 +570,106 @@ namespace DesktopClient {
 
         private void Product_Search_Slet_Click(object sender, RoutedEventArgs e) {
 
+            try {
+                Review r = productController.FindReview(selectedListItemReviewID);
+
+                if (r != null) {
+                    bool result = productController.DeleteReview(r.ID, r.User.ID);
+
+                    if (result) {
+                        foundDescriptionlabel.Content = "Anmeldelsen blev slettet";
+
+                    }
+                    else {
+                        foundDescriptionlabel.Content = "Der opstod en fejl. Prøv igen";
+                    }
+
+                    UpdateReviewListBox();
+                    CreateReviewHandler();
+                }
+            }
+            catch (NullReferenceException) {
+                MessageBox.Show("Anmeldelsen findes ikke");
+            }
+        }
+
+        private void CreateReviewHandler() {
+            try {
+                Product p = new Product();
+                if (Int32.TryParse(inputIDtextBox.Text, out int i)) {
+                    p = productController.Find(i);
+                }
+                else {
+                    p = productController.FindByName(inputIDtextBox.Text);
+                }
+                if (p.ID > 0) {
+                    productShowID.Content = p.ID;
+                    foundNamelabel.Content = p.Name;
+                    foundPricelabel.Content = p.Price;
+                    foundStocklabel.Content = p.Stock;
+                    foundDescriptionlabel.Content = p.Description;
+                    foundRatinglabel.Content = p.Rating;
+                    ProductSøgLabel.Content = "";
+                    showReviewList = new List<string>();
+                    foreach (Review review in p.Reviews) {
+                        showReviewList.Add("Review ID: " + review.ID + " " + "Skrevet af " + review.User.FirstName + ": " + review.Text);
+                        
+                    }
+                    showReviewList.Reverse();
+                    UpdateReviewListBox();
+                    
+                }
+                else {
+                    productShowID.Content = "";
+                    foundNamelabel.Content = "";
+                    foundPricelabel.Content = "";
+                    foundStocklabel.Content = "";
+                    foundDescriptionlabel.Content = "";
+                    foundRatinglabel.Content = "";
+                    showReviewList = new List<string>();
+                    ProductSøgShowReviews.ItemsSource = showReviewList;
+                    ProductSøgLabel.Content = "Produktet findes ikke";
+                }
+
+            }
+            catch (FormatException) {
+                MessageBox.Show("Ugyldig tekst indsat");
+            }
+        }
+
+        private void UpdateReviewListBox() {
+            ProductSøgShowReviews.ItemsSource = showReviewList;
+            showReviewList = new List<string>();
+        }
+
+        private void ProductSøgShowReviews_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (ProductSøgShowReviews.Items.Count > 0) {
+                selectedListItem = ProductSøgShowReviews.Items[ProductSøgShowReviews.SelectedIndex].ToString();
+                selectedListItemReviewID = Int32.Parse(Regex.Match(selectedListItem, @"\d+").Value);
+            }
+        }
+
+        private void inputIDtextBox_TextChanged(object sender, TextChangedEventArgs e) {
+
+        }
+
+
+        private void Product_Søg_Annuller_Click(object sender, RoutedEventArgs e) {
+
+            inputIDtextBox.IsEnabled = true;
+            ClearProductSøgFields();
+            UpdateReviewListBox();                                                                                                                                                                                                             
+        }
+
+        public void ClearProductSøgFields() {
+            inputIDtextBox.Text = "";
+            productShowID.Content = "";
+            foundNamelabel.Content = "";
+            foundPricelabel.Content = "";
+            foundStocklabel.Content = "";
+            foundDescriptionlabel.Content = "";
+            foundRatinglabel.Content = "";
+            
         }
     }
 }

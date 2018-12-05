@@ -49,7 +49,7 @@ namespace UnitTest {
 
             reviewDB.CreateReview(review, product.ID, user.ID);
 
-            bool isDeleted = reviewDB.DeleteReview(review, true, true);
+            bool isDeleted = reviewDB.Delete(review, true, true);
 
             Assert.AreEqual(false, isDeleted);
         }
@@ -63,9 +63,18 @@ namespace UnitTest {
 
             reviewDB.CreateReview(review, product.ID, user.ID);
 
-            bool isDeleted = reviewDB.DeleteReview(review, true);
+            bool isDeleted = reviewDB.Delete(review, true);
 
             Assert.AreEqual(true, isDeleted);
+        }
+
+        [TestMethod]
+        public void FindReview() {
+
+            Review r = reviewDB.Get(1);
+
+            Assert.IsNotNull(r);
+            
         }
     }
 }

@@ -97,7 +97,7 @@ namespace Client.Webshop.Controllers {
             User user = (User)Session["user"];
 
             if(reviewID > 0 && reviewUserID > 0) {
-                pc.DeleteReview(reviewID, reviewUserID, user.ID);
+                pc.DeleteReview(reviewID, reviewUserID);
                 return Redirect(url);
             }
             else {

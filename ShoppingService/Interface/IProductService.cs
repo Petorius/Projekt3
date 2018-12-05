@@ -13,6 +13,9 @@ namespace Server.ServiceLayer {
         Product FindProduct(int ID);
 
         [OperationContract]
+        Review FindReview(int ID);
+
+        [OperationContract]
         Product FindProductByName(string name);
 
         [OperationContract]
@@ -28,6 +31,6 @@ namespace Server.ServiceLayer {
         bool CreateReview(string text, int productID, int userID);
 
         [OperationContract]
-        bool DeleteReview(int reviewID, int reviewUserID, int sessionUserID);
+        bool DeleteReview(int reviewID, int reviewUserID);
     }
 }
