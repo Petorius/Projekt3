@@ -215,6 +215,22 @@ namespace Server.DataAccessLayer {
                             p.Images.Add(i);
                         }
                         imageReader.Close();
+                        cmd.Parameters.Clear();
+
+                        cmd.CommandText = "SELECT Text, DateCreated, UserID, ReviewID from Review where Review.ProductID = @productID";
+                        cmd.Parameters.AddWithValue("productID", p.ID);
+                        SqlDataReader reviewReader = cmd.ExecuteReader();
+                        while (reviewReader.Read()) {
+                            Review r = new Review();
+                            r.User = new User();
+                            r.Text = reviewReader.GetString(reviewReader.GetOrdinal("Text"));
+                            r.DateCreated = reviewReader.GetDateTime(reviewReader.GetOrdinal("DateCreated"));
+                            r.User.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("UserID"));
+                            r.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("ReviewID"));
+
+                            p.Reviews.Add(r);
+                        }
+                        reviewReader.Close();
                         return p;
                     }
                 }

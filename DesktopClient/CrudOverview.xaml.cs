@@ -30,6 +30,7 @@ namespace DesktopClient {
         private UserController userController;
         private List<string> userOrderListWithID;
         private List<string> orderlineItems;
+        private List<string> showReviewList;
         private int selectedListItemOrderLineID;
         private string selectedListItem = "";
 
@@ -39,7 +40,7 @@ namespace DesktopClient {
             orderController = new OrderController();
             orderlines = new List<Orderline>();
             userController = new UserController();
-
+            showReviewList = new List<string>();
             userOrderListWithID = new List<string>();
             orderlineItems = new List<string>();
         }
@@ -100,6 +101,12 @@ namespace DesktopClient {
                     foundDescriptionlabel.Content = p.Description;
                     foundRatinglabel.Content = p.Rating;
                     ProductSøgLabel.Content = "";
+                    showReviewList = new List<string>();
+                    foreach (Review review in p.Reviews) {
+                        showReviewList.Add("Skrevet af " + review.User.FirstName + ": " + review.Text);
+                    }
+                    showReviewList.Reverse();
+                    ProductSøgShowReviews.ItemsSource = showReviewList;
                 }
                 else {
                     ProductSøgLabel.Content = "Produktet findes ikke";
@@ -561,6 +568,10 @@ namespace DesktopClient {
                 selectedListItem = Ordre_Opdater_ListBox.Items[Ordre_Opdater_ListBox.SelectedIndex].ToString();
                 selectedListItemOrderLineID = Int32.Parse(Regex.Match(selectedListItem, @"\d+").Value);
             }
+        }
+
+        private void Product_Search_Slet_Click(object sender, RoutedEventArgs e) {
+
         }
     }
 }

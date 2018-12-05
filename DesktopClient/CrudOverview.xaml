@@ -41,21 +41,24 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Søg">
-                            <Grid Background="#FFE5E5E5">
-                                <TextBox x:Name="inputIDtextBox" HorizontalAlignment="Left" Height="23" Margin="371,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.388,0.557"/>
-                                <Label x:Name="searchByIDlabel" Content="Søg på ID" HorizontalAlignment="Left" Margin="212,37,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="namelabel" Content="Navn:" HorizontalAlignment="Left" Margin="212,106,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="foundNamelabel" Content="" HorizontalAlignment="Left" Margin="371,106,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="pricelabel" Content="Pris:" HorizontalAlignment="Left" Margin="212,152,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="foundPricelabel" Content="" HorizontalAlignment="Left" Margin="371,152,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="stocklabel" Content="Antal på lager:" HorizontalAlignment="Left" Margin="212,197,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="descriptionlabel" Content="Beskrivelse:" HorizontalAlignment="Left" Margin="212,246,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="foundDescriptionlabel" Content="" HorizontalAlignment="Left" Margin="371,246,0,0" VerticalAlignment="Top" Width="285"/>
-                                <Label x:Name="foundStocklabel" Content="" HorizontalAlignment="Left" Margin="371,197,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="ratinglabel" Content="Kunde rating:" HorizontalAlignment="Left" Margin="212,288,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="foundRatinglabel" Content="" HorizontalAlignment="Left" Margin="371,289,0,0" VerticalAlignment="Top"/>
+                            <Grid Background="#FFE5E5E5" Margin="1,1,-1,-1.2">
+                                <TextBox x:Name="inputIDtextBox" HorizontalAlignment="Left" Height="23" Margin="201,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.388,0.557"/>
+                                <Label x:Name="searchByIDlabel" Content="Søg på ID" HorizontalAlignment="Left" Margin="42,43,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="namelabel" Content="Navn:" HorizontalAlignment="Left" Margin="42,112,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="foundNamelabel" Content="" HorizontalAlignment="Left" Margin="201,112,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="pricelabel" Content="Pris:" HorizontalAlignment="Left" Margin="42,158,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="foundPricelabel" Content="" HorizontalAlignment="Left" Margin="201,158,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="stocklabel" Content="Antal på lager:" HorizontalAlignment="Left" Margin="42,203,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="descriptionlabel" Content="Beskrivelse:" HorizontalAlignment="Left" Margin="42,252,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="foundDescriptionlabel" Content="" HorizontalAlignment="Left" Margin="201,252,0,0" VerticalAlignment="Top" Width="540" Height="38" AutomationProperties.IsOffscreenBehavior="Onscreen"/>
+                                <Label x:Name="foundStocklabel" Content="" HorizontalAlignment="Left" Margin="201,203,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="ratinglabel" Content="Kunde rating:" HorizontalAlignment="Left" Margin="42,294,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="foundRatinglabel" Content="" HorizontalAlignment="Left" Margin="201,295,0,0" VerticalAlignment="Top"/>
                                 <Button x:Name="OKbutton" Content="OK" HorizontalAlignment="Left" Margin="581,331,0,0" VerticalAlignment="Top" Width="75" Click="Produkt_Søg_Ok_Clicked"/>
-                                <Label x:Name="ProductSøgLabel" Content="" HorizontalAlignment="Left" Margin="371,10,0,0" VerticalAlignment="Top" Width="120" Foreground="Red"/>
+                                <Label x:Name="ProductSøgLabel" Content="" HorizontalAlignment="Left" Margin="201,16,0,0" VerticalAlignment="Top" Width="120" Foreground="Red"/>
+                                <ListBox x:Name="ProductSøgShowReviews" HorizontalAlignment="Left" Height="204" Margin="351,43,0,0" VerticalAlignment="Top" Width="390"/>
+                                <Label Content="Anmeldelser af pågældende produkt:" HorizontalAlignment="Left" Margin="351,10,0,0" VerticalAlignment="Top" Width="139"/>
+                                <Button x:Name="Product_Search_Slet" Content="Slet anmeldelse" HorizontalAlignment="Left" Margin="581,13,0,0" VerticalAlignment="Top" Width="102" Click="Product_Search_Slet_Click"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Opdater">
@@ -204,24 +207,28 @@
                                 <ListBox x:Name="Kunde_Søg_Orderbox" HorizontalAlignment="Left" Height="180" Margin="439,93,0,0" VerticalAlignment="Top" Width="177"/>
                                 <Label Content="Kunden har følgende ordre:" HorizontalAlignment="Left" Margin="439,62,0,0" VerticalAlignment="Top" Width="177"/>
                                 <Grid Background="#FFE5E5E5">
-                                    <Label Content="Søg på email" HorizontalAlignment="Left" Margin="79,32,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="Efternavn:" HorizontalAlignment="Left" Margin="79,124,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="Adresse:" HorizontalAlignment="Left" Margin="79,155,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="By:" HorizontalAlignment="Left" Margin="79,216,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="Telefonnummer:" HorizontalAlignment="Left" Margin="79,247,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="Postnummer:" HorizontalAlignment="Left" Margin="79,186,0,0" VerticalAlignment="Top"/>
-                                    <Label Content="Fornavn:" HorizontalAlignment="Left" Margin="79,93,0,0" VerticalAlignment="Top"/>
-                                    <TextBox x:Name="findUserByMailTextBox2" HorizontalAlignment="Left" Height="23" Margin="190,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152"/>
-                                    <Label x:Name="userFindFirstNameLabel1" Content="" HorizontalAlignment="Left" Margin="190,93,0,0" VerticalAlignment="Top" Width="152"/>
-                                    <Label x:Name="userFindCityLabel1" Content="" HorizontalAlignment="Left" Margin="190,216,0,0" VerticalAlignment="Top" Width="152"/>
-                                    <Label x:Name="userFindPhoneLabel1" Content="" HorizontalAlignment="Left" Margin="190,247,0,0" VerticalAlignment="Top" Width="152"/>
-                                    <Label x:Name="userFindZipCodeLabel1" Content="" HorizontalAlignment="Left" Margin="190,186,0,0" VerticalAlignment="Top" Width="152"/>
-                                    <Label x:Name="userFindLastNameLabel1" Content="" HorizontalAlignment="Left" Margin="190,124,0,0" VerticalAlignment="Top" Width="152"/>
-                                    <Label x:Name="userFindAddressLabel1" Content="" HorizontalAlignment="Left" Margin="190,155,0,0" VerticalAlignment="Top" Width="152"/>
-                                    <Button x:Name="Kunde_Søg_Ok1" Content="OK" HorizontalAlignment="Left" Margin="608,300,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Søg_Ok_Click"/>
-                                    <ListBox x:Name="Kunde_Søg_Orderbox1" HorizontalAlignment="Left" Height="180" Margin="439,93,0,0" VerticalAlignment="Top" Width="177" />
-                                    <Label Content="Kunden har følgende ordre:" HorizontalAlignment="Left" Margin="439,62,0,0" VerticalAlignment="Top" Width="177"/>
-                                    <Label x:Name="UserSøgLabel" Content="" HorizontalAlignment="Left" Margin="190,4,0,0" VerticalAlignment="Top" Width="152" Foreground="#FFF90A0A"/>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="7*"/>
+                                        <ColumnDefinition Width="765*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Søg på email" HorizontalAlignment="Left" Margin="71.8,32,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                    <Label Content="Efternavn:" HorizontalAlignment="Left" Margin="71.8,124,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                    <Label Content="Adresse:" HorizontalAlignment="Left" Margin="71.8,155,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                    <Label Content="By:" HorizontalAlignment="Left" Margin="71.8,216,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                    <Label Content="Telefonnummer:" HorizontalAlignment="Left" Margin="71.8,247,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                    <Label Content="Postnummer:" HorizontalAlignment="Left" Margin="71.8,186,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                    <Label Content="Fornavn:" HorizontalAlignment="Left" Margin="71.8,93,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                    <TextBox x:Name="findUserByMailTextBox2" HorizontalAlignment="Left" Height="23" Margin="182.8,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Grid.Column="1"/>
+                                    <Label x:Name="userFindFirstNameLabel1" Content="" HorizontalAlignment="Left" Margin="182.8,93,0,0" VerticalAlignment="Top" Width="152" Grid.Column="1"/>
+                                    <Label x:Name="userFindCityLabel1" Content="" HorizontalAlignment="Left" Margin="182.8,216,0,0" VerticalAlignment="Top" Width="152" Grid.Column="1"/>
+                                    <Label x:Name="userFindPhoneLabel1" Content="" HorizontalAlignment="Left" Margin="182.8,247,0,0" VerticalAlignment="Top" Width="152" Grid.Column="1"/>
+                                    <Label x:Name="userFindZipCodeLabel1" Content="" HorizontalAlignment="Left" Margin="182.8,186,0,0" VerticalAlignment="Top" Width="152" Grid.Column="1"/>
+                                    <Label x:Name="userFindLastNameLabel1" Content="" HorizontalAlignment="Left" Margin="182.8,124,0,0" VerticalAlignment="Top" Width="152" Grid.Column="1"/>
+                                    <Label x:Name="userFindAddressLabel1" Content="" HorizontalAlignment="Left" Margin="182.8,155,0,0" VerticalAlignment="Top" Width="152" Grid.Column="1"/>
+                                    <Button x:Name="Kunde_Søg_Ok1" Content="OK" HorizontalAlignment="Left" Margin="600.8,300,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Søg_Ok_Click" Grid.Column="1"/>
+                                    <ListBox x:Name="Kunde_Søg_Orderbox1" HorizontalAlignment="Left" Height="180" Margin="431.8,93,0,0" VerticalAlignment="Top" Width="177" Grid.Column="1" />
+                                    <Label Content="Kunden har følgende ordre:" HorizontalAlignment="Left" Margin="431.8,62,0,0" VerticalAlignment="Top" Width="177" Grid.Column="1"/>
+                                    <Label x:Name="UserSøgLabel" Content="" HorizontalAlignment="Left" Margin="182.8,4,0,0" VerticalAlignment="Top" Width="152" Foreground="#FFF90A0A" Grid.Column="1"/>
                                 </Grid>
                             </Grid>
                         </TabItem>
