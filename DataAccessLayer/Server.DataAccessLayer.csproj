@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AdminDB.cs" />
     <Compile Include="CustomerDB.cs" />
+    <Compile Include="ErrorHandling.cs" />
     <Compile Include="Interface\ICRUD.cs" />
     <Compile Include="Interface\ICustomer.cs" />
     <Compile Include="Interface\IOrder.cs" />

@@ -9,5 +9,6 @@ namespace Client.Domain {
         public int ImageID { get; set; }
         public string ImageSource { get; set; }
         public string Name { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

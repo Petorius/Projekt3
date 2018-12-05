@@ -32,6 +32,8 @@ namespace Server.Domain {
         public List<Image> Images { get; set; }
         [DataMember]
         public List<Review> Reviews { get; set; }
+        [DataMember]
+        public string ErrorMessage { get; set; }
 
         public Product(string name, decimal price, int stock, int minStock, int maxStock, string description) {
             Name = name;
@@ -42,11 +44,13 @@ namespace Server.Domain {
             Description = description;
             Images = new List<Image>();
             Reviews = new List<Review>();
+            ErrorMessage = "";
         }
 
         public Product() {
             Images = new List<Image>();
             Reviews = new List<Review>();
+            ErrorMessage = "";
         }
     }
 }

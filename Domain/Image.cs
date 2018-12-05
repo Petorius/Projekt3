@@ -13,5 +13,7 @@ namespace Server.Domain {
         public string ImageSource { get; set; }
         [DataMember]
         public string Name { get; set; }
+        [DataMember]
+        public string ErrorMessage { get; set; }
     }
 }

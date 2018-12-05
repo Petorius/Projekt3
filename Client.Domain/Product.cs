@@ -18,6 +18,7 @@ namespace Client.Domain {
         public bool IsActive { get; set; }
         public List<Image> Images { get; set; }
         public List<Review> Reviews { get; set; }
+        public string ErrorMessage { get; set; }
 
         public Product(string name, decimal price, int stock, int minStock, int maxStock, string description) {
             Name = name;
@@ -28,17 +29,20 @@ namespace Client.Domain {
             Description = description;
             Reviews = new List<Review>();
             Images = new List<Image>();
+            ErrorMessage = "";
         }
 
         public Product() {
             Images = new List<Image>();
             Reviews = new List<Review>();
+            ErrorMessage = "";
         }
 
         public Product(int id) {
             ID = id;
             Reviews = new List<Review>();
             Images = new List<Image>();
+            ErrorMessage = "";
         }
 
     }

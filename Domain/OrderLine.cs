@@ -19,15 +19,18 @@ namespace Server.Domain {
         public Product Product { get; set; }
         [DataMember]
         public int OrderID { get; set; }
+        [DataMember]
+        public string ErrorMessage { get; set; }
 
         public OrderLine(int quantity, decimal subTotal, Product p) {
             Quantity = quantity;
             SubTotal = subTotal;
             Product = p;
+            ErrorMessage = "";
         }
 
         public OrderLine() {
-
+            ErrorMessage = "";
         }
     }
 }
