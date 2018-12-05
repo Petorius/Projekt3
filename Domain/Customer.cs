@@ -24,6 +24,8 @@ namespace Server.Domain {
         public int ZipCode { get; set; }
         [DataMember]
         public string City { get; set; }
+        [DataMember]
+        public string ErrorMessage { get; set; }
 
         public Customer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
             FirstName = firstName;
@@ -33,9 +35,11 @@ namespace Server.Domain {
             Address = address;
             ZipCode = zipCode;
             City = city;
+            ErrorMessage = "";
         }
 
         public Customer() {
+            ErrorMessage = "";
         }
     }
 }

@@ -20,11 +20,13 @@ namespace Server.Domain {
             int zipCode, string city) : base(firstName, lastName, phone, email, address, zipCode, city) {
             Orders = new List<Order>();
             Reviews = new List<Review>();
+            ErrorMessage = "";
         }
 
         public User() {
             Orders = new List<Order>();
             Reviews = new List<Review>();
+            ErrorMessage = "";
         }
     }
 }

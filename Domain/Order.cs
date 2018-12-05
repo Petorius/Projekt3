@@ -20,16 +20,20 @@ namespace Server.Domain {
         public DateTime DateCreated { get; set; }
         [DataMember]
         public List<OrderLine> Orderlines { get; set; }
+        [DataMember]
+        public string ErrorMessage { get; set; }
 
         public Order(Customer customer) {
             Validation = false;
             Customer = customer;
             Orderlines = new List<OrderLine>();
             DateCreated = DateTime.Today;
+            ErrorMessage = "";
         }
 
         public Order() {
             Orderlines = new List<OrderLine>();
+            ErrorMessage = "";
         }
     }
 

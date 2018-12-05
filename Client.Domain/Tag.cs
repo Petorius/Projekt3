@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace Client.Domain {
     public class Tag {
-        
+
+        public string ErrorMessage { get; set; }
+
         public string Name { get; set; }
-       
+
         public List<Product> Products { get; set; }
 
-        public Tag()
-        {
+        public Tag() {
             Products = new List<Product>();
+            ErrorMessage = "";
         }
     }
 }

@@ -17,9 +17,12 @@ namespace Server.Domain
         public string Name { get; set; }
         [DataMember]
         public List<Product> Products { get; set; }
+        [DataMember]
+        public string ErrorMessage { get; set; }
 
         public Tag() {
             Products = new List<Product>();
+            ErrorMessage = "";
         }
     }
 }
