@@ -30,7 +30,7 @@ namespace Server.BusinessLogic {
 
         // Creates an user with password. Hashes the password with auto-generated
         // salt and returns true if user was created and false otherwise.
-        public bool CreateUserWithPassword(string firstName, string lastName, string street,
+        public User CreateUserWithPassword(string firstName, string lastName, string street,
             int zip, string city, string email, int number, string password) {
 
             string s = account.CreatePasswordHash(password);
@@ -66,7 +66,7 @@ namespace Server.BusinessLogic {
             return res;
         }
 
-        public bool CreateAdminLogin(string email, string password) {
+        public Admin CreateAdminLogin(string email, string password) {
             string s = account.CreatePasswordHash(password);
             char[] splitter = { ':' };
             var split = s.Split(splitter);

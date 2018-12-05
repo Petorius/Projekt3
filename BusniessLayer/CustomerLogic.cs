@@ -28,7 +28,7 @@ namespace Server.BusinessLogic {
             c.Email = email;
             c.Phone = number;
             if (c.ID < 1) {
-                c.ID = customerDB.CreateReturnedID(c).ID;
+                c.ID = customerDB.Create(c).ID;
             }
             else {
                 customerDB.Update(c);
@@ -40,7 +40,7 @@ namespace Server.BusinessLogic {
             return customerDB.GetByMail(email);
         }
 
-        public bool UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
+        public Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
             Customer c = GetCustomerByMail(email);
             c.FirstName = firstName;
             c.LastName = lastName;

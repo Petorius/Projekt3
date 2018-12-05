@@ -43,7 +43,7 @@ namespace Server.BusinessLogic {
                 o.Validation = true;
                 o.Orderlines = ol;
                 o.Total = TotalOrderPrice(ol);
-                o.ID = orderDB.CreateReturnID(o);
+                o.ID = orderDB.Create(o).ID;
             }
             else {
                 o.Validation = false;
@@ -51,7 +51,7 @@ namespace Server.BusinessLogic {
             return o;
         }
 
-        public bool DeleteOrder(Order o) {
+        public Order DeleteOrder(Order o) {
             foreach (OrderLine ol in o.Orderlines) {
                 Product p = productDB.Get(ol.Product.ID);
                 ol.Product = p;

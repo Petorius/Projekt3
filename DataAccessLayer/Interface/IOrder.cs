@@ -8,6 +8,5 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interface {
     public interface IOrder : ICRUD<Order> {
-        Order CreateReturnID(Order Entity, bool test = false, bool testResult = false);
     }
 }

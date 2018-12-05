@@ -34,9 +34,9 @@ namespace UnitTest {
             Order o = new Order(c);
             o.Orderlines.Add(new OrderLine(2, 200, productDB.Get(1)));
 
-            int res = orderDB.CreateReturnID(o);
+            o = orderDB.Create(o);
 
-            Assert.IsTrue(res > 0);
+            Assert.IsTrue(o.ID > 0);
         }
 
         [TestMethod]
@@ -69,11 +69,11 @@ namespace UnitTest {
             Order o = new Order(c);
             o.Orderlines.Add(new OrderLine(2, 200, productDB.Get(1)));
 
-            int res = orderDB.CreateReturnID(o);
+            o = orderDB.Create(o);
 
             orderDB.Delete(o, true, true);
 
-            Assert.IsNull(orderDB.Get(res));
+            Assert.IsNull(orderDB.Get(o.ID));
         }
 
 

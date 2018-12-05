@@ -18,7 +18,7 @@ namespace Server.DataAccessLayer {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
         }
 
-        public Customer CreateReturnedID(Customer Entity) {
+        public Customer Create(Customer Entity, bool test = false, bool testResult = false) {
             Customer customer = new Customer();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
@@ -142,11 +142,7 @@ namespace Server.DataAccessLayer {
             return c;
         }
 
-        public bool Delete(Customer Entity, bool test = false, bool testResult = false) {
-            throw new NotImplementedException();
-        }
-
-        public bool Create(Customer Entity, bool test = false, bool testResult = false) {
+        public Customer Delete(Customer Entity, bool test = false, bool testResult = false) {
             throw new NotImplementedException();
         }
 

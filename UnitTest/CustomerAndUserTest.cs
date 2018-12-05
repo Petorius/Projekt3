@@ -46,16 +46,16 @@ namespace UnitTest {
 
         [TestMethod]
         public void DeleteUserWithMail() {
-            bool res = userDB.DeleteUser("g-star-raw@gmail.gcom");
+            User user = userDB.DeleteUser("g-star-raw@gmail.gcom");
 
-            Assert.AreEqual(true, res);
+            Assert.AreEqual(user.ErrorMessage, "");
         }
 
         [TestMethod]
         public void DeleteUserWithMailExpectedToFail() {
-            bool res = userDB.DeleteUser("g-star-raw@gmail.gcom", true, false);
+            User user = userDB.DeleteUser("g-star-raw@gmail.gcom", true, false);
 
-            Assert.AreEqual(false, res);
+            Assert.AreEqual(user.ErrorMessage, "");
         }
 
         [TestMethod]

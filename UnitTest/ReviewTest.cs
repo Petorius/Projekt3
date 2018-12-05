@@ -35,9 +35,9 @@ namespace UnitTest {
             Product product = productDB.Get(1);
             review.Text = "Testing 123 testing";
 
-            bool isCreated = reviewDB.CreateReview(review, product.ID, user.ID);
+            Review r = reviewDB.CreateReview(review, product.ID, user.ID);
 
-            Assert.AreEqual(true, isCreated);
+            Assert.AreEqual(r.ErrorMessage, "");
         }
 
         [TestMethod]
@@ -49,9 +49,9 @@ namespace UnitTest {
 
             reviewDB.CreateReview(review, product.ID, user.ID);
 
-            bool isDeleted = reviewDB.Delete(review, true, true);
+            Review r = reviewDB.Delete(review, true, true);
 
-            Assert.AreEqual(false, isDeleted);
+            Assert.AreEqual(r.ErrorMessage, "");
         }
 
         [TestMethod]
@@ -63,9 +63,9 @@ namespace UnitTest {
 
             reviewDB.CreateReview(review, product.ID, user.ID);
 
-            bool isDeleted = reviewDB.Delete(review, true);
+            Review r = reviewDB.Delete(review, true);
 
-            Assert.AreEqual(true, isDeleted);
+            Assert.AreEqual(r.ErrorMessage, "");
         }
 
         [TestMethod]

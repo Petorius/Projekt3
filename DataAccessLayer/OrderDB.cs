@@ -21,7 +21,7 @@ namespace Server.DataAccessLayer {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
         }
 
-        public Order CreateReturnID(Order Entity, bool test = false, bool testResult = false) {
+        public Order Create(Order Entity, bool test = false, bool testResult = false) {
             Order order = new Order();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
@@ -179,11 +179,7 @@ namespace Server.DataAccessLayer {
             throw new NotImplementedException();
         }
 
-        public bool Update(Order Entity, bool test = false, bool testResult = false) {
-            throw new NotImplementedException();
-        }
-
-        public bool Create(Order Entity, bool test = false, bool testResult = false) {
+        public Order Update(Order Entity, bool test = false, bool testResult = false) {
             throw new NotImplementedException();
         }
     }

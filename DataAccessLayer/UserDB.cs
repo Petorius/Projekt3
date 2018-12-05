@@ -152,7 +152,7 @@ namespace Server.DataAccessLayer {
                             }
                         }
                     }
-                    catch (SqlException) {
+                    catch (SqlException e) {
                         user.ErrorMessage = ErrorHandling.Exception(e);
                     }
                 }
