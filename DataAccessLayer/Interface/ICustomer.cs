@@ -9,6 +9,6 @@ using Server.Domain;
 namespace DataAccessLayer.Interface {
     public interface ICustomer : ICRUD<Customer> {
         Customer GetByMail(string email);
-        int CreateReturnedID(Customer Entity);
+        Customer CreateReturnedID(Customer Entity);
     }
 }

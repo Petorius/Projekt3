@@ -18,8 +18,8 @@ namespace Server.DataAccessLayer {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
         }
 
-        public int CreateReturnedID(Customer Entity) {
-            int res = -1;
+        public Customer CreateReturnedID(Customer Entity) {
+            Customer customer = new Customer();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
@@ -33,21 +33,24 @@ namespace Server.DataAccessLayer {
                         cmd.Parameters.AddWithValue("Address", Entity.Address);
                         cmd.Parameters.AddWithValue("ZipCode", Entity.ZipCode);
                         cmd.Parameters.AddWithValue("City", Entity.City);
-                        res = (int)cmd.ExecuteScalar();
+                        customer.ID = (int)cmd.ExecuteScalar();
+                        if(customer.ID < 1) {
+                            customer.ErrorMessage = "Kunden findes ikke";
+                        }
                     }
                 }
-                catch (SqlException) {
-                    res = -1;
+                catch (SqlException e) {
+                    customer.ErrorMessage = ErrorHandling.Exception(e);
                 }
             }
-            return res;
+            return customer;
         }
 
 
 
         // Method with optimistic concurreny. If anything is changed, we rollback our transaction after trying for 4 times
-        public bool Update(Customer Entity, bool test = false, bool testResult = false) {
-            bool isUpdated = false;
+        public Customer Update(Customer Entity, bool test = false, bool testResult = false) {
+            Customer customer = new Customer();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     connection.Open();
@@ -84,36 +87,37 @@ namespace Server.DataAccessLayer {
                                 }
 
                                 if (rowCount == 0) {
+                                    customer.ErrorMessage = "Kunden blev ikke opdateret. Prøv igen.";
                                     cmd.Transaction.Rollback();
                                 }
                                 else {
-                                    isUpdated = true;
+                                    customer.ErrorMessage = "";
                                     cmd.Transaction.Commit();
                                     break;
                                 }
                             }
-                            catch (SqlException) {
-                                return isUpdated;
+                            catch (SqlException e) {
+                                customer.ErrorMessage = ErrorHandling.Exception(e);
                             }
                         }
                     }
                 }
             }
-            return isUpdated;
+            return customer;
         }
 
 
         public Customer GetByMail(string email) {
+            Customer c = new Customer();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
-                        Customer c = new Customer();
-
                         cmd.CommandText = "SELECT customerID, FirstName, LastName, Phone, Email, Address, ZipCode, City" +
                             " from Customer where Email = @Email";
                         cmd.Parameters.AddWithValue("Email", email);
                         SqlDataReader reader = cmd.ExecuteReader();
+
                         while (reader.Read()) {
                             c.ID = reader.GetInt32(reader.GetOrdinal("customerID"));
                             c.FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
@@ -125,15 +129,17 @@ namespace Server.DataAccessLayer {
                             c.City = reader.GetString(reader.GetOrdinal("City"));
                         }
                         reader.Close();
-                        return c;
+                        
+                        if(c.ID > 1) {
+                            c.ErrorMessage = "Kunden findes ikke.";
+                        }
                     }
                 }
-                catch (SqlException) {
-                    return null;
+                catch (SqlException e) {
+                    c.ErrorMessage = ErrorHandling.Exception(e);
                 }
-
-
             }
+            return c;
         }
 
         public bool Delete(Customer Entity, bool test = false, bool testResult = false) {

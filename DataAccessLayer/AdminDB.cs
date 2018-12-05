@@ -21,12 +21,11 @@ namespace Server.DataAccessLayer {
         }
 
         public Admin GetAdmin(string email) {
+            Admin admin = new Admin();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
-                        Admin admin = new Admin();
-
                         cmd.CommandText = "select adminID, employeeEmail, hashPassword, salt from [dbo].[Admin] where [dbo].[Admin].EmployeeEmail = @Email ";
                         cmd.Parameters.AddWithValue("Email", email);
                         SqlDataReader reader = cmd.ExecuteReader();
@@ -37,18 +36,20 @@ namespace Server.DataAccessLayer {
                             admin.Salt = reader.GetString(reader.GetOrdinal("salt"));
                         }
                         reader.Close();
-                        return admin;
+                        if(admin.ID < 1) {
+                            admin.ErrorMessage = "Administrator kontoen findes ikke";
+                        }
                     }
                 }
-                catch (SqlException) {
-                    return null;
+                catch (SqlException e) {
+                    admin.ErrorMessage = ErrorHandling.Exception(e);
                 }
-
             }
+            return admin;
         }
 
-        public bool CreateAdmin(string email, string hashValue, string salt) {
-            bool res = false;
+        public Admin CreateAdmin(string email, string hashValue, string salt) {
+            Admin admin = new Admin();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
@@ -59,14 +60,13 @@ namespace Server.DataAccessLayer {
                         cmd.Parameters.AddWithValue("HashPassword", hashValue);
                         cmd.Parameters.AddWithValue("Salt", salt);
                         cmd.ExecuteNonQuery();
-                        res = true;
                     }
                 }
-                catch (SqlException) {
-                    res = false;
+                catch (SqlException e) {
+                    admin.ErrorMessage = ErrorHandling.Exception(e);
                 }
             }
-            return res;
+            return admin;
         }
     }
 }

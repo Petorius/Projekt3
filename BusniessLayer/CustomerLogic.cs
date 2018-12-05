@@ -28,7 +28,7 @@ namespace Server.BusinessLogic {
             c.Email = email;
             c.Phone = number;
             if (c.ID < 1) {
-                c.ID = customerDB.CreateReturnedID(c);
+                c.ID = customerDB.CreateReturnedID(c).ID;
             }
             else {
                 customerDB.Update(c);
