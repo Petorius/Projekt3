@@ -224,13 +224,13 @@ namespace DesktopClient {
                 Product p = new Product();
                 if (Int32.TryParse(Ordre_Opret_Find_Product_TextBox.Text, out int i)) {
                     p = productController.Find(i);
-                    if (p.ErrorMessage == "") {
+                    if (p.ErrorMessage != "") {
                         Ordre_Opret_Tilføjet_Label.Content = p.ErrorMessage;
                     }
                 }
                 else {
                     p = productController.FindByName(Ordre_Opret_Find_Product_TextBox.Text);
-                    if (p.ErrorMessage == "") {
+                    if (p.ErrorMessage != "") {
                         Ordre_Opret_Tilføjet_Label.Content = p.ErrorMessage;
                     }
                 }
@@ -238,7 +238,7 @@ namespace DesktopClient {
                 decimal subTotal = p.Price * quantity;
                 Orderline ol = orderController.CreateOrderLine(quantity, subTotal, p.ID);
 
-                if (ol.ErrorMessage != "") {
+                if (ol.ErrorMessage == "") {
                     orderlines.Add(ol);
                     Ordre_Opret_Tilføjet_Label.Content = "Ordrelinjen blev oprettet";
                     OrdrelineClearFields();
@@ -372,6 +372,10 @@ namespace DesktopClient {
                     User tempUser = userController.IsEmailAlreadyRegistered(Kunde_Opdater_Email_TextBox.Text);
                     if(tempUser.ErrorMessage != "Brugeren findes ikke") {
                         Kunde_Opdater_Result_Label.Content = "Venligt vælg en anden Email";
+                    }
+                    else {
+                        res = true;
+                        user.Email = Kunde_Opdater_Email_TextBox.Text;
                     }
                 } 
                 else {

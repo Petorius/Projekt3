@@ -28,7 +28,11 @@ namespace Server.ServiceLayer {
         public OrderLine CreateOrderLine(int quantity, decimal subTotal, int id) {
             Product p = productDB.Get(id);
             OrderLine ol = new OrderLine(quantity, subTotal, p);
-            return orderLineDB.Create(ol);
+            OrderLine orderlineWithErrorMessage = orderLineDB.Create(ol);
+            orderlineWithErrorMessage.Product = p;
+            orderlineWithErrorMessage.Quantity = quantity;
+            orderlineWithErrorMessage.SubTotal = subTotal;
+            return orderlineWithErrorMessage;
         }
 
         public OrderLine CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
