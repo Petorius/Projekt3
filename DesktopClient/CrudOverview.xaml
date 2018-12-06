@@ -36,13 +36,13 @@
                                 <Label Content="Beskrivelse:" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Width="90" Grid.ColumnSpan="2"/>
                                 <Button Content="Opret Produkt" HorizontalAlignment="Left" Margin="481.791,306,0,0" VerticalAlignment="Top" Width="93" Height="20" Click="Produkt_Opret_OpretProdukt_Clicked" Grid.Column="1"/>
                                 <Button Content="Fortryd" HorizontalAlignment="Left" Margin="614.791,307,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="Produkt_Opret_Fortryd_Clicked"/>
-                                <Label x:Name="addProductText" Content="" Grid.Column="1" HorizontalAlignment="Center" Margin="400.2,157,0,0" VerticalAlignment="Top" Height="67" Width="290" FontSize="24"/>
+                                <Label x:Name="addProductText" Content="" Grid.Column="1" HorizontalAlignment="Center" Margin="360.2,113,29,0" VerticalAlignment="Top" Height="67" Width="330" FontSize="24"/>
                                 <Button x:Name="AddImageButton" Content="Tilføj billede(r)" Grid.Column="1" HorizontalAlignment="Left" Margin="360,199,0,0" VerticalAlignment="Top" Width="83" RenderTransformOrigin="-2.422,0.538" Height="26" Click="AddImageButton_Click"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Søg">
                             <Grid Background="#FFE5E5E5" Margin="1,1,-1,-1.2">
-                                <TextBox x:Name="inputIDtextBox" HorizontalAlignment="Left" Height="23" Margin="201,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.388,0.557"/>
+                                <TextBox x:Name="inputIDtextBox" HorizontalAlignment="Left" Height="23" Margin="166,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" RenderTransformOrigin="1.388,0.557"/>
                                 <Label x:Name="searchByIDlabel" Content="Søg på ID/Navn" HorizontalAlignment="Left" Margin="42,43,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="namelabel" Content="Navn:" HorizontalAlignment="Left" Margin="42,112,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="foundNamelabel" Content="" HorizontalAlignment="Left" Margin="201,112,0,0" VerticalAlignment="Top"/>
@@ -55,7 +55,7 @@
                                 <Label x:Name="ratinglabel" Content="Kunde rating:" HorizontalAlignment="Left" Margin="42,294,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="foundRatinglabel" Content="" HorizontalAlignment="Left" Margin="201,295,0,0" VerticalAlignment="Top"/>
                                 <Button x:Name="OKbutton" Content="OK" HorizontalAlignment="Left" Margin="581,331,0,0" VerticalAlignment="Top" Width="75" Click="Produkt_Søg_Ok_Clicked"/>
-                                <Label x:Name="ProductSøgLabel" Content="" HorizontalAlignment="Left" Margin="201,16,0,0" VerticalAlignment="Top" Width="120" Foreground="Red"/>
+                                <Label x:Name="ProductSøgLabel" Content="" HorizontalAlignment="Left" Margin="166,16,0,0" VerticalAlignment="Top" Width="155" Foreground="Red"/>
                                 <ListBox x:Name="ProductSøgShowReviews" HorizontalAlignment="Left" Height="204" Margin="351,43,0,0" VerticalAlignment="Top" Width="390" SelectionChanged="ProductSøgShowReviews_SelectionChanged"/>
                                 <Label Content="Anmeldelser af pågældende produkt:" HorizontalAlignment="Left" Margin="351,10,0,0" VerticalAlignment="Top" Width="139"/>
                                 <Button x:Name="Product_Search_Slet" Content="Slet anmeldelse" HorizontalAlignment="Left" Margin="581,13,0,0" VerticalAlignment="Top" Width="102" Click="Product_Search_Slet_Click"/>
@@ -66,7 +66,7 @@
                         </TabItem>
                         <TabItem Header="Opdater">
                             <Grid Background="#FFE5E5E5">
-                                <Label x:Name="updateProductText1" Content="" HorizontalAlignment="Center" Margin="463,194,9.6,0" VerticalAlignment="Top" Height="101" Width="321" FontSize="24"/>
+                                <Label x:Name="updateProductText1" Content="" HorizontalAlignment="Center" Margin="386,194,-1,0" VerticalAlignment="Top" Height="101" Width="387" FontSize="24"/>
                                 <TextBox x:Name="_inputIDtextBox" HorizontalAlignment="Left" Height="23" Margin="198,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.388,0.557"/>
                                 <Label x:Name="_searchByIDlabel" Content="Søg på ID/Navn" HorizontalAlignment="Left" Margin="40,21,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="_namelabel" Content="Navn:" HorizontalAlignment="Left" Margin="40,90,0,0" VerticalAlignment="Top"/>
@@ -96,7 +96,7 @@
                                 <Button x:Name="Produkt_Slet_SletProdukt_Clicked" Content="Slet Produkt" Grid.Column="1" HorizontalAlignment="Left" Margin="413.2,293,0,0" VerticalAlignment="Top" Width="75" Click="Produkt_Slet_SletProdukt_Clicked_Click"/>
                                 <Label x:Name="findProductLabel" Content="Søg på ID" Grid.Column="1" HorizontalAlignment="Left" Margin="131.2,114,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="deleteTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="278.2,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                <Label x:Name="deleteStatusLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="173.2,174,0,0" VerticalAlignment="Top" Height="77" Width="341" FontSize="24"/>
+                                <Label x:Name="deleteStatusLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="131.2,174,0,0" VerticalAlignment="Top" Height="77" Width="431" FontSize="24"/>
                             </Grid>
                         </TabItem>
                     </TabControl>

@@ -57,6 +57,13 @@ namespace Client.ServiceLayer {
 
         private Orderline BuildClientOrderlines(OrderReference.OrderLine orderline) {
             Orderline ol = new Orderline();
+            if(orderline.Product != null) {
+                Product p = new Product();
+                p.ID = orderline.Product.ID;
+                p.Stock = orderline.Product.Stock;
+                p.Price = orderline.Product.Price;
+                ol.Product = p;
+            }
             ol.ID = orderline.ID;
             ol.Quantity = orderline.Quantity;
             ol.SubTotal = orderline.SubTotal;

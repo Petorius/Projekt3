@@ -10,7 +10,6 @@ namespace Client.ControlLayer {
         }
 
         // Checks if the email is already registered on an user
-        // and returns true if an email is registered on an user, otherwise false.
         public User IsEmailAlreadyRegistered(string email) {
             User user = userService.GetUser(email);
             if(user.ID > 0) {

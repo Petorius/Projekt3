@@ -21,19 +21,22 @@
                 @Model.ZipCode, @Model.City
             </div>
         </div>
-        @*<div class="panel panel-default">
+
+        <div class="panel panel-default">
             <div class="panel-heading">Tidligere ordre</div>
             @foreach (var order in Model.Orders) {
                 <div class="panel-body">
-                    Ordre #: @order.ID
+                    >Ordre #: @order.ID
                     <br />
                     @foreach (var orderline in order.Orderlines) {
-                        @(orderline.Product.Name + " - " + orderline.Quantity + " - " + orderline.SubTotal)
+
+                        @(orderline.Product.Name + " , " + orderline.Quantity + " , " + orderline.SubTotal)
                     }
                     Total Pris: @order.Total
                 </div>
             }
-        </div>*@
+        </div>
+
         <div class="btn-group" style="margin-top: 15px;">
             <input type="button" value="Opdater" onclick="location.href='@Url.Action("Edit", "UserProfile")'" class="btn btn-default" />
             <button class="btn btn-default">@Html.ActionLink("Slet", "DeleteAccount", "UserProfile", new { @onclick = "return ConfirmDelete();" })</button>

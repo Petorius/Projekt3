@@ -47,6 +47,7 @@ namespace DesktopClient {
         }
 
         private void Produkt_Opret_OpretProdukt_Clicked(object sender, RoutedEventArgs e) {
+            bool res = false;
             try {
                 string name = nameTextBox.Text;
                 decimal price = decimal.Parse(priceTextBox.Text);
@@ -55,22 +56,26 @@ namespace DesktopClient {
                 int maxStock = Int32.Parse(maxStockTextBox.Text);
                 string description = descriptionTextBox.Text;
                 Product p = new Product();
-                if (ImageName != null && ImageURL != null) {
+                if(ImageName != null && ImageURL != null) {
                     p = productController.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
+                    res = true;
                 }
-                else {
+                if(ImageName == null && ImageURL == null) {
                     addProductText.Content = "Du skal tilføje et billede";
                 }
-                if (p.ErrorMessage != "") {
-                    addProductText.Content = "Produktet blev oprettet";
+                if(p.ErrorMessage == "" && res) {
                     clearFields();
+                    addProductText.Content = "Produktet blev oprettet";
                 }
-                else {
+                if(p.ErrorMessage != "") {
                     addProductText.Content = p.ErrorMessage;
                 }
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
+            }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
             }
         }
 
@@ -91,7 +96,7 @@ namespace DesktopClient {
         }
 
         private void Produkt_Søg_Ok_Clicked(object sender, RoutedEventArgs e) {
-            inputIDtextBox.IsEnabled = false;
+            
             CreateReviewHandler();
         }
 
@@ -100,49 +105,54 @@ namespace DesktopClient {
                 int value = Int32.Parse(deleteTextBox.Text);
                 Product product = productController.DeleteProduct(value);
                 if (product.ErrorMessage == "") {
-                    deleteStatusLabel.Content = product.ErrorMessage;
+                    deleteStatusLabel.Content = "Produktet blev deaktiveret";
                     deleteTextBox.Text = "";
                 }
                 else {
-                    deleteStatusLabel.Content = "Produktet blev deaktiveret";
+                    deleteStatusLabel.Content = product.ErrorMessage;
+                    deleteTextBox.Text = "";
                 }
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
             }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
+            }
         }
 
         private void Søgbutton_Click(object sender, RoutedEventArgs e) {
-
             try {
                 Product p = new Product();
                 if (Int32.TryParse(_inputIDtextBox.Text, out int i)) {
                     p = productController.Find(i);
-                    if(p.ErrorMessage == "") {
+                    if(p.ErrorMessage != "") {
                         updateProductText1.Content = p.ErrorMessage;
                     }
                 }
                 else {
                     p = productController.FindByName(_inputIDtextBox.Text);
-                    if (p.ErrorMessage == "") {
+                    if (p.ErrorMessage != "") {
                         updateProductText1.Content = p.ErrorMessage;
                     }
                 }
-                IsActiveButton.IsChecked = p.IsActive;
-                updateNameTextBox.Text = p.Name;
-                updatePriceTextBox.Text = p.Price.ToString();
-                updateStockTextBox.Text = p.Stock.ToString();
-                updateDescriptionTextBox.Text = p.Description;
-                updateMinStockTextBox.Text = p.MinStock.ToString();
-                updateMaxStockTextBox.Text = p.MaxStock.ToString();
-                _inputIDtextBox.IsEnabled = false;
-                updateProductText1.Content = "";
-            }
-            catch (NullReferenceException) {
-                MessageBox.Show("Produktet findes ikke");
+                if(p.ErrorMessage == "") {
+                    IsActiveButton.IsChecked = p.IsActive;
+                    updateNameTextBox.Text = p.Name;
+                    updatePriceTextBox.Text = p.Price.ToString();
+                    updateStockTextBox.Text = p.Stock.ToString();
+                    updateDescriptionTextBox.Text = p.Description;
+                    updateMinStockTextBox.Text = p.MinStock.ToString();
+                    updateMaxStockTextBox.Text = p.MaxStock.ToString();
+                    _inputIDtextBox.IsEnabled = false;
+                    updateProductText1.Content = "";
+                }
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
+            }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
             }
         }
 
@@ -157,7 +167,7 @@ namespace DesktopClient {
                 int maxStock = Int32.Parse(updateMaxStockTextBox.Text);
                 string description = updateDescriptionTextBox.Text;
                 Product product = productController.Update(id, name, price, stock, minStock, maxStock, description, isActive);
-                if (product.ErrorMessage == "") {
+                if (product.ErrorMessage != "") {
                     updateProductText1.Content = product.ErrorMessage;
                     ProductClearUpdateFields();
                     _inputIDtextBox.IsEnabled = true;
@@ -167,6 +177,9 @@ namespace DesktopClient {
                     ProductClearUpdateFields();
                     _inputIDtextBox.IsEnabled = true;
                 }
+            }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
@@ -211,13 +224,13 @@ namespace DesktopClient {
                 Product p = new Product();
                 if (Int32.TryParse(Ordre_Opret_Find_Product_TextBox.Text, out int i)) {
                     p = productController.Find(i);
-                    if (p.ErrorMessage == "") {
+                    if (p.ErrorMessage != "") {
                         Ordre_Opret_Tilføjet_Label.Content = p.ErrorMessage;
                     }
                 }
                 else {
                     p = productController.FindByName(Ordre_Opret_Find_Product_TextBox.Text);
-                    if (p.ErrorMessage == "") {
+                    if (p.ErrorMessage != "") {
                         Ordre_Opret_Tilføjet_Label.Content = p.ErrorMessage;
                     }
                 }
@@ -225,7 +238,7 @@ namespace DesktopClient {
                 decimal subTotal = p.Price * quantity;
                 Orderline ol = orderController.CreateOrderLine(quantity, subTotal, p.ID);
 
-                if (ol.ErrorMessage != "") {
+                if (ol.ErrorMessage == "") {
                     orderlines.Add(ol);
                     Ordre_Opret_Tilføjet_Label.Content = "Ordrelinjen blev oprettet";
                     OrdrelineClearFields();
@@ -236,6 +249,9 @@ namespace DesktopClient {
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
+            }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
             }
         }
 
@@ -256,6 +272,9 @@ namespace DesktopClient {
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
+            }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
             }
 
         }
@@ -289,7 +308,9 @@ namespace DesktopClient {
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
             }
-
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
+            }
         }
 
         private void Ordre_Søg_Annuller_Knap_Click(object sender, RoutedEventArgs e) {
@@ -332,9 +353,13 @@ namespace DesktopClient {
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
             }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
+            }
         }
 
         private void Kunde_Opdater_OK_Click(object sender, RoutedEventArgs e) {
+            bool res = false;
             try {
                 User user = userController.GetUser(Kunde_Opdater_SøgEmail_TextBox.Text);
                 user.FirstName = Kunde_Opdater_FirstName_TextBox.Text;
@@ -343,19 +368,37 @@ namespace DesktopClient {
                 user.ZipCode = Int32.Parse(Kunde_Opdater_ZipCode_TextBox.Text);
                 user.City = Kunde_Opdater_City_TextBox.Text;
                 user.Phone = Int32.Parse(Kunde_Opdater_Phone_TextBox.Text);
-                user.Email = Kunde_Opdater_Email_TextBox.Text;
+                if (user.Email != Kunde_Opdater_Email_TextBox.Text) {
+                    User tempUser = userController.IsEmailAlreadyRegistered(Kunde_Opdater_Email_TextBox.Text);
+                    if(tempUser.ErrorMessage != "Brugeren findes ikke") {
+                        Kunde_Opdater_Result_Label.Content = "Venligt vælg en anden Email";
+                    }
+                    else {
+                        res = true;
+                        user.Email = Kunde_Opdater_Email_TextBox.Text;
+                    }
+                } 
+                else {
+                    user.Email = Kunde_Opdater_Email_TextBox.Text;
+                    res = true;
+                }
+               if(res) {
+                    Customer c = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
+                    if (c.ErrorMessage == "") {
+                        Kunde_Opdater_Result_Label.Content = "Kunden blev opdateret!";
+                    }
+                    else {
+                        Kunde_Opdater_Result_Label.Content = c.ErrorMessage;
+                    }
+                    ClearCustomerFields();
+                }
 
-                //Customer c = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
-                //if (c.ErrorMessage == "") {
-                //    Kunde_Opdater_Result_Label.Content = "Kunden blev opdateret!";
-                //}
-                //else {
-                //    Kunde_Opdater_Result_Label.Content = c.ErrorMessage;
-                //}
-                //ClearCustomerFields();
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
+            }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
             }
         }
 
@@ -421,6 +464,9 @@ namespace DesktopClient {
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
             }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
+            }
         }
 
         private void Kunde_Slet_SletKunde_Clicked(object sender, RoutedEventArgs e) {
@@ -471,6 +517,9 @@ namespace DesktopClient {
             catch (NullReferenceException) {
                 MessageBox.Show("Ordren findes ikke");
             }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
+            }
         }
 
         private void UpdateOrderlineListBox() {
@@ -493,6 +542,9 @@ namespace DesktopClient {
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
+            }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
             }
         }
 
@@ -534,6 +586,9 @@ namespace DesktopClient {
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
             }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
+            }
         }
 
         private void Ordre_Opdater_Afslut_Knap_Click(object sender, RoutedEventArgs e) {
@@ -561,6 +616,9 @@ namespace DesktopClient {
             }
             catch (NullReferenceException) {
                 MessageBox.Show("Ordrelinjen findes ikke");
+            }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
             }
         }
 
@@ -594,10 +652,14 @@ namespace DesktopClient {
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
             }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
+            }
         }
 
         private void CreateReviewHandler() {
             try {
+                inputIDtextBox.IsEnabled = false;
                 Product p = new Product();
                 if (Int32.TryParse(inputIDtextBox.Text, out int i)) {
                     p = productController.Find(i);
@@ -632,10 +694,14 @@ namespace DesktopClient {
                     showReviewList = new List<string>();
                     ProductSøgShowReviews.ItemsSource = showReviewList;
                     ProductSøgLabel.Content = p.ErrorMessage;
+                    inputIDtextBox.IsEnabled = true;
                 }
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
+            }
+            catch (OverflowException) {
+                MessageBox.Show("Du har indtastet for store tal værdier");
             }
         }
 
