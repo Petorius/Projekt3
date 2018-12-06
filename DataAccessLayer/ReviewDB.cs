@@ -45,6 +45,7 @@ namespace DataAccessLayer {
 
         public Review Delete(Review Entity, bool test = false, bool testResult = false) {
             Review review = new Review();
+            review.User = new User();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     try {

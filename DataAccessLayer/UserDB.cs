@@ -43,7 +43,7 @@ namespace Server.DataAccessLayer {
 
         public User GetUserWithOrders(string email) {
             User user = GetUser(email);
-            Order order = new Order();
+            
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
@@ -53,17 +53,18 @@ namespace Server.DataAccessLayer {
                         SqlDataReader reader = cmd.ExecuteReader();
 
                         while (reader.Read()) {
+                            Order order = new Order();
                             order.ID = reader.GetInt32(reader.GetOrdinal("orderID"));
                             user.Orders.Add(order);
                         }
                         reader.Close();
                     }
-                    if(order.ID < 1) {
-                        order.ErrorMessage = "Kunden har ingen ordre";
+                    if(user.Orders == null) {
+                        user.ErrorMessage = "Kunden har ingen ordre";
                     }
                 }
                 catch (SqlException e) {
-                    order.ErrorMessage = ErrorHandling.Exception(e);
+                    user.ErrorMessage = ErrorHandling.Exception(e);
                 }
 
             }

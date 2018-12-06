@@ -104,7 +104,7 @@ namespace Server.DataAccessLayer {
                     }
                 }
             }
-            return p;
+                return p;
         }
 
         public Product Get(int id) {
@@ -171,7 +171,11 @@ namespace Server.DataAccessLayer {
                             cmd.Parameters.Clear();
                         }
                     }
+                    if (p.ID < 1) {
+                        p.ErrorMessage = "Produktet findes ikke";
+                    }
                 }
+
                 catch (SqlException e) {
                     p.ErrorMessage = ErrorHandling.Exception(e);
                 }
@@ -230,6 +234,9 @@ namespace Server.DataAccessLayer {
                         }
                         reviewReader.Close();
                         
+                    }
+                    if (p.ID < 1) {
+                        p.ErrorMessage = "Produktet findes ikke";
                     }
                 }
                 catch (SqlException e) {
