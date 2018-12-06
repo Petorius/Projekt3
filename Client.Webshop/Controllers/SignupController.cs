@@ -48,7 +48,7 @@ namespace Client.Webshop.Controllers {
 
         public ActionResult Signup(string firstName, string lastName, int number, string street, int zip, string city, string email, string password) {
             User userError = uc.IsEmailAlreadyRegistered(email);
-            if(userError.ErrorMessage == "") { 
+            if(userError.ErrorMessage == "Brugeren findes ikke") { 
                 User user = ac.CreateUserWithPassword(firstName, lastName, street, zip, city, email, number, password);
 
                 if (user.ErrorMessage == "") {

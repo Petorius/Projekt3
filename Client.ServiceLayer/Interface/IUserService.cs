@@ -5,7 +5,7 @@ namespace Client.ServiceLayer {
         User GetUser(string email);
         User GetUserWithOrder(string email);
         Customer GetCustomerByEmail(string email);
-        Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
+        Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city, string existingemail);
         User DeleteUser(string email);
     }
 }

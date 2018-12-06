@@ -15,7 +15,7 @@ namespace Server.ServiceLayer {
         Customer GetCustomerByMail(string email);
 
         [OperationContract]
-        Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
+        Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city, string existingemail);
 
         [OperationContract]
         User DeleteUser(string email);

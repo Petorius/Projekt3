@@ -938,10 +938,10 @@ namespace Client.ServiceLayer.UserReference {
         System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.Customer> GetCustomerByMailAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateCustomer", ReplyAction="http://tempuri.org/IUserService/UpdateCustomerResponse")]
-        Client.ServiceLayer.UserReference.Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
+        Client.ServiceLayer.UserReference.Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city, string existingemail);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateCustomer", ReplyAction="http://tempuri.org/IUserService/UpdateCustomerResponse")]
-        System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.Customer> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city);
+        System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.Customer> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city, string existingemail);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteUser", ReplyAction="http://tempuri.org/IUserService/DeleteUserResponse")]
         Client.ServiceLayer.UserReference.User DeleteUser(string email);
@@ -1001,12 +1001,12 @@ namespace Client.ServiceLayer.UserReference {
             return base.Channel.GetCustomerByMailAsync(email);
         }
         
-        public Client.ServiceLayer.UserReference.Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
-            return base.Channel.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city);
+        public Client.ServiceLayer.UserReference.Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city, string existingemail) {
+            return base.Channel.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city, existingemail);
         }
         
-        public System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.Customer> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
-            return base.Channel.UpdateCustomerAsync(firstName, lastName, phone, email, address, zipCode, city);
+        public System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.Customer> UpdateCustomerAsync(string firstName, string lastName, int phone, string email, string address, int zipCode, string city, string existingemail) {
+            return base.Channel.UpdateCustomerAsync(firstName, lastName, phone, email, address, zipCode, city, existingemail);
         }
         
         public Client.ServiceLayer.UserReference.User DeleteUser(string email) {

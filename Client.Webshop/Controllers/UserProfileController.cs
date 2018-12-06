@@ -22,15 +22,34 @@ namespace Client.Webshop.Controllers {
             return View((User)Session["User"]);
         }
 
-        public ActionResult Update(User user) {
-            Customer newUser = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, 
-                user.Email, user.Address, user.ZipCode, user.City);
+        public ActionResult Update(string firstName, string lastName, int number, string street, int zip, string city, string email, string password, string newpassword, string repeatpassword, string existingemail) {
 
-            if(newUser.ErrorMessage == "") {
-                Session["User"] = null;
-                Session.Add("User", newUser);
+            User user = (User)Session["User"];
+            bool res = false;
+
+            if(!email.Equals(user.Email)) {
+                User userError = userController.IsEmailAlreadyRegistered(email);
+                if (userError.ErrorMessage == "Brugeren findes ikke") {
+                    res = true;
+                }
+                else {
+                    TempData["EmailMessage"] = "Venligst vælg en anden E-mail";
+                }
             }
+            else {
+                res = true;
+            }
+            if(res) {
+                Customer c = userController.UpdateCustomer(firstName, lastName, number,
+                    email, street, zip, city, existingemail);
+                User newUser = userController.GetUser(email);
 
+                if (c.ErrorMessage == "") {
+                    Session["User"] = null;
+                    Session.Add("User", newUser);
+                }
+            }
+            
             return RedirectToAction("Index");
         }
 

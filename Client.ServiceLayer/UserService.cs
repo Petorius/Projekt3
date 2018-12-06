@@ -43,8 +43,8 @@ namespace Client.ServiceLayer {
             return user;
         }
 
-        public Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
-            return BuildCustomer(myProxy.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city));
+        public Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city, string existingemail) {
+            return BuildCustomer(myProxy.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city, existingemail));
         }
 
         public User DeleteUser(string email) {

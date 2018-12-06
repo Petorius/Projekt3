@@ -27,8 +27,8 @@ namespace Server.ServiceLayer {
             return customerLogic.GetCustomerByMail(email);
         }
 
-        public Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
-            return customerLogic.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city);
+        public Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city, string existingemail) {
+            return customerLogic.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city, existingemail);
         }
 
         public User DeleteUser(string email) {

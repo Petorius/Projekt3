@@ -1,0 +1,115 @@
+﻿body,
+input,
+textarea,
+select {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #4c4c4c;
+}
+
+p {
+    font-size: 12px;
+    width: 150px;
+    display: inline-block;
+    margin-left: 18px;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 300;
+    color: #4c4c4c;
+    text-align: center;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+html {
+    background-color: #ffffff;
+}
+
+.updateuserbox {
+    margin: 40px auto;
+    width: 343px;
+    height: 745px;
+    -webkit-border-radius: 8px/7px;
+    -moz-border-radius: 8px/7px;
+    border-radius: 8px/7px;
+    background-color: #ebebeb;
+    -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.31);
+    -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.31);
+    box-shadow: 1px 2px 5px rgba(0,0,0,.31);
+    border: solid 1px #cbc9c9;
+}
+
+input[type=radio] {
+    visibility: hidden;
+}
+
+form {
+    margin: 0 30px;
+}
+
+input[type=text], [type=email], [type=tel], input[type=password] {
+    width: 200px;
+    height: 39px;
+    -webkit-border-radius: 0px 4px 4px 0px/5px 5px 4px 4px;
+    -moz-border-radius: 0px 4px 4px 0px/0px 0px 4px 4px;
+    border-radius: 0px 4px 4px 0px/5px 5px 4px 4px;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+    -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+    box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+    border: solid 1px #cbc9c9;
+    margin-left: -5px;
+    margin-top: 13px;
+    padding-left: 10px;
+}
+
+#icon {
+    display: inline-block;
+    width: 45px;
+    background-color: #000000;
+    padding: 8px 0px 8px 15px;
+    margin-left: 15px;
+    -webkit-border-radius: 4px 0px 0px 4px;
+    -moz-border-radius: 4px 0px 0px 4px;
+    border-radius: 4px 0px 0px 4px;
+    color: white;
+    -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+    -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+    box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+    border: solid 0px #cbc9c9;
+}
+
+.savebutton {
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    padding: 6px 25px 25px 20px;
+    margin: 0px 8px 20px 0px;
+    margin-right: 22px;
+    margin-top: 30px;
+    display: inline-block;
+    float: right;
+    text-decoration: none;
+    width: 148px;
+    height: 30px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #000000;
+    -webkit-box-shadow: 0 3px #a9a9a9;
+    -moz-box-shadow: 0 3px #a9a9a9;
+    box-shadow: 0 3px #a9a9a9;
+    transition: all 0.1s linear 0s;
+    top: 0px;
+    position: relative;
+}
+
+    .savebutton:hover {
+        top: 3px;
+        background-color: #a9a9a9;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }

@@ -345,14 +345,14 @@ namespace DesktopClient {
                 user.Phone = Int32.Parse(Kunde_Opdater_Phone_TextBox.Text);
                 user.Email = Kunde_Opdater_Email_TextBox.Text;
 
-                Customer c = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
-                if (c.ErrorMessage == "") {
-                    Kunde_Opdater_Result_Label.Content = "Kunden blev opdateret!";
-                }
-                else {
-                    Kunde_Opdater_Result_Label.Content = c.ErrorMessage;
-                }
-                ClearCustomerFields();
+                //Customer c = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
+                //if (c.ErrorMessage == "") {
+                //    Kunde_Opdater_Result_Label.Content = "Kunden blev opdateret!";
+                //}
+                //else {
+                //    Kunde_Opdater_Result_Label.Content = c.ErrorMessage;
+                //}
+                //ClearCustomerFields();
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");

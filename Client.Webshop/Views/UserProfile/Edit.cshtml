@@ -1,6 +1,6 @@
 ﻿@model Client.Domain.User
 
-@Styles.Render("~/Content/login.css")
+@Styles.Render("~/Content/user.css")
 
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
@@ -9,7 +9,7 @@
     ViewBag.Title = "Edit";
 }
 
-<div class="signupbox">
+<div class="updateuserbox">
 
     <h1>Opdater oplysninger</h1>
 
@@ -17,98 +17,30 @@
         <hr>
         <div> <p style="visibility: @ViewBag.Visibility; color: red; font-size: 17px; width: 250px; height: 20px;">E-mail er allerede i brug</p> </div>
         <label id="icon" for="name"><i class="icon-user"></i></label>
-        <input autocomplete="off" name="firstName" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" placeholder="Fornavn" required oninvalid="this.setCustomValidity('Indtast et fornavn med 2-20 bogstaver')" oninput="setCustomValidity('')" />
+        <input autocomplete="off" name="firstName" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" placeholder="Fornavn" value="@Model.FirstName" required oninvalid="this.setCustomValidity('Indtast et fornavn med 2-20 bogstaver')" oninput="setCustomValidity('')" />
         <label id="icon" for="name"><i class="icon-user"></i></label>
-        <input autocomplete="off" name="lastName" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ ]+)*$" type="text" id="name" placeholder="Efternavn" required oninvalid="this.setCustomValidity('Indtast et efternavn')" oninput="setCustomValidity('')" />
+        <input autocomplete="off" name="lastName" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ ]+)*$" type="text" id="name" placeholder="Efternavn" value="@Model.LastName" required oninvalid="this.setCustomValidity('Indtast et efternavn')" oninput="setCustomValidity('')" />
         <label id="icon" for="name"><i class="icon-phone"></i></label>
-        <input autocomplete="off" name="number" pattern="[0-9]{8}" type="tel" id="name" placeholder="Telefon nr." required oninvalid="this.setCustomValidity('Indtast et gyldigt telefonnummer')" oninput="setCustomValidity('')" />
+        <input autocomplete="off" name="number" pattern="[0-9]{8}" type="tel" id="name" placeholder="Telefon nr." value="@Model.Phone" required oninvalid="this.setCustomValidity('Indtast et gyldigt telefonnummer')" oninput="setCustomValidity('')" />
         <label id="icon" for="name"><i class="icon-home"></i></label>
-        <input autocomplete="off" name="street" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ0-9-., ]+)*$" type="text" id="name" placeholder="Adresse" required oninvalid="this.setCustomValidity('Indtast en gyldig adresse')" oninput="setCustomValidity('')" />
+        <input autocomplete="off" name="street" pattern="^[a-zA-ZæøåÆØÅ]+( [a-zA-ZæøåÆØÅ0-9-., ]+)*$" type="text" id="name" placeholder="Adresse" value="@Model.Address" required oninvalid="this.setCustomValidity('Indtast en gyldig adresse')" oninput="setCustomValidity('')" />
         <label id="icon" for="name"><i class="icon-screenshot"></i></label>
-        <input autocomplete="off" name="zip" pattern="[0-9]{4}" type="tel" id="name" placeholder="Postnr." required oninvalid="this.setCustomValidity('Indtast et dansk postnummer')" oninput="setCustomValidity('')" />
+        <input autocomplete="off" name="zip" pattern="[0-9]{4}" type="tel" id="name" placeholder="Postnr." value="@Model.ZipCode" required oninvalid="this.setCustomValidity('Indtast et dansk postnummer')" oninput="setCustomValidity('')" />
         <label id="icon" for="name"><i class="icon-building"></i></label>
-        <input autocomplete="off" name="city" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" placeholder="By" required oninvalid="this.setCustomValidity('Indtast en dansk by')" oninput="setCustomValidity('')" />
+        <input autocomplete="off" name="city" pattern="[a-zA-ZæøåÆØÅ]{1,20}$" type="text" id="name" placeholder="By" value="@Model.City" required oninvalid="this.setCustomValidity('Indtast en dansk by')" oninput="setCustomValidity('')" />
         <label id="icon" for="name"><i class="icon-envelope "></i></label>
-        <input autocomplete="off" name="email" pattern="[a-zA-ZæøåÆØÅ0-9._%+-]+@("@")[a-zA-ZæøåÆØÅ0-9.-]+\.[a-z]{2,}$" type="email" id="name" placeholder="E-mail" required oninvalid="this.setCustomValidity('Indtast en mailadresse')" oninput="setCustomValidity('')" />
+        <input autocomplete="off" name="email" pattern="[a-zA-ZæøåÆØÅ0-9._%+-]+@("@")[a-zA-ZæøåÆØÅ0-9.-]+\.[a-z]{2,}$" type="email" id="name" placeholder="E-mail" value="@Model.Email" required oninvalid="this.setCustomValidity('Indtast en mailadresse')" oninput="setCustomValidity('')" />
         <label id="icon" for="name"><i class="icon-shield"></i></label>
-        <input autocomplete="off" name="password" type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-ZÆØÅ])(?=.*[a-zæøå]).*$" id="name" placeholder="Eksisterende kodeord" required oninvalid="this.setCustomValidity('Indtast minimum 8 tegn med tal, store og små bogstaver.')" oninput="setCustomValidity('')" />
+        <input autocomplete="off" name="password" type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-ZÆØÅ])(?=.*[a-zæøå]).*$" id="name" placeholder="Eksisterende kodeord" oninvalid="this.setCustomValidity('Indtast minimum 8 tegn med tal, store og små bogstaver.')" oninput="setCustomValidity('')" />
         <label id="icon" for="name"><i class="icon-shield"></i></label>
-        <input autocomplete="off" name="password" type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-ZÆØÅ])(?=.*[a-zæøå]).*$" id="name" placeholder="Nyt kodeord" required oninvalid="this.setCustomValidity('Indtast minimum 8 tegn med tal, store og små bogstaver.')" oninput="setCustomValidity('')" />
-        
+        <input autocomplete="off" name="newpassword" type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-ZÆØÅ])(?=.*[a-zæøå]).*$" id="name" placeholder="Nyt kodeord" oninvalid="this.setCustomValidity('Indtast minimum 8 tegn med tal, store og små bogstaver.')" oninput="setCustomValidity('')" />
+        <label id="icon" for="name"><i class="icon-shield"></i></label>
+        <input autocomplete="off" name="repeatpassword" type="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-ZÆØÅ])(?=.*[a-zæøå]).*$" id="name" placeholder="Gentag kodeord" oninvalid="this.setCustomValidity('Indtast minimum 8 tegn med tal, store og små bogstaver.')" oninput="setCustomValidity('')" />
+        <input name="existingemail" type="hidden" id="name" value="@Model.Email" />
 
-        <input type="submit" value="Tilmeld" class="button" />
+        <input type="submit" value="Gem ændringer" class="savebutton" />
     </form>
 </div>
-
-
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Gem Ændringer" onclick="@Url.Action("Index")" class="btn btn-default" />
-                @*<button class="btn btn-default" onclick="@Url.Action("Index")">@Html.ActionLink("Tilbage", "Index")</button>*@
-                <input type="button" value="Tilbage" onclick="location.href='@Url.Action("Index", "UserProfile")'" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -40,8 +40,8 @@ namespace Server.BusinessLogic {
             return customerDB.GetByMail(email);
         }
 
-        public Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city) {
-            Customer c = GetCustomerByMail(email);
+        public Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city, string existingemail) {
+            Customer c = GetCustomerByMail(existingemail);
             c.FirstName = firstName;
             c.LastName = lastName;
             c.Address = address;

@@ -130,7 +130,7 @@ namespace Server.DataAccessLayer {
                         }
                         reader.Close();
                         
-                        if(c.ID > 1) {
+                        if(c.ID < 1) {
                             c.ErrorMessage = "Kunden findes ikke.";
                         }
                     }
