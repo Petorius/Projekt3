@@ -13,8 +13,6 @@ namespace Server.Domain {
         [DataMember]
         public decimal Total { get; set; }
         [DataMember]
-        public bool Validation { get; set; }
-        [DataMember]
         public Customer Customer { get; set; }
         [DataMember]
         public DateTime DateCreated { get; set; }
@@ -24,7 +22,6 @@ namespace Server.Domain {
         public string ErrorMessage { get; set; }
 
         public Order(Customer customer) {
-            Validation = false;
             Customer = customer;
             Orderlines = new List<OrderLine>();
             DateCreated = DateTime.Today;

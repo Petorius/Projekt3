@@ -50,7 +50,7 @@ namespace UnitTest {
             Order o = orderLogic.CreateOrder("Rune", "Andersen", "Istedgade 10", 9000, "Aalborg", "denbedste@gmail.com", 12341234, orderLines);
 
 
-            Assert.IsTrue(o.Validation == false);
+            Assert.AreEqual(o.ErrorMessage, "");
 
         }
 
