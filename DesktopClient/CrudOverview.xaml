@@ -96,7 +96,7 @@
                                 <Button x:Name="Produkt_Slet_SletProdukt_Clicked" Content="Slet Produkt" Grid.Column="1" HorizontalAlignment="Left" Margin="413.2,293,0,0" VerticalAlignment="Top" Width="75" Click="Produkt_Slet_SletProdukt_Clicked_Click"/>
                                 <Label x:Name="findProductLabel" Content="Søg på ID" Grid.Column="1" HorizontalAlignment="Left" Margin="131.2,114,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="deleteTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="278.2,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                <Label x:Name="deleteStatusLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="131.2,174,0,0" VerticalAlignment="Top" Height="77" Width="431" FontSize="24"/>
+                                <Label x:Name="deleteStatusLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="0.2,174,0,0" VerticalAlignment="Top" Height="77" Width="582" FontSize="24"/>
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -166,7 +166,7 @@
                                 <Label x:Name="Ordre_Opdater_ProductID_Label" Content="Produkt navn eller ID:" Grid.Column="1" HorizontalAlignment="Left" Margin="80.2,181,0,0" VerticalAlignment="Top" Width="130"/>
                                 <TextBox x:Name="Ordre_Opdater_ProductName_TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="210,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontStyle="Italic"/>
                                 <Button x:Name="Ordre_Opdater_Søg_Knap" Content="Søg" Grid.Column="1" HorizontalAlignment="Left" Margin="370.2,61,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Opdater_Søg_Knap_Click"/>
-                                <Label x:Name="Ordre_Opdater_Label_Tilføjet" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="80,268,0,0" VerticalAlignment="Top" Height="57" Width="290"/>
+                                <Label x:Name="Ordre_Opdater_Label_Tilføjet" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="10.2,246,0,0" VerticalAlignment="Top" Height="57" Width="355"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Slet">
@@ -178,7 +178,7 @@
                                 <Label Name="Ordre_Slet_FindOrdre_Label" Content="Søg på Ordre ID:" HorizontalAlignment="Left" Margin="123,132,0,0" VerticalAlignment="Top" Grid.Column="1"/>
                                 <TextBox Name="Ordre_Slet_FindOrdre_Input" HorizontalAlignment="Left" Height="23" Margin="261,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149" RenderTransformOrigin="0.209,1.408" Grid.Column="1"/>
                                 <Button Name="Ordre_Slet_SletOrdre_Button" Content="Slet" HorizontalAlignment="Left" Margin="480,308,0,0" VerticalAlignment="Top" Width="75" Click="Ordre_Slet_SletOrdre_Button_Click" Grid.Column="1"/>
-                                <Label Name="Ordre_Slet_SletStatus_Label" Content="&#xD;&#xA;" HorizontalAlignment="Left" Margin="261,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.373,-0.463" Width="149" Height="34" Grid.Column="1"/>
+                                <Label Name="Ordre_Slet_SletStatus_Label" Content="&#xD;&#xA;" HorizontalAlignment="Left" Margin="99,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.373,-0.463" Width="555" Height="34" Grid.ColumnSpan="2" FontSize="18"/>
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -261,7 +261,7 @@
                                 <Button x:Name="Kunde_Opdater_OK" Content="OK" HorizontalAlignment="Left" Margin="579,315,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Opdater_OK_Click" Grid.Column="1"/>
                                 <Button x:Name="Kunde_Opdater_Anuller" Content="Annuller" HorizontalAlignment="Left" Margin="659,315,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Opdater_Anuller_Click" Grid.Column="1"/>
                                 <Button x:Name="Kunde_Opdater_FindKunde" Content="Find" HorizontalAlignment="Left" Margin="509,33,0,0" VerticalAlignment="Top" Width="75" Click="Kunde_Opdater_FindKunde_Click" Grid.Column="1"/>
-                                <Label x:Name="Kunde_Opdater_Result_Label" Content="" HorizontalAlignment="Left" Margin="509,148,0,0" VerticalAlignment="Top" Height="49" Width="251" FontSize="20" Grid.Column="1"/>
+                                <Label x:Name="Kunde_Opdater_Result_Label" Content="" HorizontalAlignment="Left" Margin="74,266,0,0" VerticalAlignment="Top" Height="49" Width="491" FontSize="20" Grid.Column="1"/>
                                 <Label x:Name="Kunde_Opdater_FindKunde_Resultat_Label" Content="" HorizontalAlignment="Left" Margin="340,2,0,0" VerticalAlignment="Top" Width="152" Foreground="#FFFF0404" Grid.Column="1"/>
                             </Grid>
                         </TabItem>
@@ -292,7 +292,7 @@
                                     <Label Content="Mail:" HorizontalAlignment="Left" Margin="79,273,0,0" VerticalAlignment="Top"/>
                                     <Label x:Name="userDeleteMailLabel" Content="" HorizontalAlignment="Left" Margin="190,273,0,0" VerticalAlignment="Top" Width="152"/>
                                     <Label x:Name="userDeleteUserDontExLabel" Content="" HorizontalAlignment="Left" Margin="190,0,0,0" VerticalAlignment="Top" Height="27" Width="152" Foreground="#FFF70000"/>
-                                    <Label x:Name="userDeleteCompleteLabel" Content="" HorizontalAlignment="Left" Margin="419,137,0,0" VerticalAlignment="Top" Height="90" Width="298" FontSize="22"/>
+                                    <Label x:Name="userDeleteCompleteLabel" Content="" HorizontalAlignment="Left" Margin="368,91,0,0" VerticalAlignment="Top" Height="59" Width="394" FontSize="22"/>
                                 </Grid>
                             </Grid>
                         </TabItem>

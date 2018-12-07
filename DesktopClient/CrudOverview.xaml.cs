@@ -322,6 +322,7 @@ namespace DesktopClient {
             }
             catch (FormatException) {
                 MessageBox.Show("Ugyldig tekst indsat");
+                Ordre_Søg_Find_Ordre_TextBox.IsEnabled = true;
             }
             catch (OverflowException) {
                 MessageBox.Show("Du har indtastet for store tal værdier");
@@ -531,6 +532,8 @@ namespace DesktopClient {
             }
             catch (NullReferenceException) {
                 MessageBox.Show("Ordren findes ikke");
+                Ordre_Opdater_Find_Ordre_TextBox.IsEnabled = true;
+
             }
             catch (OverflowException) {
                 MessageBox.Show("Du har indtastet for store tal værdier");
