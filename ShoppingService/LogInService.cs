@@ -18,6 +18,10 @@ namespace Server.ServiceLayer {
             return userLogic.CreateUserWithPassword(firstName, lastName, street, zip, city, email, number, password);
         }
 
+        public User UpdatePassword(int userID, string newpassword) {
+            return userLogic.UpdatePassword(userID, newpassword);
+        }
+
         public Admin ValidateAdminLogin(string email, string password) {
             return userLogic.ValidateAdminLogin(email, password);
         }

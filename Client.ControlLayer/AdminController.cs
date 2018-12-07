@@ -26,5 +26,9 @@ namespace Client.ControlLayer {
         public User ValidatePassword(string email, string password) {
             return loginService.ValidatePassword(email, password);
         }
+
+        public User UpdatePassword(int userID, string newpassword) {
+            return loginService.UpdatePassword(userID, newpassword);
+        }
     }
 }

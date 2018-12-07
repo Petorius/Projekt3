@@ -9,6 +9,8 @@ using System.Web.Mvc;
 namespace Client.Webshop.Controllers {
     public class UserProfileController : Controller {
         private UserController userController = new UserController();
+        private AdminController adminController = new AdminController();
+
         // GET: UserProfile
         public ActionResult Index() {
             if (Session["User"] == null) {
@@ -18,7 +20,21 @@ namespace Client.Webshop.Controllers {
         }
 
         // GET: UserProfile/Edit
-        public ActionResult Edit() {
+        public ActionResult Edit(bool? wasRedirected) {
+
+            bool error = false;
+
+            if (wasRedirected != null) {
+                error = true;
+            }
+
+            if (error) {
+                ViewBag.Visibility = "visible";
+            }
+            else {
+                ViewBag.Visibility = "hidden";
+            }
+            
             return View((User)Session["User"]);
         }
 
@@ -33,7 +49,8 @@ namespace Client.Webshop.Controllers {
                     res = true;
                 }
                 else {
-                    TempData["EmailMessage"] = "Venligst vælg en anden E-mail";
+                    TempData["EditErrorMessage"] = "Venligst vælg en anden E-mail";
+                    return RedirectToAction("Edit", new { wasRedirected = true });
                 }
             }
             else {
@@ -42,15 +59,43 @@ namespace Client.Webshop.Controllers {
             if(res) {
                 Customer c = userController.UpdateCustomer(firstName, lastName, number,
                     email, street, zip, city, existingemail);
+
+                //Update password if desired
+                if (password != "" || newpassword != "" || repeatpassword != "") {
+                    if (newpassword.Equals(repeatpassword) && newpassword != "" && repeatpassword != "") {
+                        User validatedUser = adminController.ValidatePassword(email, password);
+
+                        if (validatedUser.ErrorMessage == "") {
+                            User userWithUpdatedPassword = adminController.UpdatePassword(validatedUser.ID, newpassword);
+                        }
+                        else {
+                            TempData["EditErrorMessage"] = "Du skal indtaste dit eksisterende kodeord";
+                            return RedirectToAction("Edit", new { wasRedirected = true });
+                        }
+                    }
+                    else {
+                        TempData["EditErrorMessage"] = "Du skal indtaste et nyt kodeord, og indtaste det igen";
+                        return RedirectToAction("Edit", new { wasRedirected = true });
+                    }
+                }
+                
+                
                 User newUser = userController.GetUser(email);
 
                 if (c.ErrorMessage == "") {
                     Session["User"] = null;
                     Session.Add("User", newUser);
+
+                    return RedirectToAction("Index");
+                }
+                else {
+                    TempData["EditErrorMessage"] = "Brugeren findes ikke";
+                    return RedirectToAction("Edit", new { wasRedirected = true });
                 }
             }
-            
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Edit", new { wasRedirected = true });
+
         }
 
         public ActionResult Logout() {

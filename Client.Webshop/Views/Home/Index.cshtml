@@ -30,6 +30,12 @@
             <p>
                 <i>@item.Price DKK</i>
             </p>
-        </div>
+
+            @if (item.Stock == 0) {
+            <p style="color: red">
+                Ikke på lager
+            </p>
+            }
+</div>
     }
 </div>

@@ -383,14 +383,14 @@ namespace DesktopClient {
                     res = true;
                 }
                if(res) {
-                    Customer c = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
-                    if (c.ErrorMessage == "") {
-                        Kunde_Opdater_Result_Label.Content = "Kunden blev opdateret!";
-                    }
-                    else {
-                        Kunde_Opdater_Result_Label.Content = c.ErrorMessage;
-                    }
-                    ClearCustomerFields();
+                    //Customer c = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
+                    //if (c.ErrorMessage == "") {
+                    //    Kunde_Opdater_Result_Label.Content = "Kunden blev opdateret!";
+                    //}
+                    //else {
+                    //    Kunde_Opdater_Result_Label.Content = c.ErrorMessage;
+                    //}
+                    //ClearCustomerFields();
                 }
 
             }

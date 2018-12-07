@@ -13,5 +13,7 @@ namespace DataAccessLayer.Interface {
         User GetUserWithOrders(string email);
 
         User DeleteUser(string email, bool test = false, bool testResult = false);
+
+        User UpdateUser(int userID, string salt, string hashValue, bool test = false, bool testResult = false);
     }
 }

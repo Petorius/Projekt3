@@ -25,6 +25,12 @@
   <wsdl:message name="ILoginService_ValidateAdminLogin_OutputMessage">
     <wsdl:part name="parameters" element="tns:ValidateAdminLoginResponse" />
   </wsdl:message>
+  <wsdl:message name="ILoginService_UpdatePassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePassword" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_UpdatePassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePasswordResponse" />
+  </wsdl:message>
   <wsdl:portType name="ILoginService">
     <wsdl:operation name="CreateUserWithPassword">
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/CreateUserWithPassword" message="tns:ILoginService_CreateUserWithPassword_InputMessage" />
@@ -37,6 +43,10 @@
     <wsdl:operation name="ValidateAdminLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/ValidateAdminLogin" message="tns:ILoginService_ValidateAdminLogin_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/ValidateAdminLoginResponse" message="tns:ILoginService_ValidateAdminLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/UpdatePassword" message="tns:ILoginService_UpdatePassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/UpdatePasswordResponse" message="tns:ILoginService_UpdatePassword_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ILoginService" type="tns:ILoginService">
@@ -61,6 +71,15 @@
     </wsdl:operation>
     <wsdl:operation name="ValidateAdminLogin">
       <soap:operation soapAction="http://tempuri.org/ILoginService/ValidateAdminLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePassword">
+      <soap:operation soapAction="http://tempuri.org/ILoginService/UpdatePassword" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -25,6 +25,14 @@
                 <input id="quantity" name="quantity" type="number" required min="1" value="1" style="width:40px; text-align:center" ; />
                 <button class="add-button" type="submit">Tilføj til kurv</button>
 
+                @if (Model.Stock != 0) {
+                    <h4 style="color: green">På lager</h4>
+                }
+                else {
+                    <h4 style="color: red">Ikke på lager</h4>
+                }
+
+
                 <h2 class="boldText"> Beskrivelse </h2>
                 <h3> @Model.Description</h3>
             </div>
