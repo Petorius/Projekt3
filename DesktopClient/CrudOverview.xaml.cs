@@ -383,7 +383,7 @@ namespace DesktopClient {
                     res = true;
                 }
                if(res) {
-                    Customer c = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City);
+                    Customer c = userController.UpdateCustomer(user.FirstName, user.LastName, user.Phone, user.Email, user.Address, user.ZipCode, user.City, Kunde_Opdater_Email_TextBox.Text);
                     if (c.ErrorMessage == "") {
                         Kunde_Opdater_Result_Label.Content = "Kunden blev opdateret!";
                     }
