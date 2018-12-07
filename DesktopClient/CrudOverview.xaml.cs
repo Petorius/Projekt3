@@ -317,7 +317,7 @@ namespace DesktopClient {
                     orderlineItems = new List<string>();
                 }
                 else {
-                    MessageBox.Show(o.ErrorMessage);
+                    OrdreSøgOrdreFoundLabel.Content = o.ErrorMessage;
                 }
             }
             catch (FormatException) {
