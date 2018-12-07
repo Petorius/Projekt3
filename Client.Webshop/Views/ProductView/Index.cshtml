@@ -53,7 +53,7 @@
                     @Html.ValidationSummary(true)
                     @Html.Hidden("url", this.Request.RawUrl)
                     <input id="productID" name="productID" value="@Model.ID" hidden />
-                    <textarea rows="1" cols="150" id="reviewText" minlength="1" maxlength="1000" name="reviewText" class="textAreaForm2"></textarea>
+                    <textarea rows="1" cols="150" id="reviewText" minlength="2" required maxlength="1000" name="reviewText" class="textAreaForm2"></textarea>
                     <button id="reviewButton" type="submit"> Indsæt anmeldelse</button>
                 }
             }
