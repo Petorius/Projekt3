@@ -60,6 +60,7 @@ namespace Server.DataAccessLayer {
 
         public Order Delete(Order Entity, bool test = false, bool testResult = false) {
             Order order = new Order();
+            order.Customer = new Customer();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
                     try {
@@ -166,6 +167,9 @@ namespace Server.DataAccessLayer {
                             o.Orderlines.Add(ol);
                         }
                         orderLineReader.Close();
+                    }
+                    if(o.ID < 1) {
+                        o.ErrorMessage = "Ordren findes ikke";
                     }
                 }
                 catch (SqlException e) {

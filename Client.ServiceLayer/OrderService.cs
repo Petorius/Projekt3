@@ -130,6 +130,7 @@ namespace Client.ServiceLayer {
                 Customer = c,
                 Orderlines = orderlines
             };
+            order.ErrorMessage = o.ErrorMessage;
 
             return order;
         }
