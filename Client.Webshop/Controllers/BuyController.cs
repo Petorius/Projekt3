@@ -69,7 +69,7 @@ namespace Client.Webshop.Controllers {
                 return RedirectToAction("Index", "Home");
             }
             User user = uc.IsEmailAlreadyRegistered(email);
-            if (user.ErrorMessage == "" || Session["User"] != null) {
+            if (user.ErrorMessage == "Brugeren findes ikke" || user.ErrorMessage == "" || Session["User"] != null) {
                 var webApi = new ValuesController();
 
                 bool flag = webApi.Get();
@@ -79,14 +79,10 @@ namespace Client.Webshop.Controllers {
                     Order o = new Order();
                     List<Orderline> cart = (List<Orderline>)Session["cart"];
                     o = oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
-                    if (o.Validation) {
-                        Session["cart"] = null;
-                        return View(o);
-                    }
-                    else {
-                        Session.Abandon();
-                        return Redirect("https://media.giphy.com/media/5ftsmLIqktHQA/giphy.gif");
-                    }
+
+                    Session["cart"] = null;
+                    return View(o);
+
 
                 }
                 else {

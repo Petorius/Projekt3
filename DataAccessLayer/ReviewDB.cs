@@ -17,12 +17,9 @@ namespace DataAccessLayer {
             this.connectionString = connectionString;
         }
 
-        public Review Create(Review Entity, bool test = false, bool testResult = false) {
-            throw new System.NotImplementedException();
-        }
-
         public Review CreateReview(Review review, int productID, int userID, bool test = false, bool testResult = false) {
             Review errorReview = new Review();
+            errorReview.User = new User();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
@@ -133,6 +130,9 @@ namespace DataAccessLayer {
         }
 
         public Review Update(Review Entity, bool test = false, bool testResult = false) {
+            throw new System.NotImplementedException();
+        }
+        public Review Create(Review Entity, bool test = false, bool testResult = false) {
             throw new System.NotImplementedException();
         }
     }

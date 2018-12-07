@@ -39,15 +39,10 @@ namespace Server.BusinessLogic {
             Order o = new Order(c);
 
             // Validates the prices for each orderline on the order.
-            if (ValidateOrderLinePrices(ol)) {
-                o.Validation = true;
-                o.Orderlines = ol;
-                o.Total = TotalOrderPrice(ol);
-                o.ID = orderDB.Create(o).ID;
-            }
-            else {
-                o.Validation = false;
-            }
+            o.Orderlines = ol;
+            o.Total = TotalOrderPrice(ol);
+            o.ID = orderDB.Create(o).ID;
+
             return o;
         }
 
@@ -58,20 +53,6 @@ namespace Server.BusinessLogic {
                 orderLineDB.DeleteInDesktop(ol);
             }
             return orderDB.Delete(o);
-        }
-
-        // Helping method used to check if the prices on each orderline matches
-        // with the prices in the database. Returns true if it matches and false if not.
-        private bool ValidateOrderLinePrices(IEnumerable<OrderLine> ol) {
-            bool result = false;
-            foreach (OrderLine orderLine in ol) {
-                Product p = productDB.Get(orderLine.Product.ID);
-                decimal databasePrice = orderLine.Quantity * p.Price;
-                if (databasePrice == orderLine.SubTotal) {
-                    result = true;
-                }
-            }
-            return result;
         }
 
         // Helping method used to calculate and return the total price of an order.

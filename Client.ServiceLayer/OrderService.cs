@@ -82,7 +82,6 @@ namespace Client.ServiceLayer {
                 ID = order.ID,
                 DateCreated = order.DateCreated,
                 Total = order.Total,
-                Validation = order.Validation
             };
             o.ErrorMessage = order.ErrorMessage;
             return o;
