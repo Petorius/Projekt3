@@ -36,7 +36,7 @@
                                 <Label Content="Beskrivelse:" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Width="90" Grid.ColumnSpan="2"/>
                                 <Button Content="Opret Produkt" HorizontalAlignment="Left" Margin="481.791,306,0,0" VerticalAlignment="Top" Width="93" Height="20" Click="Produkt_Opret_OpretProdukt_Clicked" Grid.Column="1"/>
                                 <Button Content="Fortryd" HorizontalAlignment="Left" Margin="614.791,307,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="Produkt_Opret_Fortryd_Clicked"/>
-                                <Label x:Name="addProductText" Content="" Grid.Column="1" HorizontalAlignment="Center" Margin="360.2,113,29,0" VerticalAlignment="Top" Height="67" Width="330" FontSize="24"/>
+                                <Label x:Name="addProductText" Content="" Grid.Column="1" HorizontalAlignment="Center" Margin="360.2,32,29,0" VerticalAlignment="Top" Height="151" Width="330" FontSize="24"/>
                                 <Button x:Name="AddImageButton" Content="Tilføj billede(r)" Grid.Column="1" HorizontalAlignment="Left" Margin="360,199,0,0" VerticalAlignment="Top" Width="83" RenderTransformOrigin="-2.422,0.538" Height="26" Click="AddImageButton_Click"/>
                             </Grid>
                         </TabItem>

@@ -13,7 +13,7 @@ namespace Server.DataAccessLayer {
                 case 53:
                     errorMessage = "Der er ikke forbindelse til databasen";
                     break;
-                case 8187:
+                case 8178:
                     errorMessage = "Ressourcen du prøver at tilgå findes ikke";
                     break;
 

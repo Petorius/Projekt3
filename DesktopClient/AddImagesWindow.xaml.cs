@@ -27,12 +27,15 @@ namespace DesktopClient {
 
         private void CreateImageButton_Click(object sender, RoutedEventArgs e) {
 
-            CrudOverview.ImageURL = ImageURLTextBox.Text;
-            CrudOverview.ImageName = ImageNameTextBox.Text;
+            if(ImageURLTextBox.Text != "" && ImageNameTextBox.Text != "") {
+                CrudOverview.ImageURL = ImageURLTextBox.Text;
+                CrudOverview.ImageName = ImageNameTextBox.Text;
 
-
-
-            Close();
+                Close();
+            }
+            else {
+                MessageBox.Show("Ugyldig tekst indsat");
+            }
         }
     }
 }

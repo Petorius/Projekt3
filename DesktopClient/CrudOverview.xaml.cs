@@ -56,7 +56,7 @@ namespace DesktopClient {
                 int maxStock = Int32.Parse(maxStockTextBox.Text);
                 string description = descriptionTextBox.Text;
                 Product p = new Product();
-                if(ImageName != null && ImageURL != null) {
+                if(ImageName != null && ImageURL != null && maxStock >= minStock) {
                     p = productController.CreateProduct(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
                     res = true;
                 }
@@ -66,6 +66,12 @@ namespace DesktopClient {
                 if(p.ErrorMessage == "" && res) {
                     clearFields();
                     addProductText.Content = "Produktet blev oprettet";
+                }
+                if(maxStock < minStock) {
+                    addProductText.Content = "Minimumslager skal være" + System.Environment.NewLine + "mindre end maximumslager";
+                }
+                if(maxStock < 0 || minStock < 0) {
+                    addProductText.Content = "Lagerbeholdningen kan" + System.Environment.NewLine + "ikke være under 0";
                 }
                 if(p.ErrorMessage != "") {
                     addProductText.Content = p.ErrorMessage;
@@ -166,7 +172,16 @@ namespace DesktopClient {
                 int minStock = Int32.Parse(updateMinStockTextBox.Text);
                 int maxStock = Int32.Parse(updateMaxStockTextBox.Text);
                 string description = updateDescriptionTextBox.Text;
-                Product product = productController.Update(id, name, price, stock, minStock, maxStock, description, isActive);
+                Product product = new Product();
+                if(minStock > 0 && maxStock > 0) {
+                    product = productController.Update(id, name, price, stock, minStock, maxStock, description, isActive);
+                }
+                else if(minStock > maxStock) {
+                    product.ErrorMessage = "Minimumslager skal være" + System.Environment.NewLine + "mindre";
+                }
+                else {
+                    product.ErrorMessage = "";
+                }
                 if (product.ErrorMessage != "") {
                     updateProductText1.Content = product.ErrorMessage;
                     ProductClearUpdateFields();
