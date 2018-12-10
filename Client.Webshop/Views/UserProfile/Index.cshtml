@@ -30,7 +30,7 @@
                     <br />
                     @foreach (var orderline in order.Orderlines) {
 
-                        @(orderline.Product.Name + " , " + orderline.Quantity + " , " + orderline.SubTotal)
+                        @("Orderline #: " + orderline.ID + " , " + "Produkt navn: " + orderline.Product.Name + " , " + "Antal: " + orderline.Quantity + " , " + "Sub-total: " + orderline.SubTotal + " DKK") <br />
                     }
                     Total Pris: @order.Total
                 </div>

@@ -37,6 +37,7 @@ namespace Client.ServiceLayer {
             foreach (var order in u.Orders) {
                 Order o = new Order();
                 o.ID = order.ID;
+                o.Total = order.Total;
                 o.ErrorMessage = order.ErrorMessage;
                 List<Orderline> orderlines = o.Orderlines as List<Orderline>;
 
@@ -49,9 +50,7 @@ namespace Client.ServiceLayer {
                     Product p = new Product();
                     p.Name = orderline.Product.Name;
                     ol.Product = p;
-                    orderlines.Add(ol);
-
-                    
+                    orderlines.Add(ol); 
                 }
                 o.Orderlines = orderlines;
                 user.Orders.Add(o);

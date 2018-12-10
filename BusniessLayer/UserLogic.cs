@@ -13,12 +13,25 @@ namespace Server.BusinessLogic {
         private Account account;
         private CustomerLogic cl;
         private AdminDB adminDB;
+        private ProductDB productDB;
 
         public UserLogic() {
             userDB = new UserDB();
             account = new Account();
             cl = new CustomerLogic();
             adminDB = new AdminDB();
+            productDB = new ProductDB();
+        }
+
+        public User GetUserWithOrders(string email) {
+            User user = userDB.GetUserWithOrders(email);
+
+            foreach(Order o in user.Orders) {
+                foreach(OrderLine ol in o.Orderlines) {
+                    ol.Product = productDB.Get(ol.Product.ID);
+                }
+            }
+            return user;
         }
 
         // Database test constructor. Only used for testing.
@@ -87,12 +100,5 @@ namespace Server.BusinessLogic {
             
             return userDB.UpdateUser(userID, salt, hashValue);
         }
-
-        //public User CreateUserWithOrders(string email) {
-        //    User user = new User();
-        //    user = userDB.GetUser(email);
-            
-        //    return user;
-        //}
     }
 }

@@ -80,7 +80,7 @@ namespace Client.Webshop.Controllers {
                 }
                 
                 
-                User newUser = userController.GetUser(email);
+                User newUser = userController.GetUserWithOrders(email);
 
                 if (c.ErrorMessage == "") {
                     Session["User"] = null;

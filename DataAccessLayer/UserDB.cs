@@ -43,18 +43,22 @@ namespace Server.DataAccessLayer {
 
         public User GetUserWithOrders(string email) {
             User user = GetUser(email);
-            user = FetchOrderlines(user);
+            
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
-                        cmd.CommandText = "select orderID from [dbo].[order] where [dbo].[order].[customerID] = @userID";
+                        cmd.CommandText = "select orderID, Total from [dbo].[order] where [dbo].[order].[customerID] = @userID";
                         cmd.Parameters.AddWithValue("userID", user.ID);
                         SqlDataReader reader = cmd.ExecuteReader();
 
                         while (reader.Read()) {
                             Order order = new Order();
                             order.ID = reader.GetInt32(reader.GetOrdinal("orderID"));
+                            order.Total = reader.GetDecimal(reader.GetOrdinal("Total"));
+
+                            order.Orderlines = GetUserOrderOrderlines(order);
+                            
                             user.Orders.Add(order);
                         }
                         reader.Close();
@@ -65,21 +69,17 @@ namespace Server.DataAccessLayer {
                 }
                 catch (SqlException e) {
                     user.ErrorMessage = ErrorHandling.Exception(e);
-                }
-
+                } 
             }
             return user;
         }
-
-       
-
-        private User FetchOrderlines(User user) {
-            Order o = new Order();
+        
+        private List<OrderLine> GetUserOrderOrderlines(Order o) {
+            List<OrderLine> orderlines = new List<OrderLine>();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
-                        //build orderlines
                         cmd.CommandText = "Select orderlineID, quantity, subTotal, orderID, productID from Orderline where Orderline.orderID = @orderID";
                         cmd.Parameters.AddWithValue("orderID", o.ID);
                         SqlDataReader orderLineReader = cmd.ExecuteReader();
@@ -91,17 +91,18 @@ namespace Server.DataAccessLayer {
                             Product p = new Product();
                             p.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("productID"));
                             ol.Product = p;
-
-                            o.Orderlines.Add(ol);
+                            orderlines.Add(ol);
                         }
                         orderLineReader.Close();
+                        cmd.Parameters.Clear();
+                        
                     }
                 }
                 catch (SqlException e) {
                     o.ErrorMessage = ErrorHandling.Exception(e);
                 }
             }
-            return user;
+            return orderlines;
         }
 
         public User GetUser(string email) {

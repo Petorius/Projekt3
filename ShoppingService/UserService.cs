@@ -20,7 +20,7 @@ namespace Server.ServiceLayer {
         }
 
         public User GetUserWithOrders(string email) {
-            return userDB.GetUserWithOrders(email);
+            return userLogic.GetUserWithOrders(email);  
         }
 
         public Customer GetCustomerByMail(string email) {
