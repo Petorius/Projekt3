@@ -12,5 +12,8 @@ namespace Server.ServiceLayer {
         User ValidatePassword(string email, string password);
         [OperationContract]
         Admin ValidateAdminLogin(string email, string password);
+
+        [OperationContract]
+        User UpdatePassword(int userID, string newpassword);
     }
 }

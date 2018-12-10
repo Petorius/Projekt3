@@ -135,7 +135,7 @@ namespace Server.DataAccessLayer {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
-                        
+
                         cmd.CommandText = "Select orderlineID, quantity, subTotal, orderID, productID from Orderline where orderlineID = @orderlineID";
                         cmd.Parameters.AddWithValue("orderlineID", id);
                         SqlDataReader orderLineReader = cmd.ExecuteReader();
@@ -150,7 +150,7 @@ namespace Server.DataAccessLayer {
                         }
                         orderLineReader.Close();
 
-                        
+
                     }
 
                 }
@@ -221,23 +221,24 @@ namespace Server.DataAccessLayer {
         public OrderLine CreateInDesktop(OrderLine Entity, bool test = false, bool testResult = false) {
             OrderLine orderLine = new OrderLine();
             for (int i = 0; i < 5; i++) {
-                using (SqlConnection connection = new SqlConnection(connectionString)) {
-                    connection.Open();
-                    using (SqlTransaction trans = connection.BeginTransaction()) {
-                        byte[] rowId = null;
-                        int rowCount = 0;
+                try {
+                    using (SqlConnection connection = new SqlConnection(connectionString)) {
+                        connection.Open();
+                        using (SqlTransaction trans = connection.BeginTransaction()) {
+                            byte[] rowId = null;
+                            int rowCount = 0;
 
-                        using (SqlCommand cmd = connection.CreateCommand()) {
-                            cmd.Transaction = trans;
-                            cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
-                            cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
-                            SqlDataReader reader = cmd.ExecuteReader();
+                            using (SqlCommand cmd = connection.CreateCommand()) {
+                                cmd.Transaction = trans;
+                                cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                                cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
+                                SqlDataReader reader = cmd.ExecuteReader();
 
-                            while (reader.Read()) {
-                                rowId = (byte[])reader["rowId"];
-                            }
-                            reader.Close();
-                            try {
+                                while (reader.Read()) {
+                                    rowId = (byte[])reader["rowId"];
+                                }
+                                reader.Close();
+
                                 cmd.CommandText = "UPDATE Product " +
                                     "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
                                 cmd.Parameters.AddWithValue("stock", Entity.Product.Stock - Entity.Quantity);
@@ -267,36 +268,41 @@ namespace Server.DataAccessLayer {
                                     break;
                                 }
                             }
-                            catch (SqlException e) {
-                                orderLine.ErrorMessage = ErrorHandling.Exception(e);
-                            }
+
                         }
                     }
                 }
+                catch (SqlException e) {
+                    orderLine.ErrorMessage = ErrorHandling.Exception(e);
+                }
             }
+
+
             return orderLine;
         }
+
 
         public OrderLine DeleteInDesktop(OrderLine Entity, bool test = false, bool testResult = false) {
             OrderLine orderLine = new OrderLine();
             for (int i = 0; i < 5; i++) {
-                using (SqlConnection connection = new SqlConnection(connectionString)) {
-                    connection.Open();
-                    using (SqlTransaction trans = connection.BeginTransaction()) {
-                        byte[] rowId = null;
-                        int rowCount = 0;
-                        using (SqlCommand cmd = connection.CreateCommand()) {
-                            cmd.Transaction = trans;
-                            cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
-                            cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
-                            SqlDataReader reader = cmd.ExecuteReader();
+                try {
+                    using (SqlConnection connection = new SqlConnection(connectionString)) {
+                        connection.Open();
+                        using (SqlTransaction trans = connection.BeginTransaction()) {
+                            byte[] rowId = null;
+                            int rowCount = 0;
+                            using (SqlCommand cmd = connection.CreateCommand()) {
+                                cmd.Transaction = trans;
+                                cmd.CommandText = "SELECT rowID FROM product WHERE productID = @productID";
+                                cmd.Parameters.AddWithValue("productID", Entity.Product.ID);
+                                SqlDataReader reader = cmd.ExecuteReader();
 
-                            while (reader.Read()) {
-                                rowId = (byte[])reader["rowId"];
-                            }
-                            reader.Close();
+                                while (reader.Read()) {
+                                    rowId = (byte[])reader["rowId"];
+                                }
+                                reader.Close();
 
-                            try {
+
                                 cmd.CommandText = "UPDATE Product " +
                                     "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
                                 cmd.Parameters.AddWithValue("stock", Entity.Product.Stock + Entity.Quantity);
@@ -322,14 +328,17 @@ namespace Server.DataAccessLayer {
                                     break;
                                 }
                             }
-                            catch (SqlException e) {
-                                orderLine.ErrorMessage = ErrorHandling.Exception(e);
-                            }
                         }
                     }
+                }
+
+                catch (SqlException e) {
+                    orderLine.ErrorMessage = ErrorHandling.Exception(e);
                 }
             }
             return orderLine;
         }
     }
 }
+
+

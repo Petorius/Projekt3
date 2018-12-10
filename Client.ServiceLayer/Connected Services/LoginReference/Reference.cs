@@ -981,6 +981,12 @@ namespace Client.ServiceLayer.LoginReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/ValidateAdminLogin", ReplyAction="http://tempuri.org/ILoginService/ValidateAdminLoginResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.LoginReference.Admin> ValidateAdminLoginAsync(string email, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/UpdatePassword", ReplyAction="http://tempuri.org/ILoginService/UpdatePasswordResponse")]
+        Client.ServiceLayer.LoginReference.User UpdatePassword(int userID, string newpassword);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/UpdatePassword", ReplyAction="http://tempuri.org/ILoginService/UpdatePasswordResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.LoginReference.User> UpdatePasswordAsync(int userID, string newpassword);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1032,6 +1038,14 @@ namespace Client.ServiceLayer.LoginReference {
         
         public System.Threading.Tasks.Task<Client.ServiceLayer.LoginReference.Admin> ValidateAdminLoginAsync(string email, string password) {
             return base.Channel.ValidateAdminLoginAsync(email, password);
+        }
+        
+        public Client.ServiceLayer.LoginReference.User UpdatePassword(int userID, string newpassword) {
+            return base.Channel.UpdatePassword(userID, newpassword);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.LoginReference.User> UpdatePasswordAsync(int userID, string newpassword) {
+            return base.Channel.UpdatePasswordAsync(userID, newpassword);
         }
     }
 }

@@ -25,6 +25,14 @@
                 <input id="quantity" name="quantity" type="number" required min="1" value="1" style="width:40px; text-align:center" ; />
                 <button class="add-button" type="submit">Tilføj til kurv</button>
 
+                @if (Model.Stock != 0) {
+                    <h4 style="color: green">På lager</h4>
+                }
+                else {
+                    <h4 style="color: red">Ikke på lager</h4>
+                }
+
+
                 <h2 class="boldText"> Beskrivelse </h2>
                 <h3> @Model.Description</h3>
             </div>
@@ -45,7 +53,7 @@
                     @Html.ValidationSummary(true)
                     @Html.Hidden("url", this.Request.RawUrl)
                     <input id="productID" name="productID" value="@Model.ID" hidden />
-                    <textarea rows="1" cols="150" id="reviewText" minlength="1" maxlength="1000" name="reviewText" class="textAreaForm2"></textarea>
+                    <textarea rows="1" cols="150" id="reviewText" minlength="2" required maxlength="1000" name="reviewText" class="textAreaForm2"></textarea>
                     <button id="reviewButton" type="submit"> Indsæt anmeldelse</button>
                 }
             }

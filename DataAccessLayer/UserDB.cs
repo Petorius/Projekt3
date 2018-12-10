@@ -194,5 +194,59 @@ namespace Server.DataAccessLayer {
             }
             return user;
         }
+
+        public User UpdateUser(int userID, string salt, string hashValue, bool test = false, bool testResult = false) {
+            User user = new User();
+            for (int i = 0; i < 5; i++) {
+                using (SqlConnection connection = new SqlConnection(connectionString)) {
+                    //try {
+                        connection.Open();
+                        using (SqlTransaction trans = connection.BeginTransaction()) {
+                            byte[] rowId = null;
+                            int rowCount = 0;
+                            using (SqlCommand cmd = connection.CreateCommand()) {
+                                cmd.Transaction = trans;
+                                cmd.CommandText = "SELECT rowID FROM [dbo].[user] WHERE [dbo].[user].userID = @key";
+                                cmd.Parameters.AddWithValue("key", userID);
+                                SqlDataReader reader = cmd.ExecuteReader();
+
+                                while (reader.Read()) {
+                                    rowId = (byte[])reader["rowId"];
+                                }
+                                reader.Close();
+                                
+                                cmd.CommandText = "UPDATE [dbo].[user] " +
+                                    "SET HashPassword = @HashPassword, Salt = @Salt " +
+                                    "WHERE UserID = @UserID AND rowID = @rowId";
+                                cmd.Parameters.AddWithValue("UserID", userID);
+                                cmd.Parameters.AddWithValue("HashPassword", hashValue);
+                                cmd.Parameters.AddWithValue("Salt", salt);
+                                cmd.Parameters.AddWithValue("rowID", rowId);
+                                rowCount = cmd.ExecuteNonQuery();
+                                
+                                // Used to unit test. If test is true, we can set rowCount to 0 and fake a optimistic concurreny problem
+                                if (test) {
+                                    rowCount = testResult ? 1 : 0;
+                                }
+
+                                if (rowCount == 0) {
+                                    user.ErrorMessage = "Brugerens password blev ikke opdateret. Prøv igen";
+                                    cmd.Transaction.Rollback();
+                                }
+                                else {
+                                    user.ErrorMessage = "";
+                                    cmd.Transaction.Commit();
+                                    break;
+                                }
+                            }
+                        }
+                    //}
+                    //catch (SqlException e) {
+                    //    user.ErrorMessage = ErrorHandling.Exception(e);
+                    //}
+                }
+            }
+            return user;
+        }
     }
 }

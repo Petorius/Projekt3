@@ -12,5 +12,6 @@ namespace Client.ServiceLayer.Interface {
 
         User ValidatePassword(string email, string password);
         Admin ValidateAdminLogin(string email, string password);
+        User UpdatePassword(int userID, string newpassword);
     }
 }

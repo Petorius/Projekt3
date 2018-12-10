@@ -78,6 +78,16 @@ namespace Server.BusinessLogic {
             return adminDB.CreateAdmin(email, hashValue, salt);
         }
 
+        public User UpdatePassword(int userID, string newpassword) {
+            string s = account.CreatePasswordHash(newpassword);
+            char[] splitter = { ':' };
+            var split = s.Split(splitter);
+            string salt = split[0];
+            string hashValue = split[1];
+            
+            return userDB.UpdateUser(userID, salt, hashValue);
+        }
+
         //public User CreateUserWithOrders(string email) {
         //    User user = new User();
         //    user = userDB.GetUser(email);

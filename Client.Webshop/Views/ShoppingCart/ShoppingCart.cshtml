@@ -11,7 +11,7 @@
     @foreach (var item in Model) {
     <div class="imageFloat">
         <p>
-            <a href="@Url.Action(" Index", "ProductView" , new { id=item.Product.ID })">
+            <a href="@Url.Action(" Index", "ProductView", new { id = item.Product.ID })">
                 <img border="0" alt="W3Schools" src="@item.Product.Images[0].ImageSource" width="175" height="175">
             </a>
         </p>
@@ -54,13 +54,14 @@
     </div>
     }
 </div>
+}
 
-
-    <div >
+@if (Model.Count() > 0) {
+    <div>
         <form method="post" action="/Buy/Information">
             <button type="submit" class="myButton">Checkout</button>
         </form>
     </div>
-
 }
+
 

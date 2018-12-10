@@ -18,6 +18,10 @@ namespace Client.ServiceLayer {
             return BuildUser(myProxy.ValidatePassword(email, password));
         }
 
+        public User UpdatePassword(int userID, string newpassword) {
+            return BuildUser(myProxy.UpdatePassword(userID, newpassword));
+        }
+
         public Admin ValidateAdminLogin(string email, string password) {
             return BuildClientAdmin(myProxy.ValidateAdminLogin(email, password));
         }
