@@ -78,5 +78,11 @@ namespace Server.BusinessLogic {
             return adminDB.CreateAdmin(email, hashValue, salt);
         }
 
+        //public User CreateUserWithOrders(string email) {
+        //    User user = new User();
+        //    user = userDB.GetUser(email);
+            
+        //    return user;
+        //}
     }
 }

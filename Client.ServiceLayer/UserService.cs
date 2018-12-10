@@ -1,4 +1,5 @@
 ﻿using Client.Domain;
+using System.Collections.Generic;
 
 namespace Client.ServiceLayer {
     public class UserService : IUserService {
@@ -37,8 +38,23 @@ namespace Client.ServiceLayer {
                 Order o = new Order();
                 o.ID = order.ID;
                 o.ErrorMessage = order.ErrorMessage;
-                user.Orders.Add(o);
+                List<Orderline> orderlines = o.Orderlines as List<Orderline>;
 
+
+                foreach (var orderline in order.Orderlines) {
+                    Orderline ol = new Orderline();
+                    ol.ID = orderline.ID;
+                    ol.Quantity = orderline.Quantity;
+                    ol.SubTotal = orderline.SubTotal;
+                    Product p = new Product();
+                    p.Name = orderline.Product.Name;
+                    ol.Product = p;
+                    orderlines.Add(ol);
+
+                    
+                }
+                o.Orderlines = orderlines;
+                user.Orders.Add(o);
             }
             return user;
         }

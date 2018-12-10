@@ -43,7 +43,7 @@ namespace Server.DataAccessLayer {
 
         public User GetUserWithOrders(string email) {
             User user = GetUser(email);
-            
+            user = FetchOrderlines(user);
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
@@ -67,6 +67,39 @@ namespace Server.DataAccessLayer {
                     user.ErrorMessage = ErrorHandling.Exception(e);
                 }
 
+            }
+            return user;
+        }
+
+       
+
+        private User FetchOrderlines(User user) {
+            Order o = new Order();
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                try {
+                    connection.Open();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
+                        //build orderlines
+                        cmd.CommandText = "Select orderlineID, quantity, subTotal, orderID, productID from Orderline where Orderline.orderID = @orderID";
+                        cmd.Parameters.AddWithValue("orderID", o.ID);
+                        SqlDataReader orderLineReader = cmd.ExecuteReader();
+                        while (orderLineReader.Read()) {
+                            OrderLine ol = new OrderLine();
+                            ol.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("orderlineID"));
+                            ol.Quantity = orderLineReader.GetInt32(orderLineReader.GetOrdinal("quantity"));
+                            ol.SubTotal = orderLineReader.GetDecimal(orderLineReader.GetOrdinal("subtotal"));
+                            Product p = new Product();
+                            p.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("productID"));
+                            ol.Product = p;
+
+                            o.Orderlines.Add(ol);
+                        }
+                        orderLineReader.Close();
+                    }
+                }
+                catch (SqlException e) {
+                    o.ErrorMessage = ErrorHandling.Exception(e);
+                }
             }
             return user;
         }
