@@ -676,9 +676,6 @@ namespace Client.ServiceLayer.ServiceReference1 {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal TotalField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool ValidationField;
-        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -763,19 +760,6 @@ namespace Client.ServiceLayer.ServiceReference1 {
                 if ((this.TotalField.Equals(value) != true)) {
                     this.TotalField = value;
                     this.RaisePropertyChanged("Total");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Validation {
-            get {
-                return this.ValidationField;
-            }
-            set {
-                if ((this.ValidationField.Equals(value) != true)) {
-                    this.ValidationField = value;
-                    this.RaisePropertyChanged("Validation");
                 }
             }
         }

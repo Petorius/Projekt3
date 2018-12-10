@@ -12,6 +12,9 @@ namespace Server.ServiceLayer {
         User GetUserWithOrders(string email);
 
         [OperationContract]
+        User GetUserWithOrdersAndOrderlines(string email);
+
+        [OperationContract]
         Customer GetCustomerByMail(string email);
 
         [OperationContract]

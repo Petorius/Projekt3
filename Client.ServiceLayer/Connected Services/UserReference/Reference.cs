@@ -253,9 +253,6 @@ namespace Client.ServiceLayer.UserReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal TotalField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool ValidationField;
-        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -340,19 +337,6 @@ namespace Client.ServiceLayer.UserReference {
                 if ((this.TotalField.Equals(value) != true)) {
                     this.TotalField = value;
                     this.RaisePropertyChanged("Total");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Validation {
-            get {
-                return this.ValidationField;
-            }
-            set {
-                if ((this.ValidationField.Equals(value) != true)) {
-                    this.ValidationField = value;
-                    this.RaisePropertyChanged("Validation");
                 }
             }
         }
@@ -931,6 +915,12 @@ namespace Client.ServiceLayer.UserReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserWithOrders", ReplyAction="http://tempuri.org/IUserService/GetUserWithOrdersResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.User> GetUserWithOrdersAsync(string email);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserWithOrdersAndOrderlines", ReplyAction="http://tempuri.org/IUserService/GetUserWithOrdersAndOrderlinesResponse")]
+        Client.ServiceLayer.UserReference.User GetUserWithOrdersAndOrderlines(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserWithOrdersAndOrderlines", ReplyAction="http://tempuri.org/IUserService/GetUserWithOrdersAndOrderlinesResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.User> GetUserWithOrdersAndOrderlinesAsync(string email);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetCustomerByMail", ReplyAction="http://tempuri.org/IUserService/GetCustomerByMailResponse")]
         Client.ServiceLayer.UserReference.Customer GetCustomerByMail(string email);
         
@@ -991,6 +981,14 @@ namespace Client.ServiceLayer.UserReference {
         
         public System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.User> GetUserWithOrdersAsync(string email) {
             return base.Channel.GetUserWithOrdersAsync(email);
+        }
+        
+        public Client.ServiceLayer.UserReference.User GetUserWithOrdersAndOrderlines(string email) {
+            return base.Channel.GetUserWithOrdersAndOrderlines(email);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.UserReference.User> GetUserWithOrdersAndOrderlinesAsync(string email) {
+            return base.Channel.GetUserWithOrdersAndOrderlinesAsync(email);
         }
         
         public Client.ServiceLayer.UserReference.Customer GetCustomerByMail(string email) {

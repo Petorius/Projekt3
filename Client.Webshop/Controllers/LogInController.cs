@@ -52,7 +52,7 @@ namespace Client.Webshop.Controllers {
             User user = ac.ValidatePassword(email, password);
 
             if (user.ErrorMessage == "") {
-                Session.Add("User", uc.GetUserWithOrders(email));
+                Session.Add("User", uc.GetUserWithOrdersAndOrderlines(email));
                 
                 return RedirectToAction("Index", "Home");
             }

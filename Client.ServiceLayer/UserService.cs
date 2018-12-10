@@ -22,6 +22,10 @@ namespace Client.ServiceLayer {
             return BuildUser(myProxy.GetUserWithOrders(email));
         }
 
+        public User GetUserWithOrdersAndOrderlines(string email) {
+            return BuildUser(myProxy.GetUserWithOrdersAndOrderlines(email));
+        }
+
         private User BuildUser(UserReference.User u) {
             User user = new User();
             user.ID = u.ID;

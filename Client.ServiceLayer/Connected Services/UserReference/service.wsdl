@@ -19,6 +19,12 @@
   <wsdl:message name="IUserService_GetUserWithOrders_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserWithOrdersResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_GetUserWithOrdersAndOrderlines_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserWithOrdersAndOrderlines" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUserWithOrdersAndOrderlines_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserWithOrdersAndOrderlinesResponse" />
+  </wsdl:message>
   <wsdl:message name="IUserService_GetCustomerByMail_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomerByMail" />
   </wsdl:message>
@@ -46,6 +52,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUserWithOrders" message="tns:IUserService_GetUserWithOrders_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUserWithOrdersResponse" message="tns:IUserService_GetUserWithOrders_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetUserWithOrdersAndOrderlines">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUserWithOrdersAndOrderlines" message="tns:IUserService_GetUserWithOrdersAndOrderlines_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUserWithOrdersAndOrderlinesResponse" message="tns:IUserService_GetUserWithOrdersAndOrderlines_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetCustomerByMail">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetCustomerByMail" message="tns:IUserService_GetCustomerByMail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetCustomerByMailResponse" message="tns:IUserService_GetCustomerByMail_OutputMessage" />
@@ -72,6 +82,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserWithOrders">
       <soap:operation soapAction="http://tempuri.org/IUserService/GetUserWithOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserWithOrdersAndOrderlines">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetUserWithOrdersAndOrderlines" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

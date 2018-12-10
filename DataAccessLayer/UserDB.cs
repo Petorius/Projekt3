@@ -56,9 +56,6 @@ namespace Server.DataAccessLayer {
                             Order order = new Order();
                             order.ID = reader.GetInt32(reader.GetOrdinal("orderID"));
                             order.Total = reader.GetDecimal(reader.GetOrdinal("Total"));
-
-                            order.Orderlines = GetUserOrderOrderlines(order);
-                            
                             user.Orders.Add(order);
                         }
                         reader.Close();
@@ -74,37 +71,6 @@ namespace Server.DataAccessLayer {
             return user;
         }
         
-        private List<OrderLine> GetUserOrderOrderlines(Order o) {
-            List<OrderLine> orderlines = new List<OrderLine>();
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
-                try {
-                    connection.Open();
-                    using (SqlCommand cmd = connection.CreateCommand()) {
-                        cmd.CommandText = "Select orderlineID, quantity, subTotal, orderID, productID from Orderline where Orderline.orderID = @orderID";
-                        cmd.Parameters.AddWithValue("orderID", o.ID);
-                        SqlDataReader orderLineReader = cmd.ExecuteReader();
-                        while (orderLineReader.Read()) {
-                            OrderLine ol = new OrderLine();
-                            ol.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("orderlineID"));
-                            ol.Quantity = orderLineReader.GetInt32(orderLineReader.GetOrdinal("quantity"));
-                            ol.SubTotal = orderLineReader.GetDecimal(orderLineReader.GetOrdinal("subtotal"));
-                            Product p = new Product();
-                            p.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("productID"));
-                            ol.Product = p;
-                            orderlines.Add(ol);
-                        }
-                        orderLineReader.Close();
-                        cmd.Parameters.Clear();
-                        
-                    }
-                }
-                catch (SqlException e) {
-                    o.ErrorMessage = ErrorHandling.Exception(e);
-                }
-            }
-            return orderlines;
-        }
-
         public User GetUser(string email) {
         User user = new User();
             using (SqlConnection connection = new SqlConnection(connectionString)) {

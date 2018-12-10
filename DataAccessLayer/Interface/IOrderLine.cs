@@ -12,6 +12,7 @@ namespace DataAccessLayer.Interface {
         OrderLine CreateInDesktop(OrderLine Entity, bool test = false, bool testResult = false);
 
         OrderLine DeleteInDesktop(OrderLine Entity, bool test = false, bool testResult = false);
- 
+
+        List<OrderLine> GetOrderlinesByOrderID(int ID);
     }
 }

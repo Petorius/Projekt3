@@ -14,6 +14,7 @@ namespace Server.BusinessLogic {
         private CustomerLogic cl;
         private AdminDB adminDB;
         private ProductDB productDB;
+        private OrderLineDB orderLineDB;
 
         public UserLogic() {
             userDB = new UserDB();
@@ -21,16 +22,26 @@ namespace Server.BusinessLogic {
             cl = new CustomerLogic();
             adminDB = new AdminDB();
             productDB = new ProductDB();
+            orderLineDB = new OrderLineDB();
         }
 
         public User GetUserWithOrders(string email) {
+            
             User user = userDB.GetUserWithOrders(email);
+            
+            return user;
+        }
 
-            foreach(Order o in user.Orders) {
+        public User GetUserWithOrdersAndOrderlines(string email) {
+            User user = GetUserWithOrders(email);
+
+            foreach (Order o in user.Orders) {
+                o.Orderlines = orderLineDB.GetOrderlinesByOrderID(o.ID);
                 foreach(OrderLine ol in o.Orderlines) {
                     ol.Product = productDB.Get(ol.Product.ID);
                 }
             }
+            
             return user;
         }
 

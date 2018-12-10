@@ -23,6 +23,10 @@ namespace Server.ServiceLayer {
             return userLogic.GetUserWithOrders(email);  
         }
 
+        public User GetUserWithOrdersAndOrderlines(string email) {
+            return userLogic.GetUserWithOrdersAndOrderlines(email);
+        }
+
         public Customer GetCustomerByMail(string email) {
             return customerLogic.GetCustomerByMail(email);
         }

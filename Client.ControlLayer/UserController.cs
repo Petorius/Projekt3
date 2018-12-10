@@ -27,6 +27,10 @@ namespace Client.ControlLayer {
             return userService.GetUserWithOrder(email);
         }
 
+        public User GetUserWithOrdersAndOrderlines(string email) {
+            return userService.GetUserWithOrdersAndOrderlines(email);
+        }
+
         public Customer GetCustomerByMail(string email) {
             return userService.GetCustomerByEmail(email);
         }

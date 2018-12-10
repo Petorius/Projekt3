@@ -29,6 +29,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetUserWithOrdersAndOrderlines">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserWithOrdersAndOrderlinesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="GetUserWithOrdersAndOrderlinesResult" nillable="true" type="q3:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetCustomerByMail">
     <xs:complexType>
       <xs:sequence>
@@ -39,7 +53,7 @@
   <xs:element name="GetCustomerByMailResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="GetCustomerByMailResult" nillable="true" type="q3:Customer" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="GetCustomerByMailResult" nillable="true" type="q4:Customer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -60,7 +74,7 @@
   <xs:element name="UpdateCustomerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="UpdateCustomerResult" nillable="true" type="q4:Customer" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="UpdateCustomerResult" nillable="true" type="q5:Customer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -74,7 +88,7 @@
   <xs:element name="DeleteUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="DeleteUserResult" nillable="true" type="q5:User" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Server.Domain" minOccurs="0" name="DeleteUserResult" nillable="true" type="q6:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
