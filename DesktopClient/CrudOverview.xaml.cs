@@ -131,13 +131,13 @@ namespace DesktopClient {
             try {
                 Product p = new Product();
                 if (Int32.TryParse(_inputIDtextBox.Text, out int i)) {
-                    p = productController.Find(i);
+                    p = productController.GetProduct("productID", i.ToString());
                     if(p.ErrorMessage != "") {
                         updateProductText1.Content = p.ErrorMessage;
                     }
                 }
                 else {
-                    p = productController.FindByName(_inputIDtextBox.Text);
+                    p = productController.GetProduct("name", _inputIDtextBox.Text);
                     if (p.ErrorMessage != "") {
                         updateProductText1.Content = p.ErrorMessage;
                     }
@@ -238,13 +238,13 @@ namespace DesktopClient {
             try {
                 Product p = new Product();
                 if (Int32.TryParse(Ordre_Opret_Find_Product_TextBox.Text, out int i)) {
-                    p = productController.Find(i);
+                    p = productController.GetProduct("productID", i.ToString());
                     if (p.ErrorMessage != "") {
                         Ordre_Opret_Tilføjet_Label.Content = p.ErrorMessage;
                     }
                 }
                 else {
-                    p = productController.FindByName(Ordre_Opret_Find_Product_TextBox.Text);
+                    p = productController.GetProduct("name", Ordre_Opret_Find_Product_TextBox.Text);
                     if (p.ErrorMessage != "") {
                         Ordre_Opret_Tilføjet_Label.Content = p.ErrorMessage;
                     }
@@ -576,13 +576,13 @@ namespace DesktopClient {
             try {
                 Product p = new Product();
                 if (Int32.TryParse(Ordre_Opdater_ProductName_TextBox.Text, out int i)) {
-                    p = productController.Find(i);
+                    p = productController.GetProduct("productID", i.ToString());
                     if(p.ErrorMessage == "") {
                         Ordre_Opdater_Label_Tilføjet.Content = p.ErrorMessage;
                     }
                 }
                 else {
-                    p = productController.FindByName(Ordre_Opdater_ProductName_TextBox.Text);
+                    p = productController.GetProduct("name", Ordre_Opdater_ProductName_TextBox.Text);
                     if(p.ErrorMessage == "") {
                         Ordre_Opdater_Label_Tilføjet.Content = p.ErrorMessage;
                     }
@@ -680,10 +680,10 @@ namespace DesktopClient {
                 inputIDtextBox.IsEnabled = false;
                 Product p = new Product();
                 if (Int32.TryParse(inputIDtextBox.Text, out int i)) {
-                    p = productController.Find(i);
+                    p = productController.GetProductWithReviews("productID", i.ToString());
                 }
                 else {
-                    p = productController.FindByName(inputIDtextBox.Text);
+                    p = productController.GetProductWithReviews("name", inputIDtextBox.Text);
                 }
                 if (p.ErrorMessage == "") {
                     productShowID.Content = p.ID;

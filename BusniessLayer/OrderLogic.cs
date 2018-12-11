@@ -3,6 +3,7 @@ using Server.Domain;
 using Server.DataAccessLayer;
 using DataAccessLayer.Interface;
 using System;
+using BusniessLayer;
 
 namespace Server.BusinessLogic {
     public class OrderLogic {
@@ -10,12 +11,14 @@ namespace Server.BusinessLogic {
         private CustomerLogic cl;
         private IProduct productDB;
         private OrderLineDB orderLineDB;
+        private ProductLogic productLogic;
 
         public OrderLogic() {
             orderDB = new OrderDB();
             cl = new CustomerLogic();
             productDB = new ProductDB();
             orderLineDB = new OrderLineDB();
+            productLogic = new ProductLogic();
 
         }
 
@@ -48,7 +51,7 @@ namespace Server.BusinessLogic {
 
         public Order DeleteOrder(Order o) {
             foreach (OrderLine ol in o.Orderlines) {
-                Product p = productDB.Get(ol.Product.ID);
+                Product p = productLogic.GetProduct("productID", ol.Product.ID.ToString());
                 ol.Product = p;
                 orderLineDB.DeleteInDesktop(ol);
             }

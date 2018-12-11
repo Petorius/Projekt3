@@ -3,6 +3,7 @@ using Server.DataAccessLayer;
 using Server.BusinessLogic;
 using System.Collections.Generic;
 using DataAccessLayer.Interface;
+using BusniessLayer;
 
 namespace Server.ServiceLayer {
 
@@ -11,12 +12,14 @@ namespace Server.ServiceLayer {
         private IProduct productDB;
         private OrderLogic orderLogic;
         private ICRUD<Order> orderDB;
+        private ProductLogic productLogic;
 
         public OrderService() {
             orderLineDB = new OrderLineDB();
             productDB = new ProductDB();
             orderLogic = new OrderLogic();
             orderDB = new OrderDB();
+            productLogic = new ProductLogic();
         }
 
         public Order CreateOrder(string firstName, string lastName, string street, int zip, string city, string email,
@@ -26,7 +29,7 @@ namespace Server.ServiceLayer {
         }
 
         public OrderLine CreateOrderLine(int quantity, decimal subTotal, int id) {
-            Product p = productDB.Get(id);
+            Product p = productLogic.GetProductWithImages("productID", id.ToString());
             OrderLine ol = new OrderLine(quantity, subTotal, p);
             OrderLine orderlineWithErrorMessage = orderLineDB.Create(ol);
             orderlineWithErrorMessage.Product = p;
@@ -36,7 +39,7 @@ namespace Server.ServiceLayer {
         }
 
         public OrderLine CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
-            Product p = productDB.Get(productID);
+            Product p = productLogic.GetProduct("productID", productID.ToString());
             OrderLine ol = new OrderLine(quantity, subTotal, p);
             ol.OrderID = orderID;
             return orderLineDB.CreateInDesktop(ol);
@@ -49,13 +52,13 @@ namespace Server.ServiceLayer {
         }
 
         public OrderLine DeleteOrderLine(int ID, decimal subTotal, int quantity) {
-            Product p = productDB.Get(ID);
+            Product p = productLogic.GetProduct("productID", ID.ToString());
             OrderLine ol = new OrderLine(quantity, subTotal, p);
             return orderLineDB.Delete(ol);
         }
 
         public OrderLine DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID) {
-            Product p = productDB.Get(ID);
+            Product p = productLogic.GetProduct("productID", ID.ToString());
             OrderLine ol = new OrderLine(quantity, subTotal, p);
             ol.ID = orderLineID;
             return orderLineDB.DeleteInDesktop(ol);
@@ -71,7 +74,7 @@ namespace Server.ServiceLayer {
 
         public OrderLine UpdateOrderLine(int ID, decimal subTotal, int quantity) {
 
-            Product p = productDB.Get(ID);
+            Product p = productLogic.GetProduct("productID", ID.ToString());
             OrderLine ol = new OrderLine(quantity, subTotal, p);
             return orderLineDB.Update(ol);
         }

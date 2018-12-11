@@ -8,16 +8,19 @@ using Server.Domain;
 using Server.DataAccessLayer;
 using DataAccessLayer.Interface;
 using DataAccessLayer;
+using BusniessLayer;
 
 namespace Server.ServiceLayer {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class ProductService : IProductService {
         private IProduct productDb;
         private ReviewDB reviewDB;
+        private ProductLogic productLogic;
 
         public ProductService() {
             productDb = new ProductDB();
             reviewDB = new ReviewDB();
+            productLogic = new ProductLogic();
         }
 
         public Product CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
@@ -37,7 +40,7 @@ namespace Server.ServiceLayer {
         }
 
         public Product DeleteProduct(int id) {
-            Product p = productDb.Get(id);
+            Product p = productLogic.GetProduct("productID", id.ToString());
             return productDb.Delete(p);
         }
 
@@ -49,14 +52,24 @@ namespace Server.ServiceLayer {
             return reviewDB.Delete(r);
         }
 
-        public Product FindProduct(int ID) {
-            Product product = productDb.Get(ID);
-            return product;
+        public Product GetProduct(string select, string input) {
+            Product p = productLogic.GetProduct(select, input);
+            return p;
         }
 
-        public Product FindProductByName(string name) {
-            Product product = productDb.GetByName(name);
-            return product;
+        public Product GetProductWithImages(string select, string input) {
+            Product p = productLogic.GetProductWithImages(select, input);
+            return p;
+        }
+
+        public Product GetProductWithReviews(string select, string input) {
+            Product p = productLogic.GetProductWithReviews(select, input);
+            return p;
+        }
+
+        public Product GetProductWithImagesAndReviews(string select, string input) {
+            Product p = productLogic.GetProductWithImagesAndReviews(select, input);
+            return p;
         }
 
         public Review FindReview(int ID) {
@@ -64,8 +77,8 @@ namespace Server.ServiceLayer {
             return r;
         }
 
-        public IEnumerable<Product> GetAllProducts() {
-            return productDb.GetAll();
+        public IEnumerable<Product> GetAllProductsWithImages() {
+            return productLogic.GetAllProductsWithImages();
         }
 
         public Product Update(int id, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {

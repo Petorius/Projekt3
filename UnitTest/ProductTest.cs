@@ -25,34 +25,34 @@ namespace UnitTest {
         [TestMethod]
         public void FindProductTest() {
 
-            Product p = productDB.Get(1);
+            Product p = productDB.Get("productID", 1.ToString());
 
             Assert.IsNotNull(p);
         }
 
         [TestMethod]
         public void UpdateProductTestExpectedToFail() {
-            Product p = productDB.Get(1);
+            Product p = productDB.Get("productID", 1.ToString());
             p.Name = "Tissot Prime";
             productDB.Update(p, true);
 
-            p = productDB.Get(1);
+            p = productDB.Get("productID", 1.ToString());
 
             Assert.AreEqual(p.Name, "Rolex Oyster");
         }
 
         [TestMethod]
         public void UpdateProductTest() {
-            Product p = productDB.Get(1);
+            Product p = productDB.Get("productID", 1.ToString());
             p.Name = "Tissot Prime";
 
             productDB.Update(p, true, true);
 
-            p = productDB.Get(1);
+            p = productDB.Get("productID", 1.ToString());
 
             Assert.AreEqual(p.Name, "Tissot Prime");
 
-            Product p1 = productDB.Get(1);
+            Product p1 = productDB.Get("productID", 1.ToString());
             p1.Name = "Rolex Oyster";
             productDB.Update(p1, true, true);
         }
@@ -63,7 +63,7 @@ namespace UnitTest {
             p.ID = 1;
             productDB.Delete(p, true);
 
-            p = productDB.Get(1);
+            p = productDB.Get("productID", 1.ToString());
 
             Assert.IsTrue(p.IsActive);
         }

@@ -114,6 +114,33 @@ namespace Server.DataAccessLayer {
          return user;
         }
 
+        public User GetUserFirstname(int id) {
+            User user = new User();
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                try {
+                    connection.Open();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
+                        cmd.CommandText = "SELECT FirstName FROM Customer WHERE CustomerID = @UserID";
+                        cmd.Parameters.AddWithValue("UserID", id);
+
+                        SqlDataReader userReader = cmd.ExecuteReader();
+                        while (userReader.Read()) {
+                            user.FirstName = userReader.GetString(userReader.GetOrdinal("FirstName"));
+                        }
+                        userReader.Close();
+                        cmd.Parameters.Clear();
+                    }
+                    if (user.ID < 1) {
+                        user.ErrorMessage = "Brugeren findes ikke";
+                    }
+                }
+                catch (SqlException e) {
+                    user.ErrorMessage = ErrorHandling.Exception(e);
+                }
+            }
+            return user;
+        }
+        
         public User DeleteUser(string email, bool test = false, bool testResult = false) {
             User user = new User();
             for (int i = 0; i < 5; i++) {

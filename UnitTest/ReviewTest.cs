@@ -32,7 +32,7 @@ namespace UnitTest {
         [TestMethod]
         public void CreateReview() {
             Review review = new Review();
-            Product product = productDB.Get(1);
+            Product product = productDB.Get("productID", 1.ToString());
             review.Text = "Testing 123 testing";
 
             Review r = reviewDB.CreateReview(review, product.ID, user.ID);
@@ -45,7 +45,7 @@ namespace UnitTest {
             Review review = new Review();
             review.Text = "123123";
             review.User = user;
-            Product product = productDB.Get(1);
+            Product product = productDB.Get("productID", 1.ToString());
 
             reviewDB.CreateReview(review, product.ID, user.ID);
 
@@ -59,7 +59,7 @@ namespace UnitTest {
             Review review = new Review();
             review.Text = "123123";
             review.User = user;
-            Product product = productDB.Get(1);
+            Product product = productDB.Get("productID", 1.ToString());
 
             reviewDB.CreateReview(review, product.ID, user.ID);
 

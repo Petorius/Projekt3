@@ -909,23 +909,35 @@ namespace Client.ServiceLayer.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateProduct", ReplyAction="http://tempuri.org/IProductService/CreateProductResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> CreateProductAsync(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
-        Client.ServiceLayer.ServiceReference1.Product FindProduct(int ID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProduct", ReplyAction="http://tempuri.org/IProductService/FindProductResponse")]
-        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductAsync(int ID);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindReview", ReplyAction="http://tempuri.org/IProductService/FindReviewResponse")]
         Client.ServiceLayer.ServiceReference1.Review FindReview(int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindReview", ReplyAction="http://tempuri.org/IProductService/FindReviewResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Review> FindReviewAsync(int ID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductByName", ReplyAction="http://tempuri.org/IProductService/FindProductByNameResponse")]
-        Client.ServiceLayer.ServiceReference1.Product FindProductByName(string name);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetProduct", ReplyAction="http://tempuri.org/IProductService/GetProductResponse")]
+        Client.ServiceLayer.ServiceReference1.Product GetProduct(string select, string input);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/FindProductByName", ReplyAction="http://tempuri.org/IProductService/FindProductByNameResponse")]
-        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductByNameAsync(string name);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetProduct", ReplyAction="http://tempuri.org/IProductService/GetProductResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> GetProductAsync(string select, string input);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetProductWithImages", ReplyAction="http://tempuri.org/IProductService/GetProductWithImagesResponse")]
+        Client.ServiceLayer.ServiceReference1.Product GetProductWithImages(string select, string input);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetProductWithImages", ReplyAction="http://tempuri.org/IProductService/GetProductWithImagesResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> GetProductWithImagesAsync(string select, string input);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetProductWithReviews", ReplyAction="http://tempuri.org/IProductService/GetProductWithReviewsResponse")]
+        Client.ServiceLayer.ServiceReference1.Product GetProductWithReviews(string select, string input);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetProductWithReviews", ReplyAction="http://tempuri.org/IProductService/GetProductWithReviewsResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> GetProductWithReviewsAsync(string select, string input);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetProductWithImagesAndReviews", ReplyAction="http://tempuri.org/IProductService/GetProductWithImagesAndReviewsResponse")]
+        Client.ServiceLayer.ServiceReference1.Product GetProductWithImagesAndReviews(string select, string input);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetProductWithImagesAndReviews", ReplyAction="http://tempuri.org/IProductService/GetProductWithImagesAndReviewsResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> GetProductWithImagesAndReviewsAsync(string select, string input);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/DeleteProduct", ReplyAction="http://tempuri.org/IProductService/DeleteProductResponse")]
         Client.ServiceLayer.ServiceReference1.Product DeleteProduct(int id);
@@ -939,11 +951,11 @@ namespace Client.ServiceLayer.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/Update", ReplyAction="http://tempuri.org/IProductService/UpdateResponse")]
         System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> UpdateAsync(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetAllProducts", ReplyAction="http://tempuri.org/IProductService/GetAllProductsResponse")]
-        Client.ServiceLayer.ServiceReference1.Product[] GetAllProducts();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetAllProductsWithImages", ReplyAction="http://tempuri.org/IProductService/GetAllProductsWithImagesResponse")]
+        Client.ServiceLayer.ServiceReference1.Product[] GetAllProductsWithImages();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetAllProducts", ReplyAction="http://tempuri.org/IProductService/GetAllProductsResponse")]
-        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product[]> GetAllProductsAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/GetAllProductsWithImages", ReplyAction="http://tempuri.org/IProductService/GetAllProductsWithImagesResponse")]
+        System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product[]> GetAllProductsWithImagesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/CreateReview", ReplyAction="http://tempuri.org/IProductService/CreateReviewResponse")]
         Client.ServiceLayer.ServiceReference1.Review CreateReview(string text, int productID, int userID);
@@ -993,14 +1005,6 @@ namespace Client.ServiceLayer.ServiceReference1 {
             return base.Channel.CreateProductAsync(name, price, stock, minStock, maxStock, description, ImageURL, ImageName);
         }
         
-        public Client.ServiceLayer.ServiceReference1.Product FindProduct(int ID) {
-            return base.Channel.FindProduct(ID);
-        }
-        
-        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductAsync(int ID) {
-            return base.Channel.FindProductAsync(ID);
-        }
-        
         public Client.ServiceLayer.ServiceReference1.Review FindReview(int ID) {
             return base.Channel.FindReview(ID);
         }
@@ -1009,12 +1013,36 @@ namespace Client.ServiceLayer.ServiceReference1 {
             return base.Channel.FindReviewAsync(ID);
         }
         
-        public Client.ServiceLayer.ServiceReference1.Product FindProductByName(string name) {
-            return base.Channel.FindProductByName(name);
+        public Client.ServiceLayer.ServiceReference1.Product GetProduct(string select, string input) {
+            return base.Channel.GetProduct(select, input);
         }
         
-        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> FindProductByNameAsync(string name) {
-            return base.Channel.FindProductByNameAsync(name);
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> GetProductAsync(string select, string input) {
+            return base.Channel.GetProductAsync(select, input);
+        }
+        
+        public Client.ServiceLayer.ServiceReference1.Product GetProductWithImages(string select, string input) {
+            return base.Channel.GetProductWithImages(select, input);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> GetProductWithImagesAsync(string select, string input) {
+            return base.Channel.GetProductWithImagesAsync(select, input);
+        }
+        
+        public Client.ServiceLayer.ServiceReference1.Product GetProductWithReviews(string select, string input) {
+            return base.Channel.GetProductWithReviews(select, input);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> GetProductWithReviewsAsync(string select, string input) {
+            return base.Channel.GetProductWithReviewsAsync(select, input);
+        }
+        
+        public Client.ServiceLayer.ServiceReference1.Product GetProductWithImagesAndReviews(string select, string input) {
+            return base.Channel.GetProductWithImagesAndReviews(select, input);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product> GetProductWithImagesAndReviewsAsync(string select, string input) {
+            return base.Channel.GetProductWithImagesAndReviewsAsync(select, input);
         }
         
         public Client.ServiceLayer.ServiceReference1.Product DeleteProduct(int id) {
@@ -1033,12 +1061,12 @@ namespace Client.ServiceLayer.ServiceReference1 {
             return base.Channel.UpdateAsync(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
         
-        public Client.ServiceLayer.ServiceReference1.Product[] GetAllProducts() {
-            return base.Channel.GetAllProducts();
+        public Client.ServiceLayer.ServiceReference1.Product[] GetAllProductsWithImages() {
+            return base.Channel.GetAllProductsWithImages();
         }
         
-        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product[]> GetAllProductsAsync() {
-            return base.Channel.GetAllProductsAsync();
+        public System.Threading.Tasks.Task<Client.ServiceLayer.ServiceReference1.Product[]> GetAllProductsWithImagesAsync() {
+            return base.Channel.GetAllProductsWithImagesAsync();
         }
         
         public Client.ServiceLayer.ServiceReference1.Review CreateReview(string text, int productID, int userID) {

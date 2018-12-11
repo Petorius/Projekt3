@@ -125,14 +125,45 @@ namespace DataAccessLayer {
             return r;
         }
 
-        public IEnumerable<Review> GetAll() {
-            throw new System.NotImplementedException();
+        public List<Review> GetAll(int id) {
+            List<Review> reviews = new List<Review>();
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                try {
+                    connection.Open();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
+
+                        cmd.CommandText = "SELECT Text, DateCreated, UserID, ReviewID from Review where Review.ProductID = @productID";
+                        cmd.Parameters.AddWithValue("productID", id);
+                        SqlDataReader reviewReader = cmd.ExecuteReader();
+                        while (reviewReader.Read()) {
+                            Review r = new Review();
+                            r.User = new User();
+                            r.Text = reviewReader.GetString(reviewReader.GetOrdinal("Text"));
+                            r.DateCreated = reviewReader.GetDateTime(reviewReader.GetOrdinal("DateCreated"));
+                            r.User.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("UserID"));
+                            r.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("ReviewID"));
+
+                            reviews.Add(r);
+                        }
+                        reviewReader.Close();
+                        cmd.Parameters.Clear();
+                    }
+                }
+                catch (SqlException e) {
+
+                }
+            }
+            return reviews;
         }
 
         public Review Update(Review Entity, bool test = false, bool testResult = false) {
             throw new System.NotImplementedException();
         }
         public Review Create(Review Entity, bool test = false, bool testResult = false) {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<Review> GetAll() {
             throw new System.NotImplementedException();
         }
     }

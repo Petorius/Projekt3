@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Interface;
+﻿using BusniessLayer;
+using DataAccessLayer.Interface;
 using Server.DataAccessLayer;
 using Server.Domain;
 using System;
@@ -15,6 +16,7 @@ namespace Server.BusinessLogic {
         private AdminDB adminDB;
         private ProductDB productDB;
         private OrderLineDB orderLineDB;
+        private ProductLogic productLogic;
 
         public UserLogic() {
             userDB = new UserDB();
@@ -23,6 +25,7 @@ namespace Server.BusinessLogic {
             adminDB = new AdminDB();
             productDB = new ProductDB();
             orderLineDB = new OrderLineDB();
+            productLogic = new ProductLogic();
         }
 
         public User GetUserWithOrders(string email) {
@@ -38,7 +41,7 @@ namespace Server.BusinessLogic {
             foreach (Order o in user.Orders) {
                 o.Orderlines = orderLineDB.GetOrderlinesByOrderID(o.ID);
                 foreach(OrderLine ol in o.Orderlines) {
-                    ol.Product = productDB.Get(ol.Product.ID);
+                    ol.Product = productLogic.GetProduct("productID", ol.Product.ID.ToString());
                 }
             }
             

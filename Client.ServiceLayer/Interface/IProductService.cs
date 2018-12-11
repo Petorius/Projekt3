@@ -4,12 +4,14 @@ using Client.Domain;
 namespace Client.ServiceLayer {
     public interface IProductService {
         Product Create(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName);
-        Product Find(int ID);
-        Product FindByName(string name);
+        Product GetProduct(string select, string input);
+        Product GetProductWithImages(string select, string input);
+        Product GetProductWithReviews(string select, string input);
+        Product GetProductWithImagesAndReviews(string select, string input);
+        IEnumerable<Product> GetAllProductsWithImages();
         Review FindReview(int ID);
         Product Delete(int id);
         Product Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);
-        IEnumerable<Product> GetAllProducts();
         Review CreateReview(string text, int productID, int userID);
         Review DeleteReview(int reviewID, int reviewUserID);
     }

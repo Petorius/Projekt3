@@ -13,23 +13,35 @@
   <wsdl:message name="IProductService_CreateProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateProductResponse" />
   </wsdl:message>
-  <wsdl:message name="IProductService_FindProduct_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindProduct" />
-  </wsdl:message>
-  <wsdl:message name="IProductService_FindProduct_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindProductResponse" />
-  </wsdl:message>
   <wsdl:message name="IProductService_FindReview_InputMessage">
     <wsdl:part name="parameters" element="tns:FindReview" />
   </wsdl:message>
   <wsdl:message name="IProductService_FindReview_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindReviewResponse" />
   </wsdl:message>
-  <wsdl:message name="IProductService_FindProductByName_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindProductByName" />
+  <wsdl:message name="IProductService_GetProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProduct" />
   </wsdl:message>
-  <wsdl:message name="IProductService_FindProductByName_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindProductByNameResponse" />
+  <wsdl:message name="IProductService_GetProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_GetProductWithImages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductWithImages" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_GetProductWithImages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductWithImagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_GetProductWithReviews_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductWithReviews" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_GetProductWithReviews_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductWithReviewsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_GetProductWithImagesAndReviews_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductWithImagesAndReviews" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_GetProductWithImagesAndReviews_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductWithImagesAndReviewsResponse" />
   </wsdl:message>
   <wsdl:message name="IProductService_DeleteProduct_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteProduct" />
@@ -43,11 +55,11 @@
   <wsdl:message name="IProductService_Update_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateResponse" />
   </wsdl:message>
-  <wsdl:message name="IProductService_GetAllProducts_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllProducts" />
+  <wsdl:message name="IProductService_GetAllProductsWithImages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductsWithImages" />
   </wsdl:message>
-  <wsdl:message name="IProductService_GetAllProducts_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllProductsResponse" />
+  <wsdl:message name="IProductService_GetAllProductsWithImages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductsWithImagesResponse" />
   </wsdl:message>
   <wsdl:message name="IProductService_CreateReview_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateReview" />
@@ -66,17 +78,25 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/CreateProduct" message="tns:IProductService_CreateProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/CreateProductResponse" message="tns:IProductService_CreateProduct_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="FindProduct">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/FindProduct" message="tns:IProductService_FindProduct_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/FindProductResponse" message="tns:IProductService_FindProduct_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="FindReview">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/FindReview" message="tns:IProductService_FindReview_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/FindReviewResponse" message="tns:IProductService_FindReview_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="FindProductByName">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/FindProductByName" message="tns:IProductService_FindProductByName_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/FindProductByNameResponse" message="tns:IProductService_FindProductByName_OutputMessage" />
+    <wsdl:operation name="GetProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/GetProduct" message="tns:IProductService_GetProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/GetProductResponse" message="tns:IProductService_GetProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductWithImages">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/GetProductWithImages" message="tns:IProductService_GetProductWithImages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/GetProductWithImagesResponse" message="tns:IProductService_GetProductWithImages_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductWithReviews">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/GetProductWithReviews" message="tns:IProductService_GetProductWithReviews_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/GetProductWithReviewsResponse" message="tns:IProductService_GetProductWithReviews_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductWithImagesAndReviews">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/GetProductWithImagesAndReviews" message="tns:IProductService_GetProductWithImagesAndReviews_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/GetProductWithImagesAndReviewsResponse" message="tns:IProductService_GetProductWithImagesAndReviews_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/DeleteProduct" message="tns:IProductService_DeleteProduct_InputMessage" />
@@ -86,9 +106,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/Update" message="tns:IProductService_Update_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/UpdateResponse" message="tns:IProductService_Update_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetAllProducts">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/GetAllProducts" message="tns:IProductService_GetAllProducts_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/GetAllProductsResponse" message="tns:IProductService_GetAllProducts_OutputMessage" />
+    <wsdl:operation name="GetAllProductsWithImages">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/GetAllProductsWithImages" message="tns:IProductService_GetAllProductsWithImages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/GetAllProductsWithImagesResponse" message="tns:IProductService_GetAllProductsWithImages_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateReview">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/CreateReview" message="tns:IProductService_CreateReview_InputMessage" />
@@ -110,15 +130,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FindProduct">
-      <soap:operation soapAction="http://tempuri.org/IProductService/FindProduct" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="FindReview">
       <soap:operation soapAction="http://tempuri.org/IProductService/FindReview" style="document" />
       <wsdl:input>
@@ -128,8 +139,35 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FindProductByName">
-      <soap:operation soapAction="http://tempuri.org/IProductService/FindProductByName" style="document" />
+    <wsdl:operation name="GetProduct">
+      <soap:operation soapAction="http://tempuri.org/IProductService/GetProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductWithImages">
+      <soap:operation soapAction="http://tempuri.org/IProductService/GetProductWithImages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductWithReviews">
+      <soap:operation soapAction="http://tempuri.org/IProductService/GetProductWithReviews" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductWithImagesAndReviews">
+      <soap:operation soapAction="http://tempuri.org/IProductService/GetProductWithImagesAndReviews" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -155,8 +193,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetAllProducts">
-      <soap:operation soapAction="http://tempuri.org/IProductService/GetAllProducts" style="document" />
+    <wsdl:operation name="GetAllProductsWithImages">
+      <soap:operation soapAction="http://tempuri.org/IProductService/GetAllProductsWithImages" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

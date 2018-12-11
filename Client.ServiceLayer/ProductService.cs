@@ -20,18 +20,48 @@ namespace Client.ServiceLayer {
             return BuildClientProduct(myProxy.DeleteProduct(id));
         }
 
-        public Product Find(int ID) {
-            var p = myProxy.FindProduct(ID);
+        public Product GetProduct(string select, string input) {
+            var p = myProxy.GetProduct(select, input);
             Product product = new Product();
-                if (p != null) {
-                    product = BuildClientProduct(p);
-                }
-            
+            if (p != null) {
+                product = BuildClientProduct(p);
+            }
+
             return product;
         }
 
-        public IEnumerable<Product> GetAllProducts() {
-            var products = myProxy.GetAllProducts();
+        public Product GetProductWithImages(string select, string input) {
+            var p = myProxy.GetProductWithImages(select, input);
+            Product product = new Product();
+            if (p != null) {
+                product = BuildClientProduct(p);
+            }
+
+            return product;
+        }
+
+        public Product GetProductWithReviews(string select, string input) {
+            var p = myProxy.GetProductWithReviews(select, input);
+            Product product = new Product();
+            if (p != null) {
+                product = BuildClientProduct(p);
+            }
+
+            return product;
+        }
+
+        public Product GetProductWithImagesAndReviews(string select, string input) {
+            var p = myProxy.GetProductWithImagesAndReviews(select, input);
+            Product product = new Product();
+            if (p != null) {
+                product = BuildClientProduct(p);
+            }
+
+            return product;
+        }
+        
+        public IEnumerable<Product> GetAllProductsWithImages() {
+            var products = myProxy.GetAllProductsWithImages();
 
             List<Product> productList = new List<Product>();
 
@@ -71,14 +101,8 @@ namespace Client.ServiceLayer {
             }
 
             foreach (var r in p.Reviews) {
-                Review review = new Review();
-                review.User = new User();
-                review.ID = r.ID;
-                review.Text = r.Text;
-                review.DateCreated = r.DateCreated;
-                review.User.ID = r.User.ID;
-                review.User.FirstName = r.User.FirstName;
-                product.Reviews.Add(review);
+                
+                product.Reviews.Add(BuildClientReview(r));
             }
 
             return product;
@@ -88,17 +112,7 @@ namespace Client.ServiceLayer {
             ServiceReference1.ProductServiceClient myProxy = new ServiceReference1.ProductServiceClient();
             return BuildClientProduct(myProxy.Update(ID, name, price, stock, minStock, maxStock, description, isActive));
         }
-
-        public Product FindByName(string name) {
-            var p = myProxy.FindProductByName(name);
-            Product product = new Product();
-            if (p != null) {
-                product = BuildClientProduct(p);
-            }
-
-            return product;
-        }
-
+        
         public Review CreateReview(string text, int productID, int userID) {
             return BuildClientReview(myProxy.CreateReview(text, productID, userID));
         }

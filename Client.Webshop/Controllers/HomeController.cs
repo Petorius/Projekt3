@@ -34,7 +34,7 @@ namespace Client.Webshop.Controllers {
                 Session["cart"] = orderlines;
             }
 
-            products = pc.GetAllProducts();
+            products = pc.GetAllProductsWithImages();
 
             return View(products);
         }

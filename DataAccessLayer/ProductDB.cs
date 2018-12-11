@@ -46,8 +46,6 @@ namespace Server.DataAccessLayer {
                             cmd.ExecuteNonQuery();
                             cmd.Parameters.Clear();
                         }
-
-
                     }
                 }
                 catch (SqlException e) {
@@ -106,15 +104,15 @@ namespace Server.DataAccessLayer {
             }
                 return p;
         }
-
-        public Product Get(int id) {
+        
+        public Product Get(string select, string input) {
             Product p = new Product();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
-                        cmd.CommandText = "SELECT productid, name, price, stock, description, rating, minstock, maxstock, sales, isActive from Product where productID = @ProductID";
-                        cmd.Parameters.AddWithValue("ProductID", id);
+                        cmd.CommandText = "SELECT productid, name, price, stock, description, rating, minstock, maxstock, sales, isActive from Product where " + select + " = @" + select;
+                        cmd.Parameters.AddWithValue(select, input);
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read()) {
                             p.ID = reader.GetInt32(reader.GetOrdinal("productid"));
@@ -129,47 +127,7 @@ namespace Server.DataAccessLayer {
                         }
                         reader.Close();
                         cmd.Parameters.Clear();
-
-                        cmd.CommandText = "Select ImageSource, Name from Image where Image.ProductID = @productID";
-                        cmd.Parameters.AddWithValue("productID", p.ID);
-                        SqlDataReader imageReader = cmd.ExecuteReader();
-                        while (imageReader.Read()) {
-                            Image i = new Image();
-                            i.ImageSource = imageReader.GetString(imageReader.GetOrdinal("ImageSource"));
-                            i.Name = imageReader.GetString(imageReader.GetOrdinal("Name"));
-
-                            p.Images.Add(i);
-                        }
-                        imageReader.Close();
-                        cmd.Parameters.Clear();
-
-                        cmd.CommandText = "SELECT Text, DateCreated, UserID, ReviewID from Review where Review.ProductID = @productID";
-                        cmd.Parameters.AddWithValue("productID", p.ID);
-                        SqlDataReader reviewReader = cmd.ExecuteReader();
-                        while (reviewReader.Read()) {
-                            Review r = new Review();
-                            r.User = new User();
-                            r.Text = reviewReader.GetString(reviewReader.GetOrdinal("Text"));
-                            r.DateCreated = reviewReader.GetDateTime(reviewReader.GetOrdinal("DateCreated"));
-                            r.User.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("UserID"));
-                            r.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("ReviewID"));
-
-                            p.Reviews.Add(r);
-                        }
-                        reviewReader.Close();
-                        cmd.Parameters.Clear();
-
-                        foreach (Review review in p.Reviews) {
-                            cmd.CommandText = "SELECT FirstName FROM Customer WHERE CustomerID = @UserID";
-                            cmd.Parameters.AddWithValue("UserID", review.User.ID);
-
-                            SqlDataReader userReader = cmd.ExecuteReader();
-                            while (userReader.Read()) {
-                                review.User.FirstName = userReader.GetString(userReader.GetOrdinal("FirstName"));
-                            }
-                            userReader.Close();
-                            cmd.Parameters.Clear();
-                        }
+                        
                     }
                     if (p.ID < 1) {
                         p.ErrorMessage = "Produktet findes ikke";
@@ -183,67 +141,32 @@ namespace Server.DataAccessLayer {
             return p;
         }
 
-        public Product GetByName(string name) {
-            Product p = new Product();
+        public List<Image> GetProductImages(int id) {
+            List<Image> images = new List<Image>();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
-                        cmd.CommandText = "SELECT productid, name, price, stock, description, rating, minstock, maxstock, sales, isActive from Product where name = @Name";
-                        cmd.Parameters.AddWithValue("name", name);
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read()) {
-                            p.ID = reader.GetInt32(reader.GetOrdinal("productid"));
-                            p.Name = reader.GetString(reader.GetOrdinal("name"));
-                            p.Price = reader.GetDecimal(reader.GetOrdinal("price"));
-                            p.Stock = reader.GetInt32(reader.GetOrdinal("stock"));
-                            p.MinStock = reader.GetInt32(reader.GetOrdinal("minstock"));
-                            p.MaxStock = reader.GetInt32(reader.GetOrdinal("maxstock"));
-                            p.Description = reader.GetString(reader.GetOrdinal("description"));
-                            p.Sales = reader.GetInt32(reader.GetOrdinal("sales"));
-                            p.IsActive = reader.GetBoolean(reader.GetOrdinal("isActive"));
-                        }
-                        reader.Close();
-                        cmd.Parameters.Clear();
-
                         cmd.CommandText = "Select ImageSource, Name from Image where Image.ProductID = @productID";
-                        cmd.Parameters.AddWithValue("productID", p.ID);
+                        cmd.Parameters.AddWithValue("productID", id);
                         SqlDataReader imageReader = cmd.ExecuteReader();
                         while (imageReader.Read()) {
                             Image i = new Image();
                             i.ImageSource = imageReader.GetString(imageReader.GetOrdinal("ImageSource"));
                             i.Name = imageReader.GetString(imageReader.GetOrdinal("Name"));
 
-                            p.Images.Add(i);
+                            images.Add(i);
                         }
                         imageReader.Close();
                         cmd.Parameters.Clear();
 
-                        cmd.CommandText = "SELECT Text, DateCreated, UserID, ReviewID from Review where Review.ProductID = @productID";
-                        cmd.Parameters.AddWithValue("productID", p.ID);
-                        SqlDataReader reviewReader = cmd.ExecuteReader();
-                        while (reviewReader.Read()) {
-                            Review r = new Review();
-                            r.User = new User();
-                            r.Text = reviewReader.GetString(reviewReader.GetOrdinal("Text"));
-                            r.DateCreated = reviewReader.GetDateTime(reviewReader.GetOrdinal("DateCreated"));
-                            r.User.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("UserID"));
-                            r.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("ReviewID"));
-
-                            p.Reviews.Add(r);
-                        }
-                        reviewReader.Close();
-                        
-                    }
-                    if (p.ID < 1) {
-                        p.ErrorMessage = "Produktet findes ikke";
                     }
                 }
                 catch (SqlException e) {
-                    p.ErrorMessage = ErrorHandling.Exception(e);
+
                 }
             }
-            return p;
+            return images;
         }
 
         public Product Update(Product p, bool test = false, bool testResult = false) {
@@ -306,10 +229,11 @@ namespace Server.DataAccessLayer {
         }
 
         public IEnumerable<Product> GetAll() {
+            List<Product> products = new List<Product>();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
-                    List<Product> products = new List<Product>();
+                    
                     using (SqlCommand cmd = connection.CreateCommand()) {
 
                         cmd.CommandText = "SELECT * from Product where isActive = 1";
@@ -331,33 +255,17 @@ namespace Server.DataAccessLayer {
                         reader.Close();
                         cmd.Parameters.Clear();
                     }
-
-                    using (SqlCommand cmd2 = connection.CreateCommand()) {
-
-                        foreach (Product p in products) {
-                            cmd2.CommandText = "Select ImageSource, Name from Image where Image.ProductID = @productID";
-                            cmd2.Parameters.AddWithValue("productID", p.ID);
-                            SqlDataReader imageReader = cmd2.ExecuteReader();
-                            while (imageReader.Read()) {
-                                Image i = new Image();
-                                i.ImageSource = imageReader.GetString(imageReader.GetOrdinal("ImageSource"));
-                                i.Name = imageReader.GetString(imageReader.GetOrdinal("Name"));
-
-                                p.Images.Add(i);
-                            }
-                            imageReader.Close();
-                            cmd2.Parameters.Clear();
-
-                        }
-                        return products;
-                    }
-
+                    
                 }
                 catch (SqlException) {
                     return null;
                 }
             }
+            return products;
+        }
 
+        public Product Get(int id) {
+            throw new NotImplementedException();
         }
     }
 }

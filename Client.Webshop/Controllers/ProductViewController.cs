@@ -27,20 +27,20 @@ namespace Client.Webshop.Controllers {
 
             }
 
-            Product product = pc.Find(id);
-            if(product.ID > 0) {
+            Product product = pc.GetProductWithImagesAndReviews("productID", id.ToString());
+            if (product.ID > 0) {
                 return View(product);
             }
             else {
                 return RedirectToAction("Index", "Home");
             }
-            
-            
+
+
         }
 
         
         public ActionResult AddProduct(int id, int quantity, string url) {
-            Product product = pc.Find(id);
+            Product product = pc.GetProductWithImages("productID", id.ToString());
             decimal subTotal = product.Price * quantity;
             Orderline ol = new Orderline(quantity, subTotal, product);
             Orderline errorOrderline = oc.CreateOrderLine(quantity, subTotal, product.ID);
