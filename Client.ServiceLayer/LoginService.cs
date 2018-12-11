@@ -48,7 +48,6 @@ namespace Client.ServiceLayer {
                 o.ID = order.ID;
                 o.ErrorMessage = order.ErrorMessage;
                 user.Orders.Add(o);
-
             }
             return user;
         }

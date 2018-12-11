@@ -22,40 +22,40 @@ namespace Client.ServiceLayer {
         }
 
         public Orderline CreateOrderLine(int quantity, decimal subTotal, int ID) {
-            return BuildClientOrderlines(myProxy.CreateOrderLine(quantity, subTotal, ID));
+            return BuildClientOrderline(myProxy.CreateOrderLine(quantity, subTotal, ID));
         }
 
         public Orderline DeleteOrderLine(int ID, decimal subTotal, int quantity) {
-            return BuildClientOrderlines(myProxy.DeleteOrderLine(ID, subTotal, quantity));
+            return BuildClientOrderline(myProxy.DeleteOrderLine(ID, subTotal, quantity));
         }
 
         public Orderline UpdateOrderLine(int ID, decimal subTotal, int quantity) {
-            return BuildClientOrderlines(myProxy.UpdateOrderLine(ID, subTotal, quantity));
+            return BuildClientOrderline(myProxy.UpdateOrderLine(ID, subTotal, quantity));
         }
         
         // Helping method used to convert orderlines from client.Domain to server.Domain.
-        private List<OrderReference.OrderLine> GetServiceOrderLines(IEnumerable<Orderline> pols) {
-            OrderReference.OrderLine tempOl;
-            OrderReference.Product tempProduct;
+        private List<OrderReference.OrderLine> GetServiceOrderLines(IEnumerable<Orderline> orderlines) {
+            OrderReference.OrderLine serviceOrderline;
+            OrderReference.Product serviceProduct;
             List<OrderReference.OrderLine> serviceOrderLines = new List<OrderReference.OrderLine>();
 
-            foreach (Orderline pol in pols) {
-                tempProduct = new OrderReference.Product() {
-                    ID = pol.Product.ID,
-                    Stock = pol.Product.Stock,
-                    Price = pol.Product.Price
+            foreach (Orderline orderline in orderlines) {
+                serviceProduct = new OrderReference.Product() {
+                    ID = orderline.Product.ID,
+                    Stock = orderline.Product.Stock,
+                    Price = orderline.Product.Price
                 };
-                tempOl = new OrderReference.OrderLine() {
-                    Product = tempProduct,
-                    Quantity = pol.Quantity,
-                    SubTotal = pol.SubTotal 
+                serviceOrderline = new OrderReference.OrderLine() {
+                    Product = serviceProduct,
+                    Quantity = orderline.Quantity,
+                    SubTotal = orderline.SubTotal 
                 };
-                serviceOrderLines.Add(tempOl);
+                serviceOrderLines.Add(serviceOrderline);
             }
             return serviceOrderLines;
         }
 
-        private Orderline BuildClientOrderlines(OrderReference.OrderLine orderline) {
+        private Orderline BuildClientOrderline(OrderReference.OrderLine orderline) {
             Orderline ol = new Orderline();
             if(orderline.Product != null) {
                 Product p = new Product();
@@ -139,11 +139,11 @@ namespace Client.ServiceLayer {
         }
 
         public Orderline CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
-            return BuildClientOrderlines(myProxy.CreateOrderLineInDesktop(quantity, subTotal, productID, orderID));
+            return BuildClientOrderline(myProxy.CreateOrderLineInDesktop(quantity, subTotal, productID, orderID));
         }
 
         public Orderline DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID) {
-            return BuildClientOrderlines(myProxy.DeleteOrderLineInDesktop(ID, subTotal, quantity, orderLineID));
+            return BuildClientOrderline(myProxy.DeleteOrderLineInDesktop(ID, subTotal, quantity, orderLineID));
         }
 
         public Orderline FindOrderLine(int id) {
