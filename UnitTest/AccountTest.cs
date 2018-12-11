@@ -47,7 +47,7 @@ namespace UnitTest {
 
             User user = userLogic.ValidatePassword(email, password);
 
-            Assert.AreEqual(user.ErrorMessage, "");
+            Assert.AreEqual(user.ErrorMessage, "Forkert email eller kodeord");
         }
 
         [TestMethod]

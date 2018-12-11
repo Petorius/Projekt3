@@ -55,7 +55,7 @@ namespace UnitTest {
         public void DeleteUserWithMailExpectedToFail() {
             User user = userDB.DeleteUser("g-star-raw@gmail.gcom", true, false);
 
-            Assert.AreEqual(user.ErrorMessage, "");
+            Assert.AreEqual(user.ErrorMessage, "Brugeren blev ikke slettet. Prøv igen");
         }
 
         [TestMethod]
@@ -83,8 +83,15 @@ namespace UnitTest {
             Assert.AreEqual(c.FirstName, "Rune");
         }
 
+        [TestMethod]
+        public void UpdateUserPassword() {
+            User u = userDB.GetUser("g-star-raw@gmail.gcom");
 
+            userLogic.UpdatePassword(u.ID, "newPassword");
 
+            User updatedUser = userLogic.ValidatePassword(u.Email, "newPassword");
 
+            Assert.AreEqual(updatedUser.ErrorMessage, "");
+        }
     }
 }
