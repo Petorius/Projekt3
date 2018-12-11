@@ -71,9 +71,9 @@ namespace UnitTest {
 
             o = orderDB.Create(o);
 
-            orderDB.Delete(o, true, true);
+            Order order = orderDB.Delete(o, true, true);
 
-            Assert.IsNull(orderDB.Get(o.ID));
+            Assert.AreEqual(order.ErrorMessage, "");
         }
 
 
