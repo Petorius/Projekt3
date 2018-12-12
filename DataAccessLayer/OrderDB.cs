@@ -110,6 +110,7 @@ namespace Server.DataAccessLayer {
 
         public Order Get(int id) {
             Order o = new Order();
+            Customer c = new Customer();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
@@ -123,10 +124,12 @@ namespace Server.DataAccessLayer {
                             o.Total = reader.GetDecimal(reader.GetOrdinal("total"));
                             o.DateCreated = reader.GetDateTime(reader.GetOrdinal("purchaseTime"));
                             if (!reader.IsDBNull(reader.GetOrdinal("customerID"))) {
-                                o.Customer.ID = reader.GetInt32(reader.GetOrdinal("customerID"));
+                                c.ID = reader.GetInt32(reader.GetOrdinal("customerID"));
+                                o.Customer = c;
                             }
                             else {
-                                o.Customer.ID = 0;
+                                c.ID = 0;
+                                o.Customer = c;
                             }
                         }
                         reader.Close();

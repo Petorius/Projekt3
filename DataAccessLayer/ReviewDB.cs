@@ -150,7 +150,7 @@ namespace DataAccessLayer {
                     }
                 }
                 catch (SqlException e) {
-
+                    return null;
                 }
             }
             return reviews;
