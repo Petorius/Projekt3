@@ -11,11 +11,15 @@ namespace BusniessLayer {
         ProductDB productDB;
         ReviewDB reviewDB;
         UserDB userDB;
+        List<Image> images;
+        List<Review> reviews;
 
         public ProductLogic() {
             productDB = new ProductDB();
             reviewDB = new ReviewDB();
             userDB = new UserDB();
+            images = new List<Image>();
+            reviews = new List<Review>();
         }
 
         public Product GetProduct(string select, string input) {
@@ -25,20 +29,32 @@ namespace BusniessLayer {
 
         public Product GetProductWithImages(string select, string input) {
             Product p = GetProduct(select, input);
-            p.Images = productDB.GetProductImages(p.ID);
+            images = productDB.GetProductImages(p.ID);
+
+            if (images != null) {
+                p.Images = images;
+            }
+            
             return p;
         }
 
         public Product GetProductWithReviews(string select, string input) {
             Product p = GetProduct(select, input);
-            p.Reviews = BuildReviews(p.ID);
+            reviews = BuildReviews(p.ID);
+            if (reviews != null) {
+                p.Reviews = reviews;
+            }
+            
             return p;
 
         }
 
         public Product GetProductWithImagesAndReviews(string select, string input) {
             Product p = GetProductWithImages(select, input);
-            p.Reviews = BuildReviews(p.ID);
+            reviews = BuildReviews(p.ID);
+            if (reviews != null) {
+                p.Reviews = reviews;
+            }
             return p;     
         }
 
@@ -56,7 +72,10 @@ namespace BusniessLayer {
             IEnumerable<Product> products = productDB.GetAll();
 
             foreach(Product p in products) {
-                p.Images = productDB.GetProductImages(p.ID);
+                if(productDB.GetProductImages(p.ID) != null) {
+                    p.Images = productDB.GetProductImages(p.ID);
+                }
+                
             }
             return products;
         }

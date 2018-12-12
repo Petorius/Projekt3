@@ -163,7 +163,7 @@ namespace Server.DataAccessLayer {
                     }
                 }
                 catch (SqlException e) {
-
+                    return null;
                 }
             }
             return images;
