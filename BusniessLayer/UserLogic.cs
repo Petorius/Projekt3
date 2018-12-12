@@ -26,6 +26,13 @@ namespace Server.BusinessLogic {
             productDB = new ProductDB();
             orderLineDB = new OrderLineDB();
             productLogic = new ProductLogic();
+        }  
+        
+        // Database test constructor. Only used for testing.
+        public UserLogic(string connectionString) {
+            userDB = new UserDB(connectionString);
+            account = new Account();
+            cl = new CustomerLogic(connectionString);
         }
 
         public User GetUserWithOrders(string email) {
@@ -44,16 +51,10 @@ namespace Server.BusinessLogic {
                     ol.Product = productLogic.GetProduct("productID", ol.Product.ID.ToString());
                 }
             }
-            
             return user;
         }
 
-        // Database test constructor. Only used for testing.
-        public UserLogic(string connectionString) {
-            userDB = new UserDB(connectionString);
-            account = new Account();
-            cl = new CustomerLogic(connectionString);
-        }
+
 
         // Creates an user with password. Hashes the password with auto-generated
         // salt and returns true if user was created and false otherwise.

@@ -11,15 +11,11 @@ namespace BusniessLayer {
         ProductDB productDB;
         ReviewDB reviewDB;
         UserDB userDB;
-        List<Image> images;
-        List<Review> reviews;
 
         public ProductLogic() {
             productDB = new ProductDB();
             reviewDB = new ReviewDB();
             userDB = new UserDB();
-            images = new List<Image>();
-            reviews = new List<Review>();
         }
 
         public Product GetProduct(string select, string input) {
@@ -29,7 +25,7 @@ namespace BusniessLayer {
 
         public Product GetProductWithImages(string select, string input) {
             Product p = GetProduct(select, input);
-            images = productDB.GetProductImages(p.ID);
+            List<Image> images = productDB.GetProductImages(p.ID);
 
             if (images != null) {
                 p.Images = images;
@@ -40,7 +36,7 @@ namespace BusniessLayer {
 
         public Product GetProductWithReviews(string select, string input) {
             Product p = GetProduct(select, input);
-            reviews = BuildReviews(p.ID);
+            List<Review> reviews = BuildReviews(p.ID);
             if (reviews != null) {
                 p.Reviews = reviews;
             }
@@ -51,7 +47,7 @@ namespace BusniessLayer {
 
         public Product GetProductWithImagesAndReviews(string select, string input) {
             Product p = GetProductWithImages(select, input);
-            reviews = BuildReviews(p.ID);
+            List<Review> reviews = BuildReviews(p.ID);
             if (reviews != null) {
                 p.Reviews = reviews;
             }
