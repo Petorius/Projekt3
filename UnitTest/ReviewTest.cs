@@ -51,7 +51,7 @@ namespace UnitTest {
 
             Review r = reviewDB.Delete(review, true, true);
 
-            Assert.AreEqual(r.ErrorMessage, "");
+            Assert.AreEqual(r.ErrorMessage, "Ressourcen du prøver at tilgå findes ikke");
         }
 
         [TestMethod]
