@@ -18,6 +18,14 @@ namespace BusniessLayer {
             userDB = new UserDB();
         }
 
+        public ProductLogic(string connectionString) {
+            productDB = new ProductDB(connectionString);
+            reviewDB = new ReviewDB(connectionString);
+            userDB = new UserDB(connectionString);
+            images = new List<Image>();
+            reviews = new List<Review>();
+        }
+
         public Product GetProduct(string select, string input) {
             Product p = productDB.Get(select, input);
             return p;

@@ -92,6 +92,8 @@ namespace UnitTest {
             User updatedUser = userLogic.ValidatePassword(u.Email, "newPassword");
 
             Assert.AreEqual(updatedUser.ErrorMessage, "");
+
+            userLogic.UpdatePassword(u.ID, "SuperTester123!");
         }
     }
 }

@@ -89,11 +89,11 @@
     </div>
 
     @if (TempData["Message"] != null) {
-        <script type="text/javascript">
+    <script type="text/javascript">
             window.onload = function () {
-                alert(@TempData["Message"]);
+                alert('@TempData["Message"]');
             }
-        </script>
+    </script>
     }
 
 </body>

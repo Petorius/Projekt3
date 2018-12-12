@@ -30,7 +30,8 @@ namespace Server.BusinessLogic {
             cl = new CustomerLogic(connectionString);
             productDB = new ProductDB(connectionString);
             orderLineDB = new OrderLineDB(connectionString);
-
+            productLogic = new ProductLogic(connectionString);
+            customerDB = new CustomerDB(connectionString);
         }
 
         // Creates an order with customer and returns an order based on validation
