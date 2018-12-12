@@ -162,7 +162,7 @@ namespace Server.DataAccessLayer {
 
                     }
                 }
-                catch (SqlException e) {
+                catch (SqlException) {
                     return null;
                 }
             }

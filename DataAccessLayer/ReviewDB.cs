@@ -149,7 +149,7 @@ namespace DataAccessLayer {
                         cmd.Parameters.Clear();
                     }
                 }
-                catch (SqlException e) {
+                catch (SqlException) {
                     return null;
                 }
             }

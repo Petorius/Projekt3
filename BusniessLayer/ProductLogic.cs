@@ -22,8 +22,6 @@ namespace BusniessLayer {
             productDB = new ProductDB(connectionString);
             reviewDB = new ReviewDB(connectionString);
             userDB = new UserDB(connectionString);
-            images = new List<Image>();
-            reviews = new List<Review>();
         }
 
         public Product GetProduct(string select, string input) {
