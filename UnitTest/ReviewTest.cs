@@ -74,7 +74,6 @@ namespace UnitTest {
             Review r = reviewDB.Get(1);
 
             Assert.IsNotNull(r);
-            
         }
     }
 }

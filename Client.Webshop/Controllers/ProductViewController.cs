@@ -72,7 +72,7 @@ namespace Client.Webshop.Controllers {
             }
 
             if (errorOrderline.ErrorMessage == "") {
-                TempData["Message"] = "Produktet blev tilføjet til kurv";
+                TempData["Message"] = "Produktet blev lagt i kurven";
             }
             else {
                 TempData["Message"] = errorOrderline.ErrorMessage;
