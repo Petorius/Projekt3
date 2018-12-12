@@ -47,11 +47,11 @@ namespace UnitTest {
             review.User = user;
             Product product = productDB.Get("productID", 1.ToString());
 
-            reviewDB.CreateReview(review, product.ID, user.ID);
+            Review review2 = reviewDB.CreateReview(review, product.ID, user.ID);
 
-            Review r = reviewDB.Delete(review, true, true);
+            Review r = reviewDB.Delete(review2, true);
 
-            Assert.AreEqual(r.ErrorMessage, "Ressourcen du prøver at tilgå findes ikke");
+            Assert.AreEqual(r.ErrorMessage, "Anmeldelsen blev ikke slettet. Prøv igen");
         }
 
         [TestMethod]
@@ -60,10 +60,10 @@ namespace UnitTest {
             review.Text = "123123";
             review.User = user;
             Product product = productDB.Get("productID", 1.ToString());
+            
+            Review review2 = reviewDB.CreateReview(review, product.ID, user.ID);
 
-            reviewDB.CreateReview(review, product.ID, user.ID);
-
-            Review r = reviewDB.Delete(review, true);
+            Review r = reviewDB.Delete(review2, true, true);
 
             Assert.AreEqual(r.ErrorMessage, "");
         }

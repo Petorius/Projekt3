@@ -89,11 +89,29 @@
     </div>
 
     @if (TempData["Message"] != null) {
-    <script type="text/javascript">
+        <script type="text/javascript">
             window.onload = function () {
                 alert('@TempData["Message"]');
             }
-    </script>
+        </script>
     }
+
+    @if (TempData["ReviewMessage"] != null) {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@TempData["ReviewMessage"]');
+            }
+        </script>
+    }
+
+    @if (TempData["DeleteReviewMessage"] != null) {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@TempData["DeleteReviewMessage"]');
+            }
+        </script>
+    }
+
+
 
 </body>
