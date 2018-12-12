@@ -57,7 +57,7 @@ namespace UnitTest {
         [TestMethod]
         public void FindOrder() {
 
-            Order o = orderLogic.GetOrder(2);
+            Order o = orderLogic.GetOrder(1);
 
             Assert.IsNotNull(o);
         }
