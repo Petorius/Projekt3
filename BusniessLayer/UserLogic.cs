@@ -76,7 +76,7 @@ namespace Server.BusinessLogic {
         // Validates an users attempt to login. Returns true if password matches with the email
         // and returns false otherwise.
         public User ValidatePassword(string email, string password) {
-            User user = userDB.GetUser(email);
+            User user = userDB.GetUser("email", email);
             if(user.ErrorMessage == "") {
                 if(!account.ValidateLogin(user.Salt, user.HashPassword, password)) {
                     user.ErrorMessage = "Forkert email eller kodeord";

@@ -21,7 +21,7 @@ namespace UnitTest {
             userLogic = new UserLogic(connectionString);
             userDB = new UserDB(connectionString);
             productDB = new ProductDB(connectionString);
-            user = userDB.GetUser("g-star-raw@gmail.gcom");
+            user = userDB.GetUser("email", "g-star-raw@gmail.gcom");
 
             if(user.ID < 1) {
                 userLogic.CreateUserWithPassword("Rune", "G", "G-Street", 9000, "G-Borg", 

@@ -46,7 +46,7 @@ namespace Server.ServiceLayer {
         }
 
         public Order DeleteOrder(int ID) {
-            Order o = orderDB.Get(ID);
+            Order o = orderLogic.GetOrder(ID);
             return orderLogic.DeleteOrder(o);
             
         }
@@ -65,7 +65,7 @@ namespace Server.ServiceLayer {
         }
 
         public Order FindOrder(int id) {
-            return orderDB.Get(id);
+            return orderLogic.GetOrder(id);
         }
 
         public OrderLine FindOrderLine(int id) {

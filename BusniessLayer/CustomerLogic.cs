@@ -19,7 +19,7 @@ namespace Server.BusinessLogic {
         // otherwise we create a new customer.
         public Customer HandleCustomer(string firstName, string lastName, string street, int zip, string city, string email,
          int number) {
-            Customer c = GetCustomerByMail(email);
+            Customer c = customerDB.Get("email", email);
             c.FirstName = firstName;
             c.LastName = lastName;
             c.Address = street;
@@ -35,13 +35,9 @@ namespace Server.BusinessLogic {
             }
             return c;
         }
-
-        public Customer GetCustomerByMail(string email) {
-            return customerDB.GetByMail(email);
-        }
-
+        
         public Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city, string existingemail) {
-            Customer c = GetCustomerByMail(existingemail);
+            Customer c = customerDB.Get("email", existingemail);
             c.FirstName = firstName;
             c.LastName = lastName;
             c.Address = address;

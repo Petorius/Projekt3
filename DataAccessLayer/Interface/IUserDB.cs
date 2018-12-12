@@ -9,7 +9,7 @@ namespace DataAccessLayer.Interface {
     public interface IUserDB {
         User CreateUser(int key, string salt, string hashValue);
 
-        User GetUser(string email);
+        User GetUser(string select, string input);
 
         User GetUserWithOrders(string email);
         

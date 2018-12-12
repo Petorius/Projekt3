@@ -47,7 +47,7 @@ namespace BusniessLayer {
             reviews = reviewDB.GetAll(id);
 
             foreach (Review r in reviews) {
-                r.User = userDB.GetUserFirstname(r.User.ID);
+                r.User = userDB.GetUser("userID", r.User.ID.ToString());
             }
             return reviews;
         }

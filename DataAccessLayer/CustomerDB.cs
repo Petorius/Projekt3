@@ -107,15 +107,15 @@ namespace Server.DataAccessLayer {
         }
 
 
-        public Customer GetByMail(string email) {
+        public Customer Get(string select, string input) {
             Customer c = new Customer();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
                         cmd.CommandText = "SELECT customerID, FirstName, LastName, Phone, Email, Address, ZipCode, City" +
-                            " from Customer where Email = @Email";
-                        cmd.Parameters.AddWithValue("Email", email);
+                            " from Customer where " + select + " = @" + select;
+                        cmd.Parameters.AddWithValue(select, input);
                         SqlDataReader reader = cmd.ExecuteReader();
 
                         while (reader.Read()) {
@@ -132,6 +132,7 @@ namespace Server.DataAccessLayer {
                         
                         if(c.ID < 1) {
                             c.ErrorMessage = "Kunden findes ikke.";
+                            c.Email = "deleted user";
                         }
                     }
                 }

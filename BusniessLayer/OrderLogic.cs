@@ -12,6 +12,7 @@ namespace Server.BusinessLogic {
         private IProduct productDB;
         private OrderLineDB orderLineDB;
         private ProductLogic productLogic;
+        private CustomerDB customerDB;
 
         public OrderLogic() {
             orderDB = new OrderDB();
@@ -19,6 +20,7 @@ namespace Server.BusinessLogic {
             productDB = new ProductDB();
             orderLineDB = new OrderLineDB();
             productLogic = new ProductLogic();
+            customerDB = new CustomerDB();
 
         }
 
@@ -46,6 +48,17 @@ namespace Server.BusinessLogic {
             o.Total = TotalOrderPrice(ol);
             o.ID = orderDB.Create(o).ID;
 
+            return o;
+        }
+
+        public Order GetOrder(int id) {
+
+            Order o = orderDB.Get(id);
+            
+            o.Customer = customerDB.Get("customerID", o.Customer.ID.ToString());
+
+            o.Orderlines = orderLineDB.GetOrderlinesByOrderID(o.ID);
+            
             return o;
         }
 

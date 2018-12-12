@@ -30,7 +30,7 @@ namespace UnitTest {
 
         [TestMethod]
         public void CreateOrderWithReturnedPrimaryKey() {
-            Customer c = customerDB.GetByMail("Morten@hotmail.com");
+            Customer c = customerDB.Get("email", "Morten@hotmail.com");
             Order o = new Order(c);
             o.Orderlines.Add(new OrderLine(2, 200, productDB.Get("productID", 1.ToString())));
 
@@ -57,7 +57,7 @@ namespace UnitTest {
         [TestMethod]
         public void FindOrder() {
 
-            Order o = orderDB.Get(2);
+            Order o = orderLogic.GetOrder(2);
 
             Assert.IsNotNull(o);
         }
@@ -65,7 +65,7 @@ namespace UnitTest {
         [TestMethod]
         public void  DeleteOrder() {
 
-            Customer c = customerDB.GetByMail("Morten@hotmail.com");
+            Customer c = customerDB.Get("email", "Morten@hotmail.com");
             Order o = new Order(c);
             o.Orderlines.Add(new OrderLine(2, 200, productDB.Get("productID", 1.ToString())));
 

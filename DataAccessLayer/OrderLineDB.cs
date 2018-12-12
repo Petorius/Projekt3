@@ -332,8 +332,7 @@ namespace Server.DataAccessLayer {
                                     rowId = (byte[])reader["rowId"];
                                 }
                                 reader.Close();
-
-
+                                
                                 cmd.CommandText = "UPDATE Product " +
                                     "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
                                 cmd.Parameters.AddWithValue("stock", Entity.Product.Stock + Entity.Quantity);
