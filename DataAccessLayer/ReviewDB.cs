@@ -19,18 +19,20 @@ namespace DataAccessLayer {
 
         public Review CreateReview(Review review, int productID, int userID, bool test = false, bool testResult = false) {
             Review errorReview = new Review();
+            int insertedID = -1;
             errorReview.User = new User();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
 
-                        cmd.CommandText = "INSERT INTO review(text, dateCreated, productID, userID) VALUES(@Text, @DateCreated, @ProductID, @UserID)";
+                        cmd.CommandText = "INSERT INTO review(text, dateCreated, productID, userID) OUTPUT INSERTED.ReviewID VALUES(@Text, @DateCreated, @ProductID, @UserID)";
                         cmd.Parameters.AddWithValue("Text", review.Text);
                         cmd.Parameters.AddWithValue("DateCreated", review.DateCreated);
                         cmd.Parameters.AddWithValue("ProductID", productID);
                         cmd.Parameters.AddWithValue("UserID", userID);
-                        cmd.ExecuteNonQuery();
+                        insertedID = (int)cmd.ExecuteScalar();
+                        errorReview.ID = insertedID;
                     }
                 }
                 catch (SqlException e) {

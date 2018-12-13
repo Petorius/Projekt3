@@ -88,19 +88,25 @@ namespace Client.Webshop.Controllers {
             Review review = pc.CreateReview(reviewText, productID, user.ID);
             
             if(review.ErrorMessage == "") {
-                return Redirect(url);
+                TempData["ReviewMessage"] = "Tak for din anmeldelse af produktet";
             }
             else {
-                // show error message
-                return View();
+                TempData["ReviewMessage"] = review.ErrorMessage; 
             }
+            return Redirect(url);
         }
 
         public ActionResult DeleteReview(int reviewID, int reviewUserID, string url) {
             User user = (User)Session["user"];
-
+            Review r = new Review();
             if(reviewID > 0 && reviewUserID > 0) {
-                pc.DeleteReview(reviewID, reviewUserID);
+                r = pc.DeleteReview(reviewID, reviewUserID);
+                if(r.ErrorMessage == "") {
+                    TempData["DeleteReviewMessage"] = "Din anmeldelse blev slettet";
+                }
+                else {
+                    TempData["DeleteReviewMessage"] = r.ErrorMessage;
+                }
                 return Redirect(url);
             }
             else {
