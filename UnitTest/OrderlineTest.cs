@@ -137,17 +137,5 @@ namespace UnitTest {
 
             Assert.IsNotNull(ol);
         }
-
-        [ClassCleanup]
-        public static void CleanUp() {
-
-            //using (SqlConnection connection = new SqlConnection(connectionString)) {
-            //    connection.Open();
-            //    using (SqlCommand cmd = connection.CreateCommand()) {
-            //        cmd.CommandText = "Truncate table Product";
-            //        cmd.ExecuteNonQuery();
-            //    }
-            //}
-        }
     }
 }
