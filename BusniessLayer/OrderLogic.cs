@@ -52,17 +52,19 @@ namespace Server.BusinessLogic {
             return o;
         }
 
+        // Gets an order with customer and orderlines
         public Order GetOrder(int id) {
 
             Order o = orderDB.Get(id);
             
             o.Customer = customerDB.Get("customerID", o.Customer.ID.ToString());
-
+            
             o.Orderlines = orderLineDB.GetOrderlinesByOrderID(o.ID);
             
             return o;
         }
 
+        // Deletes order from database
         public Order DeleteOrder(Order o) {
             foreach (OrderLine ol in o.Orderlines) {
                 Product p = productLogic.GetProduct("productID", ol.Product.ID.ToString());

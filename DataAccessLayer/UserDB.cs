@@ -74,7 +74,7 @@ namespace Server.DataAccessLayer {
         public User GetUser(string select, string input) {
         User user = new User();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
-                //try {
+                try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
                         cmd.CommandText = "select userid, firstName, lastName, phone, email, address, zipCode, city from [dbo].[user], customer where " + select + " = @" + select +
@@ -106,10 +106,10 @@ namespace Server.DataAccessLayer {
                         user.ErrorMessage = "Brugeren findes ikke";
                     } 
 
-                //}
-                //catch (SqlException e) {
-                //    user.ErrorMessage = ErrorHandling.Exception(e);
-                //}
+                }
+                catch (SqlException e) {
+                    user.ErrorMessage = ErrorHandling.Exception(e);
+                }
             }
          return user;
         }
@@ -166,7 +166,7 @@ namespace Server.DataAccessLayer {
             User user = new User();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
-                    //try {
+                    try {
                         connection.Open();
                         using (SqlTransaction trans = connection.BeginTransaction()) {
                             byte[] rowId = null;
@@ -207,10 +207,10 @@ namespace Server.DataAccessLayer {
                                 }
                             }
                         }
-                    //}
-                    //catch (SqlException e) {
-                    //    user.ErrorMessage = ErrorHandling.Exception(e);
-                    //}
+                    }
+                    catch (SqlException e) {
+                        user.ErrorMessage = ErrorHandling.Exception(e);
+                    }
                 }
             }
             return user;

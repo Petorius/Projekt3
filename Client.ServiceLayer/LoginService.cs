@@ -31,6 +31,7 @@ namespace Client.ServiceLayer {
             return BuildUser(myProxy.CreateUserWithPassword(firstName, lastName, street, zip, city, email, number, password));
         }
 
+        // Build Client.Domain.User from Client.ServiceLayer.LoginReference.User with orders 
         private User BuildUser(LoginReference.User u) {
             User user = new User();
             user.ID = u.ID;

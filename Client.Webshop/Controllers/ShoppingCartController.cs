@@ -14,6 +14,7 @@ namespace Client.Webshop.Controllers {
         // GET: ShoppingCart
         public ActionResult ShoppingCart() {
 
+            //Checks if orderline session ticks has exceeded, if it has exceeded, removes orderline from session.
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
             if (orderlines != null) {
@@ -22,6 +23,7 @@ namespace Client.Webshop.Controllers {
                         orderlines.Remove(orderLine);
 
                         oc.DeleteOrderLine(orderLine.Product.ID, orderLine.SubTotal, orderLine.Quantity);
+
                     }
                 }
                 Session["cart"] = orderlines;

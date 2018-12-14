@@ -39,7 +39,7 @@
 
         <div class="btn-group" style="margin-top: 15px;">
             <input type="button" value="Opdater" onclick="location.href='@Url.Action("Edit", "UserProfile")'" class="btn btn-default" />
-            <button class="btn btn-default">@Html.ActionLink("Slet", "DeleteAccount", "UserProfile", new { @onclick = "return ConfirmDelete();" })</button>
+            @Html.ActionLink("Slet", "DeleteAccount", "UserProfile", new { @onclick = "return ConfirmDelete();" })
         </div>
     </div>
 </div>

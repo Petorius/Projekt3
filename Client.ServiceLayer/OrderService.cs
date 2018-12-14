@@ -33,7 +33,7 @@ namespace Client.ServiceLayer {
             return BuildClientOrderline(myProxy.UpdateOrderLine(ID, subTotal, quantity));
         }
         
-        // Helping method used to convert orderlines from client.Domain to server.Domain.
+        // Helping method used to convert orderlines from Client.Domain to Server.Domain.
         private List<OrderReference.OrderLine> GetServiceOrderLines(IEnumerable<Orderline> orderlines) {
             OrderReference.OrderLine serviceOrderline;
             OrderReference.Product serviceProduct;
@@ -54,7 +54,7 @@ namespace Client.ServiceLayer {
             }
             return serviceOrderLines;
         }
-
+        // Helping method used to convert OrderRefernce.Orderline to Client.Domain.Orderline
         private Orderline BuildClientOrderline(OrderReference.OrderLine orderline) {
             Orderline ol = new Orderline();
             if(orderline.Product != null) {
@@ -98,6 +98,8 @@ namespace Client.ServiceLayer {
             return order;
         }
 
+        // Helping method used to convert OrderReference.Order to Client.Domain.Order
+        // Builds order with orderlines
         private Order BuildClientOrder(OrderReference.Order o) {
 
             List<Orderline> orderlines = new List<Orderline>();
@@ -146,6 +148,7 @@ namespace Client.ServiceLayer {
             return BuildClientOrderline(myProxy.DeleteOrderLineInDesktop(ID, subTotal, quantity, orderLineID));
         }
 
+        // Gets orderlne and builds Client.Domain.Product
         public Orderline FindOrderLine(int id) {
 
             var ol = myProxy.FindOrderLine(id);

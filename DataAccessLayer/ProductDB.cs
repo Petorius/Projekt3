@@ -18,6 +18,7 @@ namespace Server.DataAccessLayer {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
         }
 
+        // Create product and images in database
         public Product Create(Product Entity, bool test = false, bool testResult = false) {
             int insertedID = -1;
             Product p = new Product();
@@ -56,6 +57,7 @@ namespace Server.DataAccessLayer {
         }
 
         // Method with optimistic concurreny. If anything is changed, we rollback our transaction after trying for 4 times
+        // Sets product attribute "isActive" to false 
         public Product Delete(Product Entity, bool test = false, bool testResult = false) {
             Product p = new Product();
             for (int i = 0; i < 5; i++) {
