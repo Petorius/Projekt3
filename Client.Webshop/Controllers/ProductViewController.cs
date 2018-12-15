@@ -80,7 +80,6 @@ namespace Client.Webshop.Controllers {
             
 
             return Redirect(url);
-
         }
 
         public ActionResult CreateReview(string reviewText, int productID, string url) {

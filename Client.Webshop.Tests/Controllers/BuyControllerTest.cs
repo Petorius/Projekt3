@@ -13,7 +13,6 @@ namespace Client.Webshop.Tests.Controllers {
             // Arrange
             var webApi = new ValuesController();
 
-
             // Act
             bool flag = webApi.Get();
 

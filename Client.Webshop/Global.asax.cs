@@ -28,8 +28,6 @@ namespace Client.Webshop {
                     oc.DeleteOrderLine(orderline.Product.ID, orderline.SubTotal, orderline.Quantity);
                 }
             }
-
-
         }
 
         protected void Application_Error(Object sender, EventArgs e) {
