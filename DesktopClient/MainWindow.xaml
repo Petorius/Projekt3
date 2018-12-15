@@ -3,16 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        ResizeMode="NoResize"
         xmlns:local="clr-namespace:DesktopClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="400" Width="800">
     <Grid>
-        <TextBox x:Name="emploEmail"  HorizontalAlignment="Left" Height="36" Margin="260,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="307" RenderTransformOrigin="-0.405,-2.261" FontSize="20" />
-        <PasswordBox x:Name="employPassword"  HorizontalAlignment="Left" Margin="260,168,0,0" VerticalAlignment="Top" Height="36" Width="307"/>
-        <Button Content="Login" HorizontalAlignment="Left" Margin="453,246,0,0" VerticalAlignment="Top" Width="114" Height="29" Click="Button_Click_1"/>
-        <Label Content="Indtast din email" HorizontalAlignment="Left" Margin="335,51,0,0" VerticalAlignment="Top" Height="32" Width="149" FontSize="18"/>
-        <Label Content="Indtast password" HorizontalAlignment="Left" Margin="335,136,0,0" VerticalAlignment="Top" Height="32" Width="149" FontSize="18"/>
-        <Label x:Name="wrongLogin" Content="" HorizontalAlignment="Left" Margin="277,10,0,0" VerticalAlignment="Top" Height="41" Width="277" FontSize="20" Foreground="#FFFA0606"/>
+        <TextBox x:Name="emploEmail"  HorizontalAlignment="Left" Height="36" Margin="247,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="307" RenderTransformOrigin="-0.405,-2.261" FontSize="20" />
+        <PasswordBox x:Name="employPassword"  HorizontalAlignment="Left" Margin="247,178,0,0" VerticalAlignment="Top" Height="36" Width="307"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="440,245,0,0" VerticalAlignment="Top" Width="114" Height="29" Click="Button_Click_1"/>
+        <Label Content="Indtast din email" HorizontalAlignment="Left" Margin="320,56,0,0" VerticalAlignment="Top" Height="32" Width="149" FontSize="18"/>
+        <Label Content="Indtast password" HorizontalAlignment="Left" Margin="320,141,0,0" VerticalAlignment="Top" Height="32" Width="149" FontSize="18"/>
+        <Label x:Name="wrongLogin" Content="" HorizontalAlignment="Left" Margin="247,10,0,0" VerticalAlignment="Top" Height="41" Width="418" FontSize="20" Foreground="#FFFA0606"/>
 
 
     </Grid>
