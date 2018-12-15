@@ -56,7 +56,7 @@ namespace Server.BusinessLogic {
         public Order GetOrder(int id) {
 
             Order o = orderDB.Get(id);
-            o.Customer = new Customer();
+            
             o.Customer = customerDB.Get("customerID", o.Customer.ID.ToString());
             
             o.Orderlines = orderLineDB.GetOrderlinesByOrderID(o.ID);

@@ -299,7 +299,7 @@
                     </TabControl>
                 </Grid>
             </TabItem>
-            <Button x:Name="button" Content="Button" Height="100" Width="75"/>
+            
         </TabControl>
     </Grid>
 </Window>
