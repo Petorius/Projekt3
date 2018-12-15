@@ -36,6 +36,10 @@ namespace Client.Webshop {
                 Server.ClearError();
                 Response.Redirect("/Error/Error");
             }
+            else if(exception is HttpException) {
+                Server.ClearError();
+                Response.Redirect("/Home/Index");
+            }
         }
     }
 }
