@@ -295,13 +295,14 @@ namespace DesktopClient {
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e) {
+            
             OrderClearFields();
         }
 
         private void Ordre_Søg_Ok_Knap_Click(object sender, RoutedEventArgs e) {
 
             try {
-
+                OrdreSøgOrdreFoundLabel.Content = "";
                 int id = Int32.Parse(Ordre_Søg_Find_Ordre_TextBox.Text);
                 Order o = orderController.FindOrder(id);
                 if (o.ErrorMessage == "") {
@@ -318,6 +319,7 @@ namespace DesktopClient {
                 }
                 else {
                     OrdreSøgOrdreFoundLabel.Content = o.ErrorMessage;
+                    ClearOrderFields();
                 }
             }
             catch (FormatException) {
@@ -330,6 +332,13 @@ namespace DesktopClient {
         }
 
         private void Ordre_Søg_Annuller_Knap_Click(object sender, RoutedEventArgs e) {
+
+            OrdreSøgOrdreFoundLabel.Content = "";
+            ClearOrderFields();
+        }
+
+        private void ClearOrderFields() {
+            
             Ordre_Søg_Find_Ordre_TextBox.Text = "";
             Ordre_Søg_Kunde_Email_Label_Output.Content = "";
             Ordre_Søg_Total_Label_Output.Content = "";
