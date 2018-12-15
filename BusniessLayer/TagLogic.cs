@@ -17,11 +17,13 @@ namespace BusniessLayer {
             tagDB = new TagDB();
         }
 
+        // Gets a specific tag with products by name
         public Tag GetTagWithProducts(string name) {
             Tag tag = new Tag();
 
             tag = tagDB.Get(name);
 
+            // For every product in tag, builds images on product
             foreach(Product p in tag.Products) {
                 p.Images = productDB.GetProductImages(p.ID);
             }

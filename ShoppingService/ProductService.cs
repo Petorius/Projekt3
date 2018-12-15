@@ -23,6 +23,7 @@ namespace Server.ServiceLayer {
             productLogic = new ProductLogic();
         }
 
+        // Creates product in database with images
         public Product CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName) {
             Product p = new Product(name, price, stock, minStock, maxStock, description);
             Image i = new Image {
@@ -39,6 +40,7 @@ namespace Server.ServiceLayer {
             return reviewDB.CreateReview(review, productID, userID);
         }
 
+        
         public Product DeleteProduct(int id) {
             Product p = productLogic.GetProduct("productID", id.ToString());
             return productDb.Delete(p);
@@ -72,15 +74,18 @@ namespace Server.ServiceLayer {
             return p;
         }
 
+
         public Review FindReview(int ID) {
             Review r = reviewDB.Get(ID);
             return r;
         }
 
+
         public IEnumerable<Product> GetAllProductsWithImages() {
             return productLogic.GetAllProductsWithImages();
         }
 
+        // Updates products attributes
         public Product Update(int id, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive) {
             Product p = new Product(name, price, stock, minStock, maxStock, description);
             p.IsActive = isActive;

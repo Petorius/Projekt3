@@ -14,6 +14,7 @@ namespace Client.ServiceLayer {
             myProxy = new ServiceReference2.TagServiceClient();
         }
 
+        // Convert Tag from Server.Domain to Client.Domain builds tag with products and images
         public Tag FindTagByName(string name) {
             var t = myProxy.FindTagByName(name);
             Tag tag = new Tag();

@@ -28,6 +28,8 @@ namespace Server.ServiceLayer {
             number, ol);
         }
 
+        // Gets a product with images, builds an orderline with quantity, subtotal and product. Returns an orderline with error message.
+        // This method does not create a orderline in database, used to affect product stock in database.
         public OrderLine CreateOrderLine(int quantity, decimal subTotal, int id) {
             Product p = productLogic.GetProductWithImages("productID", id.ToString());
             OrderLine ol = new OrderLine(quantity, subTotal, p);
@@ -38,6 +40,7 @@ namespace Server.ServiceLayer {
             return orderlineWithErrorMessage;
         }
 
+        // Used to create am orderline in database, affects product stock. Returns orderline with error message.
         public OrderLine CreateOrderLineInDesktop(int quantity, decimal subTotal, int productID, int orderID) {
             Product p = productLogic.GetProduct("productID", productID.ToString());
             OrderLine ol = new OrderLine(quantity, subTotal, p);
@@ -51,12 +54,14 @@ namespace Server.ServiceLayer {
             
         }
 
+        // Affects orderline product stock, returns orderline with error message
         public OrderLine DeleteOrderLine(int ID, decimal subTotal, int quantity) {
             Product p = productLogic.GetProduct("productID", ID.ToString());
             OrderLine ol = new OrderLine(quantity, subTotal, p);
             return orderLineDB.Delete(ol);
         }
 
+        // Deletes orderline in database, affects product stock. Returns orderline with error message
         public OrderLine DeleteOrderLineInDesktop(int ID, decimal subTotal, int quantity, int orderLineID) {
             Product p = productLogic.GetProduct("productID", ID.ToString());
             OrderLine ol = new OrderLine(quantity, subTotal, p);
@@ -72,6 +77,7 @@ namespace Server.ServiceLayer {
             return orderLineDB.Get(id);
         }
 
+        // Updates orderline, affects product stock. Returns orderline with error message
         public OrderLine UpdateOrderLine(int ID, decimal subTotal, int quantity) {
 
             Product p = productLogic.GetProduct("productID", ID.ToString());

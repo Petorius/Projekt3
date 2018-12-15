@@ -15,6 +15,7 @@ namespace Client.Webshop.Controllers {
 
         [HttpPost]
         public ActionResult Search(string searchString) {
+            //Checks if orderline session ticks has exceeded, if it has exceeded, removes orderline from session.
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
             if (orderlines != null) {
@@ -27,7 +28,6 @@ namespace Client.Webshop.Controllers {
                     }
                 }
                 Session["cart"] = orderlines;
-
             }
 
             Session["Search"] = searchString;

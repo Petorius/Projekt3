@@ -36,6 +36,7 @@ namespace Server.BusinessLogic {
             return c;
         }
         
+        // Update customer with input parameters, takes an existing email and updates with a new one.
         public Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city, string existingemail) {
             Customer c = customerDB.Get("email", existingemail);
             c.FirstName = firstName;

@@ -21,6 +21,7 @@ namespace Server.DataAccessLayer {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
         }
 
+        // Creates and order and an orderlines in database
         public Order Create(Order Entity, bool test = false, bool testResult = false) {
             Order order = new Order();
             using (SqlConnection connection = new SqlConnection(connectionString)) {

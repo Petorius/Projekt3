@@ -30,6 +30,7 @@ namespace Client.Webshop.Controllers {
 
             }
 
+            //Checks if orderline session ticks has exceeded, if it has exceeded, removes orderline from session.
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
             if (orderlines != null) {
@@ -38,6 +39,7 @@ namespace Client.Webshop.Controllers {
                         orderlines.Remove(orderLine);
 
                         oc.DeleteOrderLine(orderLine.Product.ID, orderLine.SubTotal, orderLine.Quantity);
+
                     }
                 }
                 Session["cart"] = orderlines;
@@ -81,8 +83,13 @@ namespace Client.Webshop.Controllers {
                     o = oc.CreateOrder(firstName, lastName, street, zip, city, email, number, cart);
 
                     Session["cart"] = null;
-                    return View(o);
 
+                    // Updates user in session
+                    User newUser = uc.GetUserWithOrdersAndOrderlines(email);
+                    Session["User"] = null;
+                    Session.Add("User", newUser);
+
+                    return View(o);
 
                 }
                 else {

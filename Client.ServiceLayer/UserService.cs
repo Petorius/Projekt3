@@ -26,6 +26,7 @@ namespace Client.ServiceLayer {
             return BuildUser(myProxy.GetUserWithOrdersAndOrderlines(email));
         }
 
+        // Helping method used to build Client.Domain.User from UserReference.User builds user with orders and orderlines
         private User BuildUser(UserReference.User u) {
             User user = new User();
             user.ID = u.ID;
@@ -70,6 +71,7 @@ namespace Client.ServiceLayer {
             return BuildUser(myProxy.DeleteUser(email));
         }
 
+        // Helping method used to build Client.Domain.Customer from UserReference.Customer
         private Customer BuildCustomer(UserReference.Customer c) {
             Customer customer = new Customer();
             customer.ID = c.ID;

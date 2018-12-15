@@ -42,6 +42,7 @@ namespace Server.BusinessLogic {
             return user;
         }
 
+        // Get an user with orders and orderlines, builds products on orderlines
         public User GetUserWithOrdersAndOrderlines(string email) {
             User user = GetUserWithOrders(email);
 
@@ -86,6 +87,7 @@ namespace Server.BusinessLogic {
             return user;
         }
 
+        // Validates and admin attempt to login.
         public Admin ValidateAdminLogin(string email, string password) {
             Admin admin = adminDB.GetAdmin(email);
             if(admin.ErrorMessage == "") {
@@ -106,6 +108,7 @@ namespace Server.BusinessLogic {
             return adminDB.CreateAdmin(email, hashValue, salt);
         }
 
+        // Updates an user password with a new password.
         public User UpdatePassword(int userID, string newpassword) {
             string s = account.CreatePasswordHash(newpassword);
             char[] splitter = { ':' };

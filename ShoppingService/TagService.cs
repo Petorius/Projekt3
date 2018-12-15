@@ -11,6 +11,7 @@ namespace Server.ServiceLayer {
             tagLogic = new TagLogic();
         }
 
+        // Gets a tag with products and images
         public Tag FindTagByName(string name) {
             return tagLogic.GetTagWithProducts(name);
         }

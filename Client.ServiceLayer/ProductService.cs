@@ -75,6 +75,7 @@ namespace Client.ServiceLayer {
         }
 
         // Helping method used to convert a product from server.domain to client.domain.
+        // Builds product with images
         private Product BuildClientProduct(ServiceReference1.Product p) {
             Product product = new Product {
                 ID = p.ID,
@@ -130,6 +131,7 @@ namespace Client.ServiceLayer {
             return review;
         }
 
+        // Helping method used to build Client.Domain.Review from ServiceReference1.Review
         private Review BuildClientReview(ServiceReference1.Review r) {
             Review review = new Review();
             review.User = new User();

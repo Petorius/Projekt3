@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Server.DataAccessLayer {
+
+    // Class used for giving an error message
     public static class ErrorHandling {
         public static string Exception(SqlException e) {
             string errorMessage = "";

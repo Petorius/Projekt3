@@ -20,6 +20,7 @@ namespace Server.DataAccessLayer {
             productDB = new ProductDB();
         }
 
+        // Gets a tag with products
         public Tag Get(string name) {
             Tag t = new Tag();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
