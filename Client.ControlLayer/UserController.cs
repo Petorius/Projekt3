@@ -16,7 +16,6 @@ namespace Client.ControlLayer {
                 user.ErrorMessage = "Denne email er tilknyttet en bruger, venligst log ind med denne bruger";
             }
             return user;
-            
         }
         
         public User GetUser(string email) {
@@ -39,7 +38,6 @@ namespace Client.ControlLayer {
             return userService.UpdateCustomer(firstName, lastName, phone, email, address, zipCode, city, existingemail);
         }
 
-      
         public User DeleteUser(string email) {
             return userService.DeleteUser(email);
         }

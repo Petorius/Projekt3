@@ -8,15 +8,17 @@ namespace Server.ServiceLayer {
         private UserLogic userLogic;
         private IUserDB userDB;
         private CustomerLogic customerLogic;
+        private CustomerDB customerDB;
 
         public UserService() {
             userLogic = new UserLogic();
             userDB = new UserDB();
             customerLogic = new CustomerLogic();
+            customerDB = new CustomerDB();
         }
 
         public User GetUser(string email) {
-            return userDB.GetUser(email);
+            return userDB.GetUser("email", email);
         }
 
         public User GetUserWithOrders(string email) {
@@ -28,7 +30,7 @@ namespace Server.ServiceLayer {
         }
 
         public Customer GetCustomerByMail(string email) {
-            return customerLogic.GetCustomerByMail(email);
+            return customerDB.Get("email", email);
         }
 
         public Customer UpdateCustomer(string firstName, string lastName, int phone, string email, string address, int zipCode, string city, string existingemail) {

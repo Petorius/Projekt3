@@ -9,7 +9,6 @@ namespace Client.Domain {
         public List<Order> Orders { get; set; }
         public List<Review> Reviews { get; set; }
 
-
         public User(string firstName, string lastName, int phone, string email, string address,
             int zipCode, string city) : base(firstName, lastName, phone, email, address, zipCode, city) {
             Orders = new List<Order>();
@@ -27,6 +26,4 @@ namespace Client.Domain {
             return ""+ID;
         }
     }
-
-
 }

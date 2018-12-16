@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using BusniessLayer;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Server.DataAccessLayer;
 using Server.Domain;
 using System;
@@ -15,44 +16,94 @@ namespace UnitTest {
     public class ProductTest {
         private static string connectionString = "Server=kraka.ucn.dk; Database=dmab0917_1067354; User Id=dmab0917_1067354; Password=Password1! ";
         private ProductDB productDB;
+        private ProductLogic productLogic;
 
 
         [TestInitialize]
         public void SetUp() {
             productDB = new ProductDB(connectionString);
+            productLogic = new ProductLogic(connectionString);
         }
 
         [TestMethod]
         public void FindProductTest() {
 
-            Product p = productDB.Get(1);
+            Product p = productLogic.GetProduct("productID", 1.ToString());
 
             Assert.IsNotNull(p);
         }
 
         [TestMethod]
+        public void FindProductAndImageTest() {
+
+            Product p = productLogic.GetProductWithImages("productID", 1.ToString());
+
+            Assert.IsNotNull(p.Images);
+        }
+
+        [TestMethod]
+        public void FindProductAndReviewTest() {
+
+            Product p = productLogic.GetProductWithImages("productID", 1.ToString());
+
+            Assert.IsNotNull(p.Reviews);
+        }
+
+        [TestMethod]
+        public void FindProductWithImageAndReviewTest() {
+
+            Product p = productLogic.GetProductWithImagesAndReviews("productID", 1.ToString());
+
+            Assert.IsNotNull(p.Images);
+            Assert.IsNotNull(p.Reviews);
+        }
+
+        [TestMethod]
+        public void FindAllProductsWithImagesTest() {
+
+            IEnumerable<Product> products = productLogic.GetAllProductsWithImages();
+
+            Assert.IsNotNull(products);
+        }
+
+        [TestMethod]
+        public void FindAllProductsWithImagesAndFindImageTest() {
+            List<Image> images = new List<Image>();
+
+            IEnumerable<Product> products = productLogic.GetAllProductsWithImages();
+            foreach (Product p in products) {
+                    foreach (Image image in p.Images) {
+                        images.Add(image);
+                    };
+
+            }
+            Assert.IsNotNull(images[0]);
+        }
+
+
+        [TestMethod]
         public void UpdateProductTestExpectedToFail() {
-            Product p = productDB.Get(1);
+            Product p = productLogic.GetProduct("productID", 1.ToString());
             p.Name = "Tissot Prime";
             productDB.Update(p, true);
 
-            p = productDB.Get(1);
+            p = productLogic.GetProduct("productID", 1.ToString());
 
             Assert.AreEqual(p.Name, "Rolex Oyster");
         }
 
         [TestMethod]
         public void UpdateProductTest() {
-            Product p = productDB.Get(1);
+            Product p = productLogic.GetProduct("productID", 1.ToString());
             p.Name = "Tissot Prime";
 
             productDB.Update(p, true, true);
 
-            p = productDB.Get(1);
+            p = productLogic.GetProduct("productID", 1.ToString());
 
             Assert.AreEqual(p.Name, "Tissot Prime");
 
-            Product p1 = productDB.Get(1);
+            Product p1 = productLogic.GetProduct("productID", 1.ToString());
             p1.Name = "Rolex Oyster";
             productDB.Update(p1, true, true);
         }
@@ -63,26 +114,9 @@ namespace UnitTest {
             p.ID = 1;
             productDB.Delete(p, true);
 
-            p = productDB.Get(1);
+            p = productLogic.GetProduct("productID", 1.ToString());
 
             Assert.IsTrue(p.IsActive);
-        }
-
-        // Method to help testing by finding a product
-        private Product FindHelperTest(int id) {
-            Product p = new Product();
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
-                connection.Open();
-                using (SqlCommand cmd = connection.CreateCommand()) {
-                    cmd.CommandText = "SELECT productid, name from Product where productID = 1";
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read()) {
-                        p.ID = reader.GetInt32(reader.GetOrdinal("productid"));
-                        p.Name = reader.GetString(reader.GetOrdinal("name"));
-                    }
-                }
-            }
-            return p;
         }
     }
 }

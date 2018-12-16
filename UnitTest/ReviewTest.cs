@@ -21,7 +21,7 @@ namespace UnitTest {
             userLogic = new UserLogic(connectionString);
             userDB = new UserDB(connectionString);
             productDB = new ProductDB(connectionString);
-            user = userDB.GetUser("g-star-raw@gmail.gcom");
+            user = userDB.GetUser("email", "g-star-raw@gmail.gcom");
 
             if(user.ID < 1) {
                 userLogic.CreateUserWithPassword("Rune", "G", "G-Street", 9000, "G-Borg", 
@@ -32,7 +32,7 @@ namespace UnitTest {
         [TestMethod]
         public void CreateReview() {
             Review review = new Review();
-            Product product = productDB.Get(1);
+            Product product = productDB.Get("productID", 1.ToString());
             review.Text = "Testing 123 testing";
 
             Review r = reviewDB.CreateReview(review, product.ID, user.ID);
@@ -45,13 +45,13 @@ namespace UnitTest {
             Review review = new Review();
             review.Text = "123123";
             review.User = user;
-            Product product = productDB.Get(1);
+            Product product = productDB.Get("productID", 1.ToString());
 
-            reviewDB.CreateReview(review, product.ID, user.ID);
+            Review review2 = reviewDB.CreateReview(review, product.ID, user.ID);
 
-            Review r = reviewDB.Delete(review, true, true);
+            Review r = reviewDB.Delete(review2, true);
 
-            Assert.AreEqual(r.ErrorMessage, "");
+            Assert.AreEqual(r.ErrorMessage, "Anmeldelsen blev ikke slettet. Prøv igen");
         }
 
         [TestMethod]
@@ -59,11 +59,11 @@ namespace UnitTest {
             Review review = new Review();
             review.Text = "123123";
             review.User = user;
-            Product product = productDB.Get(1);
+            Product product = productDB.Get("productID", 1.ToString());
+            
+            Review review2 = reviewDB.CreateReview(review, product.ID, user.ID);
 
-            reviewDB.CreateReview(review, product.ID, user.ID);
-
-            Review r = reviewDB.Delete(review, true);
+            Review r = reviewDB.Delete(review2, true, true);
 
             Assert.AreEqual(r.ErrorMessage, "");
         }
@@ -74,7 +74,6 @@ namespace UnitTest {
             Review r = reviewDB.Get(1);
 
             Assert.IsNotNull(r);
-            
         }
     }
 }

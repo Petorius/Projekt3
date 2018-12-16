@@ -30,9 +30,9 @@ namespace UnitTest {
 
         [TestMethod]
         public void CreateOrderWithReturnedPrimaryKey() {
-            Customer c = customerDB.GetByMail("Morten@hotmail.com");
+            Customer c = customerDB.Get("email", "Morten@hotmail.com");
             Order o = new Order(c);
-            o.Orderlines.Add(new OrderLine(2, 200, productDB.Get(1)));
+            o.Orderlines.Add(new OrderLine(2, 200, productDB.Get("productID", 1.ToString())));
 
             o = orderDB.Create(o);
 
@@ -41,7 +41,7 @@ namespace UnitTest {
 
         [TestMethod]
         public void ValidateOrderLinePricesToPreventInsecureDirectObjectReference() {
-            Product p = productDB.Get(1);
+            Product p = productDB.Get("productID", 1.ToString());
             //Price on OrderLine is incorrect and should be caught
             OrderLine ol = new OrderLine(1, 100, p);
             List<OrderLine> orderLines = new List<OrderLine>();
@@ -57,7 +57,7 @@ namespace UnitTest {
         [TestMethod]
         public void FindOrder() {
 
-            Order o = orderDB.Get(2);
+            Order o = orderLogic.GetOrder(1);
 
             Assert.IsNotNull(o);
         }
@@ -65,15 +65,15 @@ namespace UnitTest {
         [TestMethod]
         public void  DeleteOrder() {
 
-            Customer c = customerDB.GetByMail("Morten@hotmail.com");
+            Customer c = customerDB.Get("email", "Morten@hotmail.com");
             Order o = new Order(c);
-            o.Orderlines.Add(new OrderLine(2, 200, productDB.Get(1)));
+            o.Orderlines.Add(new OrderLine(2, 200, productDB.Get("productID", 1.ToString())));
 
             o = orderDB.Create(o);
 
-            orderDB.Delete(o, true, true);
+            Order order = orderDB.Delete(o, true, true);
 
-            Assert.IsNull(orderDB.Get(o.ID));
+            Assert.AreEqual(order.ErrorMessage, "");
         }
 
 

@@ -44,6 +44,5 @@ namespace Client.Domain {
             Images = new List<Image>();
             ErrorMessage = "";
         }
-
     }
 }

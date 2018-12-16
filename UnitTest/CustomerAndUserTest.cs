@@ -23,7 +23,7 @@ namespace UnitTest {
             customerDB = new CustomerDB(connectionString);
             userLogic = new UserLogic(connectionString);
             userDB = new UserDB(connectionString);
-            User user = userDB.GetUser("g-star-raw@gmail.gcom");
+            User user = userDB.GetUser("email", "g-star-raw@gmail.gcom");
             if (user.ID < 1) {
                 userLogic.CreateUserWithPassword("Rune", "G", "G-Street", 9000, "G-Borg",
                                                 "g-star-raw@gmail.gcom", 81238123, "SuperTester123!");
@@ -32,14 +32,14 @@ namespace UnitTest {
 
         [TestMethod]
         public void FindCustomerByMail() {
-            Customer c = customerDB.GetByMail("g-star-raw@gmail.gcom");
+            Customer c = customerDB.Get("email", "g-star-raw@gmail.gcom");
 
             Assert.AreEqual(c.FirstName, "Rune");
         }
 
         [TestMethod]
         public void FindUserByMail() {
-            User u = userDB.GetUser("g-star-raw@gmail.gcom");
+            User u = userDB.GetUser("email", "g-star-raw@gmail.gcom");
 
             Assert.AreEqual(u.FirstName, "Rune");
         }
@@ -55,16 +55,16 @@ namespace UnitTest {
         public void DeleteUserWithMailExpectedToFail() {
             User user = userDB.DeleteUser("g-star-raw@gmail.gcom", true, false);
 
-            Assert.AreEqual(user.ErrorMessage, "");
+            Assert.AreEqual(user.ErrorMessage, "Brugeren blev ikke slettet. Prøv igen");
         }
 
         [TestMethod]
         public void FindCustomerAndUpdate() {
-            Customer c = customerDB.GetByMail("g-star-raw@gmail.gcom");
+            Customer c = customerDB.Get("email", "g-star-raw@gmail.gcom");
             c.FirstName = "Morten";
 
             customerDB.Update(c, true, true);
-            c = customerDB.GetByMail("g-star-raw@gmail.gcom");
+            c = customerDB.Get("email", "g-star-raw@gmail.gcom");
 
             Assert.AreEqual(c.FirstName, "Morten");
             c.FirstName = "Rune";
@@ -74,17 +74,26 @@ namespace UnitTest {
 
         [TestMethod]
         public void FindCustomerAndUpdateExpectedToFail() {
-            Customer c = customerDB.GetByMail("g-star-raw@gmail.gcom");
+            Customer c = customerDB.Get("email", "g-star-raw@gmail.gcom");
             c.FirstName = "Morten";
 
             customerDB.Update(c, true, false);
-            c = customerDB.GetByMail("g-star-raw@gmail.gcom");
+            c = customerDB.Get("email", "g-star-raw@gmail.gcom");
 
             Assert.AreEqual(c.FirstName, "Rune");
         }
 
+        [TestMethod]
+        public void UpdateUserPassword() {
+            User u = userDB.GetUser("email", "g-star-raw@gmail.gcom");
 
+            userLogic.UpdatePassword(u.ID, "newPassword");
 
+            User updatedUser = userLogic.ValidatePassword(u.Email, "newPassword");
 
+            Assert.AreEqual(updatedUser.ErrorMessage, "");
+
+            userLogic.UpdatePassword(u.ID, "SuperTester123!");
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace Client.Webshop.Controllers {
         OrderController oc = new OrderController();
 
         public ActionResult Index(int id) {
+            //Checks if orderline session ticks has exceeded, if it has exceeded, removes orderline from session.
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
             if (orderlines != null) {
@@ -24,23 +25,22 @@ namespace Client.Webshop.Controllers {
                     }
                 }
                 Session["cart"] = orderlines;
-
             }
 
-            Product product = pc.Find(id);
-            if(product.ID > 0) {
+            Product product = pc.GetProductWithImagesAndReviews("productID", id.ToString());
+            if (product.ID > 0) {
                 return View(product);
             }
             else {
                 return RedirectToAction("Index", "Home");
             }
-            
-            
+
+
         }
 
         
         public ActionResult AddProduct(int id, int quantity, string url) {
-            Product product = pc.Find(id);
+            Product product = pc.GetProductWithImages("productID", id.ToString());
             decimal subTotal = product.Price * quantity;
             Orderline ol = new Orderline(quantity, subTotal, product);
             Orderline errorOrderline = oc.CreateOrderLine(quantity, subTotal, product.ID);
@@ -72,7 +72,7 @@ namespace Client.Webshop.Controllers {
             }
 
             if (errorOrderline.ErrorMessage == "") {
-                TempData["Message"] = "Produktet blev tilføjet til kurv";
+                TempData["Message"] = "Produktet blev lagt i kurven";
             }
             else {
                 TempData["Message"] = errorOrderline.ErrorMessage;
@@ -80,7 +80,6 @@ namespace Client.Webshop.Controllers {
             
 
             return Redirect(url);
-
         }
 
         public ActionResult CreateReview(string reviewText, int productID, string url) {
@@ -88,19 +87,25 @@ namespace Client.Webshop.Controllers {
             Review review = pc.CreateReview(reviewText, productID, user.ID);
             
             if(review.ErrorMessage == "") {
-                return Redirect(url);
+                TempData["ReviewMessage"] = "Tak for din anmeldelse af produktet";
             }
             else {
-                // show error message
-                return View();
+                TempData["ReviewMessage"] = review.ErrorMessage; 
             }
+            return Redirect(url);
         }
 
         public ActionResult DeleteReview(int reviewID, int reviewUserID, string url) {
             User user = (User)Session["user"];
-
+            Review r = new Review();
             if(reviewID > 0 && reviewUserID > 0) {
-                pc.DeleteReview(reviewID, reviewUserID);
+                r = pc.DeleteReview(reviewID, reviewUserID);
+                if(r.ErrorMessage == "") {
+                    TempData["DeleteReviewMessage"] = "Din anmeldelse blev slettet";
+                }
+                else {
+                    TempData["DeleteReviewMessage"] = r.ErrorMessage;
+                }
                 return Redirect(url);
             }
             else {

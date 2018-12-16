@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Interface;
+﻿using BusniessLayer;
+using DataAccessLayer.Interface;
 using Server.DataAccessLayer;
 using Server.Domain;
 using System;
@@ -15,6 +16,7 @@ namespace Server.BusinessLogic {
         private AdminDB adminDB;
         private ProductDB productDB;
         private OrderLineDB orderLineDB;
+        private ProductLogic productLogic;
 
         public UserLogic() {
             userDB = new UserDB();
@@ -23,6 +25,14 @@ namespace Server.BusinessLogic {
             adminDB = new AdminDB();
             productDB = new ProductDB();
             orderLineDB = new OrderLineDB();
+            productLogic = new ProductLogic();
+        }  
+        
+        // Database test constructor. Only used for testing.
+        public UserLogic(string connectionString) {
+            userDB = new UserDB(connectionString);
+            account = new Account();
+            cl = new CustomerLogic(connectionString);
         }
 
         public User GetUserWithOrders(string email) {
@@ -32,25 +42,20 @@ namespace Server.BusinessLogic {
             return user;
         }
 
+        // Get an user with orders and orderlines, builds products on orderlines
         public User GetUserWithOrdersAndOrderlines(string email) {
             User user = GetUserWithOrders(email);
 
             foreach (Order o in user.Orders) {
                 o.Orderlines = orderLineDB.GetOrderlinesByOrderID(o.ID);
                 foreach(OrderLine ol in o.Orderlines) {
-                    ol.Product = productDB.Get(ol.Product.ID);
+                    ol.Product = productLogic.GetProduct("productID", ol.Product.ID.ToString());
                 }
             }
-            
             return user;
         }
 
-        // Database test constructor. Only used for testing.
-        public UserLogic(string connectionString) {
-            userDB = new UserDB(connectionString);
-            account = new Account();
-            cl = new CustomerLogic(connectionString);
-        }
+
 
         // Creates an user with password. Hashes the password with auto-generated
         // salt and returns true if user was created and false otherwise.
@@ -73,7 +78,7 @@ namespace Server.BusinessLogic {
         // Validates an users attempt to login. Returns true if password matches with the email
         // and returns false otherwise.
         public User ValidatePassword(string email, string password) {
-            User user = userDB.GetUser(email);
+            User user = userDB.GetUser("email", email);
             if(user.ErrorMessage == "") {
                 if(!account.ValidateLogin(user.Salt, user.HashPassword, password)) {
                     user.ErrorMessage = "Forkert email eller kodeord";
@@ -82,6 +87,7 @@ namespace Server.BusinessLogic {
             return user;
         }
 
+        // Validates and admin attempt to login.
         public Admin ValidateAdminLogin(string email, string password) {
             Admin admin = adminDB.GetAdmin(email);
             if(admin.ErrorMessage == "") {
@@ -102,6 +108,7 @@ namespace Server.BusinessLogic {
             return adminDB.CreateAdmin(email, hashValue, salt);
         }
 
+        // Updates an user password with a new password.
         public User UpdatePassword(int userID, string newpassword) {
             string s = account.CreatePasswordHash(newpassword);
             char[] splitter = { ':' };

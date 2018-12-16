@@ -16,6 +16,7 @@ namespace Client.Webshop.Controllers {
         // GET: Signup
         public ActionResult Index(bool? wasRedirected) {
 
+            //Checks if orderline session ticks has exceeded, if it has exceeded, removes orderline from session.
             long timeNow = DateTime.Now.Ticks;
             List<Orderline> orderlines = Session["cart"] as List<Orderline>;
             if (orderlines != null) {

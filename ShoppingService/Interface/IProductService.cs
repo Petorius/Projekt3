@@ -10,13 +10,19 @@ namespace Server.ServiceLayer {
         Product CreateProduct(string name, decimal price, int stock, int minStock, int maxStock, string description, string ImageURL, string ImageName);
 
         [OperationContract]
-        Product FindProduct(int ID);
-
-        [OperationContract]
         Review FindReview(int ID);
 
         [OperationContract]
-        Product FindProductByName(string name);
+        Product GetProduct(string select, string input);
+
+        [OperationContract]
+        Product GetProductWithImages(string select, string input);
+
+        [OperationContract]
+        Product GetProductWithReviews(string select, string input);
+
+        [OperationContract]
+        Product GetProductWithImagesAndReviews(string select, string input);
 
         [OperationContract]
         Product DeleteProduct(int id);
@@ -25,7 +31,7 @@ namespace Server.ServiceLayer {
         Product Update(int ID, string name, decimal price, int stock, int minStock, int maxStock, string description, bool isActive);
 
         [OperationContract]
-        IEnumerable<Product> GetAllProducts();
+        IEnumerable<Product> GetAllProductsWithImages();
 
         [OperationContract]
         Review CreateReview(string text, int productID, int userID);

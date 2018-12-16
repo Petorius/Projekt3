@@ -23,109 +23,109 @@ namespace UnitTest {
 
         [TestMethod]
         public void CreateOrderlineInDesktop() {
-            Product p = productDB.Get(1);
+            Product p = productDB.Get("productID", 1.ToString());
             OrderLine ol = new OrderLine(1, 2000, p);
             ol.OrderID = 1;
             
             orderlineDB.CreateInDesktop(ol);
 
-            ol.Product = productDB.Get(1);
+            ol.Product = productDB.Get("productID", 1.ToString());
 
             Assert.AreEqual(p.Stock - 1, ol.Product.Stock);
         }
 
         [TestMethod]
         public void OptimisticConcurrencyWithStock() {
-            Product p = productDB.Get(1);
+            Product p = productDB.Get("productID", 1.ToString());
             OrderLine ol = new OrderLine(1, 2000, p);
 
             orderlineDB.Create(ol);
 
-            ol.Product = productDB.Get(1);
+            ol.Product = productDB.Get("productID", 1.ToString());
 
             Assert.AreEqual(p.Stock - 1, ol.Product.Stock);
         }
 
         [TestMethod]
         public void OptimisticConcurrencyWithStockExpectedToFail() {
-            Product p = productDB.Get(1);
+            Product p = productDB.Get("productID", 1.ToString());
             OrderLine ol = new OrderLine(1, 2000, p);
 
             orderlineDB.Create(ol, true);
 
-            ol.Product = productDB.Get(1);
+            ol.Product = productDB.Get("productID", 1.ToString());
 
             Assert.AreEqual(p.Stock , ol.Product.Stock);
         }
 
         [TestMethod]
         public void OptimisticConCurrencyUpdateStock() {
-            Product p = productDB.Get(1);
+            Product p = productDB.Get("productID", 1.ToString());
             OrderLine ol = new OrderLine(2, 2000, p);
 
             orderlineDB.Update(ol, true, true);
 
-            ol.Product = productDB.Get(1);
+            ol.Product = productDB.Get("productID", 1.ToString());
 
             Assert.AreEqual(p.Stock + 1, ol.Product.Stock);
         }
 
         [TestMethod]
         public void OptimisticConCurrencyUpdateStockFail() {
-            Product p = productDB.Get(1);
+            Product p = productDB.Get("productID", 1.ToString());
             OrderLine ol = new OrderLine(2, 2000, p);
 
             orderlineDB.Update(ol, true, false);
 
-            ol.Product = productDB.Get(1);
+            ol.Product = productDB.Get("productID", 1.ToString());
 
             Assert.AreEqual(p.Stock, ol.Product.Stock);
         }
 
         [TestMethod]
         public void OptimisticConCurrencyDelete() {
-            Product p = productDB.Get(1);
+            Product p = productDB.Get("productID", 1.ToString());
             OrderLine ol = new OrderLine(2, 2000, p);
 
             orderlineDB.Delete(ol, true, true);
 
-            ol.Product = productDB.Get(1);
+            ol.Product = productDB.Get("productID", 1.ToString());
 
             Assert.AreEqual(p.Stock + 2, ol.Product.Stock);
         }
 
         [TestMethod]
         public void OptimisticConCurrencyDeleteFail() {
-            Product p = productDB.Get(1);
+            Product p = productDB.Get("productID", 1.ToString());
             OrderLine ol = new OrderLine(2, 2000, p);
 
             orderlineDB.Delete(ol, true, false);
 
-            ol.Product = productDB.Get(1);
+            ol.Product = productDB.Get("productID", 1.ToString());
 
             Assert.AreEqual(p.Stock, ol.Product.Stock);
         }
 
         [TestMethod]
         public void DeleteOrderlineInDesktop() {
-            Product p = productDB.Get(3);
+            Product p = productDB.Get("productID", 3.ToString());
             OrderLine ol = new OrderLine(3, 15000, p);
 
             orderlineDB.DeleteInDesktop(ol);
 
-            ol.Product = productDB.Get(3);
+            ol.Product = productDB.Get("productID", 3.ToString());
 
             Assert.AreEqual(p.Stock + 3, ol.Product.Stock);
         }
 
         [TestMethod]
         public void DeleteOrderlineInDesktopFail() {
-            Product p = productDB.Get(2);
+            Product p = productDB.Get("productID", 2.ToString());
             OrderLine ol = new OrderLine(4, 14000, p);
 
             orderlineDB.DeleteInDesktop(ol, true, false);
 
-            ol.Product = productDB.Get(2);
+            ol.Product = productDB.Get("productID", 2.ToString());
 
             Assert.AreEqual(p.Stock, ol.Product.Stock);
         }

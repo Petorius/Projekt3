@@ -19,18 +19,20 @@ namespace DataAccessLayer {
 
         public Review CreateReview(Review review, int productID, int userID, bool test = false, bool testResult = false) {
             Review errorReview = new Review();
+            int insertedID = -1;
             errorReview.User = new User();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
 
-                        cmd.CommandText = "INSERT INTO review(text, dateCreated, productID, userID) VALUES(@Text, @DateCreated, @ProductID, @UserID)";
+                        cmd.CommandText = "INSERT INTO review(text, dateCreated, productID, userID) OUTPUT INSERTED.ReviewID VALUES(@Text, @DateCreated, @ProductID, @UserID)";
                         cmd.Parameters.AddWithValue("Text", review.Text);
                         cmd.Parameters.AddWithValue("DateCreated", review.DateCreated);
                         cmd.Parameters.AddWithValue("ProductID", productID);
                         cmd.Parameters.AddWithValue("UserID", userID);
-                        cmd.ExecuteNonQuery();
+                        insertedID = (int)cmd.ExecuteScalar();
+                        errorReview.ID = insertedID;
                     }
                 }
                 catch (SqlException e) {
@@ -125,14 +127,45 @@ namespace DataAccessLayer {
             return r;
         }
 
-        public IEnumerable<Review> GetAll() {
-            throw new System.NotImplementedException();
+        public List<Review> GetAll(int id) {
+            List<Review> reviews = new List<Review>();
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                try {
+                    connection.Open();
+                    using (SqlCommand cmd = connection.CreateCommand()) {
+
+                        cmd.CommandText = "SELECT Text, DateCreated, UserID, ReviewID from Review where Review.ProductID = @productID";
+                        cmd.Parameters.AddWithValue("productID", id);
+                        SqlDataReader reviewReader = cmd.ExecuteReader();
+                        while (reviewReader.Read()) {
+                            Review r = new Review();
+                            r.User = new User();
+                            r.Text = reviewReader.GetString(reviewReader.GetOrdinal("Text"));
+                            r.DateCreated = reviewReader.GetDateTime(reviewReader.GetOrdinal("DateCreated"));
+                            r.User.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("UserID"));
+                            r.ID = reviewReader.GetInt32(reviewReader.GetOrdinal("ReviewID"));
+
+                            reviews.Add(r);
+                        }
+                        reviewReader.Close();
+                        cmd.Parameters.Clear();
+                    }
+                }
+                catch (SqlException) {
+                    return null;
+                }
+            }
+            return reviews;
         }
 
         public Review Update(Review Entity, bool test = false, bool testResult = false) {
             throw new System.NotImplementedException();
         }
         public Review Create(Review Entity, bool test = false, bool testResult = false) {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<Review> GetAll() {
             throw new System.NotImplementedException();
         }
     }

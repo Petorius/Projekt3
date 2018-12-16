@@ -3,6 +3,7 @@ using Server.Domain;
 using Server.DataAccessLayer;
 using DataAccessLayer.Interface;
 using System;
+using BusniessLayer;
 
 namespace Server.BusinessLogic {
     public class OrderLogic {
@@ -10,12 +11,16 @@ namespace Server.BusinessLogic {
         private CustomerLogic cl;
         private IProduct productDB;
         private OrderLineDB orderLineDB;
+        private ProductLogic productLogic;
+        private CustomerDB customerDB;
 
         public OrderLogic() {
             orderDB = new OrderDB();
             cl = new CustomerLogic();
             productDB = new ProductDB();
             orderLineDB = new OrderLineDB();
+            productLogic = new ProductLogic();
+            customerDB = new CustomerDB();
 
         }
 
@@ -25,7 +30,8 @@ namespace Server.BusinessLogic {
             cl = new CustomerLogic(connectionString);
             productDB = new ProductDB(connectionString);
             orderLineDB = new OrderLineDB(connectionString);
-
+            productLogic = new ProductLogic(connectionString);
+            customerDB = new CustomerDB(connectionString);
         }
 
         // Creates an order with customer and returns an order based on validation
@@ -46,9 +52,22 @@ namespace Server.BusinessLogic {
             return o;
         }
 
+        // Gets an order with customer and orderlines
+        public Order GetOrder(int id) {
+
+            Order o = orderDB.Get(id);
+            
+            o.Customer = customerDB.Get("customerID", o.Customer.ID.ToString());
+            
+            o.Orderlines = orderLineDB.GetOrderlinesByOrderID(o.ID);
+            
+            return o;
+        }
+
+        // Deletes order from database
         public Order DeleteOrder(Order o) {
             foreach (OrderLine ol in o.Orderlines) {
-                Product p = productDB.Get(ol.Product.ID);
+                Product p = productLogic.GetProduct("productID", ol.Product.ID.ToString());
                 ol.Product = p;
                 orderLineDB.DeleteInDesktop(ol);
             }

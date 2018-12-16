@@ -20,9 +20,11 @@ namespace Server.DataAccessLayer {
             productDB = new ProductDB();
         }
 
+        // Gets a tag with products
         public Tag Get(string name) {
+            Tag t = new Tag();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
-                Tag t = new Tag();
+                
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
@@ -43,7 +45,7 @@ namespace Server.DataAccessLayer {
                             int foundProductID;
                             foundProductID = productReader.GetInt32(productReader.GetOrdinal("productID"));
 
-                            Product p = productDB.Get(foundProductID);
+                            Product p = productDB.Get("productID", foundProductID.ToString());
                             if (p.IsActive) {
                                 t.Products.Add(p);
                             }
@@ -59,8 +61,8 @@ namespace Server.DataAccessLayer {
                 catch (SqlException e) {
                     t.ErrorMessage = ErrorHandling.Exception(e);
                 }
-                return t;
             }
+            return t;
         }
 
     }

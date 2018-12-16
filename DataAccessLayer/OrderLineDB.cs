@@ -168,7 +168,7 @@ namespace Server.DataAccessLayer {
         public List<OrderLine> GetOrderlinesByOrderID(int ID) {
             List<OrderLine> orderlines = new List<OrderLine>();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
-                //try {
+                try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
                         cmd.CommandText = "Select orderlineID, quantity, subTotal, orderID, productID from Orderline where Orderline.orderID = @orderID";
@@ -188,10 +188,10 @@ namespace Server.DataAccessLayer {
                         cmd.Parameters.Clear();
 
                     }
-                //}
-                //catch (SqlException e) {
-                //    //o.ErrorMessage = ErrorHandling.Exception(e);
-                //}
+                }
+                catch (SqlException e) {
+                    return null;
+                }
             }
             return orderlines;
         }
@@ -249,6 +249,7 @@ namespace Server.DataAccessLayer {
             return orderLine;
         }
 
+        // Creates orderline in database, affects product stock
         public OrderLine CreateInDesktop(OrderLine Entity, bool test = false, bool testResult = false) {
             OrderLine orderLine = new OrderLine();
             for (int i = 0; i < 5; i++) {
@@ -312,7 +313,7 @@ namespace Server.DataAccessLayer {
             return orderLine;
         }
 
-
+        // Deletes orderline from database, affects product stock
         public OrderLine DeleteInDesktop(OrderLine Entity, bool test = false, bool testResult = false) {
             OrderLine orderLine = new OrderLine();
             for (int i = 0; i < 5; i++) {
@@ -332,8 +333,7 @@ namespace Server.DataAccessLayer {
                                     rowId = (byte[])reader["rowId"];
                                 }
                                 reader.Close();
-
-
+                                
                                 cmd.CommandText = "UPDATE Product " +
                                     "SET stock = @stock, sales = @sales WHERE productID = @productID AND rowID = @rowId";
                                 cmd.Parameters.AddWithValue("stock", Entity.Product.Stock + Entity.Quantity);

@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interface {
     public interface IProduct : ICRUD<Product> {
-
-        Product GetByName(string name);
-
+        List<Image> GetProductImages(int id);
+        Product Get(string select, string input);
     }
 }

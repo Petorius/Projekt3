@@ -177,6 +177,7 @@ div.formRow {
 .imageFloat {
     float: left;
     padding: 65px;
+    height: 410px;
 }
 
 img {

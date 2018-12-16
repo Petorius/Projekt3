@@ -28,8 +28,6 @@ namespace Client.Webshop {
                     oc.DeleteOrderLine(orderline.Product.ID, orderline.SubTotal, orderline.Quantity);
                 }
             }
-
-
         }
 
         protected void Application_Error(Object sender, EventArgs e) {
@@ -37,6 +35,10 @@ namespace Client.Webshop {
             if (exception is HttpRequestValidationException) {
                 Server.ClearError();
                 Response.Redirect("/Error/Error");
+            }
+            else if(exception is HttpException) {
+                Server.ClearError();
+                Response.Redirect("/Home/Index");
             }
         }
     }

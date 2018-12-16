@@ -42,7 +42,7 @@ namespace Server.DataAccessLayer {
         }
 
         public User GetUserWithOrders(string email) {
-            User user = GetUser(email);
+            User user = GetUser("email", email);
             
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
@@ -71,22 +71,22 @@ namespace Server.DataAccessLayer {
             return user;
         }
         
-        public User GetUser(string email) {
+        public User GetUser(string select, string input) {
         User user = new User();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 try {
                     connection.Open();
                     using (SqlCommand cmd = connection.CreateCommand()) {
-                        cmd.CommandText = "select userid, firstName, lastName, phone, address, zipCode, city from [dbo].[user], customer where Customer.Email = @Email " +
-                            "AND customer.CustomerID = [dbo].[User].UserID;";
-                        cmd.Parameters.AddWithValue("Email", email);
+                        cmd.CommandText = "select userid, firstName, lastName, phone, email, address, zipCode, city from [dbo].[user], customer where " + select + " = @" + select +
+                            " AND customer.CustomerID = [dbo].[User].UserID;";
+                        cmd.Parameters.AddWithValue(select, input);
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read()) {
                             user.ID = reader.GetInt32(reader.GetOrdinal("userid"));
                             user.FirstName = reader.GetString(reader.GetOrdinal("firstName"));
                             user.LastName = reader.GetString(reader.GetOrdinal("lastName"));
                             user.Phone = reader.GetInt32(reader.GetOrdinal("phone"));
-                            user.Email = email;
+                            user.Email = reader.GetString(reader.GetOrdinal("email"));
                             user.Address = reader.GetString(reader.GetOrdinal("address"));
                             user.ZipCode = reader.GetInt32(reader.GetOrdinal("zipCode"));
                             user.City = reader.GetString(reader.GetOrdinal("city"));
@@ -113,7 +113,7 @@ namespace Server.DataAccessLayer {
             }
          return user;
         }
-
+        
         public User DeleteUser(string email, bool test = false, bool testResult = false) {
             User user = new User();
             for (int i = 0; i < 5; i++) {
@@ -166,7 +166,7 @@ namespace Server.DataAccessLayer {
             User user = new User();
             for (int i = 0; i < 5; i++) {
                 using (SqlConnection connection = new SqlConnection(connectionString)) {
-                    //try {
+                    try {
                         connection.Open();
                         using (SqlTransaction trans = connection.BeginTransaction()) {
                             byte[] rowId = null;
@@ -207,10 +207,10 @@ namespace Server.DataAccessLayer {
                                 }
                             }
                         }
-                    //}
-                    //catch (SqlException e) {
-                    //    user.ErrorMessage = ErrorHandling.Exception(e);
-                    //}
+                    }
+                    catch (SqlException e) {
+                        user.ErrorMessage = ErrorHandling.Exception(e);
+                    }
                 }
             }
             return user;

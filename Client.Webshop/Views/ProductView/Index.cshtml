@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "ProductView";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var input = "<script> window.onload = alert('lkamsd'); </script > ";
 }
 
 <head>
@@ -91,9 +92,27 @@
     @if (TempData["Message"] != null) {
         <script type="text/javascript">
             window.onload = function () {
-                alert(@TempData["Message"]);
+                alert('@TempData["Message"]');
             }
         </script>
     }
+
+    @if (TempData["ReviewMessage"] != null) {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@TempData["ReviewMessage"]');
+            }
+        </script>
+    }
+
+    @if (TempData["DeleteReviewMessage"] != null) {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert('@TempData["DeleteReviewMessage"]');
+            }
+        </script>
+    }
+
+
 
 </body>

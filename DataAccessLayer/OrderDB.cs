@@ -21,6 +21,7 @@ namespace Server.DataAccessLayer {
             connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
         }
 
+        // Creates and order and an orderlines in database
         public Order Create(Order Entity, bool test = false, bool testResult = false) {
             Order order = new Order();
             using (SqlConnection connection = new SqlConnection(connectionString)) {
@@ -125,48 +126,16 @@ namespace Server.DataAccessLayer {
                             o.DateCreated = reader.GetDateTime(reader.GetOrdinal("purchaseTime"));
                             if (!reader.IsDBNull(reader.GetOrdinal("customerID"))) {
                                 c.ID = reader.GetInt32(reader.GetOrdinal("customerID"));
+                                o.Customer = c;
                             }
                             else {
                                 c.ID = 0;
+                                o.Customer = c;
                             }
                         }
                         reader.Close();
                         cmd.Parameters.Clear();
-
-                        if (c.ID > 0) {
-                            cmd.CommandText = "SELECT customerID, email from Customer where customerID = @customerID";
-                            cmd.Parameters.AddWithValue("customerID", c.ID);
-                            SqlDataReader customerReader = cmd.ExecuteReader();
-                            while (customerReader.Read()) {
-                                c.Email = customerReader.GetString(customerReader.GetOrdinal("email"));
-                            }
-                            customerReader.Close();
-                            cmd.Parameters.Clear();
-
-                            o.Customer = c;
-                        }
-                        else {
-                            c.ErrorMessage = "Der blev ikke fundet en kunde til ordren";
-                            c.Email = "deleted user";
-                            o.Customer = c;
-                        }
-
-                        //build orderlines
-                        cmd.CommandText = "Select orderlineID, quantity, subTotal, orderID, productID from Orderline where Orderline.orderID = @orderID";
-                        cmd.Parameters.AddWithValue("orderID", o.ID);
-                        SqlDataReader orderLineReader = cmd.ExecuteReader();
-                        while (orderLineReader.Read()) {
-                            OrderLine ol = new OrderLine();
-                            ol.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("orderlineID"));
-                            ol.Quantity = orderLineReader.GetInt32(orderLineReader.GetOrdinal("quantity"));
-                            ol.SubTotal = orderLineReader.GetDecimal(orderLineReader.GetOrdinal("subtotal"));
-                            Product p = new Product();
-                            p.ID = orderLineReader.GetInt32(orderLineReader.GetOrdinal("productID"));
-                            ol.Product = p;
-
-                            o.Orderlines.Add(ol);
-                        }
-                        orderLineReader.Close();
+                        
                     }
                     if(o.ID < 1) {
                         o.ErrorMessage = "Ordren findes ikke";

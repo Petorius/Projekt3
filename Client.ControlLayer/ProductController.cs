@@ -17,16 +17,27 @@ namespace Client.ControlLayer {
             return productService.Create(name, price, stock, minStock, maxStock, description, ImageUrl, ImageName);
         }
 
-        public Product Find(int ID) {
-            Product p = productService.Find(ID);
-            p.Reviews.Reverse();
+        public Product GetProduct(string select, string input) {
+            Product p = productService.GetProduct(select, input);
             return p;
         }
 
-        public Product FindByName(string name) {
-            return productService.FindByName(name);
+        public Product GetProductWithImages(string select, string input) {
+            Product p = productService.GetProductWithImages(select, input);
+            return p;
         }
 
+        public Product GetProductWithReviews(string select, string input) {
+            Product p = productService.GetProductWithReviews(select, input);
+            return p;
+        }
+
+        public Product GetProductWithImagesAndReviews(string select, string input) {
+            Product p = productService.GetProductWithImagesAndReviews(select, input);
+            p.Reviews.Reverse();
+            return p;
+        }
+        
         public Product DeleteProduct(int ID) {
             return productService.Delete(ID);
         }
@@ -35,8 +46,8 @@ namespace Client.ControlLayer {
             return productService.Update(ID, name, price, stock, minStock, maxStock, description, isActive);
         }
 
-        public IEnumerable<Product> GetAllProducts() {
-            return productService.GetAllProducts().OrderByDescending(x => x.Sales);
+        public IEnumerable<Product> GetAllProductsWithImages() {
+            return productService.GetAllProductsWithImages().OrderByDescending(x => x.Sales);
         }
 
         public Review CreateReview(string text, int productID, int userID) {

@@ -31,6 +31,7 @@ namespace Server.Domain {
         public Order() {
             Orderlines = new List<OrderLine>();
             ErrorMessage = "";
+            Customer = new Customer();
         }
     }
 
