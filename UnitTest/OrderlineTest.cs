@@ -138,6 +138,13 @@ namespace UnitTest {
             Assert.IsNotNull(ol);
         }
 
+        [TestMethod]
+        public void FindOrderLineByOrderID() {
+            List <OrderLine> ol = orderlineDB.GetOrderlinesByOrderID(1);
+
+            Assert.IsNotNull(ol);
+        }
+
         [ClassCleanup]
         public static void CleanUp() {
 
